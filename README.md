@@ -1,1 +1,2 @@
-# epicMail\n A pseudo mail service
+# epicMail
+A pseudo mail service
