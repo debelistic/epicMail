@@ -3,9 +3,14 @@ body {
     margin: 0;
 }
 
+a{
+    text-decoration: none;
+    color: #FCFCFC;
+}
+
 #header{
     margin: 0;
-    padding: 3px;
+    padding: 5px;
     background-color: #003D66;
     height: 100px;
     color: #FCFCFC;
@@ -14,16 +19,96 @@ body {
 
 .page-title{
     float: left;
+    padding: 20px;
 }
 
 .page-title h1{
     margin: 0;
+    letter-spacing: 2px;
+    padding: 0 20px 0 10PX;
+    border-right: 3px solid #FCFCFC;
     font-size: 40px;
     font-weight: bolder;
 }
 
 .page-nav{
     float: right;
+    padding: 0 20px 0 0;
+    margin: 0;
+    color: #FCFCFC;
+}
+
+.page-nav a{
+    text-decoration: none;
+    color: #FCFCFC;
+    font-weight: bolder;
+    font-size: 20px;
+}
+
+.page-nav ul li{
+    list-style: none;
+    margin: 0 20px 5px 0;
+    display: inline;
+    line-height: 45px;
+    letter-spacing: 2px;
+}
+
+.container{
+    margin: 0;
+    padding: 0;
+}
+
+div.container{
+    width: 60%;
+    float: left;
+    color: #FCFCFC;
+    margin: 25px 0 0 10px;
+}
+
+.transparent{
+    background-color: rgba(13, 47, 70, 0.473);
+    border-radius: 5px;
+    margin: 0 0 0 0;
+    height: calc(100vh - 300px);
+}
+
+aside.container{
+    margin: 0;
+    width: 30%;
+    float: right;
+    margin: 25px 25px 0 0;
+}
+
+.main-banner{
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: calc(100vh - 200px);
+    background-image: url(../imgs/banner.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+}
+
+h1.main-content{
+    margin: 0 0 10px;
+    padding: 30px 20px;
+    font-size: 40px;
+    font-weight: 800;
+    color: #FCFCFC;
+    letter-spacing: 2px;
+    text-shadow: 2px;
+}
+
+p.main-content{
+    margin: 0 0 10px;
+    padding: 30px 20px;
+    font-size: 30px;
+    font-weight: 500;
+    color: #FCFCFC;
+    letter-spacing: 2px;
+    text-justify: right;
+    overflow: hidden;
 }
 
 #footer{
@@ -33,4 +118,43 @@ body {
     height: 200px;
     color: #FCFCFC;
     overflow: hidden;
+    position: relative;
+}
+
+footer div.page-nav ul li{
+    list-style: none;
+    margin: 0 20px 5px 0;
+    display: block;
+    line-height: 45px;
+    letter-spacing: 2px;
+}
+
+.sm-page{
+    float: left;
+    list-style: none;
+    line-height: 45px;
+}
+
+footer div.sm-page ul li{
+    list-style: none;
+    margin: 0 20px 5px 0;
+    display: block;
+    line-height: 45px;
+    letter-spacing: 2px;
+}
+
+footer div.sm-page ul li a{
+    text-decoration: none;
+    color: #FCFCFC;
+}
+
+.copyright{
+   position: absolute;
+   bottom: 0;
+   left: 43vw;
+   letter-spacing: 2px;
+   background-color: rgba(13, 47, 70, 0.473);
+   border-radius: 5px;
+   padding: 0 10px 0;
+   font-weight: 600;
 }
