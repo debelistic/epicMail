@@ -53,6 +53,10 @@ a{
     letter-spacing: 2px;
 }
 
+#navbutton{
+    display: none;
+}
+
 .container{
     margin: 0;
     padding: 0;
@@ -97,7 +101,7 @@ h1.main-content{
     font-weight: 800;
     color: #FCFCFC;
     letter-spacing: 2px;
-    text-shadow: 2px;
+    text-shadow: 4px 4px 8px #003D66;
 }
 
 p.main-content{
@@ -131,10 +135,22 @@ footer div.page-nav ul li{
 
 .sm-page{
     float: left;
-    list-style: none;
-    line-height: 45px;
+    padding: 0 20px 0 0;
+    margin: 0;
+    color: #FCFCFC;
 }
 
+.sm-page ul{
+    margin: 0;
+}
+
+.sm-page ul li{
+    list-style: none;
+    margin: 0 20px 5px 0;
+    display: inline;
+    line-height: 45px;
+    letter-spacing: 2px;
+}
 footer div.sm-page ul li{
     list-style: none;
     margin: 0 20px 5px 0;
@@ -146,12 +162,14 @@ footer div.sm-page ul li{
 footer div.sm-page ul li a{
     text-decoration: none;
     color: #FCFCFC;
+    font-weight: bolder;
+    font-size: 20px;
 }
 
 .copyright{
    position: absolute;
    bottom: 0;
-   left: 43vw;
+   left: 38vw;
    letter-spacing: 2px;
    background-color: rgba(13, 47, 70, 0.473);
    border-radius: 5px;
@@ -159,13 +177,16 @@ footer div.sm-page ul li a{
    font-weight: 600;
 }
 
-@media screen and (min-width: 740px){
+@media screen and (max-width: 740px){
     #header{
-        display: block
+        display: block;
+        padding: 0;
     }
     .page-title{
         float: none;
         padding: 0;
+        margin: auto;
+        width: 50vw;
     }
     .page-title h1{
         margin: 0;
@@ -173,15 +194,20 @@ footer div.sm-page ul li a{
         border-right: none;
         font-size: 40px;
         font-weight: bolder;
+        text-align: center
     }
     nav.page-nav{
         float: none;
-        padding: 0 20px 0 0;
-        margin: 0;
+        padding: 0 0 0 0;
+        margin: auto;
+        width: 100vw;        
         color: #FCFCFC;
+        border-top: #FCFCFC solid 5px;
+        border-bottom: #FCFCFC solid 5px;
     }
     .page-nav ul{
-        margin: 0;
+        margin: auto;
+        width: 50%;
     }
     aside div p.main-content{
         margin: 0 0 10px;
@@ -192,5 +218,90 @@ footer div.sm-page ul li a{
         letter-spacing: 2px;
         text-justify: right;
         overflow: hidden;
+    }
+}
+
+@media screen and (max-width: 480px){
+    .page-title{
+        width: unset;
+        margin: 0;
+    }
+    .page-title h1{
+        font-size: 30px;
+        margin: 0;
+        padding: 5px;
+        width: 40%;
+    }
+    nav.page-nav{
+        border: none;
+    }
+    .page-nav ul li{
+        display: block;
+        margin: auto;
+        width: 50%;
+        line-height: unset;
+    }
+    aside.container{
+        float: none;
+        width: 90%;
+        margin: auto;
+        height: 100px;
+        overflow: hidden;
+    }
+    div.container{
+        float: none;
+        width: 80%;
+        margin: 10px auto;
+        height: 400px;
+    }
+    h1.main-content{
+        margin: 0;
+        padding: 5px;
+        font-weight: normal;
+        font-size: 25px;
+    }
+    p.main-content{
+        padding: 5px;
+        font-weight: normal;
+        font-size: 20px;
+    }
+    .transparent {
+        background-color: rgba(13, 47, 70, 0.473);
+        border-radius: 5px;
+        height: unset;       
+    }
+    .container{
+        margin: 10px 0;
+    }
+    aside div p.main-content {
+        margin: 0 0 5px;
+        padding: 5px;
+        font-size: 20px;
+        font-weight: 500;
+        color: #FCFCFC;
+        letter-spacing: 2px;
+        text-justify: right;
+        overflow: hidden;
+    }
+    #footer{
+        display: block;
+        height: 100vw;
+    }
+    .sm-page{
+        float: none;
+        margin: auto;
+        padding: 0;
+    }
+    .sm-page ul{
+        margin: auto;
+        width: 50%;
+    }
+    .page-nav{
+        float: none;
+        margin: auto;
+        padding: 0;
+    }
+    .copyright{
+        left: 30vw;
     }
 }

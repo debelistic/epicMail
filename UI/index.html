@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>EPIC MAIL</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" type="text/css" media="screen" href="./styles/main.css">  
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">  
 </head>
@@ -15,25 +15,28 @@
         </div>
         <nav class="page-nav">
             <ul>
-                <li><a href="#">Sign in</a></li>
-                <li><a href="#">Sign Up</a></li>
-                <li><a href="#">Help Desk</a></li>
+                <li class="navli"><a href="#">Sign in</a></li>
+                <li class="navli"><a href="#">Sign Up</a></li>
+                <li class="navli"><a href="#">Help</a></li>
             </ul>
         </nav>
+        <button id="navbutton" class="icon">
+            <i class="fa fa-bars"></i>
+        </button>
     </header>
 
     <main>
         <section class="main-banner">
-            <div class="container transparent">
-                <p class="main-content">Create Account</p>
-                <p class="main-content">Have an account, <a href="#">Signin</a></p>
-            </div>
             <aside class="container">
                 <div class="transparent">
                     <h1 class="main-content">Get global with EPIC MAIL</h1>
                     <p class="main-content">A web app that helps people exchange messages over the internet.</p>
                 </div>                
             </aside>
+            <div class="container transparent">
+                <p class="main-content">Create Account</p>
+                <p class="main-content">Have an account, <a href="#">Signin</a></p>
+            </div>
         </section>
     </main>
     
@@ -46,7 +49,7 @@
                 </ul>
         </div>
         <div class="page-nav">
-            <ul>
+            <ul id="navigation">
                 <li><a href="#">Find Us</a></li>
                 <li><a href="#">Support</a></li>
                 <li><a href="#">About Epic Mail</a></li>
