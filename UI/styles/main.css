@@ -252,6 +252,12 @@ footer div.footer-nav ul li a {
         text-justify: right;
         overflow: hidden;
     }
+    .footer-nav {
+        float: none;
+        padding: 0 20px 0 0;
+        margin: 0;
+        color: #FCFCFC;
+    }
 }
 
 @media screen and (max-width: 480px){
@@ -381,6 +387,12 @@ footer div.footer-nav ul li a {
         margin: auto;
         width: 50%;
     }
+    .footer-nav {
+        float: none;
+        padding: 0 20px 0 0;
+        margin: 0;
+        color: #FCFCFC;
+    }
 }
 
 @media screen and (max-width: 380px){
@@ -436,5 +448,11 @@ footer div.footer-nav ul li a {
     }
     .copyright {
         left: 25vw;
+    }
+    .footer-nav {
+        float: none;
+        padding: 0 20px 0 0;
+        margin: 0;
+        color: #FCFCFC;
     }
 }
