@@ -96,8 +96,8 @@ aside.container{
 
 h1.main-content{
     margin: 0 0 10px;
-    padding: 30px 20px;
-    font-size: 40px;
+    padding: 0;
+    font-size: 2rem;
     font-weight: 800;
     color: #FCFCFC;
     letter-spacing: 2px;
@@ -253,8 +253,8 @@ footer div.footer-nav ul li a {
         overflow: hidden;
     }
     .footer-nav {
-        float: none;
-        padding: 0 20px 0 0;
+        float: right;
+        padding: 0.3rem;
         margin: 0;
         color: #FCFCFC;
     }
@@ -324,13 +324,13 @@ footer div.footer-nav ul li a {
         float: none;
         width: 80%;
         margin: 10px auto;
-        height: 400px;
+        height: calc(110vw - 200px);
     }
     h1.main-content{
         margin: 0;
-        padding: 5px;
+        padding: 0.3rem;
         font-weight: normal;
-        font-size: 25px;
+        font-size: 1.5rem;
     }
     p.main-content{
         padding: 5px;
@@ -346,27 +346,27 @@ footer div.footer-nav ul li a {
         margin: 10px 0;
     }
     aside div p.main-content {
-        margin: 0 0 5px;
-        padding: 5px;
-        font-size: 16px;
+        margin: 0 0 0.2rem;
+        padding: 0.2rem;
+        font-size: 1.1rem;
         font-weight: 500;
         color: #FCFCFC;
-        letter-spacing: 2px;
+        letter-spacing: 0.2rem;
         text-justify: right;
         overflow: hidden;
     }
     #footer{
         display: block;
-        height: 100vw;
+        height: calc(100vw - 150px);
     }
     .sm-page{
-        float: none;
-        margin: auto;
+        float: left;
+        margin: 0;
         padding: 0;
     }
     .sm-page ul{
-        margin: auto;
-        width: 50%;
+        margin: 0;
+        padding: 0.4rem;
     }
     .page-nav{
         float: none;
@@ -379,17 +379,16 @@ footer div.footer-nav ul li a {
     .footer-nav ul li{
         display: block;
         margin: auto;
-        width: 50%;
         border-top: none;
         line-height: unset;
     }
     .footer-nav ul {
-        margin: auto;
-        width: 50%;
+        margin: 0;
+        padding: 0.3rem;
     }
     .footer-nav {
-        float: none;
-        padding: 0 20px 0 0;
+        float: right;
+        padding: 0.3rem;
         margin: 0;
         color: #FCFCFC;
     }
@@ -434,11 +433,11 @@ footer div.footer-nav ul li a {
     }
     footer div.footer-nav ul li {
         list-style: none;
-        margin: 5px;
-        padding: 5px;
+        margin: 0.2rem;
+        padding: 0.3rem;
         display: block;
         line-height: unset;
-        letter-spacing: 3px;
+        letter-spacing: 0.2rem;
     }
     footer div.footer-nav ul li a {
         text-decoration: none;
@@ -450,9 +449,13 @@ footer div.footer-nav ul li a {
         left: 25vw;
     }
     .footer-nav {
-        float: none;
-        padding: 0 20px 0 0;
+        float: right;
+        padding: 0.3rem;
         margin: 0;
         color: #FCFCFC;
+    }
+    .footer-nav ul{
+        margin: 0;
+        padding: 0.3rem;
     }
 }
