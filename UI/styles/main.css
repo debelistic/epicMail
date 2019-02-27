@@ -192,6 +192,13 @@ footer div.footer-nav ul li a {
     font-size: 20px;
 }
 
+.footer-nav {
+    float: right;
+    padding: 0.3rem;
+    margin: 0;
+    color: #FCFCFC;
+}
+
 @media screen and (max-width: 1024px){
     .sm-page {
         float: left;
@@ -201,7 +208,7 @@ footer div.footer-nav ul li a {
     }
     .footer-nav {
         float: right;
-        padding: 0 20px 0 0;
+        padding: 0.3rem;
         margin: 0;
         color: #FCFCFC;
     }
