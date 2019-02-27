@@ -85,7 +85,7 @@ aside.container{
 
 .main-banner{
     margin: 0;
-    padding: 0;
+    padding: 10px 0;
     width: 100%;
     height: calc(100vh - 200px);
     background-image: url(../imgs/banner.jpg);
@@ -177,6 +177,21 @@ footer div.sm-page ul li a{
    font-weight: 600;
 }
 
+footer div.footer-nav ul li {
+    list-style: none;
+    margin: 0 20px 5px 0;
+    display: block;
+    line-height: 45px;
+    letter-spacing: 2px;
+}
+
+footer div.footer-nav ul li a {
+    text-decoration: none;
+    color: #FCFCFC;
+    font-weight: bolder;
+    font-size: 20px;
+}
+
 @media screen and (max-width: 740px){
     #header{
         display: block;
@@ -222,6 +237,24 @@ footer div.sm-page ul li a{
 }
 
 @media screen and (max-width: 480px){
+    #header{
+        height: unset;
+        position: relative;
+    }
+    #navbutton{
+        display: unset;
+        color: #FCFCFC;
+        background-color: #003D66;
+        border: none;
+        cursor: pointer;
+        margin: 5px;
+        padding: 5px;
+        font-size: 30px;
+        font-weight: 600;
+        position: absolute;
+        top: 0;
+        right: 0;
+    }
     .page-title{
         width: unset;
         margin: 0;
@@ -234,11 +267,26 @@ footer div.sm-page ul li a{
     }
     nav.page-nav{
         border: none;
+        float: none;
+        width: unset;
+        border-bottom: #FCFCFC solid 3px;
+        border-right: #FCFCFC solid 3px;
+        border-left: #FCFCFC solid 3px;
+    }
+    .page-nav ul{
+        width: 100%;
+        padding: 0;
+        height: 0;
+    }
+    .page-nav ul.open{
+        height: auto;
     }
     .page-nav ul li{
         display: block;
-        margin: auto;
-        width: 50%;
+        margin: 10px 0 0 0;
+        padding: 10px;
+        width: 100%;
+        border-top: #FCFCFC solid 3px;
         line-height: unset;
     }
     aside.container{
@@ -303,5 +351,16 @@ footer div.sm-page ul li a{
     }
     .copyright{
         left: 30vw;
+    }
+    .footer-nav ul li{
+        display: block;
+        margin: auto;
+        width: 50%;
+        border-top: none;
+        line-height: unset;
+    }
+    .footer-nav ul {
+        margin: auto;
+        width: 50%;
     }
 }
