@@ -484,6 +484,8 @@ footer div.footer-nav ul li a {
     .form-group label{
         color: #FCFCFC;
         font-size: 1rem;
+        text-align: left;
+        display: block;
     }
     .form-group input{
         color: #FCFCFC;
@@ -492,6 +494,15 @@ footer div.footer-nav ul li a {
         height: 2rem;
         padding: 0.3rem;
         background: transparent;
+        outline: unset;
+    }
+    .form-group button{
+        color: #FCFCFC;
+        background: #003D66;
+        font-size: 1rem;
+        font-weight: 700;
+        padding: 0.3rem;
+        border-radius: 0.4rem;
         outline: unset;
     }
     .form-group input:active{
