@@ -105,15 +105,9 @@ h1.main-content{
 }
 
 p.main-content{
-<<<<<<< HEAD
     margin: 0 0.2rem 0.7rem 0.2rem;
     padding: 0 0.3rem 0.9rem;
     font-size: 1.7rem;
-=======
-    margin: 0 0 10px;
-    padding: 0.8rem 1.2rem;
-    font-size: 30px;
->>>>>>> ft-signup-164193598
     font-weight: 500;
     color: #FCFCFC;
     letter-spacing: 2px;
@@ -313,11 +307,6 @@ p.main-content{
         margin: 0;
         color: #FCFCFC;
     }
-<<<<<<< HEAD
-    form#signinform{
-        margin: 0.2rem 0  0.2rem 0.3rem;
-    }
-=======
     p.main-content{
         font-size: 0.9rem;
     }
@@ -359,7 +348,6 @@ p.main-content{
         border: #003D66 solid 0.1rem;
         
     }
->>>>>>> ft-signup-164193598
 }
 
 @media screen and (max-width: 480px){
@@ -397,11 +385,6 @@ p.main-content{
         float: none;
         width: unset;
         border-bottom: #FCFCFC solid 3px;
-<<<<<<< HEAD
-        border-right: #003D66 solid 3px;
-        border-left: #003D66 solid 3px;
-=======
->>>>>>> ft-signup-164193598
     }
     .page-nav ul{
         width: 100%;
@@ -430,11 +413,7 @@ p.main-content{
         float: none;
         width: 80%;
         margin: 10px auto;
-<<<<<<< HEAD
-        height: calc(100vh - 350px);
-=======
         height: calc(100vh - 210px);
->>>>>>> ft-signup-164193598
     }
     h1.main-content{
         margin: 0;
@@ -575,12 +554,7 @@ p.main-content{
         float: none;
         width: 80%;
         margin: 10px auto;
-<<<<<<< HEAD
-        height: calc(100vh - 350px);
-        padding: 0.4rem;
-=======
         height: calc(100vh - 180px);
->>>>>>> ft-signup-164193598
     }
     footer div.sm-page ul li {
         list-style: none;
