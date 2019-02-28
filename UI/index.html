@@ -11,7 +11,7 @@
 <body>
     <header id="header">
         <div class="page-title">
-            <h1><a href="#">EPIC MAIL</a></h1>
+            <h1><a href="#"><i class="fa fa-envelope-o"></i> EPIC MAIL</a></h1>
         </div>
         
         <i id="navbutton" class="fa fa-bars icon"></i>
@@ -34,9 +34,22 @@
                 </div>                
             </aside>
             <div class="container transparent">
-                <p class="main-content">Create Account</p>
-                <form action="" method="post"></form>
-                <p class="main-content">Have an account, <a href="#">Signin</a></p>
+                <p class="main-content">Signin</p>
+                <form action="#" method="get" id="signinform">
+                    <div id="message"></div>
+                    <div class="form-group">
+                        <label for="username">Username</label>
+                        <input type="text" name="username" id="username" placeholder="Username">
+                    </div>
+                    <div class="form-group">
+                        <label for="password">Password</label>
+                        <input type="text" name="password" id="password"     placeholder="Enter Password">
+                    </div>
+                    <div class="form-group">
+                        <button type="button">Signin</button>
+                    </div>                    
+                </form>
+                <p class="main-content">Don't have an account, <a href="#">Signin</a></p>
             </div>
         </section>
     </main>

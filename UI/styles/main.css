@@ -279,7 +279,7 @@ footer div.footer-nav ul li a {
         border: none;
         cursor: pointer;
         margin: 5px;
-        padding: 5px;
+        padding: 0;
         font-size: 30px;
         font-weight: 600;
         position: absolute;
@@ -402,6 +402,12 @@ footer div.footer-nav ul li a {
 }
 
 @media screen and (max-width: 380px){
+    .page-title h1{
+        font-size: 1.5rem;
+        margin: 0;
+        width: unset;
+        text-align: unset;
+    }
     h1.main-content {
         margin: 0;
         padding: 5px;
@@ -464,5 +470,46 @@ footer div.footer-nav ul li a {
     .footer-nav ul{
         margin: 0;
         padding: 0.3rem;
+    }
+    p.main-content{
+        font-size: 0.9rem;
+    }
+    form#form{
+        margin: 0.2rem 0  0.2rem 0.3rem;
+    }
+    .form-group{
+        margin: 0 0 0.7rem 0;
+        padding: 0 0.3rem 0.5rem;
+    }
+    .form-group label{
+        color: #FCFCFC;
+        font-size: 1rem;
+        text-align: left;
+        display: block;
+    }
+    .form-group input{
+        color: #FCFCFC;
+        font-size: 1rem;
+        border-radius: 0.4rem;
+        height: 2rem;
+        padding: 0.3rem;
+        background: transparent;
+        outline: unset;
+    }
+    .form-group button{
+        color: #FCFCFC;
+        background: #003D66;
+        font-size: 1rem;
+        font-weight: 700;
+        padding: 0.3rem;
+        border-radius: 0.4rem;
+        outline: unset;
+    }
+    .form-group input:active{
+        border: #003D66 solid 0.3rem;
+    }
+    .form-group input:focus{
+        border: #003D66 solid 0.1rem;
+        
     }
 }
