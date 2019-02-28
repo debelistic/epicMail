@@ -1,7 +1,7 @@
-let navicon = document.querySelector('i');
+let navbutton = document.querySelector('i#navbutton');
 let navmenu = document.querySelector('nav ul')
 
-navicon.addEventListener('click', () => {
+navbutton.addEventListener('click', () => {
     navmenu.classList.toggle('open');
 
 })
