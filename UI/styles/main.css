@@ -105,9 +105,15 @@ h1.main-content{
 }
 
 p.main-content{
+<<<<<<< HEAD
     margin: 0 0.2rem 0.7rem 0.2rem;
     padding: 0 0.3rem 0.9rem;
     font-size: 1.7rem;
+=======
+    margin: 0 0 10px;
+    padding: 0.8rem 1.2rem;
+    font-size: 30px;
+>>>>>>> ft-signup-164193598
     font-weight: 500;
     color: #FCFCFC;
     letter-spacing: 2px;
@@ -199,6 +205,7 @@ footer div.footer-nav ul li a {
     color: #FCFCFC;
 }
 
+<<<<<<< HEAD
 form#form{
     margin: 0.2rem 0  0.2rem 0.3rem;
 }
@@ -237,6 +244,49 @@ form#form{
     border: #003D66 solid 0.1rem;
     
 }
+=======
+p.main-content{
+        font-size: 0.9rem;
+    }
+    form#signinform{
+        margin: 0.2rem 0  0.2rem 0.3rem;
+    }
+    .form-group{
+        margin: 0 0 0.7rem 0;
+        padding: 0 0.3rem 0.5rem;
+    }
+    .form-group label{
+        color: #FCFCFC;
+        font-size: 1rem;
+        text-align: left;
+        display: block;
+    }
+    .form-group input{
+        color: #FCFCFC;
+        font-size: 1rem;
+        border-radius: 0.4rem;
+        height: 2rem;
+        padding: 0.3rem;
+        background: transparent;
+        outline: unset;
+    }
+    .form-group button{
+        color: #FCFCFC;
+        background: #003D66;
+        font-size: 1rem;
+        font-weight: 700;
+        padding: 0.3rem;
+        border-radius: 0.4rem;
+        outline: unset;
+    }
+    .form-group input:active{
+        border: #003D66 solid 0.3rem;
+    }
+    .form-group input:focus{
+        border: #003D66 solid 0.1rem;
+        
+    }
+>>>>>>> ft-signup-164193598
 
 @media screen and (max-width: 1024px){
     .sm-page {
@@ -304,9 +354,53 @@ form#form{
         margin: 0;
         color: #FCFCFC;
     }
+<<<<<<< HEAD
     form#signinform{
         margin: 0.2rem 0  0.2rem 0.3rem;
     }
+=======
+    p.main-content{
+        font-size: 0.9rem;
+    }
+    form#signinform{
+        margin: 0.2rem 0  0.2rem 0.3rem;
+    }
+    .form-group{
+        margin: 0 0 0.7rem 0;
+        padding: 0 0.3rem 0.5rem;
+    }
+    .form-group label{
+        color: #FCFCFC;
+        font-size: 1rem;
+        text-align: left;
+        display: block;
+    }
+    .form-group input{
+        color: #FCFCFC;
+        font-size: 1rem;
+        border-radius: 0.4rem;
+        height: 2rem;
+        padding: 0.3rem;
+        background: transparent;
+        outline: unset;
+    }
+    .form-group button{
+        color: #FCFCFC;
+        background: #003D66;
+        font-size: 1rem;
+        font-weight: 700;
+        padding: 0.3rem;
+        border-radius: 0.4rem;
+        outline: unset;
+    }
+    .form-group input:active{
+        border: #003D66 solid 0.3rem;
+    }
+    .form-group input:focus{
+        border: #003D66 solid 0.1rem;
+        
+    }
+>>>>>>> ft-signup-164193598
 }
 
 @media screen and (max-width: 480px){
@@ -344,8 +438,11 @@ form#form{
         float: none;
         width: unset;
         border-bottom: #FCFCFC solid 3px;
+<<<<<<< HEAD
         border-right: #003D66 solid 3px;
         border-left: #003D66 solid 3px;
+=======
+>>>>>>> ft-signup-164193598
     }
     .page-nav ul{
         width: 100%;
@@ -374,7 +471,11 @@ form#form{
         float: none;
         width: 80%;
         margin: 10px auto;
+<<<<<<< HEAD
         height: calc(100vh - 350px);
+=======
+        height: calc(100vh - 210px);
+>>>>>>> ft-signup-164193598
     }
     h1.main-content{
         margin: 0;
@@ -508,12 +609,19 @@ form#form{
         text-justify: right;
         overflow: hidden;
     }
+    .main-banner{
+        height: unset;
+    }
     div.container {
         float: none;
         width: 80%;
         margin: 10px auto;
+<<<<<<< HEAD
         height: calc(100vh - 350px);
         padding: 0.4rem;
+=======
+        height: calc(100vh - 180px);
+>>>>>>> ft-signup-164193598
     }
     footer div.sm-page ul li {
         list-style: none;
