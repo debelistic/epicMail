@@ -205,46 +205,6 @@ footer div.footer-nav ul li a {
     color: #FCFCFC;
 }
 
-<<<<<<< HEAD
-form#form{
-    margin: 0.2rem 0  0.2rem 0.3rem;
-}
-.form-group{
-    margin: 0 0 0.7rem 0;
-    padding: 0 0.3rem 0.9rem;
-}
-.form-group label{
-    color: #FCFCFC;
-    font-size: 1rem;
-    text-align: left;
-    display: block;
-}
-.form-group input{
-    color: #FCFCFC;
-    font-size: 1rem;
-    border-radius: 0.4rem;
-    height: 2rem;
-    padding: 0.3rem;
-    background: transparent;
-    outline: unset;
-}
-.form-group button{
-    color: #FCFCFC;
-    background: #003D66;
-    font-size: 1rem;
-    font-weight: 700;
-    padding: 0.3rem;
-    border-radius: 0.4rem;
-    outline: unset;
-}
-.form-group input:active{
-    border: #003D66 solid 0.3rem;
-}
-.form-group input:focus{
-    border: #003D66 solid 0.1rem;
-    
-}
-=======
 p.main-content{
         font-size: 0.9rem;
     }
@@ -286,7 +246,6 @@ p.main-content{
         border: #003D66 solid 0.1rem;
         
     }
->>>>>>> ft-signup-164193598
 
 @media screen and (max-width: 1024px){
     .sm-page {
