@@ -12,7 +12,7 @@ a{
     margin: 0;
     padding: 5px;
     background-color: #003D66;
-    height: 100px;
+    height: calc(100vh - 572px);
     color: #FCFCFC;
     overflow: hidden;
 }
@@ -106,7 +106,7 @@ h1.main-content{
 
 p.main-content{
     margin: 0 0 10px;
-    padding: 30px 20px;
+    padding: 0.8rem 1.2rem;
     font-size: 30px;
     font-weight: 500;
     color: #FCFCFC;
@@ -199,6 +199,48 @@ footer div.footer-nav ul li a {
     color: #FCFCFC;
 }
 
+p.main-content{
+        font-size: 0.9rem;
+    }
+    form#signinform{
+        margin: 0.2rem 0  0.2rem 0.3rem;
+    }
+    .form-group{
+        margin: 0 0 0.7rem 0;
+        padding: 0 0.3rem 0.5rem;
+    }
+    .form-group label{
+        color: #FCFCFC;
+        font-size: 1rem;
+        text-align: left;
+        display: block;
+    }
+    .form-group input{
+        color: #FCFCFC;
+        font-size: 1rem;
+        border-radius: 0.4rem;
+        height: 2rem;
+        padding: 0.3rem;
+        background: transparent;
+        outline: unset;
+    }
+    .form-group button{
+        color: #FCFCFC;
+        background: #003D66;
+        font-size: 1rem;
+        font-weight: 700;
+        padding: 0.3rem;
+        border-radius: 0.4rem;
+        outline: unset;
+    }
+    .form-group input:active{
+        border: #003D66 solid 0.3rem;
+    }
+    .form-group input:focus{
+        border: #003D66 solid 0.1rem;
+        
+    }
+
 @media screen and (max-width: 1024px){
     .sm-page {
         float: left;
@@ -265,6 +307,47 @@ footer div.footer-nav ul li a {
         margin: 0;
         color: #FCFCFC;
     }
+    p.main-content{
+        font-size: 0.9rem;
+    }
+    form#signinform{
+        margin: 0.2rem 0  0.2rem 0.3rem;
+    }
+    .form-group{
+        margin: 0 0 0.7rem 0;
+        padding: 0 0.3rem 0.5rem;
+    }
+    .form-group label{
+        color: #FCFCFC;
+        font-size: 1rem;
+        text-align: left;
+        display: block;
+    }
+    .form-group input{
+        color: #FCFCFC;
+        font-size: 1rem;
+        border-radius: 0.4rem;
+        height: 2rem;
+        padding: 0.3rem;
+        background: transparent;
+        outline: unset;
+    }
+    .form-group button{
+        color: #FCFCFC;
+        background: #003D66;
+        font-size: 1rem;
+        font-weight: 700;
+        padding: 0.3rem;
+        border-radius: 0.4rem;
+        outline: unset;
+    }
+    .form-group input:active{
+        border: #003D66 solid 0.3rem;
+    }
+    .form-group input:focus{
+        border: #003D66 solid 0.1rem;
+        
+    }
 }
 
 @media screen and (max-width: 480px){
@@ -291,18 +374,17 @@ footer div.footer-nav ul li a {
         margin: 0;
     }
     .page-title h1{
-        font-size: 30px;
-        margin: 0;
+        font-size: 1.5rem;
+        margin: 0.3rem;
+        width: unset;
+        text-align: unset;
         padding: 5px;
-        width: 40%;
     }
     nav.page-nav{
         border: none;
         float: none;
         width: unset;
         border-bottom: #FCFCFC solid 3px;
-        border-right: #FCFCFC solid 3px;
-        border-left: #FCFCFC solid 3px;
     }
     .page-nav ul{
         width: 100%;
@@ -331,7 +413,7 @@ footer div.footer-nav ul li a {
         float: none;
         width: 80%;
         margin: 10px auto;
-        height: calc(110vw - 200px);
+        height: calc(100vh - 210px);
     }
     h1.main-content{
         margin: 0;
@@ -399,6 +481,47 @@ footer div.footer-nav ul li a {
         margin: 0;
         color: #FCFCFC;
     }
+    p.main-content{
+        font-size: 0.9rem;
+    }
+    form#signinform{
+        margin: 0.2rem 0  0.2rem 0.3rem;
+    }
+    .form-group{
+        margin: 0 0 0.7rem 0;
+        padding: 0 0.3rem 0.5rem;
+    }
+    .form-group label{
+        color: #FCFCFC;
+        font-size: 1rem;
+        text-align: left;
+        display: block;
+    }
+    .form-group input{
+        color: #FCFCFC;
+        font-size: 1rem;
+        border-radius: 0.4rem;
+        height: 2rem;
+        padding: 0.3rem;
+        background: transparent;
+        outline: unset;
+    }
+    .form-group button{
+        color: #FCFCFC;
+        background: #003D66;
+        font-size: 1rem;
+        font-weight: 700;
+        padding: 0.3rem;
+        border-radius: 0.4rem;
+        outline: unset;
+    }
+    .form-group input:active{
+        border: #003D66 solid 0.3rem;
+    }
+    .form-group input:focus{
+        border: #003D66 solid 0.1rem;
+        
+    }
 }
 
 @media screen and (max-width: 380px){
@@ -424,11 +547,14 @@ footer div.footer-nav ul li a {
         text-justify: right;
         overflow: hidden;
     }
+    .main-banner{
+        height: unset;
+    }
     div.container {
         float: none;
         width: 80%;
         margin: 10px auto;
-        height: 250px;
+        height: calc(100vh - 180px);
     }
     footer div.sm-page ul li {
         list-style: none;
