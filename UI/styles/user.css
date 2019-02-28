@@ -84,9 +84,9 @@ h1.main-content {
         height: unset;
     }
     div.container {
-        float: none;
-        width: 80%;
-        margin: 10px auto;
+        float: left;
+        width: 60%;
+        margin: 25px 0 0 25px;
         height: calc(100vh - 350px);
     }
     div.container ul li{
@@ -128,7 +128,7 @@ h1.main-content {
         background: #003D66;
         padding: 0.6rem;
         margin: 0.4rem;
-        width: 14rem;
+        width: 80%;
         text-align: center;
         font-size: 1.3rem;
         cursor: pointer;
@@ -153,14 +153,19 @@ h1.main-content {
         margin: 10px auto;
         height: calc(100vh - 350px);
     }
+    div.container ul {
+        margin: 0.5rem;
+        width: 90%;
+        padding: 0.5rem;
+    }
     div.container ul li{
         list-style: none;
         height: 1.3rem;
         border-radius: 0.4rem;
         background: #003D66;
         padding: 0.6rem;
-        margin: 0.4rem;
-        width: 10rem;
+        margin: 0.6rem;
+        width: 80%;
         text-align: center;
         font-size: 1.3rem;
         cursor: pointer;
