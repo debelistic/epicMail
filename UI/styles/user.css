@@ -11,7 +11,7 @@
 }
 
 .main-banner{
-    height: calc(100vh - 150px);
+    height: 100vh;
 }
 
 aside.container{
@@ -21,7 +21,7 @@ div.container {
     float: left;
     width: 60%;
     margin: 25px 0 0 25px;
-    height: calc(100vh - 180px);
+    height: 80%;
 }
 .transparent{
     height: unset;
@@ -41,6 +41,7 @@ div.container ul li{
     margin: 1rem auto;
     width: 80%;
     text-align: center;
+    overflow: hidden;
     font-size: 1.6rem;
     font-weight: 600;
     cursor: pointer;
@@ -96,6 +97,7 @@ h1.main-content {
         padding: 0.6rem;
         margin: 0.8rem auto;
         width: 14rem;
+        overflow: hidden;
         text-align: center;
         font-size: 1.3rem;
         cursor: pointer;
@@ -136,6 +138,7 @@ h1.main-content {
         padding: 0.6rem;
         margin: 0.8rem auto;
         width: 14rem;
+        overflow: hidden;
         text-align: center;
         font-size: 1.3rem;
         cursor: pointer;
@@ -148,6 +151,10 @@ h1.main-content {
     a.main-content {
         font-size: 0.9rem;
         text-align: center;
+        margin: 0.5rem auto;
+        padding: 0.4rem;
+        width: 50%;
+        font-weight: 600;
     }
     h1.main-content {
         text-align: center;
@@ -155,6 +162,12 @@ h1.main-content {
 }
 
 @media screen and (max-width:480px){
+    #header{
+        height: auto;
+    }
+    .page-title{
+        float: none;
+    }
     .page-title h1{
         font-size: 1.5rem;
         margin: 0.3rem;
@@ -180,6 +193,7 @@ h1.main-content {
         padding: 0.6rem;
         margin: 0.8rem auto;
         width: 80%;
+        overflow: hidden;
         text-align: center;
         font-size: 1.3rem;
         cursor: pointer;
@@ -192,6 +206,10 @@ h1.main-content {
     a.main-content {
         font-size: 0.9rem;
         text-align: center;
+        margin: 0.5rem auto;
+        padding: 0.4rem;
+        width: 50%;
+        font-weight: 600;
     }
     h1.main-content {
         text-align: center;
@@ -199,6 +217,12 @@ h1.main-content {
 }
 
 @media screen and (max-width:380px){
+    #header{
+        height: auto;
+    }
+    .page-title{
+        float: none;
+    }
     aside.container{
         height: unset;
     }
@@ -235,6 +259,10 @@ h1.main-content {
     a.main-content {
         font-size: 0.9rem;
         text-align: center;
+        margin: 0.5rem auto;
+        padding: 0.4rem;
+        width: 50%;
+        font-weight: 600;
     }
     h1.main-content {
         text-align: center;
