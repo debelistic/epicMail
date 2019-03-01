@@ -203,6 +203,7 @@ h1.main-content {
         padding: 0.6rem;
         margin: 0.6rem auto;
         width: 80%;
+        overflow: hidden;
         text-align: center;
         font-size: 1.3rem;
         cursor: pointer;
