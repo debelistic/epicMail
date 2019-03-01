@@ -1,71 +1,201 @@
-div.groupdiv{
-    margin: auto 0.4rem auto 0.8rem;
-    justify-content: center;
-    padding: 0.4rem
+#addgroupform{
+    margin: 0.8rem;
 }
 
-i.adminbutton{
-    margin: 0.5rem;
-    padding: 0.4rem;
-    background: #003D66;
-    border-radius: 0.2rem;
+#addgroupform input{        
+    height: 1.3rem;
+    border-radius: 0.4rem;
     box-shadow: 2px 2px 4px 2px thistle;
-    cursor: pointer;
-
+    background: transparent;
+    padding: 0.6rem;
+    margin: 0.6rem auto;
+    width: 80%;
+    overflow: hidden;    
+    font-size: 1.3rem;
+    cursor: wait;
+    outline: unset;
+    color: #FCFCFC
 }
-
-@media screen and (max-width: 1024px){
-    i.adminbutton{
-        margin: 0.5rem;
-        padding: 0.4rem;
-        background: #003D66;
-        border-radius: 0.2rem;
-        box-shadow: 2px 2px 4px 2px thistle;
-        cursor: pointer;
-
-    }
+#addgroupform input[type='submit']{        
+    height: 3rem;       
+    box-shadow: 2px 2px 4px 2px thistle;
+    background: #003D66;
+    padding: 0.6rem;
+    margin: 0.6rem auto;
+    width: 50%;
+    overflow: hidden;    
+    font-size: 1rem;
+    cursor: wait;
+    color: #FCFCFC;
+}
+div.container ul{
+    margin: 0.8rem;
+    width: 80%;
+}
+div.container ul li{
+    text-align: left;
+    height: auto;
+    font-size: 1rem;
+    cursor: unset;
+    background: transparent;
+    width: 80%;
+}
+.delete{
+    background: #003D66;
+    margin: 0;
+    padding: 0.5rem;
+    float: right;
+    border-radius: 0.4rem;
 }
 
 @media screen and (max-width: 740px){
-    .groupdiv{
-        margin: auto 0.4rem auto 1rem;
-        padding: 0.4rem
+    #addgroupform{
+        margin: 0.8rem;
     }
-    i.adminbutton{
-        margin: 0.5rem;
-        padding: 0.4rem;
-        background: #003D66;
-        border-radius: 0.2rem;
-        box-shadow: 2px 2px 4px 2px thistle;
-        cursor: pointer;
 
+    #addgroupform input{        
+        height: 1.3rem;
+        border-radius: 0.4rem;
+        box-shadow: 2px 2px 4px 2px thistle;
+        background: transparent;
+        padding: 0.6rem;
+        margin: 0.6rem auto;
+        width: 80%;
+        overflow: hidden;    
+        font-size: 1.3rem;
+        cursor: wait;
+        outline: unset;
+        color: #FCFCFC
+    }
+    #addgroupform input[type='submit']{        
+        height: 3rem;       
+        box-shadow: 2px 2px 4px 2px thistle;
+        background: #003D66;
+        padding: 0.6rem;
+        margin: 0.6rem auto;
+        width: 50%;
+        overflow: hidden;    
+        font-size: 1rem;
+        cursor: wait;
+        color: #FCFCFC;
+    }
+    div.container ul{
+        margin: 0.8rem;
+        width: 80%;
+    }
+    div.container ul li{
+        text-align: left;
+        height: auto;
+        font-size: 1rem;
+        cursor: unset;
+        background: transparent;
+        width: 80%;
+    }
+    .delete{
+        background: #003D66;
+        margin: 0;
+        padding: 0.5rem;
+        float: right;
+        border-radius: 0.4rem;
     }
 }
 @media screen and (max-width: 480px){
-    div.groupdiv{
-        margin: auto 0.4rem auto 0.8rem;
-        padding: 0.4rem
+    #addgroupform{
+        margin: 0.8rem;
     }
-    i.adminbutton{
-        margin: 0.5rem;
-        padding: 0.4rem;
-        font-size: 1.1rem;
-        background: #003D66;
-        border-radius: 0.2rem;
-        box-shadow: 2px 2px 4px 2px thistle;
-        cursor: pointer;
 
+    #addgroupform input{        
+        height: 1.3rem;
+        border-radius: 0.4rem;
+        box-shadow: 2px 2px 4px 2px thistle;
+        background: transparent;
+        padding: 0.6rem;
+        margin: 0.6rem auto;
+        width: 80%;
+        overflow: hidden;    
+        font-size: 1.3rem;
+        cursor: wait;
+        outline: unset;
+        color: #FCFCFC
+    }
+    #addgroupform input[type='submit']{        
+        height: 3rem;       
+        box-shadow: 2px 2px 4px 2px thistle;
+        background: #003D66;
+        padding: 0.6rem;
+        margin: 0.6rem auto;
+        width: 50%;
+        overflow: hidden;    
+        font-size: 1rem;
+        cursor: wait;
+        color: #FCFCFC;
+    }
+    div.container ul {
+        margin: auto;
+        width: 100%;
+        padding: 0;
+    }
+    div.container ul li{
+        text-align: left;
+        height: auto;
+        font-size: 1rem;
+        cursor: unset;
+        background: transparent;
+        width: 80%;
+    }
+    .delete{
+        background: #003D66;
+        margin: 0;
+        padding: 0.5rem;
+        float: right;
+        border-radius: 0.4rem;
     }
 }
 
 @media screen and (max-width: 380px){
-    i.adminbutton{
-        margin: 0.5rem;
-        padding: 0.4rem;
-        background: #003D66;
-        border-radius: 0.2rem;
-        box-shadow: 2px 2px 4px 2px thistle;
-        cursor: pointer;
+    #addgroupform{
+        margin: 0.8rem;
+    }
 
+    #addgroupform input{        
+        height: 1.3rem;
+        border-radius: 0.4rem;
+        box-shadow: 2px 2px 4px 2px thistle;
+        background: transparent;
+        padding: 0.6rem;
+        margin: 0.6rem auto;
+        width: 80%;
+        overflow: hidden;    
+        font-size: 1.3rem;
+        cursor: wait;
+        outline: unset;
+        color: #FCFCFC
+    }
+    #addgroupform input[type='submit']{        
+        height: 3rem;       
+        box-shadow: 2px 2px 4px 2px thistle;
+        background: #003D66;
+        padding: 0.6rem;
+        margin: 0.6rem auto;
+        width: 50%;
+        overflow: hidden;    
+        font-size: 1rem;
+        cursor: wait;
+        color: #FCFCFC;
+    }
+    div.container ul li{
+        text-align: left;
+        height: auto;
+        font-size: 1rem;
+        cursor: unset;
+        background: transparent;
+        width: 80%;
+    }
+    .delete{
+        background: #003D66;
+        margin: 0;
+        padding: 0.5rem;
+        float: right;
+        border-radius: 0.4rem;
     }
 }
