@@ -5,7 +5,8 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>EPIC MAIL</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" type="text/css" media="screen" href="./styles/main.css">  
+    <link rel="stylesheet" type="text/css" media="screen" href="./styles/main.css">
+    <link rel="stylesheet" type="text/css" media="screen" href="./styles/user.css">  
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">  
 </head>
 <body>
@@ -18,9 +19,9 @@
         
         <nav class="page-nav">
             <ul>
-                <li class="navli"><a href="index.html">Sign in</a></li>
-                <li class="navli"><a href="signup.html">Sign Up</a></li>
-                <li class="navli"><a href="#">Help</a></li>
+                <li class="navli"><a href="index.html">Sign out</a></li>
+                <li class="navli"><a href="signup.html">Contact Admin</a></li>
+                <li class="navli"><a href="user.html">Set Profile</a></li>>
             </ul>
         </nav>
     </header>
@@ -29,28 +30,20 @@
         <section class="main-banner">
             <aside class="container">
                 <div class="transparent">
-                    <h1 class="main-content">Get global with EPIC MAIL</h1>
-                    <p class="main-content">...best to way exchange messages over the internet.</p>
+                    <h1 class="main-content">Welcome</h1>
+                    <p class="main-content">you're login as <em>James Smith</em></p>
                 </div>                
             </aside>
             <div class="container transparent">
-                <p class="main-content">Signin</p>
-                <form action="/user.html" method="get" id="signinform">
-                    <div id="message"></div>
-                    <div class="form-group">
-                        <label for="username">Username</label>
-                        <input type="text" name="username" id="username" placeholder="Username" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="password">Password</label>
-                        <input type="text" name="password" id="password"     placeholder="Enter Password" required>
-                    </div>
-                    <div class="form-group">
-                        <button type="button"><a href="user.html">Signin</a></button>
-                    </div>                    
-                </form>
-                <p class="main-content">Don't have an account, <a href="signup.html">Signup</a></p>
-                <p class="main-content">Forget password, <a href="resetpass.html">Reset here</a></p>
+                <p class="main-content">View Your Inbox Messages</p>                
+                <ul>
+                    <li><a href="usermessage.html">New message</a></li>
+                    <li>Lorem ipsum dolor sit amet consectetur adipisicing elit.</li>
+                    <li>Lorem ipsum dolor sit amet consectetur adipisicing elit.</li>
+                    <li>Lorem ipsum dolor sit amet consectetur adipisicing elit.</li>
+                    <li>Lorem ipsum dolor sit amet consectetur adipisicing elit.</li>
+                </ul>
+                <a href="user.html" class="main-content">Back to Home</a>                
             </div>
         </section>
     </main>
