@@ -1,0 +1,23 @@
+{
+  "name": "epicmail",
+  "version": "1.0.0",
+  "description": "A wep app to share messages over the internet",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/debelistic/epicMail.git"
+  },
+  "author": "Victor Awotidebe",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/debelistic/epicMail/issues"
+  },
+  "homepage": "https://github.com/debelistic/epicMail#readme",
+  "devDependencies": {
+    "eslint": "^5.15.0",
+    "eslint-plugin-import": "^2.16.0"
+  }
+}
