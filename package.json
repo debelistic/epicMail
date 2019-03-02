@@ -1,0 +1,34 @@
+{
+  "name": "epicmail",
+  "version": "1.0.0",
+  "description": "A wep app to share messages over the internet",
+  "main": "server/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon --exec babel-node server/index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/debelistic/epicMail.git"
+  },
+  "author": "Victor Awotidebe",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/debelistic/epicMail/issues"
+  },
+  "homepage": "https://github.com/debelistic/epicMail#readme",
+  "devDependencies": {
+    "@babel/core": "^7.3.4",
+    "@babel/node": "^7.2.2",
+    "@babel/preset-env": "^7.3.4",
+    "babel-core": "^6.26.3",
+    "eslint": "^5.15.0",
+    "eslint-config-airbnb": "^17.1.0",
+    "eslint-config-airbnb-base": "^13.1.0",
+    "eslint-plugin-import": "^2.16.0",
+    "nodemon": "^1.18.10"
+  },
+  "dependencies": {
+    "dotenv": "^6.2.0"
+  }
+}
