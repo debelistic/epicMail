@@ -29,6 +29,9 @@
     "nodemon": "^1.18.10"
   },
   "dependencies": {
-    "dotenv": "^6.2.0"
+    "chai": "^4.2.0",
+    "chai-http": "^4.2.1",
+    "dotenv": "^6.2.0",
+    "mocha": "^6.0.2"
   }
 }
