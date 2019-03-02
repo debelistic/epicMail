@@ -1,6 +1,7 @@
-// eslint-disable-next-line no-undef
+/* global document */
+/* eslint no-undefined:"error" */
 const navbutton = document.querySelector('i#navbutton');
-// eslint-disable-next-line no-undef
+
 const navmenu = document.querySelector('nav ul');
 
 navbutton.addEventListener('click', () => {
