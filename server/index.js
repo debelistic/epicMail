@@ -1,7 +1,3 @@
-import dotenv from 'dotenv';
+import env from './config';
 
-const port = process.env.PORT;
-console.log(`Your port is ${port}`);
-
-dotenv.config();
-console.log(process.env.PORT);
+console.log(env.port, env.dev);
