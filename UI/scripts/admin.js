@@ -7,17 +7,17 @@ const groupName = document.querySelector('#groupname');
  * delete group
  */
 groupList.addEventListener('click', (event) => {
-    if(event.target.className == 'delete'){
-        const li = event.target.parentElement;
-        groupList.removeChild(li);
-    }
-})
+  if (event.target.className == 'delete') {
+    const li = event.target.parentElement;
+    groupList.removeChild(li);
+  }
+});
 
 
 /**
  * add group
  */
- addGroupForm.addEventListener('submit', (event) => {
+addGroupForm.addEventListener('submit', (event) => {
 
     //prevent form form reloading
      event.preventDefault();
@@ -26,7 +26,7 @@ groupList.addEventListener('click', (event) => {
      const newgroupname = groupName.value;
      if(newgroupname === "") {
          return
-     } else{
+     } 
         const li = document.createElement('li');
         const remove = document.createElement('span');
         li.innerText = newgroupname;
@@ -36,7 +36,5 @@ groupList.addEventListener('click', (event) => {
         li.appendChild(remove);
         groupList.appendChild(li);
         addGroupForm.reset();
-    }     
- })
-
-
+         
+ });
