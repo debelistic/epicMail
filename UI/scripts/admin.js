@@ -1,5 +1,8 @@
+// eslint-disable-next-line no-undef
 const addGroupForm = document.forms.addgroupform;
+// eslint-disable-next-line no-undef
 const groupList = document.querySelector('#groupid');
+// eslint-disable-next-line no-undef
 const groupName = document.querySelector('#groupname');
 
 /**
@@ -25,7 +28,9 @@ addGroupForm.addEventListener('submit', (event) => {
   if (newgroupname === '') {
     return;
   }
+  // eslint-disable-next-line no-undef
   const li = document.createElement('li');
+  // eslint-disable-next-line no-undef
   const remove = document.createElement('span');
   li.innerText = newgroupname;
   remove.className = 'delete';
