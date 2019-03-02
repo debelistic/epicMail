@@ -1,0 +1,102 @@
+div.container{
+    width: 90%;
+    float: none;
+}
+form#signinform{
+    margin: 0.2rem 0  0.2rem 0.3rem;
+}
+
+.form-group{
+    margin: 0 0 0.7rem 0;
+    padding: 0 0.3rem 0.9rem;
+}
+.form-group label{
+    color: #FCFCFC;
+    font-size: 1rem;
+    text-align: left;
+    display: block;
+}
+.form-group input{
+    color: #FCFCFC;
+    font-size: 1rem;
+    border-radius: 0.4rem;
+    width: 90%;
+    height: 2rem;
+    padding: 0.3rem;
+    background: transparent;
+    outline: unset;
+}
+.form-group button{
+    color: #FCFCFC;
+    background: #003D66;
+    font-size: 1rem;
+    font-weight: 700;
+    padding: 0.3rem;
+    border-radius: 0.4rem;
+    outline: unset;
+}
+.form-group input:active{
+    border: #003D66 solid 0.3rem;
+}
+.form-group input:focus{
+    border: #003D66 solid 0.1rem;
+    
+}
+@media screen and (max-width: 740px){
+    form#signinform{
+        margin: 0.2rem 0  0.2rem 0.3rem;
+    }
+}
+
+@media screen and (max-width: 480px){
+    p.main-content{
+        font-size: 0.9rem;
+    }
+    form#signinform{
+        margin: 0.2rem 0  0.2rem 0.3rem;
+    }
+    .form-group{
+        margin: 0 0 0.7rem 0;
+        padding: 0 0.3rem 0.5rem;
+    }
+    .form-group label{
+        color: #FCFCFC;
+        font-size: 1rem;
+        text-align: left;
+        display: block;
+    }
+    .form-group input{
+        color: #FCFCFC;
+        font-size: 1rem;
+        border-radius: 0.4rem;
+        height: 2rem;
+        padding: 0.3rem;
+        background: transparent;
+        outline: unset;
+    }
+    .form-group button{
+        color: #FCFCFC;
+        background: #003D66;
+        font-size: 1rem;
+        font-weight: 700;
+        padding: 0.3rem;
+        border-radius: 0.4rem;
+        outline: unset;
+    }
+    .form-group input:active{
+        border: #003D66 solid 0.3rem;
+    }
+    .form-group input:focus{
+        border: #003D66 solid 0.1rem;
+        
+    }
+    div.container{
+        height: calc(100vh - 350px);
+    }
+}
+
+@media screen and (max-width:380px){
+    div.container{
+        height: calc(100vh - 350px);
+    }
+}

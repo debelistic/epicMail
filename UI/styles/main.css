@@ -1,0 +1,640 @@
+body {
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    margin: 0;
+}
+
+a{
+    text-decoration: none;
+    color: #FCFCFC;
+}
+
+#header{
+    margin: 0;
+    padding: 5px;
+    background-color: #003D66;
+    color: #FCFCFC;
+    overflow: hidden;
+}
+
+.page-title{
+    float: left;
+    padding: 20px;
+}
+
+.page-title h1{
+    margin: 0;
+    letter-spacing: 2px;
+    padding: 0 20px 0 10PX;
+    border-right: 3px solid #FCFCFC;
+    font-size: 40px;
+    font-weight: bolder;
+}
+
+.page-nav{
+    float: right;
+    padding: 0 20px 0 0;
+    margin: 0;
+    color: #FCFCFC;
+}
+
+.page-nav a{
+    text-decoration: none;
+    color: #FCFCFC;
+    font-weight: bolder;
+    font-size: 20px;
+}
+
+.page-nav ul li{
+    list-style: none;
+    margin: 0 20px 5px 0;
+    display: inline;
+    line-height: 45px;
+    letter-spacing: 2px;
+}
+
+#navbutton{
+    display: none;
+}
+
+.container{
+    margin: 0;
+    padding: 0;
+}
+
+div.container{
+    width: 60%;
+    float: left;
+    color: #FCFCFC;
+    margin: 25px 0 0 10px;
+}
+
+.transparent{
+    background-color: rgba(13, 47, 70, 0.473);
+    border-radius: 5px;
+    margin: 0 0 0 0;
+    height: calc(100vh - 300px);
+}
+
+aside.container{
+    margin: 0;
+    width: 30%;
+    float: right;
+    margin: 25px 25px 0 0;
+}
+
+.main-banner{
+    margin: 0;
+    padding: 10px 0;
+    width: 100%;
+    height: calc(100vh - 200px);
+    background-image: url(../imgs/banner.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+}
+
+h1.main-content{
+    margin: 0 0 10px;
+    padding: 0;
+    font-size: 2rem;
+    font-weight: 800;
+    color: #FCFCFC;
+    letter-spacing: 2px;
+    text-shadow: 4px 4px 8px #003D66;
+}
+
+p.main-content{
+    margin: 0 0.2rem 0.7rem 0.2rem;
+    padding: 0 0.3rem 0.9rem;
+    font-size: 1.7rem;
+    font-weight: 500;
+    color: #FCFCFC;
+    letter-spacing: 2px;
+    text-justify: right;
+    overflow: hidden;
+}
+
+#footer{
+    margin: 0;
+    padding: 3px;
+    background-color: #003D66;
+    height: 200px;
+    color: #FCFCFC;
+    overflow: hidden;
+    position: relative;
+}
+
+footer div.page-nav ul li{
+    list-style: none;
+    margin: 0 20px 5px 0;
+    display: block;
+    line-height: 45px;
+    letter-spacing: 2px;
+}
+
+.sm-page{
+    float: left;
+    padding: 0 20px 0 0;
+    margin: 0;
+    color: #FCFCFC;
+}
+
+.sm-page ul{
+    margin: 0;
+}
+
+.sm-page ul li{
+    list-style: none;
+    margin: 0 20px 5px 0;
+    display: inline;
+    line-height: 45px;
+    letter-spacing: 2px;
+}
+footer div.sm-page ul li{
+    list-style: none;
+    margin: 0 20px 5px 0;
+    display: block;
+    line-height: 45px;
+    letter-spacing: 2px;
+}
+
+footer div.sm-page ul li a{
+    text-decoration: none;
+    color: #FCFCFC;
+    font-weight: bolder;
+    font-size: 20px;
+}
+
+.copyright{
+   position: absolute;
+   bottom: 0;
+   left: 38vw;
+   letter-spacing: 2px;
+   background-color: rgba(13, 47, 70, 0.473);
+   border-radius: 5px;
+   padding: 0 10px 0;
+   font-weight: 600;
+}
+
+footer div.footer-nav ul li {
+    list-style: none;
+    margin: 0 20px 5px 0;
+    display: block;
+    line-height: 45px;
+    letter-spacing: 2px;
+}
+
+footer div.footer-nav ul li a {
+    text-decoration: none;
+    color: #FCFCFC;
+    font-weight: bolder;
+    font-size: 20px;
+}
+
+.footer-nav {
+    float: right;
+    padding: 0.3rem;
+    margin: 0;
+    color: #FCFCFC;
+}
+
+p.main-content{
+        font-size: 0.9rem;
+    }
+    form#signinform{
+        margin: 0.2rem 0  0.2rem 0.3rem;
+    }
+    .form-group{
+        margin: 0 0 0.7rem 0;
+        padding: 0 0.3rem 0.5rem;
+    }
+    .form-group label{
+        color: #FCFCFC;
+        font-size: 1rem;
+        text-align: left;
+        display: block;
+    }
+    .form-group input{
+        color: #FCFCFC;
+        font-size: 1rem;
+        border-radius: 0.4rem;
+        height: 2rem;
+        padding: 0.3rem;
+        background: transparent;
+        outline: unset;
+    }
+    .form-group button{
+        color: #FCFCFC;
+        background: #003D66;
+        font-size: 1rem;
+        font-weight: 700;
+        padding: 0.3rem;
+        border-radius: 0.4rem;
+        outline: unset;
+    }
+    .form-group input:active{
+        border: #003D66 solid 0.3rem;
+    }
+    .form-group input:focus{
+        border: #003D66 solid 0.1rem;
+        
+    }
+
+@media screen and (max-width: 1024px){
+    .sm-page {
+        float: left;
+        padding: 0 20px 0 0;
+        margin: 0;
+        color: #FCFCFC;
+    }
+    .footer-nav {
+        float: right;
+        padding: 0.3rem;
+        margin: 0;
+        color: #FCFCFC;
+    }
+    .footer-nav ul {
+        margin: 0;
+    }
+}
+
+@media screen and (max-width: 740px){
+    #header{
+        display: block;
+        padding: 0;
+    }
+    .page-title{
+        float: none;
+        padding: 0;
+        margin: auto;
+        width: 50vw;
+    }
+    .page-title h1{
+        margin: 0;
+        letter-spacing: 2px;
+        border-right: none;
+        font-size: 40px;
+        font-weight: bolder;
+        text-align: center
+    }
+    nav.page-nav{
+        float: none;
+        padding: 0 0 0 0;
+        margin: auto;
+        width: 100vw;        
+        color: #FCFCFC;
+        border-top: #FCFCFC solid 5px;
+        border-bottom: #FCFCFC solid 5px;
+    }
+    .page-nav ul{
+        margin: auto;
+        width: 50%;
+    }
+    aside div p.main-content{
+        margin: 0 0 10px;
+        padding: 30px 20px;
+        font-size: 20px;
+        font-weight: 500;
+        color: #FCFCFC;
+        letter-spacing: 2px;
+        text-justify: right;
+        overflow: hidden;
+    }
+    .footer-nav {
+        float: right;
+        padding: 0.3rem;
+        margin: 0;
+        color: #FCFCFC;
+    }
+    p.main-content{
+        font-size: 0.9rem;
+    }
+    form#signinform{
+        margin: 0.2rem 0  0.2rem 0.3rem;
+    }
+    .form-group{
+        margin: 0 0 0.7rem 0;
+        padding: 0 0.3rem 0.5rem;
+    }
+    .form-group label{
+        color: #FCFCFC;
+        font-size: 1rem;
+        text-align: left;
+        display: block;
+    }
+    .form-group input{
+        color: #FCFCFC;
+        font-size: 1rem;
+        border-radius: 0.4rem;
+        height: 2rem;
+        padding: 0.3rem;
+        background: transparent;
+        outline: unset;
+    }
+    .form-group button{
+        color: #FCFCFC;
+        background: #003D66;
+        font-size: 1rem;
+        font-weight: 700;
+        padding: 0.3rem;
+        border-radius: 0.4rem;
+        outline: unset;
+    }
+    .form-group input:active{
+        border: #003D66 solid 0.3rem;
+    }
+    .form-group input:focus{
+        border: #003D66 solid 0.1rem;
+        
+    }
+}
+
+@media screen and (max-width: 480px){
+    #header{
+        height: unset;
+        position: relative;
+    }
+    #navbutton{
+        display: unset;
+        color: #FCFCFC;
+        background-color: #003D66;
+        border: none;
+        cursor: pointer;
+        margin: 0.3rem;
+        padding: 0.2rem;
+        font-size: 30px;
+        font-weight: 600;
+        position: absolute;
+        top: 0;
+        right: 0;
+    }
+    .page-title{
+        width: unset;
+        margin: 0;
+    }
+    .page-title h1{
+        font-size: 1.5rem;
+        margin: 0.3rem;
+        width: unset;
+        text-align: unset;
+        padding: 5px;
+    }
+    nav.page-nav{
+        border: none;
+        float: none;
+        width: unset;
+        border-bottom: #FCFCFC solid 3px;
+    }
+    .page-nav ul{
+        width: 100%;
+        padding: 0;
+        height: 0;
+    }
+    .page-nav ul.open{
+        height: auto;
+    }
+    .page-nav ul li{
+        display: block;
+        margin: 10px 0 0 0;
+        padding: 10px;
+        width: 100%;
+        border-top: #FCFCFC solid 3px;
+        line-height: unset;
+    }
+    aside.container{
+        float: none;
+        width: 90%;
+        margin: auto;
+        height: 100px;
+        overflow: hidden;
+    }
+    div.container{
+        float: none;
+        width: 80%;
+        margin: 10px auto;
+        height: calc(100vh - 210px);
+    }
+    h1.main-content{
+        margin: 0;
+        padding: 0.3rem;
+        font-weight: normal;
+        font-size: 1.5rem;
+    }
+    p.main-content{
+        padding: 5px;
+        font-weight: normal;
+        font-size: 20px;
+    }
+    .transparent {
+        background-color: rgba(13, 47, 70, 0.473);
+        border-radius: 5px;
+        height: unset;       
+    }
+    .container{
+        margin: 10px 0;
+    }
+    aside div p.main-content {
+        margin: 0 0 0.2rem;
+        padding: 0.2rem;
+        font-size: 1.1rem;
+        font-weight: 500;
+        color: #FCFCFC;
+        letter-spacing: 0.2rem;
+        text-justify: right;
+        overflow: hidden;
+    }
+    #footer{
+        display: block;
+        height: calc(100vw - 150px);
+    }
+    .sm-page{
+        float: left;
+        margin: 0;
+        padding: 0;
+    }
+    .sm-page ul{
+        margin: 0;
+        padding: 0.4rem;
+    }
+    .page-nav{
+        float: none;
+        margin: auto;
+        padding: 0;
+    }
+    .copyright{
+        left: 30vw;
+    }
+    .footer-nav ul li{
+        display: block;
+        margin: auto;
+        border-top: none;
+        line-height: unset;
+    }
+    .footer-nav ul {
+        margin: 0;
+        padding: 0.3rem;
+    }
+    .footer-nav {
+        float: right;
+        padding: 0.3rem;
+        margin: 0;
+        color: #FCFCFC;
+    }
+    p.main-content{
+        font-size: 0.9rem;
+    }
+    form#signinform{
+        margin: 0.2rem 0  0.2rem 0.3rem;
+    }
+    .form-group{
+        margin: 0 0 0.7rem 0;
+        padding: 0 0.3rem 0.5rem;
+    }
+    .form-group label{
+        color: #FCFCFC;
+        font-size: 1rem;
+        text-align: left;
+        display: block;
+    }
+    .form-group input{
+        color: #FCFCFC;
+        font-size: 1rem;
+        border-radius: 0.4rem;
+        height: 2rem;
+        padding: 0.3rem;
+        background: transparent;
+        outline: unset;
+    }
+    .form-group button{
+        color: #FCFCFC;
+        background: #003D66;
+        font-size: 1rem;
+        font-weight: 700;
+        padding: 0.3rem;
+        border-radius: 0.4rem;
+        outline: unset;
+    }
+    .form-group input:active{
+        border: #003D66 solid 0.3rem;
+    }
+    .form-group input:focus{
+        border: #003D66 solid 0.1rem;
+        
+    }
+}
+
+@media screen and (max-width: 380px){
+    .page-title h1{
+        font-size: 1.5rem;
+        margin: 0.3rem;
+        width: unset;
+        text-align: unset;
+    }
+    h1.main-content {
+        margin: 0;
+        padding: 5px;
+        font-weight: normal;
+        font-size: 18px;
+    }
+    aside div p.main-content {
+        margin: 0 0 5px;
+        padding: 5px;
+        font-size: 14px;
+        font-weight: 500;
+        color: #FCFCFC;
+        letter-spacing: 2px;
+        text-justify: right;
+        overflow: hidden;
+    }
+    .main-banner{
+        height: unset;
+    }
+    div.container {
+        float: none;
+        width: 80%;
+        margin: 10px auto;
+        height: calc(100vh - 180px);
+    }
+    footer div.sm-page ul li {
+        list-style: none;
+        margin: 5px;
+        display: block;
+        padding: 5px;
+        line-height: unset;
+        letter-spacing: 3px;
+    }
+    footer div.sm-page ul li a {
+        text-decoration: none;
+        color: #FCFCFC;
+        font-weight: bolder;
+        font-size: 16px;
+    }
+    footer div.footer-nav ul li {
+        list-style: none;
+        margin: 0.2rem;
+        padding: 0.3rem;
+        display: block;
+        line-height: unset;
+        letter-spacing: 0.2rem;
+    }
+    footer div.footer-nav ul li a {
+        text-decoration: none;
+        color: #FCFCFC;
+        font-weight: bolder;
+        font-size: 16px;
+    }
+    .copyright {
+        left: 25vw;
+    }
+    .footer-nav {
+        float: right;
+        padding: 0.3rem;
+        margin: 0;
+        color: #FCFCFC;
+    }
+    .footer-nav ul{
+        margin: 0;
+        padding: 0.3rem;
+    }
+    p.main-content{
+        font-size: 0.9rem;
+    }
+    form#signinform{
+        margin: 0.2rem 0  0.2rem 0.3rem;
+    }
+    .form-group{
+        margin: 0 0 0.7rem 0;
+        padding: 0 0.3rem 0.5rem;
+    }
+    .form-group label{
+        color: #FCFCFC;
+        font-size: 1rem;
+        text-align: left;
+        display: block;
+    }
+    .form-group input{
+        color: #FCFCFC;
+        font-size: 1rem;
+        border-radius: 0.4rem;
+        height: 2rem;
+        padding: 0.3rem;
+        background: transparent;
+        outline: unset;
+    }
+    .form-group button{
+        color: #FCFCFC;
+        background: #003D66;
+        font-size: 1rem;
+        font-weight: 700;
+        padding: 0.3rem;
+        border-radius: 0.4rem;
+        outline: unset;
+    }
+    .form-group input:active{
+        border: #003D66 solid 0.3rem;
+    }
+    .form-group input:focus{
+        border: #003D66 solid 0.1rem;
+        
+    }
+}
