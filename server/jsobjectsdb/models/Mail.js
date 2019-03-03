@@ -18,6 +18,7 @@ class Mail {
     this.inbox = [];
     this.sent = [];
     this.drafts = [];
+    this.allMail = [];
   }
 
   create(mail) {
@@ -27,15 +28,27 @@ class Mail {
       subject: mail.subject,
       message: mail.message,
       parentMessageId: mail.parentMessageId,
-      status: Boolean,
+      status: mail.status,
     };
+
+    this.allMail.push(mail);
 
     if (newMail.status === true) {
       this.sent.push(newMail);
-      return { message: 'Mail Sent' };
+      return {
+        message: 'Mail Sent',
+        newMail,
+      };
     }
     this.drafts.push(newMail);
-    return { message: 'Saved to darfts' };
+    return {
+      message: 'Saved to darfts',
+      newMail,
+    };
+  }
+
+  getAllMail() {
+    return this.allMail;
   }
 
   getInbox() {
@@ -66,4 +79,4 @@ class Mail {
   }
 }
 
-export default Mail;
+export default new Mail();
