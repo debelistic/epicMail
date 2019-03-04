@@ -1,3 +1,5 @@
+import User from 'User';
+
 /**
  * randomId function is from the discussion on this stackoverflow link
  * https://stackoverflow.com/questions/1349404/generate-random-string-characters-in-javascript
@@ -13,7 +15,7 @@ const randomId = () => {
   return id;
 };
 
-class Mail {
+class MailModel {
   constructor() {
     this.inbox = [];
     this.sent = [];
@@ -27,6 +29,7 @@ class Mail {
       createdOn: Date(),
       subject: mail.subject,
       message: mail.message,
+      userid: mail.id,
       parentMessageId: mail.parentMessageId,
       status: mail.status,
     };
@@ -79,4 +82,5 @@ class Mail {
   }
 }
 
-export default new Mail();
+
+export default new MailModel();
