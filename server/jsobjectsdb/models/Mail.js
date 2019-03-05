@@ -1,5 +1,3 @@
-// import User from 'User';
-
 /**
  * randomId function is from the discussion on this stackoverflow link
  * https://stackoverflow.com/questions/1349404/generate-random-string-characters-in-javascript

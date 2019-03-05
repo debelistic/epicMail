@@ -26,5 +26,4 @@ app.get('/drafts/:id', MailController.getADraftMail);
 
 const port = process.env.PORT;
 
-console.log(port);
 app.listen(port);

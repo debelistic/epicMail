@@ -1,5 +1,5 @@
 import Helper from './Helper';
-// import UserController from '../controllers/UserController';
+
 /**
  * randomId function is from the discussion on this stackoverflow link
  * https://stackoverflow.com/questions/1349404/generate-random-string-characters-in-javascript
