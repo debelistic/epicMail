@@ -1,5 +1,6 @@
 import express from 'express';
 import MailController from './jsobjectsdb/controllers/MailController';
+import UserController from './jsobjectsdb/controllers/UserController';
 
 
 const app = express();
@@ -11,6 +12,8 @@ app.get('/', (req, res) => {
 });
 
 app.post('/mail', MailController.createMail);
+app.post('/user', UserController.createUser);
+app.post('/user/signin', UserController.signInUser);
 app.get('/mail', MailController.getAll);
 app.get('/sentmails', MailController.getSentMails);
 app.get('/sentmails/:id', MailController.getASentMail);

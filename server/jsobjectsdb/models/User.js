@@ -24,17 +24,17 @@ const generateToken = (tokenLength) => {
 };
 
 
-class User {
+class UserModel {
   constructor() {
     this.users = [];
   }
 
-  create(user) {
+  createUser(user) {
     const newUser = {
       id: randomId(),
       firstName: user.firstName,
       lastName: user.lastName,
-      contactName: `${user.contactName}@epicmail`,
+      contactName: `${user.contactName}@epicmail.com`,
       password: user.password,
       confirmPassword: user.confirmPassword,
       createdOn: Date(),
@@ -45,17 +45,17 @@ class User {
       && !newUser.confirmPassword) {
       return { message: 'All fields are required' };
     }
-    if (!/^[a-z\d]{5,}$/i.test(newUser.contactName)) {
+    if (!/^[a-z\d]{5,}$/i.test(user.contactName)) {
       return { message: 'Use a valid contact name' };
     }
-    if (/^(?=.*?[a-z])(?=.*?[A-Z])(?=.*?[0-9])(?=.*?[$@#&!]).{6,}$/.test(newUser.password)) {
+    if (!/^(?=.*?[a-z])(?=.*?[A-Z])(?=.*?[0-9])(?=.*?[$@#&!]).{6,}$/.test(newUser.password)) {
       return {
         message: 'Password should contain at least a lower and upper case, a digit and special character',
       };
     }
-    if (newUser.password === newUser.confirmPassword) {
+    if (newUser.password !== newUser.confirmPassword) {
       return {
-        message: 'Password should contain at least a lower and upper case, a digit and special character',
+        message: 'Password should match',
       };
     }
     this.users.push(newUser);
@@ -66,8 +66,8 @@ class User {
     };
   }
 
-  signIn(id) {
-    const user = this.user.find(aUser => aUser.id === id);
+  signIn(contactName) {
+    const user = this.users.find(aUser => aUser.contactName === contactName);
     if (!user.contactName && !user.password) {
       return { message: 'Signin details does not match' };
     }
@@ -75,14 +75,14 @@ class User {
     return token;
   }
 
-  getAUSer(id) {
-    const user = this.user.find(aUser => aUser.id === id);
+  getAUSer(contactName) {
+    const user = this.users.find(aUser => aUser.contacName === contactName);
     if (!user.contactName && !user.password) {
       return { message: 'Signin details does not match' };
-    }    
+    }
     return user;
   }
 }
 
 
-export default new User();
+export default new UserModel();
