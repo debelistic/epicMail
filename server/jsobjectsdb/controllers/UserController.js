@@ -38,8 +38,7 @@ const UserController = {
     if (!req.body.contactName && !req.body.password) {
       return res.status(400).send({ message: 'Required field empty' });
     }
-    console.log(req.body);
-    console.log(req.body.contactName);
+
     const user = UserModel.signIn(req.body.contactName);
     if (req.body.password === user.password) {
       const token = generateToken(90);

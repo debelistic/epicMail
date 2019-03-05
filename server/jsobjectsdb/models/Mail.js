@@ -1,4 +1,4 @@
-//import User from 'User';
+// import User from 'User';
 
 /**
  * randomId function is from the discussion on this stackoverflow link

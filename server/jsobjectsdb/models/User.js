@@ -14,8 +14,6 @@ const randomId = () => {
 };
 
 
-
-
 class UserModel {
   constructor() {
     this.users = [];
@@ -59,16 +57,15 @@ class UserModel {
   }
 
   signIn(contactName) {
-    console.log(this.users);
     const user = this.users.find(aUser => aUser.contactName === `${contactName}@epicmail.com`);
-    console.log(user);
+
     if (!user.contactName && !user.password) {
       return { message: 'Signin details does not match' };
     }
     return user;
   }
 
-  getAUSer(contactName) {    
+  getAUSer(contactName) {
     const user = this.users.find(aUser => aUser.contacName === contactName);
     if (!user.contactName && !user.password) {
       return { message: 'Signin details does not match' };
