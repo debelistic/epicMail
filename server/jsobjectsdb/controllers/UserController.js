@@ -1,8 +1,18 @@
 import UserModel from '../models/User';
 
+const generateToken = (tokenLength) => {
+  let token = '';
+  const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+
+  for (let index = 0; index < tokenLength; index += 1) {
+    token += characters.charAt(Math.floor(Math.random() * characters.length));
+  }
+  return token;
+};
+
 const UserController = {
   createUser(req, res) {
-    if (!req.body.firstName && !req.body.lastName && !req.body.contacName
+    if (!req.body.firstName && !req.body.lastName && !req.body.contactName
         && !req.body.password && !req.body.confirmPassword) {
       return { message: 'All fields are required' };
     }
@@ -25,12 +35,17 @@ const UserController = {
   },
 
   signInUser(req, res) {
-    if (!req.body.contacName && !req.body.password) {
+    if (!req.body.contactName && !req.body.password) {
       return res.status(400).send({ message: 'Required field empty' });
     }
     console.log(req.body);
-    const user = UserModel.signIn(req.body);
-    return res.status(200).send(user);
+    console.log(req.body.contactName);
+    const user = UserModel.signIn(req.body.contactName);
+    if (req.body.password === user.password) {
+      const token = generateToken(90);
+      return res.status(200).send(`token for ${user.contactName} is ${token}`);
+    }
+    return res.status(400).send({ message: 'invalid password' });
   },
 };
 

@@ -13,15 +13,7 @@ const randomId = () => {
   return id;
 };
 
-const generateToken = (tokenLength) => {
-  let token = '';
-  const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
 
-  for (let index = 0; index < tokenLength; index += 1) {
-    token += characters.charAt(Math.floor(Math.random() * characters.length));
-  }
-  return token;
-};
 
 
 class UserModel {
@@ -67,15 +59,16 @@ class UserModel {
   }
 
   signIn(contactName) {
-    const user = this.users.find(aUser => aUser.contactName === contactName);
+    console.log(this.users);
+    const user = this.users.find(aUser => aUser.contactName === `${contactName}@epicmail.com`);
+    console.log(user);
     if (!user.contactName && !user.password) {
       return { message: 'Signin details does not match' };
     }
-    const token = generateToken(90);
-    return token;
+    return user;
   }
 
-  getAUSer(contactName) {
+  getAUSer(contactName) {    
     const user = this.users.find(aUser => aUser.contacName === contactName);
     if (!user.contactName && !user.password) {
       return { message: 'Signin details does not match' };
