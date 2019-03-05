@@ -1,3 +1,5 @@
+import Helper from './Helper';
+// import UserController from '../controllers/UserController';
 /**
  * randomId function is from the discussion on this stackoverflow link
  * https://stackoverflow.com/questions/1349404/generate-random-string-characters-in-javascript
@@ -38,16 +40,14 @@ class UserModel {
     if (!/^[a-z\d]{5,}$/i.test(user.contactName)) {
       return { message: 'Use a valid contact name' };
     }
-    if (!/^(?=.*?[a-z])(?=.*?[A-Z])(?=.*?[0-9])(?=.*?[$@#&!]).{6,}$/.test(newUser.password)) {
-      return {
-        message: 'Password should contain at least a lower and upper case, a digit and special character',
-      };
-    }
     if (newUser.password !== newUser.confirmPassword) {
       return {
         message: 'Password should match',
       };
     }
+    const hashPassword = Helper.hashPassword(newUser.password);
+    newUser.password = hashPassword;
+
     this.users.push(newUser);
     return {
       message: `User account created for ${newUser.firstName} ${newUser.lastName}`,
@@ -56,19 +56,21 @@ class UserModel {
     };
   }
 
-  signIn(contactName) {
+  getAuser(contactName) {
+    const user = this.users.find(aUser => aUser.contactName === `${contactName}@epicmail.com`);
+    return user;
+  }
+
+  getAUser(contactName, password) {
     const user = this.users.find(aUser => aUser.contactName === `${contactName}@epicmail.com`);
 
     if (!user.contactName && !user.password) {
       return { message: 'Signin details does not match' };
     }
-    return user;
-  }
-
-  getAUSer(contactName) {
-    const user = this.users.find(aUser => aUser.contacName === contactName);
-    if (!user.contactName && !user.password) {
-      return { message: 'Signin details does not match' };
+    console.log(user);
+    console.log('this is her password', password);
+    if (!Helper.comparePassword(password, user.password)) {
+      return { message: 'Invalid password' };
     }
     return user;
   }

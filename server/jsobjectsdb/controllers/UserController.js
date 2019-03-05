@@ -1,20 +1,11 @@
+import Helper from '../models/Helper';
 import UserModel from '../models/User';
-
-const generateToken = (tokenLength) => {
-  let token = '';
-  const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-
-  for (let index = 0; index < tokenLength; index += 1) {
-    token += characters.charAt(Math.floor(Math.random() * characters.length));
-  }
-  return token;
-};
 
 const UserController = {
   createUser(req, res) {
     if (!req.body.firstName && !req.body.lastName && !req.body.contactName
         && !req.body.password && !req.body.confirmPassword) {
-      return { message: 'All fields are required' };
+      return res.status(400).send({ message: 'All fields are required' });
     }
 
     if (!/^[a-z\d]{5,}$/i.test(req.body.contactName)) {
@@ -39,12 +30,29 @@ const UserController = {
       return res.status(400).send({ message: 'Required field empty' });
     }
 
-    const user = UserModel.signIn(req.body.contactName);
-    if (req.body.password === user.password) {
-      const token = generateToken(90);
-      return res.status(200).send(`token for ${user.contactName} is ${token}`);
+
+    const user = UserModel.getAuser(req.body.contactName);
+    if (!user.contactName && !user.password) {
+      return res.status(400).send({ message: 'Signin details does not match' });
     }
-    return res.status(400).send({ message: 'invalid password' });
+
+    if (!Helper.comparePassword(req.body.password, user.password)) {
+      return res.status(400).send({ message: 'Invalid password' });
+    }
+
+
+    const token = Helper.generateToken(user.id);
+    return res.status(200).send(token);
+  },
+
+  getARegUser(req, res) {
+    if (!req.body.contactName && !req.body.password) {
+      return res.status(400).send({ message: 'Required field empty' });
+    }
+
+    const user = UserModel.getAUser(req.body.contactName, req.body.password);
+
+    return res.status(201).send({ user });
   },
 };
 
