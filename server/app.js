@@ -16,7 +16,7 @@ app.get('/', (req, res) => {
 });
 
 app.post('/mail', MailController.createMail);
-app.post('/user', UserController.createUser);
+app.post('/user', Auth.verifyToken, UserController.createUser);
 app.post('/user/signin', UserController.signInUser);
 app.get('/user/:id', UserController.getARegUser);
 app.get('/users', UserController.getAllUsers);
