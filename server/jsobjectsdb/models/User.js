@@ -1,20 +1,5 @@
-import Helper from './Helper';
-
-/**
- * randomId function is from the discussion on this stackoverflow link
- * https://stackoverflow.com/questions/1349404/generate-random-string-characters-in-javascript
- * the function is modified here to generate 15 length character id for our data base
- */
-const randomId = () => {
-  let id = '';
-  const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-
-  for (let index = 0; index < 15; index += 1) {
-    id += characters.charAt(Math.floor(Math.random() * characters.length));
-  }
-  return id;
-};
-
+import HelperModule from './Helper';
+import randomId from './randomid';
 
 class UserModel {
   constructor() {
@@ -23,7 +8,7 @@ class UserModel {
 
   createUser(user) {
     const newUser = {
-      id: randomId(),
+      id: randomId,
       firstName: user.firstName,
       lastName: user.lastName,
       contactName: `${user.contactName}@epicmail.com`,
@@ -45,7 +30,7 @@ class UserModel {
         message: 'Password should match',
       };
     }
-    const hashPassword = Helper.hashPassword(newUser.password);
+    const hashPassword = HelperModule.hashPassword(newUser.password);
     newUser.password = hashPassword;
 
     this.users.push(newUser);
@@ -56,7 +41,7 @@ class UserModel {
     };
   }
 
-  getAuser(contactName) {
+  getAwithContactName(contactName) {
     const user = this.users.find(aUser => aUser.contactName === `${contactName}@epicmail.com`);
     return user;
   }
@@ -68,7 +53,7 @@ class UserModel {
       return { message: 'Signin details does not match' };
     }
 
-    if (!Helper.comparePassword(password, user.password)) {
+    if (!HelperModule.comparePassword(password, user.password)) {
       return { message: 'Invalid password' };
     }
     return user;

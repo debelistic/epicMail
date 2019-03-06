@@ -1,6 +1,5 @@
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
-import UserModel from './User';
 
 const Helper = {
   /**
@@ -22,7 +21,7 @@ const Helper = {
    */
   generateToken(id) {
     const token = jwt.sign({
-      userId: UserModel.getAUserWithId(id),
+      userId: id,
     },
     process.env.SECRET, { expiresIn: '7d' });
     return token;
