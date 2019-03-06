@@ -1,4 +1,4 @@
-import Helper from './Helper';
+import HelperModule from './Helper';
 
 /**
  * randomId function is from the discussion on this stackoverflow link
@@ -45,7 +45,7 @@ class UserModel {
         message: 'Password should match',
       };
     }
-    const hashPassword = Helper.hashPassword(newUser.password);
+    const hashPassword = HelperModule.hashPassword(newUser.password);
     newUser.password = hashPassword;
 
     this.users.push(newUser);
@@ -68,7 +68,7 @@ class UserModel {
       return { message: 'Signin details does not match' };
     }
 
-    if (!Helper.comparePassword(password, user.password)) {
+    if (!HelperModule.comparePassword(password, user.password)) {
       return { message: 'Invalid password' };
     }
     return user;
