@@ -21,8 +21,9 @@ const UserController = {
         message: 'Password should match',
       });
     }
-    const user = UserModel.createUser(req.body);
-    return res.status(201).send(user);
+    UserModel.createUser(req.body);
+    const token = Helper.generateToken(req.body.id);
+    return res.status(201).send(token);
   },
 
   signInUser(req, res) {
@@ -32,12 +33,16 @@ const UserController = {
 
 
     const user = UserModel.getAuser(req.body.contactName);
-    if (!user.contactName && !user.password) {
+    if (!user) {
       return res.status(400).send({ message: 'Signin details does not match' });
     }
 
     if (!Helper.comparePassword(req.body.password, user.password)) {
       return res.status(400).send({ message: 'Invalid password' });
+    }
+
+    if (!user.contactName === undefined) {
+      return res.status(403).send({ message: 'User not registered' });
     }
 
 
@@ -53,6 +58,12 @@ const UserController = {
     const user = UserModel.getAUser(req.body.contactName, req.body.password);
 
     return res.status(201).send({ user });
+  },
+
+  getAllUsers(req, res) {
+    const users = UserModel.getAllusers();
+
+    return res.status(200).send(users);
   },
 };
 

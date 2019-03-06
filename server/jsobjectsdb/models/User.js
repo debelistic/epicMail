@@ -67,12 +67,20 @@ class UserModel {
     if (!user.contactName && !user.password) {
       return { message: 'Signin details does not match' };
     }
-    console.log(user);
-    console.log('this is her password', password);
+
     if (!Helper.comparePassword(password, user.password)) {
       return { message: 'Invalid password' };
     }
     return user;
+  }
+
+  getAUserWithId(id) {
+    const user = this.users.find(auser => auser.id === id);
+    return user;
+  }
+
+  getAllusers() {
+    return this.users;
   }
 }
 
