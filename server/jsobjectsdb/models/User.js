@@ -8,7 +8,7 @@ class UserModel {
 
   createUser(user) {
     const newUser = {
-      id: randomId(),
+      id: randomId,
       firstName: user.firstName,
       lastName: user.lastName,
       contactName: `${user.contactName}@epicmail.com`,
@@ -41,7 +41,7 @@ class UserModel {
     };
   }
 
-  getAuser(contactName) {
+  getAwithContactName(contactName) {
     const user = this.users.find(aUser => aUser.contactName === `${contactName}@epicmail.com`);
     return user;
   }

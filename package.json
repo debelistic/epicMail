@@ -4,7 +4,7 @@
   "description": "A wep app to share messages over the internet",
   "main": "server/app.js",
   "scripts": {
-    "test": "mocha --require @babel/register test/*.js",
+    "test": "mocha --require @babel/register test/*.js --exit",
     "start": "nodemon --exec babel-node server/app.js"
   },
   "repository": {
