@@ -32,7 +32,7 @@ const UserController = {
     }
 
 
-    const user = UserModel.getAuser(req.body.contactName);
+    const user = UserModel.getAwithContactName(req.body.contactName);
     if (!user) {
       return res.status(400).send({ message: 'Signin details does not match' });
     }

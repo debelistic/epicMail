@@ -10,7 +10,7 @@ class MailModel {
 
   create(mail) {
     const newMail = {
-      id: randomId(),
+      id: randomId,
       createdOn: Date(),
       subject: mail.subject,
       message: mail.message,
