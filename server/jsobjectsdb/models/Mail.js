@@ -93,6 +93,7 @@ class MailModel {
       createdOn: Date(),
       subject: mail.subject,
       message: mail.message,
+      receiverId: mail.receiverId,
       parentMessageId: mail.parentMessageId,
       sentStatus: mail.sentStatus,
       status: mail.status,

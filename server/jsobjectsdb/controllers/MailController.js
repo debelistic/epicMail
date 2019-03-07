@@ -3,11 +3,15 @@ import MailModel from '../models/Mail';
 const Mail = {
 
   createMail(req, res) {
-    if (!req.body.subject && !req.body.message && !req.body.parentMessageId && !req.body.status) {
+    if (!req.body.subject && !req.body.message && !req.body.parentMessageId && !req.body.status
+      && !req.body.parentMessageId) {
       res.status(400).send({ message: 'You have missing field' });
     }
     const mail = MailModel.create(req.body);
-    return res.status(201).send(mail);
+    return res.status(201).send({
+      status: 201,
+      mail,
+    });
   },
 
   getAll(req, res) {
