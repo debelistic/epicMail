@@ -1,4 +1,8 @@
+import express from 'express';
 import MailModel from '../models/Mail';
+
+const app = express();
+app.use(express.json);
 
 const Mail = {
 
