@@ -29,5 +29,8 @@ router.get('/messages/unread', Auth.verifyToken, MailController.getUnreadMail);
 // Send mail to individuals
 router.post('/messages', Auth.verifyToken, MailController.createMail);
 
+// Get a user email
+router.get('/messages/:id', Auth.verifyToken, MailController.getASentMail);
+
 
 export default router;
