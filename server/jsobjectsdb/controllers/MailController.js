@@ -20,10 +20,10 @@ const Mail = {
   },
 
   getInbox(req, res) {
-    const allMail = MailModel.getInbox();
+    const inbox = MailModel.getInbox();
     res.status(200).send({
       status: 200,
-      allMail,
+      data: [inbox],
     });
   },
 
@@ -45,7 +45,10 @@ const Mail = {
 
   getASentMail(req, res) {
     const aSentMail = MailModel.getASent(req.params.id);
-    res.status(200).send(aSentMail);
+    res.status(200).send({
+      status: 201,
+      data: [aSentMail],
+    });
   },
 
   getDrafts(req, res) {

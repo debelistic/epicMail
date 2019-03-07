@@ -4,8 +4,9 @@ class MailModel {
   constructor() {
     this.inbox = [
       {
-        receiverId: parseInt(randomId, 2),
-        parentMessageId: parseInt(randomId, 2),
+        id: randomId,
+        receiverId: randomId,
+        parentMessageId: randomId,
         messageId: randomId,
         subject: 'Rain Coder',
         message: 'Lorem ipsum dolor sit, amet consectetur adipisicing elit. Magni temporibus ex tenetur delectus earum',
@@ -14,8 +15,9 @@ class MailModel {
         status: 'UnRead',
       },
       {
-        receiverId: parseInt(randomId, 2),
-        parentMessageId: parseInt(randomId, 2),
+        id: randomId,
+        receiverId: randomId,
+        parentMessageId: randomId,
         messageId: randomId,
         subject: 'Summer Coder',
         message: 'Lorem ipsum dolor sit, amet consectetur adipisicing elit. Magni temporibus ex tenetur delectus earum',
@@ -24,8 +26,9 @@ class MailModel {
         status: 'UnRead',
       },
       {
-        receiverId: parseInt(randomId, 2),
-        parentMessageId: parseInt(randomId, 2),
+        id: randomId,
+        receiverId: randomId,
+        parentMessageId: randomId,
         messageId: randomId,
         subject: 'Rain Coder',
         message: 'Lorem ipsum dolor sit, amet consectetur adipisicing elit. Magni temporibus ex tenetur delectus earum',
@@ -34,8 +37,9 @@ class MailModel {
         status: 'Read',
       },
       {
-        receiverId: parseInt(randomId, 2),
-        parentMessageId: parseInt(randomId, 2),
+        id: randomId,
+        receiverId: randomId,
+        parentMessageId: randomId,
         messageId: randomId,
         subject: 'Summer Coder',
         message: 'Lorem ipsum dolor sit, amet consectetur adipisicing elit. Magni temporibus ex tenetur delectus earum',
@@ -46,7 +50,8 @@ class MailModel {
     ];
     this.sent = [
       {
-        receiverId: parseInt(randomId, 2),
+        id: randomId,
+        receiverId: randomId,
         messageId: randomId,
         subject: 'Rain Coder',
         message: 'Lorem ipsum dolor sit, amet consectetur adipisicing elit. Magni temporibus ex tenetur delectus earum',
@@ -55,7 +60,8 @@ class MailModel {
         status: 'Sent',
       },
       {
-        receiverId: parseInt(randomId, 2),
+        id: randomId,
+        receiverId: randomId,
         messageId: randomId,
         subject: 'Rain Coder',
         message: 'Lorem ipsum dolor sit, amet consectetur adipisicing elit. Magni temporibus ex tenetur delectus earum',
@@ -66,7 +72,8 @@ class MailModel {
     ];
     this.drafts = [
       {
-        receiverId: parseInt(randomId, 2),
+        id: randomId,
+        receiverId: randomId,
         messageId: randomId,
         subject: 'Rain Coder',
         message: 'Lorem ipsum dolor sit, amet consectetur adipisicing elit. Magni temporibus ex tenetur delectus earum',
@@ -75,7 +82,8 @@ class MailModel {
         status: 'Draft',
       },
       {
-        receiverId: parseInt(randomId, 2),
+        id: randomId,
+        receiverId: randomId,
         messageId: randomId,
         subject: 'Rain Coder',
         message: 'Lorem ipsum dolor sit, amet consectetur adipisicing elit. Magni temporibus ex tenetur delectus earum',
