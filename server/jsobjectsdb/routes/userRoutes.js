@@ -23,4 +23,7 @@ router.post('/auth/login', UserController.signInUser);
 // Get all received emails for a user
 router.get('/messages', Auth.verifyToken, MailController.getInbox);
 
+// Get unread mails for a user
+router.get('/messages/unread', Auth.verifyToken, MailController.getUnreadMail);
+
 export default router;

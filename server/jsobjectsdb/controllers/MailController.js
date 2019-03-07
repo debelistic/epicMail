@@ -17,7 +17,18 @@ const Mail = {
 
   getInbox(req, res) {
     const allMail = MailModel.getInbox();
-    res.status(200).send(allMail);
+    res.status(200).send({
+      status: 200,
+      allMail,
+    });
+  },
+
+  getUnreadMail(req, res) {
+    const unreadMail = MailModel.getUnread();
+    res.status(200).send({
+      status: 200,
+      date: [unreadMail],
+    });
   },
 
   getSentMails(req, res) {
