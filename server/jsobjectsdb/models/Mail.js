@@ -5,35 +5,43 @@ class MailModel {
     this.inbox = [
       {
         receiverId: parseInt(randomId, 2),
+        parentMessageId: parseInt(randomId, 2),
         messageId: randomId,
         subject: 'Rain Coder',
         message: 'Lorem ipsum dolor sit, amet consectetur adipisicing elit. Magni temporibus ex tenetur delectus earum',
         createdOn: new Date(),
         readStatus: false,
+        status: 'UnRead',
       },
       {
         receiverId: parseInt(randomId, 2),
+        parentMessageId: parseInt(randomId, 2),
         messageId: randomId,
         subject: 'Summer Coder',
         message: 'Lorem ipsum dolor sit, amet consectetur adipisicing elit. Magni temporibus ex tenetur delectus earum',
         createdOn: new Date(),
         readStatus: false,
+        status: 'UnRead',
       },
       {
         receiverId: parseInt(randomId, 2),
+        parentMessageId: parseInt(randomId, 2),
         messageId: randomId,
         subject: 'Rain Coder',
         message: 'Lorem ipsum dolor sit, amet consectetur adipisicing elit. Magni temporibus ex tenetur delectus earum',
         createdOn: new Date(),
         readStatus: true,
+        status: 'Read',
       },
       {
         receiverId: parseInt(randomId, 2),
+        parentMessageId: parseInt(randomId, 2),
         messageId: randomId,
         subject: 'Summer Coder',
         message: 'Lorem ipsum dolor sit, amet consectetur adipisicing elit. Magni temporibus ex tenetur delectus earum',
         createdOn: new Date(),
         readStatus: true,
+        status: 'Read',
       },
     ];
     this.sent = [
@@ -43,7 +51,8 @@ class MailModel {
         subject: 'Rain Coder',
         message: 'Lorem ipsum dolor sit, amet consectetur adipisicing elit. Magni temporibus ex tenetur delectus earum',
         createdOn: new Date(),
-        status: true,
+        sentStatus: true,
+        status: 'Sent',
       },
       {
         receiverId: parseInt(randomId, 2),
@@ -51,7 +60,8 @@ class MailModel {
         subject: 'Rain Coder',
         message: 'Lorem ipsum dolor sit, amet consectetur adipisicing elit. Magni temporibus ex tenetur delectus earum',
         createdOn: new Date(),
-        status: true,
+        sentStatus: true,
+        status: 'Sent',
       },
     ];
     this.drafts = [
@@ -61,7 +71,8 @@ class MailModel {
         subject: 'Rain Coder',
         message: 'Lorem ipsum dolor sit, amet consectetur adipisicing elit. Magni temporibus ex tenetur delectus earum',
         createdOn: new Date(),
-        status: false,
+        sentStatus: false,
+        status: 'Draft',
       },
       {
         receiverId: parseInt(randomId, 2),
@@ -69,7 +80,8 @@ class MailModel {
         subject: 'Rain Coder',
         message: 'Lorem ipsum dolor sit, amet consectetur adipisicing elit. Magni temporibus ex tenetur delectus earum',
         createdOn: new Date(),
-        status: false,
+        sentStatus: false,
+        status: 'Draft',
       },
     ];
     this.allMail = [];
@@ -81,13 +93,15 @@ class MailModel {
       createdOn: Date(),
       subject: mail.subject,
       message: mail.message,
+      receiverId: mail.receiverId,
       parentMessageId: mail.parentMessageId,
+      sentStatus: mail.sentStatus,
       status: mail.status,
     };
 
     this.allMail.push(mail);
 
-    if (newMail.status === true) {
+    if (newMail.sentStatus === true) {
       this.sent.push(newMail);
       return {
         message: 'Mail Sent',
