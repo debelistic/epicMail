@@ -26,4 +26,8 @@ router.get('/messages', Auth.verifyToken, MailController.getInbox);
 // Get unread mails for a user
 router.get('/messages/unread', Auth.verifyToken, MailController.getUnreadMail);
 
+// Get sent mails for a user
+router.get('/messages/sent', Auth.verifyToken, MailController.getSentMails);
+
+
 export default router;

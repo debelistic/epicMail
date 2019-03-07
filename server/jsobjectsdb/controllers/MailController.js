@@ -27,13 +27,16 @@ const Mail = {
     const unreadMail = MailModel.getUnread();
     res.status(200).send({
       status: 200,
-      date: [unreadMail],
+      data: [unreadMail],
     });
   },
 
   getSentMails(req, res) {
     const sentMail = MailModel.getSent();
-    res.status(200).send(sentMail);
+    res.status(200).send({
+      status: 200,
+      data: [sentMail],
+    });
   },
 
   getASentMail(req, res) {
