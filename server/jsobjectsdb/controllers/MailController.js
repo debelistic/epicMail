@@ -61,9 +61,21 @@ const Mail = {
     res.status(200).send(aDraft);
   },
 
-  // deleteInboxMail(req, res){
-
-  // }
+  deleteInbox(req, res) {
+    const inbox = MailModel.getAInbox(req.params.id);
+    if (!inbox) {
+      return res.status(404).send({
+        status: 404,
+        message: 'message not found',
+      });
+    }
+    const dInbox = MailModel.deleteAInbox(req.params.id);
+    console.log(dInbox)
+    return res.status(204).send({
+      status: 204,
+      dInbox,
+    });
+  },
 };
 
 export default Mail;
