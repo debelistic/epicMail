@@ -16,4 +16,7 @@ router.get('/', (req, res) => {
 // User Signup for an account
 router.post('/auth/signup', UserController.createUser);
 
+// User Signin
+router.post('/auth/login', UserController.signInUser);
+
 export default router;

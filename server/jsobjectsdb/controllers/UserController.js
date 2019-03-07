@@ -36,26 +36,43 @@ const UserController = {
 
   signInUser(req, res) {
     if (!req.body.contactName && !req.body.password) {
-      return res.status(400).send({ message: 'Required field empty' });
+      return res.status(403).send({
+        status: 403,
+        message: 'Required field empty' 
+});
     }
 
 
     const user = UserModel.getAwithContactName(req.body.contactName);
     if (!user) {
-      return res.status(400).send({ message: 'Signin details does not match' });
+      return res.status(403).send({
+        status: 403,
+        message: 'Signin details does not match',
+      });
     }
 
     if (!Helper.comparePassword(req.body.password, user.password)) {
-      return res.status(400).send({ message: 'Invalid password' });
+      return res.status(403).send({
+        status: 403,
+        message: 'Invalid password',
+      });
     }
 
     if (!user.contactName === undefined) {
-      return res.status(403).send({ message: 'User not registered' });
+      return res.status(403).send({
+        status: 403,
+        message: 'User not registered',
+      });
     }
 
 
     const token = Helper.generateToken(user.id);
-    return res.status(200).send(token);
+    return res.status(201).send({
+      status: 201,
+      data: [
+        { token },
+      ],
+    });
   },
 
   getARegUser(req, res) {
