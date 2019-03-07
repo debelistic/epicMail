@@ -1,5 +1,6 @@
 import express from 'express';
 import dotenv from 'dotenv';
+import userRoutes from './jsobjectsdb/routes/userRoutes';
 import MailController from './jsobjectsdb/controllers/MailController';
 import UserController from './jsobjectsdb/controllers/UserController';
 import Auth from './jsobjectsdb/dsmiddleware/AuthwithDS';
@@ -10,6 +11,7 @@ const app = express();
 dotenv.config();
 
 app.use(express.json());
+app.use('/api/v1/users', userRoutes);
 
 app.get('/', (req, res) => {
   res.send('welcome');
