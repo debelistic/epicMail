@@ -163,6 +163,15 @@ class MailModel {
     const aDraft = this.drafts.find(adraft => adraft.id === id);
     return aDraft;
   }
+
+  deleteAInbox(id) {
+    const ainbox = this.getAInbox(id);
+    const index = this.inbox.indexOf(ainbox);
+
+    this.inbox.splice(index, 1);
+
+    return {};
+  }
 }
 
 
