@@ -1,6 +1,7 @@
 import express from 'express';
 import UserController from '../controllers/UserController';
-// import Auth from '../dsmiddleware/AuthwithDS';
+import MailController from '../controllers/MailController';
+import Auth from '../dsmiddleware/AuthwithDS';
 
 const router = express.Router();
 
@@ -18,5 +19,8 @@ router.post('/auth/signup', UserController.createUser);
 
 // User Signin
 router.post('/auth/login', UserController.signInUser);
+
+// Get all received emails for a user
+router.get('/messages', Auth.verifyToken, MailController.getInbox);
 
 export default router;

@@ -10,7 +10,7 @@ const Auth = {
     }
 
     const decoded = jwt.verify(token, process.env.SECRET);
-    if (UserModel.getAllusers.length === 0) {
+    if (UserModel.getAllusers().length === 0) {
       return res.status(403).send({ message: 'Session closed' });
     }
 

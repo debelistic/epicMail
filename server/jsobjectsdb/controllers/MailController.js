@@ -15,6 +15,11 @@ const Mail = {
     res.status(200).send(allMail);
   },
 
+  getInbox(req, res) {
+    const allMail = MailModel.getInbox();
+    res.status(200).send(allMail);
+  },
+
   getSentMails(req, res) {
     const sentMail = MailModel.getSent();
     res.status(200).send(sentMail);
@@ -34,6 +39,10 @@ const Mail = {
     const aDraft = MailModel.getADraft(req.params.id);
     res.status(200).send(aDraft);
   },
+
+  // deleteInboxMail(req, res){
+
+  // }
 };
 
 export default Mail;

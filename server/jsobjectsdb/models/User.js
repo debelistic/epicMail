@@ -3,7 +3,22 @@ import randomId from './randomid';
 
 class UserModel {
   constructor() {
-    this.users = [];
+    this.users = [
+      {
+        firstName: 'victor',
+        lastName: 'tolulope',
+        contactName: 'deviclistic23',
+        password: 'hjrjfhrjf9980GH#',
+        confirmPassword: 'hjrjfhrjf9980GH#',
+      },
+      {
+        firstName: 'test',
+        lastName: 'annie',
+        contactName: 'funmilayo',
+        password: 'tyrywruJKU89$',
+        confirmPassword: 'tyrywruJKU89$',
+      },
+    ];
   }
 
   createUser(user) {
