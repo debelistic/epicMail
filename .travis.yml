@@ -1,0 +1,11 @@
+before_script:
+ -cd server/
+language: node_js
+node_js:
+  - 'stable'
+script:
+  npm test
+
+branches:
+  only:
+    - ch-tests-badges-164473738 
