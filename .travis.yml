@@ -9,3 +9,4 @@ script:
   - npm test
 env:
   -SECRET=hbjfrjmbnfvmfnvbbfvnmvj
+  -export CODECOV_TOKEN="15475461-44a7-4ca7-ad24-24e28b48128f"
