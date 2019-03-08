@@ -6,3 +6,5 @@ node_js:
   - "stable"
 script:
   - npm test
+env:
+  -SECRET=hbjfrjmbnfvmfnvbbfvnmvj
