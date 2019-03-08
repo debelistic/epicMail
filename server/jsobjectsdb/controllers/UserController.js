@@ -26,11 +26,14 @@ const UserController = {
         message: 'Password should match',
       });
     }
-    UserModel.createUser(req.body);
+    const newuser = UserModel.createUser(req.body);
     const token = Helper.generateToken(req.body.id);
     return res.status(201).send({
       status: 201,
-      data: [token],
+      data: [
+        token,
+        newuser,
+      ],
     });
   },
 
@@ -67,8 +70,8 @@ const UserController = {
 
 
     const token = Helper.generateToken(user.id);
-    return res.status(201).send({
-      status: 201,
+    return res.status(200).send({
+      status: 200,
       data: [
         { token },
       ],

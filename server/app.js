@@ -6,11 +6,12 @@ const app = express();
 
 dotenv.config();
 
-app.use(express.json());
 app.use('/api/v1/users', userRoutes);
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 
 app.get('/', (req, res) => {
-  res.send('welcome');
+  res.status(200).send('welcome');
 });
 
 

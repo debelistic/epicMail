@@ -1,14 +1,22 @@
-import express from 'express';
 import chai from 'chai';
 import chaiHttp from 'chai-http';
+import jwt from 'jsonwebtoken';
+import dotenv from 'dotenv';
 import app from '../server/app';
-import UserController from '../server/jsobjectsdb/controllers/UserController';
+import UserModel from '../server/jsobjectsdb/models/User';
+
 
 chai.use(chaiHttp);
-app.use(express.json());
 
-describe('/Post Mail', () => {
-  it('Create Mail when user fills form', (done) => {
+dotenv.config();
+
+const token = jwt.sign({
+  userId: 3,
+},
+process.env.SECRET, { expiresIn: '7d' });
+
+describe('/Post User', () => {
+  it('Create USer Account on Sign up', (done) => {
     const newuser = {
       firstName: 'victor',
       lastName: 'tolulope',
@@ -16,106 +24,157 @@ describe('/Post Mail', () => {
       password: 'jdnfmHYU67&hjfjf',
       confirmPassword: 'jdnfmHYU67&hjfjf',
     };
+
     chai.request(app)
-      .post('/auth/signup', UserController.createUser)
+      .post('/api/v1/users/auth/signup')
       .send(newuser)
       .end((err, res) => {
         if (err) done();
-
-        res.should.have.status(201);
-        // res.body.should.an('object');
-        // res.body.should.have.property('firstName');
-        // res.body.should.have.property('lastName');
-        // res.body.should.have.property('password');
-        // res.body.should.have.property('confirmPassword');
+        chai.expect(res.status).to.equal(201);
+        chai.expect(res.body).to.be.a('object');
+        chai.expect(res.body.data).to.be.a('array');
+        chai.expect(res.body.data[1]).to.be.a('object');
+        chai.expect(res.body.data[1]).to.have.keys('message', 'mailaddress', 'newUser');
+        chai.expect(res.body.data[1].newUser).to.have.keys('firstName', 'lastName', 'password', 'confirmPassword', 'id', 'contactName', 'createdOn', 'modifiedOn');
         done();
       });
   });
 });
 
-// describe('/Signin User', () => {
-//   it('Sign in user and generate token', (done) => {
-//     const newuser = {
-//       contactName: 'deviclistic23',
-//       password: 'awoboyEVERcom89@',
-//     };
-//     chai.request(app)
-//       .post('/user', Mail.createMail())
-//       .send(newuser)
-//       .end((err, res) => {
-//         if (err) done(err);
-//         res.should.have.status(200);
-//         res.body.should.an('object');
-//         res.body.should.have.property('contactName');
-//         res.body.should.have.property('password');
-//         done();
-//       });
-//   });
-// });
+describe('/Signin User', () => {
+  it('Sign in user and generate token', (done) => {
+    const newuser = {
+      firstName: 'victor',
+      lastName: 'tolulope',
+      contactName: 'deviclistic23',
+      password: 'jdnfmHYU67&hjfjf',
+      confirmPassword: 'jdnfmHYU67&hjfjf',
+    };
+    UserModel.createUser(newuser);
+    const reguser = {
+      contactName: 'deviclistic23',
+      password: 'jdnfmHYU67&hjfjf',
+    };
+    chai.request(app)
+      .post('/api/v1/users/auth/login')
+      .send(reguser)
+      .end((err, res) => {
+        if (err) done(err);
+        chai.expect(res.status).to.equal(200);
+        chai.expect(res.body).to.be.a('object');
+        chai.expect(res.body.data).to.be.a('array');
+        chai.expect(res.body.data[0]).to.be.a('object');
+        chai.expect(res.body.data[0]).to.have.key('token');
+        done();
+      });
+  });
+});
 
-// describe('/GET All Sent mails', () => {
-//   it('It should get all sent mails in the database', (done) => {
-//     chai.request(app)
-//       .get('/mail/sent', Mail.getSentMails())
-//       .end((err, res) => {
-//         if (err) done(err);
-//         res.should.have.status(200);
-//         res.body.should.be.an('array');
-//         done();
-//       });
-//   });
-// });
+describe('/GET All Received mails', () => {
+  it('It should get all received mails of auth user', (done) => {
+    chai.request(app)
+      .get('/api/v1/users/messages')
+      .set('x-access-token', token)
+      .end((err, res) => {
+        if (err) done(err);
+        chai.expect(res.status).to.equal(200);
+        chai.expect(res.body).to.be.a('object');
+        chai.expect(res.body.data[0]).to.be.a('array');
+        done();
+      });
+  });
+});
+
+describe('/GET All Unread mails', () => {
+  it('It should get all unread mails of auth user', (done) => {
+    chai.request(app)
+      .get('/api/v1/users/messages/unread')
+      .set('x-access-token', token)
+      .end((err, res) => {
+        if (err) done(err);
+        chai.expect(res.status).to.equal(200);
+        chai.expect(res.body).to.be.a('object');
+        chai.expect(res.body.data).to.be.a('array');
+        done();
+      });
+  });
+});
 
 
-// describe('/GET/:id a Sent mail', () => {
-//   it('It should get a sent mail in the database', (done) => {
-//     const newMail = {
-//       id: randomid,
-//       subject: 'test',
-//       message: "you're building",
-//       parentMessageId: 'from habiib',
-//       status: true,
-//     };
-//     chai.request(app)
-//       .get(`/mail/sent/${newMail.id}`, Mail.getASentMail())
-//       .end((err, res) => {
-//         if (err) done(err);
-//         res.should.have.status(200);
-//         res.body.should.be.an('array');
-//         done();
-//       });
-//   });
-// });
+describe('/GET All Sent mails', () => {
+  it('It should get all sent mails of auth user', (done) => {
+    chai.request(app)
+      .get('/api/v1/users/messages/sent')
+      .set('x-access-token', token)
+      .end((err, res) => {
+        if (err) done(err);
+        chai.expect(res.status).to.equal(200);
+        chai.expect(res.body).to.be.a('object');
+        chai.expect(res.body.data[0]).to.be.a('array');
+        done();
+      });
+  });
+});
 
-// describe('/GET All Drafts', () => {
-//   it('It should get all drafts in the database', (done) => {
-//     chai.request(app)
-//       .get('/mail/drafts', Mail.getDrafts())
-//       .end((err, res) => {
-//         if (err) done(err);
-//         res.should.have.status(200);
-//         res.body.should.be.an('array');
-//         done();
-//       });
-//   });
-// });
 
-// describe('/GET/:id a Draft mail', () => {
-//   it('It should get a draft mail from the database', (done) => {
-//     const newMail = {
-//       id: randomid,
-//       subject: 'test',
-//       message: "you're building",
-//       parentMessageId: 'from habiib',
-//       status: false,
-//     };
-//     chai.request(app)
-//       .get(`/mail/drafts/${newMail.id}`, Mail.getADraftMail())
-//       .end((err, res) => {
-//         if (err) done(err);
-//         res.should.have.status(200);
-//         res.body.should.be.an('array');
-//         done();
-//       });
-//   });
-// });
+describe('Get A Mail', () => {
+  it('It should return mail of auth user', (done) => {
+    const newMail = {
+      id: 63,
+      createdOn: Date(),
+      subject: 'test',
+      message: "you're building",
+      receiverId: 56,
+      parentMessageId: 89,
+      sentStatus: true,
+      status: 'sent',
+    };
+
+    chai.request(app)
+      .get(`/api/v1/users/messages/${newMail.id}`)
+      .set('x-access-token', token)
+      .end((err, res) => {
+        if (err) done(err);
+        chai.expect(res.status).to.equal(200);
+        chai.expect(res.body).to.be.a('object');
+        chai.expect(res.body.data).to.be.a('array');
+        done();
+      });
+  });
+});
+
+describe('/GET All Drafts', () => {
+  it('It should get all drafts for auth user', (done) => {
+    chai.request(app)
+      .get('/api/v1/users/messages/drafts')
+      .set('x-access-token', token)
+      .end((err, res) => {
+        if (err) done(err);
+        chai.expect(res.status).to.equal(200);
+        chai.expect(res.body).to.be.a('object');
+        chai.expect(res.body.data).to.be.a('array');
+        done();
+      });
+  });
+});
+
+describe('/GET/:id a Draft mail', () => {
+  it('It should get a draft mail from the database', (done) => {
+    const newMail = {
+      id: 56,
+      subject: 'test',
+      message: "you're building",
+      parentMessageId: 'from habiib',
+      status: false,
+    };
+    chai.request(app)
+      .get(`/api/v1/users/messages/drafts/${newMail.id}`)
+      .set('x-access-token', token)
+      .end((err, res) => {
+        if (err) done(err);
+        chai.expect(res.status).to.equal(200);
+        chai.expect(res.body).to.be.a('object');
+        done();
+      });
+  });
+});

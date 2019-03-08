@@ -46,7 +46,9 @@ class UserModel {
       };
     }
     const hashPassword = HelperModule.hashPassword(newUser.password);
+    const hashConfirmPassword = HelperModule.hashPassword(newUser.confirmPassword);
     newUser.password = hashPassword;
+    newUser.confirmPassword = hashConfirmPassword;
 
     this.users.push(newUser);
     return {

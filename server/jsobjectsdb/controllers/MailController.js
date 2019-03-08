@@ -50,19 +50,29 @@ const Mail = {
   getASentMail(req, res) {
     const aSentMail = MailModel.getASent(req.params.id);
     res.status(200).send({
-      status: 201,
-      data: [aSentMail],
+      status: 200,
+      data: [
+        aSentMail,
+      ],
     });
   },
 
   getDrafts(req, res) {
-    const sentMail = MailModel.getDrafts();
-    res.status(200).send(sentMail);
+    const drafts = MailModel.getDrafts();
+    res.status(200).send({
+      status: 200,
+      data: [
+        drafts,
+      ],
+    });
   },
 
   getADraftMail(req, res) {
     const aDraft = MailModel.getADraft(req.params.id);
-    res.status(200).send(aDraft);
+    res.status(200).send({
+      status: 200,
+      data: [aDraft],
+    });
   },
 
   deleteInbox(req, res) {
