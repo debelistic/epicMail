@@ -9,13 +9,7 @@ dotenv.config();
 app.use(express.json());
 app.use('/api/v1/users', userRoutes);
 
-app.get('/', (req, res) => {
-  res.send('welcome');
-});
-
-
 const port = process.env.PORT;
-
 app.listen(port);
 
 export default app;

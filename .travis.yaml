@@ -1,8 +1,0 @@
-before_script:
-  - npm install mocha
-  - npm install chai
-language: node_js
-node_js:
-  - "stable"
-script:
-  - npm test

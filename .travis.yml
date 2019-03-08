@@ -1,10 +1,11 @@
 before_script:
   - npm install mocha
   - npm install chai
+  - npm install nyc
 language: node_js
 node_js:
   - "stable"
 script:
-  - npm test
+  - nyc npm test
 env:
   -SECRET=hbjfrjmbnfvmfnvbbfvnmvj
