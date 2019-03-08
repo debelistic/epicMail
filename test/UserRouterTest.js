@@ -1,14 +1,11 @@
 import chai from 'chai';
 import chaiHttp from 'chai-http';
 import jwt from 'jsonwebtoken';
-import dotenv from 'dotenv';
 import app from '../server/app';
 import UserModel from '../server/jsobjectsdb/models/User';
 
 
 chai.use(chaiHttp);
-
-dotenv.config();
 
 const token = jwt.sign({
   userId: 3,
