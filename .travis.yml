@@ -1,6 +1,7 @@
 before_script:
   - npm install mocha
   - npm install chai
+  - npm install dotenv
 language: node_js
 node_js:
   - "stable"
