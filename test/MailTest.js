@@ -65,7 +65,7 @@ describe('Sent Mails', () => {
 
 describe('Draft Mails', () => {
   it('Return array of drafts', () => {
-    chai.expect(MailModel.getDrafts()).to.be.an('array');
+    chai.expect(MailModel.getAllDrafts()).to.be.an('array');
   });
 });
 

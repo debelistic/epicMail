@@ -2,9 +2,96 @@ import randomId from './randomid';
 
 class MailModel {
   constructor() {
-    this.inbox = [];
-    this.sent = [];
-    this.drafts = [];
+    this.inbox = [
+      {
+        id: 13,
+        receiverId: 74,
+        parentMessageId: randomId,
+        messageId: randomId,
+        subject: 'Rain Coder',
+        message: 'Lorem ipsum dolor sit, amet consectetur adipisicing elit. Magni temporibus ex tenetur delectus earum',
+        createdOn: new Date(),
+        readStatus: false,
+        status: 'UnRead',
+      },
+      {
+        id: 99,
+        receiverId: 201,
+        parentMessageId: randomId,
+        messageId: randomId,
+        subject: 'Summer Coder',
+        message: 'Lorem ipsum dolor sit, amet consectetur adipisicing elit. Magni temporibus ex tenetur delectus earum',
+        createdOn: new Date(),
+        readStatus: false,
+        status: 'UnRead',
+      },
+      {
+        id: 701,
+        receiverId: 63,
+        parentMessageId: randomId,
+        messageId: randomId,
+        subject: 'Rain Coder',
+        message: 'Lorem ipsum dolor sit, amet consectetur adipisicing elit. Magni temporibus ex tenetur delectus earum',
+        createdOn: new Date(),
+        readStatus: true,
+        status: 'Read',
+      },
+      {
+        id: 35,
+        receiverId: 83,
+        parentMessageId: randomId,
+        messageId: randomId,
+        subject: 'Summer Coder',
+        message: 'Lorem ipsum dolor sit, amet consectetur adipisicing elit. Magni temporibus ex tenetur delectus earum',
+        createdOn: new Date(),
+        readStatus: true,
+        status: 'Read',
+      },
+    ];
+    this.sent = [
+      {
+        id: randomId,
+        receiverId: randomId,
+        messageId: randomId,
+        subject: 'Rain Coder',
+        message: 'Lorem ipsum dolor sit, amet consectetur adipisicing elit. Magni temporibus ex tenetur delectus earum',
+        createdOn: new Date(),
+        sentStatus: true,
+        status: 'Sent',
+      },
+      {
+        id: randomId,
+        receiverId: randomId,
+        messageId: randomId,
+        subject: 'Rain Coder',
+        message: 'Lorem ipsum dolor sit, amet consectetur adipisicing elit. Magni temporibus ex tenetur delectus earum',
+        createdOn: new Date(),
+        sentStatus: true,
+        status: 'Sent',
+      },
+    ];
+    this.drafts = [
+      {
+        id: 57,
+        receiverId: 45,
+        messageId: randomId,
+        subject: 'Rain Coder',
+        message: 'Lorem ipsum dolor sit, amet consectetur adipisicing elit. Magni temporibus ex tenetur delectus earum',
+        createdOn: new Date(),
+        sentStatus: true,
+        status: 'Sent',
+      },
+      {
+        id: 89,
+        receiverId: 45,
+        messageId: randomId,
+        subject: 'Rain Coder',
+        message: 'Lorem ipsum dolor sit, amet consectetur adipisicing elit. Magni temporibus ex tenetur delectus earum',
+        createdOn: new Date(),
+        sentStatus: true,
+        status: 'Sent',
+      },
+    ];
     this.allMail = [];
   }
 
@@ -14,14 +101,15 @@ class MailModel {
       createdOn: Date(),
       subject: mail.subject,
       message: mail.message,
-      userid: mail.id,
+      receiverId: mail.receiverId,
       parentMessageId: mail.parentMessageId,
+      sentStatus: mail.sentStatus,
       status: mail.status,
     };
 
     this.allMail.push(mail);
 
-    if (newMail.status === true) {
+    if (newMail.sentStatus === true) {
       this.sent.push(newMail);
       return {
         message: 'Mail Sent',
@@ -48,6 +136,16 @@ class MailModel {
     return aInbox;
   }
 
+  getUnread() {
+    const aInbox = this.inbox.find(ainbox => ainbox.readStatus === false);
+    return aInbox;
+  }
+
+  getRead() {
+    const aInbox = this.inbox.find(ainbox => ainbox.readStatus === true);
+    return aInbox;
+  }
+
   getSent() {
     return this.sent;
   }
@@ -57,13 +155,22 @@ class MailModel {
     return aSent;
   }
 
-  getDrafts() {
+  getAllDrafts() {
     return this.drafts;
   }
 
   getADraft(id) {
     const aDraft = this.drafts.find(adraft => adraft.id === id);
     return aDraft;
+  }
+
+  deleteAInbox(id) {
+    const ainbox = this.getAInbox(id);
+    const index = this.inbox.indexOf(ainbox);
+
+    this.inbox.splice(index, 1);
+
+    return {};
   }
 }
 
