@@ -10,6 +10,7 @@ node_js:
   - "stable"
 script:
   - npm test
+
 env:  
   global:
     - CC_TEST_REPORTER_ID=87a765b87dbb6cd1cd812775f246f595e1f75d4a3ef5bb1b3c4f456a1d727e67
