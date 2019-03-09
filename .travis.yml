@@ -2,11 +2,17 @@ before_script:
   - npm install mocha
   - npm install chai
   - npm install nyc codeclimate-test-reporter
+  - curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
+  - chmod +x ./cc-test-reporter
+  - ./cc-test-reporter before-build
 language: node_js
 node_js:
   - "stable"
 script:
   - npm test
-env:
-  -SECRET=hbjfrjmbnfvmfnvbbfvnmvj
-  -export CODECOV_TOKEN="15475461-44a7-4ca7-ad24-24e28b48128f"
+env:  
+  global:
+    - CC_TEST_REPORTER_ID=87a765b87dbb6cd1cd812775f246f595e1f75d4a3ef5bb1b3c4f456a1d727e67
+    - SECRET=hbjfrjmbnfvmfnvbbfvnmvj
+after_script:
+  - ./cc-test-reporter after-build --exit-code $TRAVIS_TEST_RESULT
