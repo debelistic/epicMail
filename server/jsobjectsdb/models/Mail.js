@@ -4,8 +4,8 @@ class MailModel {
   constructor() {
     this.inbox = [
       {
-        id: randomId,
-        receiverId: randomId,
+        id: 13,
+        receiverId: 74,
         parentMessageId: randomId,
         messageId: randomId,
         subject: 'Rain Coder',
@@ -15,8 +15,8 @@ class MailModel {
         status: 'UnRead',
       },
       {
-        id: randomId,
-        receiverId: randomId,
+        id: 99,
+        receiverId: 201,
         parentMessageId: randomId,
         messageId: randomId,
         subject: 'Summer Coder',
@@ -26,8 +26,8 @@ class MailModel {
         status: 'UnRead',
       },
       {
-        id: randomId,
-        receiverId: randomId,
+        id: 701,
+        receiverId: 63,
         parentMessageId: randomId,
         messageId: randomId,
         subject: 'Rain Coder',
@@ -37,8 +37,8 @@ class MailModel {
         status: 'Read',
       },
       {
-        id: randomId,
-        receiverId: randomId,
+        id: 35,
+        receiverId: 83,
         parentMessageId: randomId,
         messageId: randomId,
         subject: 'Summer Coder',
@@ -72,24 +72,24 @@ class MailModel {
     ];
     this.drafts = [
       {
-        id: randomId,
-        receiverId: randomId,
+        id: 57,
+        receiverId: 45,
         messageId: randomId,
         subject: 'Rain Coder',
         message: 'Lorem ipsum dolor sit, amet consectetur adipisicing elit. Magni temporibus ex tenetur delectus earum',
         createdOn: new Date(),
-        sentStatus: false,
-        status: 'Draft',
+        sentStatus: true,
+        status: 'Sent',
       },
       {
-        id: randomId,
-        receiverId: randomId,
+        id: 89,
+        receiverId: 45,
         messageId: randomId,
         subject: 'Rain Coder',
         message: 'Lorem ipsum dolor sit, amet consectetur adipisicing elit. Magni temporibus ex tenetur delectus earum',
         createdOn: new Date(),
-        sentStatus: false,
-        status: 'Draft',
+        sentStatus: true,
+        status: 'Sent',
       },
     ];
     this.allMail = [];
@@ -155,7 +155,7 @@ class MailModel {
     return aSent;
   }
 
-  getDrafts() {
+  getAllDrafts() {
     return this.drafts;
   }
 

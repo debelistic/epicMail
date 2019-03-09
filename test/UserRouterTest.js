@@ -23,7 +23,7 @@ describe('/Post User', () => {
     };
 
     chai.request(app)
-      .post('/api/v1/users/auth/signup')
+      .post('/api/v1/auth/signup')
       .send(newuser)
       .end((err, res) => {
         if (err) done();
@@ -53,7 +53,7 @@ describe('/Signin User', () => {
       password: 'jdnfmHYU67&hjfjf',
     };
     chai.request(app)
-      .post('/api/v1/users/auth/login')
+      .post('/api/v1/auth/login')
       .send(reguser)
       .end((err, res) => {
         if (err) done(err);
@@ -70,7 +70,7 @@ describe('/Signin User', () => {
 describe('/GET All Received mails', () => {
   it('It should get all received mails of auth user', (done) => {
     chai.request(app)
-      .get('/api/v1/users/messages')
+      .get('/api/v1/user/messages')
       .set('x-access-token', token)
       .end((err, res) => {
         if (err) done(err);
@@ -85,7 +85,7 @@ describe('/GET All Received mails', () => {
 describe('/GET All Unread mails', () => {
   it('It should get all unread mails of auth user', (done) => {
     chai.request(app)
-      .get('/api/v1/users/messages/unread')
+      .get('/api/v1/user/messages/unread')
       .set('x-access-token', token)
       .end((err, res) => {
         if (err) done(err);
@@ -101,7 +101,7 @@ describe('/GET All Unread mails', () => {
 describe('/GET All Sent mails', () => {
   it('It should get all sent mails of auth user', (done) => {
     chai.request(app)
-      .get('/api/v1/users/messages/sent')
+      .get('/api/v1/user/messages/sent')
       .set('x-access-token', token)
       .end((err, res) => {
         if (err) done(err);
@@ -128,7 +128,7 @@ describe('Get A Mail', () => {
     };
 
     chai.request(app)
-      .get(`/api/v1/users/messages/${newMail.id}`)
+      .get(`/api/v1/user/messages/${newMail.id}`)
       .set('x-access-token', token)
       .end((err, res) => {
         if (err) done(err);
@@ -143,7 +143,7 @@ describe('Get A Mail', () => {
 describe('/GET All Drafts', () => {
   it('It should get all drafts for auth user', (done) => {
     chai.request(app)
-      .get('/api/v1/users/messages/drafts')
+      .get('/api/v1/user/messages/drafts')
       .set('x-access-token', token)
       .end((err, res) => {
         if (err) done(err);
@@ -165,7 +165,7 @@ describe('/GET/:id a Draft mail', () => {
       status: false,
     };
     chai.request(app)
-      .get(`/api/v1/users/messages/drafts/${newMail.id}`)
+      .get(`/api/v1/user/messages/drafts/${newMail.id}`)
       .set('x-access-token', token)
       .end((err, res) => {
         if (err) done(err);

@@ -21,28 +21,28 @@ router.post('/auth/signup', UserController.createUser);
 router.post('/auth/login', UserController.signInUser);
 
 // Get all received emails for a user
-router.get('/messages', Auth.verifyToken, MailController.getInbox);
+router.get('/user/messages', Auth.verifyToken, MailController.getInbox);
 
 // Get unread mails for a user
-router.get('/messages/unread', Auth.verifyToken, MailController.getUnreadMail);
+router.get('/user/messages/unread', Auth.verifyToken, MailController.getUnreadMail);
 
 // Send mail to individuals
-router.post('/messages', Auth.verifyToken, MailController.createMail);
+router.post('/user/message', Auth.verifyToken, MailController.createMail);
 
 // Get all sent emails user
-router.get('/messages/sent', MailController.getSentMails);
+router.get('/user/messages/sent', MailController.getSentMails);
 
 // Get a user email
-router.get('/messages/:id', Auth.verifyToken, MailController.getASentMail);
+router.get('/user/messages/:id', Auth.verifyToken, MailController.getASentMail);
 
 // Get drafts of a user
-router.get('/messages/drafts', Auth.verifyToken, MailController.getDrafts);
+router.get('/user/messages/draft', Auth.verifyToken, MailController.getAllUnsent);
 
 // Get a draft
-router.get('/messages/drafts/:id', Auth.verifyToken, MailController.getADraftMail);
+router.get('/user/messages/drafts/:id', Auth.verifyToken, MailController.getADraftMail);
 
 // Delete from inbox
-router.delete('/messages/:id', Auth.verifyToken, MailController.deleteInbox);
+router.delete('/user/message/:id', Auth.verifyToken, MailController.deleteInbox);
 
 
 export default router;

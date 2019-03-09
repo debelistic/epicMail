@@ -1,8 +1,4 @@
-import express from 'express';
 import MailModel from '../models/Mail';
-
-const app = express();
-app.use(express.json);
 
 const Mail = {
 
@@ -57,13 +53,11 @@ const Mail = {
     });
   },
 
-  getDrafts(req, res) {
-    const drafts = MailModel.getDrafts();
+  getAllUnsent(req, res) {
+    const drafts = MailModel.getAllDrafts();
     res.status(200).send({
       status: 200,
-      data: [
-        drafts,
-      ],
+      data: [drafts],
     });
   },
 
