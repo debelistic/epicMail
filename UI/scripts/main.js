@@ -1,5 +1,4 @@
 /* global document */
-/* eslint no-undefined:"error" */
 const navbutton = document.querySelector('i#navbutton');
 
 const navmenu = document.querySelector('nav ul');
