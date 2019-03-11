@@ -220,6 +220,70 @@ h1.main-content {
 }
 
 @media screen and (max-width:380px){
+    .usermenu{
+        /* display: none; */
+        height: 100vh;
+        width: 100vw;
+        background: rgba(13, 47, 70, 0.473);
+    }
+    .usermenu ul{
+        margin: 0;
+        padding: 10px;
+    }
+    div.userheader{
+        color: #FCFCFC;
+        height: 35px;
+        background: rgba(13, 47, 70, 0.473);
+        margin: 0 0 10px 0;
+        padding: 10px;
+        position: relative;
+    }
+    #composeicon{
+        position: absolute;
+        right: 15px;
+        top: 5px;
+        font-size: 30px;
+    }
+    #inboxicon{
+        position: absolute;
+        left: 15px;
+        top: 5px;
+        font-size: 30px;
+    }
+    .userheader p{
+        margin: 0;
+        padding: 0;
+    }
+    div.usermail{
+        color: #FCFCFC;
+        display: flex;
+        justify-content: center;
+        align-content: center;
+        width: 100vw;
+    }
+    .usermail ul{
+        margin: 0;
+        padding: 0;
+        width: 90%;        
+    }
+    .maillist{
+        background-color: rgba(13, 47, 70, 0.473);
+        list-style: none;
+        border-bottom: solid 3px #FCFCFC;
+        border-top: solid 1px #FCFCFC;
+        border-radius: 4px;      
+        padding: 10px;
+        height: 45px;
+        width: 90%;
+        margin: 0 0 5px 0;
+    }
+
+    .senderid{
+        font-size: 20px;
+    }
+    .mailsubject{
+        font-size: 24px;
+    }
     #header{
         height: auto;
     }
@@ -228,7 +292,7 @@ h1.main-content {
     }
     aside.container{
         height: unset;
-    }
+    }    
     div.container {
         float: none;
         width: 80%;
