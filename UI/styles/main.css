@@ -433,10 +433,10 @@ p.main-content{
         width: 100%;
         border-top: #FCFCFC solid 3px;
         line-height: unset;
-		}
-		.main-banner{
-			height: calc(100vh - 40px);
-		}
+	}
+	.main-banner{
+		height: calc(100vh - 40px);
+	}
     aside.container{
         float: none;
         width: 90%;
