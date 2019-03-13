@@ -13,9 +13,8 @@
     <header id="header">
         <div class="page-title">
             <h1><a href="index.html"><i class="fa fa-envelope-o"></i> EPIC MAIL</a></h1>
-        </div>
+        </div> 
         
-        <i id="navbutton" class="fa fa-bars icon"></i>
         
         <!-- <nav class="page-nav">
             <ul>
@@ -27,47 +26,70 @@
 
     <main>
         <section class="main-banner">
-            <aside class="usermenu">
-                <ul>
-                    <li>Inbox</li>
-                    <li>Sent</li>
-                    <li>Drafts</li>
-                    <li>Settings</li>
-                </ul>
-            </aside>
+            
             <div class="userheader">
-                <i class="fa fa-inbox" id="inboxicon"></i>
+                <i id="mailicon" class="fa fa-bars icon"></i>
                 <i class="fa fa-pencil-square-o" id="composeicon"></i>
             </div>
-            <div class="usermail">                
+            <nav class="usermenu">
                 <ul>
+                    <li><a href="userallmail.html">Inbox</a></a></li>
+                    <li><a href="usersent.html">Sent</a></li>
+                    <li><a href="userdrafts.html">Drafts</a></li>
+                    <li><a href="user.html">Settings</a></li>
+                </ul>
+            </nav>
+            <div id="mailformdiv">
+                <form action="#" id="mailform">
+                    <input type="text" name="Contact" id="contact" placeholder="Contact">
+                    <input type="text" name="Subject" id="mailsubject" placeholder="Subject">
+                    <textarea name="Message" id="mailcontent" cols="30" rows="10"></textarea>
+                    <input type="button" value="Send">
+                </form>
+            </div>            
+            <div class="usermail">                
+                <ul id="mails">
                     <li class="maillist">
-                        <span class="senderid">Sender:</span>
-                        <span class="mailsubject">SUbject</span>
+                        <a href="usermessage.html">
+                            <span class="senderid">Annie:</span>
+                            <span class="mailsubject">Meet Me at the...</span>
+                        </a>                        
                     </li>   
                     <li class="maillist">
-                        <span class="senderid">Sender:</span>
-                        <span class="mailsubject">SUbject</span>
+                        <a href="usermessage.html">
+                            <span class="senderid">Frank:</span>
+                            <span class="mailsubject">Lorem ipsum...</span>
+                        </a>
                     </li> 
                     <li class="maillist">
-                        <span class="senderid">Sender:</span>
-                        <span class="mailsubject">SUbject</span>
+                        <a href="usermessage.html">
+                            <span class="senderid">Gerrad:</span>
+                            <span class="mailsubject">Sit, amet conse...</span>
+                        </a>                        
                     </li>   
                     <li class="maillist">
-                        <span class="senderid">Sender:</span>
-                        <span class="mailsubject">SUbject</span>
+                        <a href="usermessage.html">
+                            <span class="senderid">Victor:</span>
+                            <span class="mailsubject">Sit, amet conse...</span>
+                        </a>
                     </li>
                     <li class="maillist">
-                        <span class="senderid">Sender:</span>
-                        <span class="mailsubject">SUbject</span>
+                        <a href="usermessage.html">
+                            <span class="senderid">Tobe:</span>
+                            <span class="mailsubject">Sit, amet conse...</span>
+                        </a>
                     </li>
                     <li class="maillist">
-                        <span class="senderid">Sender:</span>
-                        <span class="mailsubject">SUbject</span>
+                        <a href="usermessage.html">
+                            <span class="senderid">Amy:</span>
+                            <span class="mailsubject">Sit, amet conse...</span>
+                        </a>                        
                     </li>
                     <li class="maillist">
-                        <span class="senderid">Sender:</span>
-                        <span class="mailsubject">SUbject</span>
+                        <a href="usermessage.html">
+                            <span class="senderid">Wedekind:</span>
+                            <span class="mailsubject">Sit, amet conse...</span>
+                        </a>                        
                     </li>           
                 </ul>            
             </div>
