@@ -175,3 +175,17 @@ describe('/GET/:id a Draft mail', () => {
       });
   });
 });
+
+
+describe('Delete A Mail', () => {
+  it('It return 404 status code', (done) => {
+    chai.request(app)
+      .delete('/api/v1/user/message/13')
+      .set('x-access-token', token)
+      .end((err, res) => {
+        if (err) done(err);
+        chai.expect(res.status).to.equal(404);
+        done();
+      });
+  });
+});
