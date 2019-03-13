@@ -36,6 +36,75 @@ describe('/Post User', () => {
         done();
       });
   });
+
+  it('Return 403 status code if there is a missing field', (done) => {
+    const newuser = {};
+
+    chai.request(app)
+      .post('/api/v1/auth/signup')
+      .send(newuser)
+      .end((err, res) => {
+        if (err) done();
+        chai.expect(res.status).to.equal(403);
+        done();
+      });
+  });
+
+  it('Return 403 status code if password is not strong', (done) => {
+    const newuser = {
+      firstName: 'victor',
+      lastName: 'tolulope',
+      contactName: 'deviclistic23',
+      password: 'jdnfmHYU',
+      confirmPassword: 'jdnfmHYU',
+    };
+
+    chai.request(app)
+      .post('/api/v1/auth/signup')
+      .send(newuser)
+      .end((err, res) => {
+        if (err) done();
+        chai.expect(res.status).to.equal(403);
+        done();
+      });
+  });
+
+  it('Return 403 status code if password does not match', (done) => {
+    const newuser = {
+      firstName: 'victor',
+      lastName: 'tolulope',
+      contactName: 'deviclistic23',
+      password: 'frankmHYU67&hjfjf',
+      confirmPassword: 'jdnfmHYU67&hjfjf',
+    };
+
+    chai.request(app)
+      .post('/api/v1/auth/signup')
+      .send(newuser)
+      .end((err, res) => {
+        if (err) done();
+        chai.expect(res.status).to.equal(403);
+        done();
+      });
+  });
+  it('Return 403 status code if contact name is too short', (done) => {
+    const newuser = {
+      firstName: 'victor',
+      lastName: 'tolulope',
+      contactName: 'devi',
+      password: 'frankmHYU67&hjfjf',
+      confirmPassword: 'jdnfmHYU67&hjfjf',
+    };
+
+    chai.request(app)
+      .post('/api/v1/auth/signup')
+      .send(newuser)
+      .end((err, res) => {
+        if (err) done();
+        chai.expect(res.status).to.equal(403);
+        done();
+      });
+  });
 });
 
 describe('/Signin User', () => {
@@ -62,6 +131,19 @@ describe('/Signin User', () => {
         chai.expect(res.body.data).to.be.a('array');
         chai.expect(res.body.data[0]).to.be.a('object');
         chai.expect(res.body.data[0]).to.have.key('token');
+        done();
+      });
+  });
+
+  it('Return 403 status code if there is a miss field', (done) => {
+    const reguser = {};
+
+    chai.request(app)
+      .post('/api/v1/auth/login')
+      .send(reguser)
+      .end((err, res) => {
+        if (err) done();
+        chai.expect(res.status).to.equal(403);
         done();
       });
   });

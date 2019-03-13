@@ -3,8 +3,8 @@ import UserModel from '../models/User';
 
 const UserController = {
   createUser(req, res) {
-    if (!req.body.firstName && !req.body.lastName && !req.body.contactName
-        && !req.body.password && !req.body.confirmPassword) {
+    if (!req.body.firstName || !req.body.lastName || !req.body.contactName
+        || !req.body.password || !req.body.confirmPassword) {
       return res.status(403).send({
         status: 403,
         message: 'All fields are required',
@@ -12,7 +12,7 @@ const UserController = {
     }
 
     if (!/^[a-z\d]{5,}$/i.test(req.body.contactName)) {
-      return res.status(400).send({ message: 'Use valid contact name' });
+      return res.status(403).send({ message: 'Use valid contact name' });
     }
     if (!/^(?=.*?[a-z])(?=.*?[A-Z])(?=.*?[0-9])(?=.*?[$@#&!]).{6,}$/.test(req.body.password)) {
       return res.status(403).send({
@@ -38,7 +38,7 @@ const UserController = {
   },
 
   signInUser(req, res) {
-    if (!req.body.contactName && !req.body.password) {
+    if (!req.body.contactName || !req.body.password) {
       return res.status(403).send({
         status: 403,
         message: 'Required field empty',
@@ -79,7 +79,7 @@ const UserController = {
   },
 
   getARegUser(req, res) {
-    if (!req.body.contactName && !req.body.password) {
+    if (!req.body.contactName || !req.body.password) {
       return res.status(400).send({ message: 'Required field empty' });
     }
 

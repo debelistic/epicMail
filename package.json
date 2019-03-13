@@ -4,7 +4,7 @@
   "description": "A wep app to share messages over the internet",
   "main": "server/app.js",
   "scripts": {
-    "test": "nyc mocha --require @babel/register test/*.js --exit",
+    "test": "mocha --require @babel/register test/*.js --exit",
     "start": "nodemon --exec babel-node server/app.js",
     "coverage": "nyc --reporter-lcov --reporter > coverage.lcov && codecov"
   },
