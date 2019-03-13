@@ -1,6 +1,7 @@
 import express from 'express';
 import dotenv from 'dotenv';
 import swaggerUi from 'swagger-ui-express';
+// import pg from 'pg';
 import swaggerDocument from '../swagger.json';
 import userRoutes from './jsobjectsdb/routes/userRoutes';
 
