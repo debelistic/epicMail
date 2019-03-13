@@ -12,6 +12,7 @@
 .main-banner{
     position: relative;
     color: #FCFCFC;
+    display: block;
 }
 .chat{
     display: block;
