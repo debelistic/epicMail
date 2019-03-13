@@ -1,7 +1,7 @@
 before_script:
   - npm install mocha
   - npm install chai
-  - npm install nyc codecov
+  - npm install nyc codecov coveralls
 language: node_js
 node_js:
   - "stable"
