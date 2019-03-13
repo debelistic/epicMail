@@ -210,35 +210,36 @@ footer div.footer-nav ul li a {
 }
 
 p.main-content{
-        font-size: 1.7rem;
-    }
-    form#signinform{
-        margin: 0.2rem 0  0.2rem 0.3rem;
-    }
-    .form-group{
-        margin: 0 0 0.7rem 0;
-        padding: 0 0.3rem 0.5rem;
-    }
-    .form-group label{
-        color: #FCFCFC;
-        font-size: 1.7rem;
-        text-align: left;
-        display: block;
-		}
+    font-size: 1.7rem;
+}
+form#signinform{
+    margin: 0.2rem 0  0.2rem 0.3rem;
+}
+.form-group{
+    margin: 0 0 0.7rem 0;
+    padding: 0 0.3rem 0.5rem;
+}
+.form-group label{
+    color: #FCFCFC;
+    font-size: 1.7rem;
+    text-align: left;
+    display: block;
+}
 .form-group input{
-  color: #FCFCFC;
+
+    color: #FCFCFC;
 	font-size: 1.5rem;
 	letter-spacing: 0.3rem;
-  border-radius: 0.4rem;
+    border-radius: 0.4rem;
 	height: 2.3rem;
 	width: 70%;
 	margin: 10px 0 0 0;
-  padding: 0.5rem;
-  background: transparent;
-  outline: unset;
-    }
+    padding: 0.5rem;
+    background: transparent;
+    outline: unset;
+}
 .form-group button{
-  color: #FCFCFC;
+    color: #FCFCFC;
 	background: #003D66;
 	width: 40%;
 	font-size: 1rem;
@@ -433,10 +434,10 @@ p.main-content{
         width: 100%;
         border-top: #FCFCFC solid 3px;
         line-height: unset;
-		}
-		.main-banner{
-			height: calc(100vh - 40px);
-		}
+	}
+	.main-banner{
+		height: calc(100vh - 40px);
+	}
     aside.container{
         float: none;
         width: 90%;
@@ -481,9 +482,9 @@ p.main-content{
     }
     #footer{
         display: flex;
-				height: calc(100vw - 150px);
-				align-content: center;
-				justify-content: center;
+		height: calc(100vw - 150px);
+		align-content: center;
+		justify-content: center;
     }
     .sm-page{
         float: none;
@@ -500,13 +501,13 @@ p.main-content{
         padding: 0;
     }
     .copyright {
-			position: absolute;
-			bottom: 0;
-			left: auto;
-			display: flex;
-			width: 100%;
-			align-content: center;
-			justify-content: center;
+		position: absolute;
+		bottom: 0;
+		left: auto;
+		display: flex;
+		width: 100%;
+		align-content: center;
+		justify-content: center;
 	}
     .footer-nav ul li{
         display: block;
@@ -543,8 +544,8 @@ p.main-content{
     .form-group input{
         color: #FCFCFC;
         font-size: 1rem;
-				border-radius: 0.4rem;
-				width: 80%;
+		border-radius: 0.4rem;
+		width: 80%;
         height: 2rem;
         padding: 0.3rem;
         background: transparent;
