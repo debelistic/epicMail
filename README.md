@@ -1,6 +1,6 @@
 # epicMail
 
-[![Build Status](https://travis-ci.com/debelistic/epicMail.svg?branch=ft-api-endpoints-164351273)](https://travis-ci.com/debelistic/epicMail) [![Coverage Status](https://coveralls.io/repos/github/debelistic/epicMail/badge.svg?branch=ft-api-endpoints-164351273)](https://coveralls.io/github/debelistic/epicMail?branch=ft-api-endpoints-164351273) [![codecov](https://codecov.io/gh/debelistic/epicMail/branch/ft-api-endpoints-164351273/graph/badge.svg)](https://codecov.io/gh/debelistic/epicMail)
+[![Build Status](https://travis-ci.com/debelistic/epicMail.svg?branch=develop)](https://travis-ci.com/debelistic/epicMail) [![Coverage Status](https://coveralls.io/repos/github/debelistic/epicMail/badge.svg?branch=master)](https://coveralls.io/github/debelistic/epicMail?branch=master) [![codecov](https://codecov.io/gh/debelistic/epicMail/branch/develop/graph/badge.svg)](https://codecov.io/gh/debelistic/epicMail)
 
 ## Features
 
