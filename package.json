@@ -5,7 +5,7 @@
   "main": "server/app.js",
   "scripts": {
     "test": "mocha --require @babel/register test/*.js --exit",
-    "start": "nodemon --exec babel-node server/app.js",    
+    "start": "nodemon --exec babel-node server/app.js",
     "coverage": "nyc report --reporter=text-lcov | coveralls"
   },
   "repository": {
@@ -43,7 +43,6 @@
     "body-parser": "^1.18.3",
     "chai": "^4.2.0",
     "chai-http": "^4.2.1",
-    "coveralls": "^3.0.3",
     "dotenv": "^6.2.0",
     "eslint": "^5.15.0",
     "eslint-config-airbnb": "^17.1.0",
