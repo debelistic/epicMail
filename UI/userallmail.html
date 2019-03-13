@@ -14,59 +14,81 @@
         <div class="page-title">
             <h1><a href="index.html"><i class="fa fa-envelope-o"></i> EPIC MAIL</a></h1>
         </div>
-        
-        <i id="navbutton" class="fa fa-bars icon"></i>
-        
-        <nav class="page-nav">
-            <ul>
-                <li class="navli"><a href="index.html">Sign out</a></li>
-                <li class="navli"><a href="signup.html">Contact Admin</a></li>
-                <li class="navli"><a href="user.html">Set Profile</a></li>
-            </ul>
-        </nav>
+    
     </header>
 
     <main>
-        <section class="main-banner">
-            <aside class="container">
-                <div class="transparent">
-                    <h1 class="main-content">Welcome</h1>
-                    <p class="main-content">you're login as <em>James Smith</em></p>
-                </div>                
-            </aside>
-            <div class="container transparent">
-                <p class="main-content">View Your Mails</p>                
-                <ul>
-                    <li><a href="usermessage.html">New message</a></li>
-                    <li><a href="userinbox.html">Inbox</a></li>
-                    <li><a href="usersent.html">Sent Mail</a></li>
-                    <li><a href="userdrafts.html">Drafts</a></li>
-                    <li><a href="userallmail.html">All Mail</a></li>
-                </ul>
-                <a href="user.html" class="main-content">Back to Home</a>             
-            </div>
-        </section>
-    </main>
+            <section class="main-banner">
+                
+                <div class="userheader">
+                    <i id="mailicon" class="fa fa-bars icon"></i>
+                    <i class="fa fa-pencil-square-o" id="composeicon"></i>
+                </div>
+                <nav class="usermenu">
+                    <ul>
+                        <li><a href="userallmail.html">Inbox</a></a></li>
+                        <li><a href="usersent.html">Sent</a></li>
+                        <li><a href="userdrafts.html">Drafts</a></li>
+                        <li><a href="user.html">Settings</a></li>
+                    </ul>
+                </nav>
+                <div id="mailformdiv">
+                        <form action="#" id="mailform">
+                            <input type="text" name="Contact" id="contact" placeholder="Contact">
+                            <input type="text" name="Subject" id="mailsubject" placeholder="Subject">
+                            <textarea name="Message" id="mailcontent" cols="30" rows="10"></textarea>
+                            <input type="button" value="Send">
+                        </form>
+                    </div>            
+                    <div class="usermail">                
+                        <ul id="mails">
+                            <li class="maillist">
+                                <a href="usermessage.html">
+                                    <span class="senderid">Annie:</span>
+                                    <span class="mailsubject">Meet Me at the...</span>
+                                </a>                        
+                            </li>   
+                            <li class="maillist">
+                                <a href="usermessage.html">
+                                    <span class="senderid">Frank:</span>
+                                    <span class="mailsubject">Lorem ipsum...</span>
+                                </a>
+                            </li> 
+                            <li class="maillist">
+                                <a href="usermessage.html">
+                                    <span class="senderid">Gerrad:</span>
+                                    <span class="mailsubject">Sit, amet conse...</span>
+                                </a>                        
+                            </li>   
+                            <li class="maillist">
+                                <a href="usermessage.html">
+                                    <span class="senderid">Victor:</span>
+                                    <span class="mailsubject">Sit, amet conse...</span>
+                                </a>
+                            </li>
+                            <li class="maillist">
+                                <a href="usermessage.html">
+                                    <span class="senderid">Tobe:</span>
+                                    <span class="mailsubject">Sit, amet conse...</span>
+                                </a>
+                            </li>
+                            <li class="maillist">
+                                <a href="usermessage.html">
+                                    <span class="senderid">Amy:</span>
+                                    <span class="mailsubject">Sit, amet conse...</span>
+                                </a>                        
+                            </li>
+                            <li class="maillist">
+                                <a href="usermessage.html">
+                                    <span class="senderid">Wedekind:</span>
+                                    <span class="mailsubject">Sit, amet conse...</span>
+                                </a>                        
+                            </li>           
+                        </ul>            
+                    </div>
+            </section>
+        </main>
     
-    <footer id="footer">
-        <div class="sm-page">
-                <ul>
-                    <li><a href="#"> Facebook <i class="fa fa-facebook-square"></i></a></li>
-                    <li><a href="#"> Twitter <i class="fa fa-twitter"></i></a></li>
-                    <li><a href="#"> Pinterest <i class="fa fa-pinterest"></i></a></li>
-                </ul>
-        </div>
-        <div class="footer-nav">
-            <ul id="navigation">
-                <li class="footerli"><a href="#">Find Us</a></li>
-                <li class="footerli"><a href="#">Support</a></li>
-                <li class="footerli"><a href="#">About</a></li>
-            </ul>
-        </div>
-        <div class="copyright">
-            <p>EPIC MAIL &copy 2019</p>
-        </div>
-    </footer>
-    <script src="./scripts/main.js"></script>
+    <script src="./scripts/user.js"></script>
 </body>
 </html>

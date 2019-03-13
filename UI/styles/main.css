@@ -1,5 +1,5 @@
 body {
-    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    font-family: "Courier New", Courier, monospace;
     margin: 0;
 }
 
@@ -58,25 +58,24 @@ a{
 
 .container{
     margin: 0;
-    padding: 0;
+    padding: 20px 0 0 10px;
 }
 
 div.container{
-    width: 60%;
-    float: left;
+    width: 50%;
+    float: none;
     color: #FCFCFC;
-    margin: 25px 0 0 10px;
+    margin: 25px 0 0 25px;
 }
 
 .transparent{
     background-color: rgba(13, 47, 70, 0.473);
     border-radius: 5px;
     margin: 0 0 0 0;
-    height: calc(100vh - 300px);
+    height: calc(100vh - 150px);
 }
 
 aside.container{
-    margin: 0;
     width: 30%;
     float: right;
     margin: 25px 25px 0 0;
@@ -86,7 +85,10 @@ aside.container{
     margin: 0;
     padding: 10px 0;
     width: 100%;
-    height: calc(100vh - 200px);
+    height: calc(100vh - 70px);
+    display: flex;
+    align-content: center;
+    justify-content: center;
     background-image: url(../imgs/banner.jpg);
     background-repeat: no-repeat;
     background-size: cover;
@@ -115,10 +117,10 @@ p.main-content{
 }
 
 #footer{
+    padding: 20px 0 0 0;
     margin: 0;
-    padding: 3px;
     background-color: #003D66;
-    height: 200px;
+    height: 150px;
     color: #FCFCFC;
     overflow: hidden;
     position: relative;
@@ -133,9 +135,11 @@ footer div.page-nav ul li{
 }
 
 .sm-page{
-    float: left;
-    padding: 0 20px 0 0;
-    margin: 0;
+    float: none;
+    padding: 0;
+    margin: auto;
+    width: 70%;
+    text-align: center;
     color: #FCFCFC;
 }
 
@@ -153,7 +157,7 @@ footer div.page-nav ul li{
 footer div.sm-page ul li{
     list-style: none;
     margin: 0 20px 5px 0;
-    display: block;
+    display: inline;
     line-height: 45px;
     letter-spacing: 2px;
 }
@@ -168,18 +172,26 @@ footer div.sm-page ul li a{
 .copyright{
    position: absolute;
    bottom: 0;
-   left: 38vw;
-   letter-spacing: 2px;
-   background-color: rgba(13, 47, 70, 0.473);
-   border-radius: 5px;
-   padding: 0 10px 0;
-   font-weight: 600;
+   left: auto;
+   display: flex;
+   width: 100%;
+   align-content: center;
+   justify-content: center;
+}
+
+.copyright p{
+    background-color: rgba(13, 47, 70, 0.473);
+    letter-spacing: 2px;   
+		border-radius: 5px;
+		margin: 0;
+    padding: 10px;
+    font-weight: 600;
 }
 
 footer div.footer-nav ul li {
     list-style: none;
     margin: 0 20px 5px 0;
-    display: block;
+    display: inline;
     line-height: 45px;
     letter-spacing: 2px;
 }
@@ -192,65 +204,110 @@ footer div.footer-nav ul li a {
 }
 
 .footer-nav {
-    float: right;
-    padding: 0.3rem;
-    margin: 0;
-    color: #FCFCFC;
+	float: none;
+    padding: 0;
+    margin: auto;
+    width: 70%;
+    text-align: center;
+	color: #FCFCFC;
+}
+
+.footer-nav ul {
+	margin: 0;
 }
 
 p.main-content{
-        font-size: 0.9rem;
-    }
-    form#signinform{
-        margin: 0.2rem 0  0.2rem 0.3rem;
-    }
-    .form-group{
-        margin: 0 0 0.7rem 0;
-        padding: 0 0.3rem 0.5rem;
-    }
-    .form-group label{
-        color: #FCFCFC;
-        font-size: 1rem;
-        text-align: left;
-        display: block;
-    }
-    .form-group input{
-        color: #FCFCFC;
-        font-size: 1rem;
-        border-radius: 0.4rem;
-        height: 2rem;
-        padding: 0.3rem;
-        background: transparent;
-        outline: unset;
-    }
-    .form-group button{
-        color: #FCFCFC;
-        background: #003D66;
-        font-size: 1rem;
-        font-weight: 700;
-        padding: 0.3rem;
-        border-radius: 0.4rem;
-        outline: unset;
-    }
-    .form-group input:active{
-        border: #003D66 solid 0.3rem;
-    }
-    .form-group input:focus{
-        border: #003D66 solid 0.1rem;
-        
-    }
+    font-size: 1.7rem;
+    margin: auto;
+    width: 70%;
+}
+form#signinform{
+    padding: 20px 0 0 0;
+    margin: auto;
+    width: 70%;
+}
+.form-group{
+    margin: 0 0 0.7rem 0;
+    padding: 0 0.3rem 0.5rem;
+}
+.form-group label{
+    color: #FCFCFC;
+    font-size: 1.7rem;
+    text-align: left;
+    display: block;
+}
+.form-group input{
+    color: #FCFCFC;
+	font-size: 1.5rem;
+	letter-spacing: 0.3rem;
+    border-radius: 0.4rem;
+	height: 2.3rem;
+	width: 90%;
+	margin: 10px 0 0 0;
+    padding: 0.5rem;
+    background: transparent;
+    outline: unset;
+}
+.form-group button{
+    color: #FCFCFC;
+	background: #003D66;
+	width: 40%;
+	font-size: 1rem;
+	font-weight: 700;
+	margin: auto;
+	padding: 0.3rem;
+	border-radius: 0.4rem;
+	outline: unset;
+	height: 3rem;
+	font-family: 'Courier New', Courier, monospace;
+}
+
+.form-group input:active{
+  border: #003D66 solid 0.3rem;
+}
+.form-group input:focus{
+	border: #003D66 solid 0.1rem;
+}
 
 @media screen and (max-width: 1024px){
-    .sm-page {
-        float: left;
-        padding: 0 20px 0 0;
+	.page-nav {
+		float: right;
+        padding: 0;
         margin: 0;
+        color: #FCFCFC;
+	}
+		
+	.main-banner{
+		height: calc(100vh - 40px);
+	}
+
+	.transparent{
+		height: calc(100vh - 150px);
+    }
+    div.container{
+        width: 70%;
+    }
+    
+    #footer{
+        height: 150px;
+    }
+
+    .sm-page {
+        float: none;
+        display: block;
+        text-align: center;
+        padding: 0;
+        width: 70%;
+        margin: auto;
         color: #FCFCFC;
     }
     .footer-nav {
-        float: right;
-        padding: 0.3rem;
-        margin: 0;
+        float: none;
+        display: block;
+        text-align: center;
+        padding: 0;
+        width: 70%;
+        margin: auto;
         color: #FCFCFC;
     }
     .footer-nav ul {
@@ -290,6 +347,9 @@ p.main-content{
         margin: auto;
         width: 50%;
     }
+    div.container{
+        width: 70%;
+    }		
     aside div p.main-content{
         margin: 0 0 10px;
         padding: 30px 20px;
@@ -301,16 +361,18 @@ p.main-content{
         overflow: hidden;
     }
     .footer-nav {
-        float: right;
+        float: none;
+        display: block;
         padding: 0.3rem;
-        margin: 0;
+        margin: auto;
         color: #FCFCFC;
     }
     p.main-content{
         font-size: 0.9rem;
     }
     form#signinform{
-        margin: 0.2rem 0  0.2rem 0.3rem;
+        padding: 30px 20px 20px 20px;
+        margin: auto;
     }
     .form-group{
         margin: 0 0 0.7rem 0;
@@ -363,7 +425,6 @@ p.main-content{
         margin: 0.3rem;
         padding: 0.2rem;
         font-size: 30px;
-        font-weight: 600;
         position: absolute;
         top: 0;
         right: 0;
@@ -400,7 +461,10 @@ p.main-content{
         width: 100%;
         border-top: #FCFCFC solid 3px;
         line-height: unset;
-    }
+	}
+	.main-banner{
+		height: calc(100vh - 40px);
+	}
     aside.container{
         float: none;
         width: 90%;
@@ -416,9 +480,9 @@ p.main-content{
     }
     h1.main-content{
         margin: 0;
-        padding: 0.3rem;
+        padding: 0;
         font-weight: normal;
-        font-size: 1.5rem;
+        font-size: 1.3rem;
     }
     p.main-content{
         padding: 5px;
@@ -444,15 +508,19 @@ p.main-content{
         overflow: hidden;
     }
     #footer{
-        display: block;
-        height: calc(100vw - 150px);
+        display: flex;
+		height: calc(100vw - 250px);
+		align-content: center;
+		justify-content: center;
     }
     .sm-page{
         float: left;
+        text-align: unset;
         margin: 0;
         padding: 0;
     }
     .sm-page ul{
+        display: block;
         margin: 0;
         padding: 0.4rem;
     }
@@ -461,30 +529,55 @@ p.main-content{
         margin: auto;
         padding: 0;
     }
-    .copyright{
-        left: 30vw;
-    }
-    .footer-nav ul li{
+    .copyright {
+		position: absolute;
+		bottom: 0;
+		left: auto;
+		display: flex;
+		width: 100%;
+		align-content: center;
+		justify-content: center;
+	}
+    footer div.footer-nav ul li{
         display: block;
-        margin: auto;
+        margin: 10px;
         border-top: none;
         line-height: unset;
     }
-    .footer-nav ul {
-        margin: 0;
-        padding: 0.3rem;
+    footer div.sm-page ul li{
+        display: block;
+        margin: 10px;
+        border-top: none;
+        line-height: unset;
     }
     .footer-nav {
+        display: block;
         float: right;
         padding: 0.3rem;
+        text-align: unset;
         margin: 0;
         color: #FCFCFC;
     }
+    .footer-nav ul{
+        text-align: right;
+        display: block;
+        margin: 0;
+        padding: 0.3rem;
+    }
     p.main-content{
+        width: 90%;
+        margin: auto;
         font-size: 0.9rem;
     }
     form#signinform{
-        margin: 0.2rem 0  0.2rem 0.3rem;
+        width: 90%;
+        padding: 0;
+        margin: auto;
+    }
+    .form-group{
+        width: 100%;
+        margin: 0 0 0.7rem 0;
+        padding: 0 0.3rem 0.5rem;
     }
     .form-group{
         margin: 0 0 0.7rem 0;
@@ -499,7 +592,8 @@ p.main-content{
     .form-group input{
         color: #FCFCFC;
         font-size: 1rem;
-        border-radius: 0.4rem;
+		border-radius: 0.4rem;
+		width: 80%;
         height: 2rem;
         padding: 0.3rem;
         background: transparent;
@@ -507,9 +601,11 @@ p.main-content{
     }
     .form-group button{
         color: #FCFCFC;
-        background: #003D66;
+				background: #003D66;
+				width: 40%;
         font-size: 1rem;
-        font-weight: 700;
+				font-weight: 700;
+				margin: auto;
         padding: 0.3rem;
         border-radius: 0.4rem;
         outline: unset;
@@ -552,8 +648,11 @@ p.main-content{
     div.container {
         float: none;
         width: 80%;
-        margin: 10px auto;
+        padding: 10px;
         height: calc(100vh - 180px);
+    }
+    #footer{
+        height: calc(100vh - 500px);
     }
     footer div.sm-page ul li {
         list-style: none;
@@ -584,25 +683,39 @@ p.main-content{
         font-size: 16px;
     }
     .copyright {
-        left: 25vw;
+			position: absolute;
+			bottom: 0;
+			left: auto;
+			display: flex;
+			width: 100%;
+			align-content: center;
+			justify-content: center;
     }
     .footer-nav {
         float: right;
         padding: 0.3rem;
+        text-align: unset;
         margin: 0;
         color: #FCFCFC;
     }
     .footer-nav ul{
+        text-align: right;
+        display: block;
         margin: 0;
         padding: 0.3rem;
     }
     p.main-content{
+        width: 90%;
+        margin: auto;
         font-size: 0.9rem;
     }
     form#signinform{
-        margin: 0.2rem 0  0.2rem 0.3rem;
+        width: 90%;
+        padding: 0;
+        margin: auto;
     }
     .form-group{
+        width: 100%;
         margin: 0 0 0.7rem 0;
         padding: 0 0.3rem 0.5rem;
     }
@@ -616,6 +729,7 @@ p.main-content{
         color: #FCFCFC;
         font-size: 1rem;
         border-radius: 0.4rem;
+        width: 100%;
         height: 2rem;
         padding: 0.3rem;
         background: transparent;
