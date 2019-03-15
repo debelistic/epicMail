@@ -1,7 +1,6 @@
 import express from 'express';
 import UserController from '../controllers/UserController';
 import MailController from '../controllers/MailController';
-import Auth from '../dsmiddleware/AuthwithDS';
 
 const router = express.Router();
 

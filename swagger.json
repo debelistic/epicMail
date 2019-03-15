@@ -207,10 +207,7 @@
               "name": "messageId",
               "description": "Id of message to be returned",
               "required": true,
-              "type": "integer",
-              "maximum": 10,
-              "minimum": 1,
-              "format": "int64"
+              "type": "integer"
             }
           ]
         }
@@ -255,10 +252,7 @@
               "name": "messageId",
               "description": "Id of message to be deleted",
               "required": true,
-              "type": "integer",
-              "maximum": 10,
-              "minimum": 1,
-              "format": "int64"
+              "type": "integer"
             }
           ]
         }
