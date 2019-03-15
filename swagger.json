@@ -185,7 +185,7 @@
           }
         }
       },
-      "/user/messages/:id": {
+      "/user/messages/{messageId}": {
         "get": {
           "tags": [
             "email"
@@ -221,7 +221,7 @@
           }
         }
       },
-      "/user/message/:id": {
+      "/user/message/{messageId}": {
         "delete": {
           "tags": [
             "email"
