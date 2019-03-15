@@ -6,7 +6,7 @@
   "scripts": {
     "test": "mocha --require @babel/register test/*.js --exit",
     "start": "nodemon --exec babel-node server/app.js",
-    "coverage": "nyc report --reporter=text-lcov > coverage.lcov && codecov"
+    "coverage": "nyc report --reporter=text-lcov > coveralls"
   },
   "repository": {
     "type": "git",
