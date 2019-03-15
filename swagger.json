@@ -203,13 +203,14 @@
           },
           "parameters": [
             {
-              "in": "body",
+              "in": "path",
               "name": "messageId",
               "description": "Id of message to be returned",
               "required": true,
-              "schema": {
-                "$ref": "#/definitions/Email"
-              }
+              "type": "integer",
+              "maximum": 10,
+              "minimum": 1,
+              "format": "int64"
             }
           ]
         }
@@ -250,13 +251,14 @@
           },
           "parameters": [
             {
-              "in": "body",
+              "in": "path",
               "name": "messageId",
               "description": "Id of message to be deleted",
               "required": true,
-              "schema": {
-                "$ref": "#/definitions/Email"
-              }
+              "type": "integer",
+              "maximum": 10,
+              "minimum": 1,
+              "format": "int64"
             }
           ]
         }
