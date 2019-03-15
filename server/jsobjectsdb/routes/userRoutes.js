@@ -21,22 +21,22 @@ router.post('/auth/signup', UserController.createUser);
 router.post('/auth/login', UserController.signInUser);
 
 // Get all received emails for a user
-router.get('/user/messages', Auth.verifyToken, MailController.getInbox);
+router.get('/user/messages', MailController.getInbox);
 
 // Get unread mails for a user
-router.get('/user/messages/unread', Auth.verifyToken, MailController.getUnreadMail);
+router.get('/user/messages/unread', MailController.getUnreadMail);
 
 // Get all sent emails for a user
 router.get('/user/messages/sent', MailController.getSentMails);
 
 // Get a user email
-router.get('/user/messages/:id', Auth.verifyToken, MailController.getAInboxMail);
+router.get('/user/messages/:id', MailController.getAInboxMail);
 
 // Send mail to individuals
-router.post('/user/message', Auth.verifyToken, MailController.createMail);
+router.post('/user/message', MailController.createMail);
 
 // Delete from inbox
-router.delete('/user/message/:id', Auth.verifyToken, MailController.deleteInbox);
+router.delete('/user/message/:id', MailController.deleteInbox);
 
 // Get a sent email for a user
 router.get('/user/messages/sent/:id', MailController.getASentMail);
