@@ -207,7 +207,7 @@
               "name": "messageId",
               "description": "Id of message to be returned",
               "required": true,
-              "type": "integer"
+              "type": "string"
             }
           ]
         }
@@ -252,7 +252,7 @@
               "name": "messageId",
               "description": "Id of message to be deleted",
               "required": true,
-              "type": "integer"
+              "type": "string"
             }
           ]
         }
