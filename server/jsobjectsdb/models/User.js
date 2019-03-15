@@ -23,7 +23,7 @@ class UserModel {
 
   createUser(user) {
     const newUser = {
-      id: randomId,
+      id: randomId(),
       firstName: user.firstName,
       lastName: user.lastName,
       contactName: `${user.contactName}@epicmail.com`,
@@ -32,9 +32,9 @@ class UserModel {
       createdOn: Date(),
       modifiedOn: Date(),
     };
-    if (!newUser.firstName && !newUser.lastName
-      && !newUser.contactName && !newUser.password
-      && !newUser.confirmPassword) {
+    if (!newUser.firstName || !newUser.lastName
+      || !newUser.contactName || !newUser.password
+      || !newUser.confirmPassword) {
       return { message: 'All fields are required' };
     }
     if (!/^[a-z\d]{5,}$/i.test(user.contactName)) {
@@ -58,7 +58,7 @@ class UserModel {
     };
   }
 
-  getAwithContactName(contactName) {
+  getUserContactName(contactName) {
     const user = this.users.find(aUser => aUser.contactName === `${contactName}@epicmail.com`);
     return user;
   }
@@ -66,7 +66,7 @@ class UserModel {
   getAUser(contactName, password) {
     const user = this.users.find(aUser => aUser.contactName === `${contactName}@epicmail.com`);
 
-    if (!user.contactName && !user.password) {
+    if (!user.contactName || !user.password) {
       return { message: 'Signin details does not match' };
     }
 

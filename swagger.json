@@ -117,7 +117,7 @@
           }
         }
       },
-      "/user/message": {
+      "/user/messages": {
         "post": {
           "tags": [
             "email"
@@ -149,7 +149,7 @@
           }
         }
       },
-      "/user/messages": {
+      "/user/messages/": {
         "get": {
           "tags": [
             "email"
@@ -157,42 +157,6 @@
           "summary": "Return all received messages for a user",
           "description": "",
           "operationId": "getinboxmessages",
-          "produces": [
-            "application/json"
-          ],
-          "responses": {
-            "default": {
-              "description": "successful operation"
-            }
-          }
-        }
-      },
-      "/user/messages/drafts": {
-        "get": {
-          "tags": [
-            "email"
-          ],
-          "summary": "Return all drafts for a user",
-          "description": "",
-          "operationId": "getdrafts",
-          "produces": [
-            "application/json"
-          ],
-          "responses": {
-            "default": {
-              "description": "successful operation"
-            }
-          }
-        }
-      },
-      "/user/messages/drafts/:id": {
-        "get": {
-          "tags": [
-            "email"
-          ],
-          "summary": "Return a draft",
-          "description": "",
-          "operationId": "getadraft",
           "produces": [
             "application/json"
           ],
