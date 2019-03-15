@@ -32,7 +32,7 @@ const UserController = {
       status: 201,
       data: [
         token,
-        `New user created, your contact id is ${newuser.contactName}`,
+        `New user created, your contact id is ${newuser.newUser.contactName}`,
       ],
     });
   },
