@@ -13,7 +13,7 @@
       }
     },
     "host": "epicmailwithds.herokuapp.com",
-    "basePath": "/v1",
+    "basePath": "/api/v1",
     "tags": [
       {
         "name": "user",
@@ -296,19 +296,14 @@
           "lastName": {
             "type": "string"
           },
-          "email": {
+          "contactName": {
             "type": "string"
           },
           "password": {
             "type": "string"
           },
-          "phone": {
+          "confirmPassword": {
             "type": "string"
-          },
-          "userStatus": {
-            "type": "integer",
-            "format": "int32",
-            "description": "User Status"
           }
         },
         "xml": {
@@ -322,8 +317,8 @@
             "type": "integer",
             "format": "int32"
           },
-          "type": {
-            "type": "string"
+          "data": {
+            "type": "array"
           },
           "message": {
             "type": "string"

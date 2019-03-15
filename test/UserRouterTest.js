@@ -283,7 +283,7 @@ describe('/GET All Drafts', () => {
 describe('Delete A Mail', () => {
   it('It return 404 status code', (done) => {
     chai.request(app)
-      .delete('/api/v1/user/message/13')
+      .delete('/api/v1/user/messages/13')
       .set('x-access-token', token)
       .end((err, res) => {
         if (err) done(err);
