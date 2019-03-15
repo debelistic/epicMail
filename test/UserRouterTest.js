@@ -30,9 +30,7 @@ describe('/Post User', () => {
         chai.expect(res.status).to.equal(201);
         chai.expect(res.body).to.be.a('object');
         chai.expect(res.body.data).to.be.a('array');
-        chai.expect(res.body.data[1]).to.be.a('object');
-        chai.expect(res.body.data[1]).to.have.keys('message', 'mailaddress', 'newUser');
-        chai.expect(res.body.data[1].newUser).to.have.keys('firstName', 'lastName', 'password', 'confirmPassword', 'id', 'contactName', 'createdOn', 'modifiedOn');
+        chai.expect(res.body.data[1]).to.be.a('string');        
         done();
       });
   });
