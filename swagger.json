@@ -200,7 +200,18 @@
             "default": {
               "description": "successful operation"
             }
-          }
+          },
+          "parameters": [
+            {
+              "in": "body",
+              "name": "messageId",
+              "description": "Id of message to be returned",
+              "required": true,
+              "schema": {
+                "$ref": "#/definitions/Email"
+              }
+            }
+          ]
         }
       },
       "/user/messages/unread": {
@@ -236,7 +247,18 @@
             "default": {
               "description": "successful operation"
             }
-          }
+          },
+          "parameters": [
+            {
+              "in": "body",
+              "name": "messageId",
+              "description": "Id of message to be deleted",
+              "required": true,
+              "schema": {
+                "$ref": "#/definitions/Email"
+              }
+            }
+          ]
         }
       }
     },
