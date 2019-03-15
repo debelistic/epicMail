@@ -131,59 +131,10 @@ describe('/Send Message', () => {
   });
 
   it('Return 400 status code if there is a missing field', (done) => {
-    const newuser = {};
-
-    chai.request(app)
-      .post('/api/v1/auth/signup')
-      .send(newuser)
-      .end((err, res) => {
-        if (err) done();
-        chai.expect(res.status).to.equal(400);
-        done();
-      });
-  });
-
-  it('Return 400 status code if password is not strong', (done) => {
-    const newuser = {
-      firstName: 'victor',
-      lastName: 'tolulope',
-      contactName: 'deviclistic23',
-      password: 'jdnfmHYU',
-      confirmPassword: 'jdnfmHYU',
-    };
-
-    chai.request(app)
-      .post('/api/v1/auth/signup')
-      .send(newuser)
-      .end((err, res) => {
-        if (err) done();
-        chai.expect(res.status).to.equal(400);
-        done();
-      });
-  });
-
-  it('Return 400 status code if password does not match', (done) => {
-    const newuser = {
-      subject: 'victor',
-      sentStatus: 'tolulope',
-      status: 'devi',
-    };
-
-    chai.request(app)
-      .post('/api/v1//user/message')
-      .set('x-access-token', token)
-      .send(newuser)
-      .end((err, res) => {
-        if (err) done();
-        chai.expect(res.status).to.equal(400);
-        done();
-      });
-  });
-  it('Return 400 status code if contact name is too short', (done) => {
     const newmail = {
       subject: 'victor',
-      sentStatus: 'tolulope',
-      status: 'devi',
+      message: 'jnnvjfnvtmj jvfrmjv',
+      status: true,
     };
 
     chai.request(app)
