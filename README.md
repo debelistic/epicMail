@@ -24,7 +24,10 @@ This version of EPIC MAIL implement
 
 - Run 'npm install' to install dependenccies
 - Run 'npm start' to run app
+<<<<<<< HEAD
 - Run 'npm test' to test
+=======
+>>>>>>> 9a7e26ffaa64a76e5862a0d0a1cc5dbf7b995951
 - See API on [heroku](cmailwithds.herokuapp.com)
 - See [Documentation](https://epicmailwithds.herokuapp.com/api-docs/) for routes
 - UI is hosted on :
