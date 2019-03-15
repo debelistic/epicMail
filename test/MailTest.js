@@ -12,12 +12,13 @@ describe('Mail Object', () => {
 describe('Create a Mail Account', () => {
   it('Return mail object', () => {
     const mail = {
-      id: randomId,
+      id: randomId(),
       createdOn: Date(),
       subject: 'Test',
       message: 'Testing with chai',
-      userid: 'FGTTHJ',
-      parentMessageId: 35,
+      senderId: 'ghj098',
+      receiverId: 'jfvjigjgkvg89',
+      parentMessageId: 'fjhtjvhntj',
       status: true,
     };
     const mailobj = MailModel.create(mail);
@@ -42,46 +43,12 @@ describe('Inbox Mails', () => {
 
 describe('Sent Mail', () => {
   it('Return a sent mail', () => {
-    const mail = {
-      id: randomId,
-      createdOn: Date(),
-      subject: 'Test',
-      message: 'Testing with chai',
-      userid: 'FGTTHJ',
-      parentMessageId: 35,
-      status: true,
-    };
-    MailModel.create(mail);
-    chai.expect(MailModel.getASent(mail.id)).to.be.an('object');
+    chai.expect(MailModel.getASent(13)).to.be.an('object');
   });
 });
 
 describe('Sent Mails', () => {
   it('Return array of sent mails', () => {
     chai.expect(MailModel.getSent()).to.be.an('array');
-  });
-});
-
-
-describe('Draft Mails', () => {
-  it('Return array of drafts', () => {
-    chai.expect(MailModel.getAllDrafts()).to.be.an('array');
-  });
-});
-
-
-describe('Draft Mail', () => {
-  it('Return a draft', () => {
-    const mail = {
-      id: randomId,
-      createdOn: Date(),
-      subject: 'Test',
-      message: 'Testing with chai',
-      userid: 'FGTTHJ',
-      parentMessageId: 35,
-      status: false,
-    };
-    MailModel.create(mail);
-    chai.expect(MailModel.getADraft(mail.id)).to.be.an('object');
   });
 });

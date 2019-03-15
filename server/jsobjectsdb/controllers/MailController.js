@@ -27,6 +27,17 @@ const Mail = {
     });
   },
 
+  getAInboxMail(req, res) {
+    const aInboxMail = MailModel.getAInbox(req.params.id);
+
+    res.status(200).send({
+      status: 200,
+      data: [
+        aInboxMail,
+      ],
+    });
+  },
+
   getUnreadMail(req, res) {
     const unreadMail = MailModel.getUnread();
     res.status(200).send({
@@ -53,22 +64,6 @@ const Mail = {
     });
   },
 
-  getAllUnsent(req, res) {
-    const drafts = MailModel.getAllDrafts();
-    res.status(200).send({
-      status: 200,
-      data: [drafts],
-    });
-  },
-
-  getADraftMail(req, res) {
-    const aDraft = MailModel.getADraft(req.params.id);
-    res.status(200).send({
-      status: 200,
-      data: [aDraft],
-    });
-  },
-
   deleteInbox(req, res) {
     const inbox = MailModel.getAInbox(req.params.id);
     if (!inbox) {
@@ -78,9 +73,12 @@ const Mail = {
       });
     }
     const dInbox = MailModel.deleteAInbox(req.params.id);
-    return res.status(204).send({
+    return res.send({
       status: 204,
-      dInbox,
+      message: [
+        dInbox,
+        'Mail deleted',
+      ],
     });
   },
 };
