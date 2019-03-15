@@ -296,19 +296,14 @@
           "lastName": {
             "type": "string"
           },
-          "email": {
+          "contactName": {
             "type": "string"
           },
           "password": {
             "type": "string"
           },
-          "phone": {
+          "confirmPassword": {
             "type": "string"
-          },
-          "userStatus": {
-            "type": "integer",
-            "format": "int32",
-            "description": "User Status"
           }
         },
         "xml": {
