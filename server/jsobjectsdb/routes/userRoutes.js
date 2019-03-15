@@ -36,7 +36,7 @@ router.get('/user/messages/:id', Auth.verifyToken, MailController.getAInboxMail)
 router.post('/user/message', Auth.verifyToken, MailController.createMail);
 
 // Delete from inbox
-router.delete('/user/messages/:id', Auth.verifyToken, MailController.deleteInbox);
+router.delete('/user/message/:id', Auth.verifyToken, MailController.deleteInbox);
 
 // Get a sent email for a user
 router.get('/user/messages/sent/:id', MailController.getASentMail);

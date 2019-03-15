@@ -117,7 +117,7 @@
           }
         }
       },
-      "/user/messages": {
+      "/user/message": {
         "post": {
           "tags": [
             "email"
@@ -137,7 +137,7 @@
               "schema": {
                 "type": "array",
                 "items": {
-                  "$ref": "#/definitions/User"
+                  "$ref": "#/definitions/Email"
                 }
               }
             }
