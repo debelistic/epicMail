@@ -16,7 +16,9 @@
 }
 .chat{
     display: block;
-    position: absolute;
+    float: right;
+    width: 80%;
+    height: 70%;
     bottom: 70px;
 }
 .chat .open{
@@ -24,7 +26,7 @@
 }
 .chatarea{
     width: 100%;
-    margin: 5px;
+    margin: 0;
 }
 .chatarea input{
     color: #FCFCFC;
@@ -116,25 +118,18 @@ textarea#mailcontent{
     padding: 0;
 }
 .usermenu{
-    position: relative;
+    float: left;
     border: none;
-    width: unset;
+    width: 20%;
     color: #FCFCFC;
 }
-.usermenu ul{
-    position: absolute;
-    top: 0;
-    left: 0;
-    display: none;
+.usermenu ul{    
+    display: block;
     background: #003D66;
+    width: 100%;
     margin: 0;
     height: 0;
     padding: 0;
-}
-
-.usermenu ul.open{
-    width: 80%;
-    display: block;
     height: calc(100vh - 55px);
 }
 
@@ -176,7 +171,8 @@ div.usermail{
     display: flex;
     justify-content: center;
     align-content: center;
-    width: 100vw;
+    float: right;
+    width: 80%;
 }
 .usermail ul{
     margin: 0;
@@ -342,6 +338,7 @@ h1.main-content {
     form#mailform.open{
         height: auto;
         display: block;
+        z-index: 3;
     }
     form#mailform input[type='text']{
         margin: 5px;
@@ -397,9 +394,10 @@ h1.main-content {
     }
 
     .usermenu ul.open{
-        width: 80%;
+        width: 50%;
         display: block;
         height: calc(100vh - 55px);
+        z-index: 3;
     }
 
     .usermenu ul li{
@@ -408,7 +406,8 @@ h1.main-content {
         margin: 0;
         padding: 10px;
         font-size: 25px;
-        border-top: #FCFCFC solid 3px;
+        border: #FCFCFC solid 3px;
+        border-radius: 16px;
     }
 
     div.userheader{
@@ -543,7 +542,7 @@ h1.main-content {
     }
     .chatarea{
         width: 100%;
-        margin: 5px;
+        margin: 0;
     }
     .chatarea input{
         color: #FCFCFC;
@@ -884,7 +883,7 @@ h1.main-content {
     }
 
     .usermenu ul.open{
-        width: 80%;
+        width: 60%;
         display: block;
         height: calc(100vh - 55px);
     }
@@ -895,9 +894,14 @@ h1.main-content {
         margin: 0;
         padding: 10px;
         font-size: 25px;
-        border-top: #FCFCFC solid 3px;
+        border: #FCFCFC solid 3px;
+        border-radius: 16px;
     }
 
+    .usermenu ul li a{
+        width: 100%;
+        height: inherit;
+    }
     div.userheader{
         color: #FCFCFC;
         height: 35px;
@@ -1125,6 +1129,7 @@ h1.main-content {
         margin: 0;
         height: 0;
         padding: 0;
+        z-index: 3;
     }
 
     .usermenu ul.open{
@@ -1139,7 +1144,13 @@ h1.main-content {
         margin: 0;
         padding: 10px;
         font-size: 25px;
-        border-top: #FCFCFC solid 3px;
+        border: #FCFCFC solid 3px;
+        border-radius: 16px;
+    }
+
+    .usermenu ul li a{
+        width: 100%;
+        height: inherit;
     }
 
     div.userheader{
