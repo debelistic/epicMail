@@ -30,14 +30,12 @@ describe('/Post User', () => {
         chai.expect(res.status).to.equal(201);
         chai.expect(res.body).to.be.a('object');
         chai.expect(res.body.data).to.be.a('array');
-        chai.expect(res.body.data[1]).to.be.a('object');
-        chai.expect(res.body.data[1]).to.have.keys('message', 'mailaddress', 'newUser');
-        chai.expect(res.body.data[1].newUser).to.have.keys('firstName', 'lastName', 'password', 'confirmPassword', 'id', 'contactName', 'createdOn', 'modifiedOn');
+        chai.expect(res.body.data[1]).to.be.a('string');        
         done();
       });
   });
 
-  it('Return 403 status code if there is a missing field', (done) => {
+  it('Return 400 status code if there is a missing field', (done) => {
     const newuser = {};
 
     chai.request(app)
@@ -45,12 +43,12 @@ describe('/Post User', () => {
       .send(newuser)
       .end((err, res) => {
         if (err) done();
-        chai.expect(res.status).to.equal(403);
+        chai.expect(res.status).to.equal(400);
         done();
       });
   });
 
-  it('Return 403 status code if password is not strong', (done) => {
+  it('Return 400 status code if password is not strong', (done) => {
     const newuser = {
       firstName: 'victor',
       lastName: 'tolulope',
@@ -64,12 +62,12 @@ describe('/Post User', () => {
       .send(newuser)
       .end((err, res) => {
         if (err) done();
-        chai.expect(res.status).to.equal(403);
+        chai.expect(res.status).to.equal(400);
         done();
       });
   });
 
-  it('Return 403 status code if password does not match', (done) => {
+  it('Return 400 status code if password does not match', (done) => {
     const newuser = {
       firstName: 'victor',
       lastName: 'tolulope',
@@ -83,11 +81,11 @@ describe('/Post User', () => {
       .send(newuser)
       .end((err, res) => {
         if (err) done();
-        chai.expect(res.status).to.equal(403);
+        chai.expect(res.status).to.equal(400);
         done();
       });
   });
-  it('Return 403 status code if contact name is too short', (done) => {
+  it('Return 400 status code if contact name is too short', (done) => {
     const newuser = {
       firstName: 'victor',
       lastName: 'tolulope',
@@ -101,7 +99,49 @@ describe('/Post User', () => {
       .send(newuser)
       .end((err, res) => {
         if (err) done();
-        chai.expect(res.status).to.equal(403);
+        chai.expect(res.status).to.equal(400);
+        done();
+      });
+  });
+});
+
+describe('/Send Message', () => {
+  it('A User Send message', (done) => {
+    const newmail = {
+      subject: 'victor',
+      message: 'jnnvjfnvtmj jvfrmjv',
+      sentStatus: 'Drafts',
+      status: true,
+    };
+
+    chai.request(app)
+      .post('/api/v1//user/message')
+      .set('x-access-token', token)
+      .send(newmail)
+      .end((err, res) => {
+        if (err) done();
+        chai.expect(res.status).to.equal(201);
+        chai.expect(res.body).to.be.a('object');
+        chai.expect(res.body.data).to.be.a('array');
+        chai.expect(res.body.data[0]).to.be.a('object');
+        done();
+      });
+  });
+
+  it('Return 400 status code if there is a missing field', (done) => {
+    const newmail = {
+      subject: 'victor',
+      message: 'jnnvjfnvtmj jvfrmjv',
+      status: true,
+    };
+
+    chai.request(app)
+      .post('/api/v1//user/message')
+      .set('x-access-token', token)
+      .send(newmail)
+      .end((err, res) => {
+        if (err) done();
+        chai.expect(res.status).to.equal(400);
         done();
       });
   });
@@ -112,17 +152,18 @@ describe('/Signin User', () => {
     const newuser = {
       firstName: 'victor',
       lastName: 'tolulope',
-      contactName: 'deviclistic23',
+      contactName: 'devicddlistic23',
       password: 'jdnfmHYU67&hjfjf',
       confirmPassword: 'jdnfmHYU67&hjfjf',
     };
     UserModel.createUser(newuser);
     const reguser = {
-      contactName: 'deviclistic23',
+      contactName: 'devicddlistic23',
       password: 'jdnfmHYU67&hjfjf',
     };
     chai.request(app)
       .post('/api/v1/auth/login')
+      .set('x-access-token', token)
       .send(reguser)
       .end((err, res) => {
         if (err) done(err);
@@ -135,7 +176,7 @@ describe('/Signin User', () => {
       });
   });
 
-  it('Return 403 status code if there is a miss field', (done) => {
+  it('Return 400 status code if there is a missing field', (done) => {
     const reguser = {};
 
     chai.request(app)
@@ -143,7 +184,7 @@ describe('/Signin User', () => {
       .send(reguser)
       .end((err, res) => {
         if (err) done();
-        chai.expect(res.status).to.equal(403);
+        chai.expect(res.status).to.equal(400);
         done();
       });
   });
@@ -237,32 +278,10 @@ describe('/GET All Drafts', () => {
   });
 });
 
-describe('/GET/:id a Draft mail', () => {
-  it('It should get a draft mail from the database', (done) => {
-    const newMail = {
-      id: 56,
-      subject: 'test',
-      message: "you're building",
-      parentMessageId: 'from habiib',
-      status: false,
-    };
-    chai.request(app)
-      .get(`/api/v1/user/messages/drafts/${newMail.id}`)
-      .set('x-access-token', token)
-      .end((err, res) => {
-        if (err) done(err);
-        chai.expect(res.status).to.equal(200);
-        chai.expect(res.body).to.be.a('object');
-        done();
-      });
-  });
-});
-
-
 describe('Delete A Mail', () => {
   it('It return 404 status code', (done) => {
     chai.request(app)
-      .delete('/api/v1/user/message/13')
+      .delete('/api/v1/user/messages/13')
       .set('x-access-token', token)
       .end((err, res) => {
         if (err) done(err);

@@ -13,4 +13,4 @@ const randomId = () => {
   return id;
 };
 
-export default randomId();
+export default randomId;

@@ -1,7 +1,6 @@
 import express from 'express';
 import UserController from '../controllers/UserController';
 import MailController from '../controllers/MailController';
-import Auth from '../dsmiddleware/AuthwithDS';
 
 const router = express.Router();
 
@@ -21,28 +20,25 @@ router.post('/auth/signup', UserController.createUser);
 router.post('/auth/login', UserController.signInUser);
 
 // Get all received emails for a user
-router.get('/user/messages', Auth.verifyToken, MailController.getInbox);
+router.get('/user/messages', MailController.getInbox);
 
 // Get unread mails for a user
-router.get('/user/messages/unread', Auth.verifyToken, MailController.getUnreadMail);
+router.get('/user/messages/unread', MailController.getUnreadMail);
 
-// Send mail to individuals
-router.post('/user/message', Auth.verifyToken, MailController.createMail);
-
-// Get all sent emails user
+// Get all sent emails for a user
 router.get('/user/messages/sent', MailController.getSentMails);
 
 // Get a user email
-router.get('/user/messages/:id', Auth.verifyToken, MailController.getASentMail);
+router.get('/user/messages/:id', MailController.getAInboxMail);
 
-// Get drafts of a user
-router.get('/user/messages/draft', Auth.verifyToken, MailController.getAllUnsent);
-
-// Get a draft
-router.get('/user/messages/drafts/:id', Auth.verifyToken, MailController.getADraftMail);
+// Send mail to individuals
+router.post('/user/message', MailController.createMail);
 
 // Delete from inbox
-router.delete('/user/message/:id', Auth.verifyToken, MailController.deleteInbox);
+router.delete('/user/message/:id', MailController.deleteInbox);
+
+// Get a sent email for a user
+router.get('/user/messages/sent/:id', MailController.getASentMail);
 
 
 export default router;

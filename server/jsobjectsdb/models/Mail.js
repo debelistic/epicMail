@@ -4,10 +4,10 @@ class MailModel {
   constructor() {
     this.inbox = [
       {
-        id: 13,
-        receiverId: 74,
-        parentMessageId: randomId,
-        messageId: randomId,
+        id: randomId(),
+        receiverId: randomId(),
+        parentMessageId: randomId(),
+        messageId: randomId(),
         subject: 'Rain Coder',
         message: 'Lorem ipsum dolor sit, amet consectetur adipisicing elit. Magni temporibus ex tenetur delectus earum',
         createdOn: new Date(),
@@ -15,10 +15,10 @@ class MailModel {
         status: 'UnRead',
       },
       {
-        id: 99,
-        receiverId: 201,
-        parentMessageId: randomId,
-        messageId: randomId,
+        id: randomId(),
+        receiverId: randomId(),
+        parentMessageId: randomId(),
+        messageId: randomId(),
         subject: 'Summer Coder',
         message: 'Lorem ipsum dolor sit, amet consectetur adipisicing elit. Magni temporibus ex tenetur delectus earum',
         createdOn: new Date(),
@@ -26,10 +26,10 @@ class MailModel {
         status: 'UnRead',
       },
       {
-        id: 701,
-        receiverId: 63,
-        parentMessageId: randomId,
-        messageId: randomId,
+        id: 13,
+        receiverId: randomId(),
+        parentMessageId: randomId(),
+        messageId: randomId(),
         subject: 'Rain Coder',
         message: 'Lorem ipsum dolor sit, amet consectetur adipisicing elit. Magni temporibus ex tenetur delectus earum',
         createdOn: new Date(),
@@ -37,10 +37,10 @@ class MailModel {
         status: 'Read',
       },
       {
-        id: 35,
-        receiverId: 83,
-        parentMessageId: randomId,
-        messageId: randomId,
+        id: randomId(),
+        receiverId: randomId(),
+        parentMessageId: randomId(),
+        messageId: randomId(),
         subject: 'Summer Coder',
         message: 'Lorem ipsum dolor sit, amet consectetur adipisicing elit. Magni temporibus ex tenetur delectus earum',
         createdOn: new Date(),
@@ -50,9 +50,9 @@ class MailModel {
     ];
     this.sent = [
       {
-        id: randomId,
-        receiverId: randomId,
-        messageId: randomId,
+        id: randomId(),
+        receiverId: randomId(),
+        messageId: randomId(),
         subject: 'Rain Coder',
         message: 'Lorem ipsum dolor sit, amet consectetur adipisicing elit. Magni temporibus ex tenetur delectus earum',
         createdOn: new Date(),
@@ -60,9 +60,9 @@ class MailModel {
         status: 'Sent',
       },
       {
-        id: randomId,
-        receiverId: randomId,
-        messageId: randomId,
+        id: 13,
+        receiverId: randomId(),
+        messageId: randomId(),
         subject: 'Rain Coder',
         message: 'Lorem ipsum dolor sit, amet consectetur adipisicing elit. Magni temporibus ex tenetur delectus earum',
         createdOn: new Date(),
@@ -72,24 +72,24 @@ class MailModel {
     ];
     this.drafts = [
       {
-        id: 57,
-        receiverId: 45,
-        messageId: randomId,
+        id: randomId(),
+        receiverId: randomId(),
+        messageId: randomId(),
         subject: 'Rain Coder',
         message: 'Lorem ipsum dolor sit, amet consectetur adipisicing elit. Magni temporibus ex tenetur delectus earum',
         createdOn: new Date(),
-        sentStatus: true,
-        status: 'Sent',
+        sentStatus: false,
+        status: 'Draft',
       },
       {
-        id: 89,
-        receiverId: 45,
-        messageId: randomId,
+        id: randomId(),
+        receiverId: randomId(),
+        messageId: randomId(),
         subject: 'Rain Coder',
         message: 'Lorem ipsum dolor sit, amet consectetur adipisicing elit. Magni temporibus ex tenetur delectus earum',
         createdOn: new Date(),
-        sentStatus: true,
-        status: 'Sent',
+        sentStatus: false,
+        status: 'Draft',
       },
     ];
     this.allMail = [];
@@ -97,7 +97,7 @@ class MailModel {
 
   create(mail) {
     const newMail = {
-      id: randomId,
+      id: randomId(),
       createdOn: Date(),
       subject: mail.subject,
       message: mail.message,
@@ -137,7 +137,7 @@ class MailModel {
   }
 
   getUnread() {
-    const aInbox = this.inbox.find(ainbox => ainbox.readStatus === false);
+    const aInbox = this.inbox.find(inbox => inbox.readStatus === false);
     return aInbox;
   }
 
@@ -153,15 +153,6 @@ class MailModel {
   getASent(id) {
     const aSent = this.sent.find(asent => asent.id === id);
     return aSent;
-  }
-
-  getAllDrafts() {
-    return this.drafts;
-  }
-
-  getADraft(id) {
-    const aDraft = this.drafts.find(adraft => adraft.id === id);
-    return aDraft;
   }
 
   deleteAInbox(id) {

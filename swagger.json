@@ -13,7 +13,7 @@
       }
     },
     "host": "epicmailwithds.herokuapp.com",
-    "basePath": "/v1",
+    "basePath": "/api/v1",
     "tags": [
       {
         "name": "user",
@@ -137,7 +137,7 @@
               "schema": {
                 "type": "array",
                 "items": {
-                  "$ref": "#/definitions/User"
+                  "$ref": "#/definitions/Email"
                 }
               }
             }
@@ -149,7 +149,7 @@
           }
         }
       },
-      "/user/messages": {
+      "/user/messages/": {
         "get": {
           "tags": [
             "email"
@@ -157,42 +157,6 @@
           "summary": "Return all received messages for a user",
           "description": "",
           "operationId": "getinboxmessages",
-          "produces": [
-            "application/json"
-          ],
-          "responses": {
-            "default": {
-              "description": "successful operation"
-            }
-          }
-        }
-      },
-      "/user/messages/drafts": {
-        "get": {
-          "tags": [
-            "email"
-          ],
-          "summary": "Return all drafts for a user",
-          "description": "",
-          "operationId": "getdrafts",
-          "produces": [
-            "application/json"
-          ],
-          "responses": {
-            "default": {
-              "description": "successful operation"
-            }
-          }
-        }
-      },
-      "/user/messages/drafts/:id": {
-        "get": {
-          "tags": [
-            "email"
-          ],
-          "summary": "Return a draft",
-          "description": "",
-          "operationId": "getadraft",
           "produces": [
             "application/json"
           ],
@@ -221,7 +185,7 @@
           }
         }
       },
-      "/user/messages/:id": {
+      "/user/messages/{messageId}": {
         "get": {
           "tags": [
             "email"
@@ -236,7 +200,16 @@
             "default": {
               "description": "successful operation"
             }
-          }
+          },
+          "parameters": [
+            {
+              "in": "path",
+              "name": "messageId",
+              "description": "Id of message to be returned",
+              "required": true,
+              "type": "string"
+            }
+          ]
         }
       },
       "/user/messages/unread": {
@@ -257,7 +230,7 @@
           }
         }
       },
-      "/user/message/:id": {
+      "/user/message/{messageId}": {
         "delete": {
           "tags": [
             "email"
@@ -272,7 +245,16 @@
             "default": {
               "description": "successful operation"
             }
-          }
+          },
+          "parameters": [
+            {
+              "in": "path",
+              "name": "messageId",
+              "description": "Id of message to be deleted",
+              "required": true,
+              "type": "string"
+            }
+          ]
         }
       }
     },
@@ -332,19 +314,14 @@
           "lastName": {
             "type": "string"
           },
-          "email": {
+          "contactName": {
             "type": "string"
           },
           "password": {
             "type": "string"
           },
-          "phone": {
+          "confirmPassword": {
             "type": "string"
-          },
-          "userStatus": {
-            "type": "integer",
-            "format": "int32",
-            "description": "User Status"
           }
         },
         "xml": {
@@ -358,8 +335,8 @@
             "type": "integer",
             "format": "int32"
           },
-          "type": {
-            "type": "string"
+          "data": {
+            "type": "array"
           },
           "message": {
             "type": "string"

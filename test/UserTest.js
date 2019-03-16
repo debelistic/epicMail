@@ -12,7 +12,7 @@ describe('Mail Object', () => {
 describe('Create a User', () => {
   it('Return user object', () => {
     const newUser = {
-      id: randomId,
+      id: randomId(),
       firstName: 'Debe',
       lastName: 'Victor',
       contactName: 'annie',
@@ -31,7 +31,7 @@ describe('Create a User', () => {
 describe('Get User With Contact Name', () => {
   it('Return a user object', () => {
     const newUser = {
-      id: randomId,
+      id: randomId(),
       firstName: 'Debe',
       lastName: 'Victor',
       contactName: 'annie',
@@ -41,7 +41,7 @@ describe('Get User With Contact Name', () => {
       modifiedOn: Date(),
     };
     UserModel.createUser(newUser);
-    chai.expect(UserModel.getAwithContactName(newUser.contactName)).to.be.an('object');
+    chai.expect(UserModel.getUserContactName(newUser.contactName)).to.be.an('object');
   });
 });
 
@@ -49,7 +49,7 @@ describe('Get User With Contact Name', () => {
 describe('Get A User To Signin', () => {
   it('Return a User object', () => {
     const newUser = {
-      id: randomId,
+      id: randomId(),
       firstName: 'Debe',
       lastName: 'Victor',
       contactName: 'annie',
@@ -65,7 +65,6 @@ describe('Get A User To Signin', () => {
 describe('Get A User With Id', () => {
   it('Return a User object', () => {
     const newUser = {
-      id: randomId,
       firstName: 'Debe',
       lastName: 'Victor',
       contactName: 'annie',
@@ -82,7 +81,6 @@ describe('Get A User With Id', () => {
 describe('Get A User With Id', () => {
   it('Return a User object', () => {
     const newUser = {
-      id: randomId,
       firstName: 'Debe',
       lastName: 'Victor',
       contactName: 'annie',
@@ -91,7 +89,6 @@ describe('Get A User With Id', () => {
       modifiedOn: Date(),
     };
     const newUser1 = {
-      id: randomId,
       firstName: 'Debe',
       lastName: 'Victor',
       contactName: 'annie',

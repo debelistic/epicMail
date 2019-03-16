@@ -3,14 +3,15 @@ import MailModel from '../models/Mail';
 const Mail = {
 
   createMail(req, res) {
-    if (!req.body.subject || !req.body.message || !req.body.parentMessageId || !req.body.status
-      || !req.body.parentMessageId) {
+    if (!req.body.subject || !req.body.message || !req.body.sentStatus || !req.body.status) {
       res.status(400).send({ message: 'You have missing field' });
     }
     const mail = MailModel.create(req.body);
     return res.status(201).send({
       status: 201,
-      mail,
+      data: [
+        mail,
+      ],
     });
   },
 
@@ -24,6 +25,17 @@ const Mail = {
     res.status(200).send({
       status: 200,
       data: [inbox],
+    });
+  },
+
+  getAInboxMail(req, res) {
+    const aInboxMail = MailModel.getAInbox(req.params.id);
+
+    res.status(200).send({
+      status: 200,
+      data: [
+        aInboxMail,
+      ],
     });
   },
 
@@ -53,22 +65,6 @@ const Mail = {
     });
   },
 
-  getAllUnsent(req, res) {
-    const drafts = MailModel.getAllDrafts();
-    res.status(200).send({
-      status: 200,
-      data: [drafts],
-    });
-  },
-
-  getADraftMail(req, res) {
-    const aDraft = MailModel.getADraft(req.params.id);
-    res.status(200).send({
-      status: 200,
-      data: [aDraft],
-    });
-  },
-
   deleteInbox(req, res) {
     const inbox = MailModel.getAInbox(req.params.id);
     if (!inbox) {
@@ -78,9 +74,12 @@ const Mail = {
       });
     }
     const dInbox = MailModel.deleteAInbox(req.params.id);
-    return res.status(204).send({
+    return res.send({
       status: 204,
-      dInbox,
+      message: [
+        dInbox,
+        'Mail deleted',
+      ],
     });
   },
 };

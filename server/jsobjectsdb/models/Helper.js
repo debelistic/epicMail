@@ -12,8 +12,8 @@ const Helper = {
   /**
    * Compare Password
    */
-  comparePassword(hashPassword, password) {
-    return bcrypt.compareSync(hashPassword, password);
+  comparePassword(password, hashPassword) {
+    return bcrypt.compareSync(password, hashPassword);
   },
 
   /**
