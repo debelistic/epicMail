@@ -1,5 +1,5 @@
 #header{
-    height: auto;
+    height: 80px;
 }
 .page-title{
     float: none;
@@ -13,32 +13,43 @@
     position: relative;
     color: #FCFCFC;
     display: block;
+    font-size: 20px;
 }
 .chat{
     display: block;
     float: right;
     width: 80%;
-    height: 70%;
-    bottom: 70px;
+    height: 100%;
 }
 .chat .open{
     display: unset;
 }
 .chatarea{
+    clear: both;
     width: 100%;
-    margin: 0;
+    height: 65px;
+    position: absolute;
+    bottom: 15px;
 }
-.chatarea input{
+.chatwrapper{
+    position: relative;
+    height: 100%;
+}
+.chatarea textarea{
     color: #FCFCFC;
-    height: 30px;
+    height: 40px;
     width: 80%;
     padding: 5px;
     border-radius: 4px;
     background: rgba(13, 47, 70, 0.473);
     outline: unset;
+    font-size: 16px;
+    margin-left: 5px;
 }
 .chatarea i {
     color: #003D66;
+    font-weight: 900;
+    font-size: 30px;
 }
 div.sent{
     width: 70%;
@@ -46,7 +57,7 @@ div.sent{
     border-radius: 4px;
     background: rgba(13, 47, 80, 0.473);
     padding: 5px;
-    margin: 2px;
+    margin: 5px;
     border: 1px solid #FCFCFC;
 
 }
@@ -56,7 +67,7 @@ div.receive{
     background: rgba(13, 47, 80, 0.473);
     border-radius: 4px;
     padding: 5px;
-    margin: 2px;
+    margin: 5px;
     border: 1px solid #FCFCFC;
 }
 .page-title{
@@ -128,9 +139,8 @@ textarea#mailcontent{
     background: #003D66;
     width: 100%;
     margin: 0;
-    height: 0;
     padding: 0;
-    height: calc(100vh - 55px);
+    height: calc(100vh - 80px);
 }
 
 .usermenu ul li{
@@ -143,6 +153,7 @@ textarea#mailcontent{
 }
 
 div.userheader{
+    display: none;
     color: #FCFCFC;
     height: 35px;
     background: rgba(13, 47, 70, 0.473);
@@ -210,7 +221,7 @@ div.usermail{
 }
 
 .main-banner{
-    height: 100vh;
+    height: calc(100vh - 80px);;
 }
 
 aside.container{
@@ -1015,8 +1026,6 @@ h1.main-content {
     }
     .chat{
         display: block;
-        position: absolute;
-        bottom: 70px;
     }
     .chat .open{
         display: unset;
@@ -1154,6 +1163,7 @@ h1.main-content {
     }
 
     div.userheader{
+        display: block;
         color: #FCFCFC;
         height: 35px;
         background: rgba(13, 47, 70, 0.473);
@@ -1206,7 +1216,7 @@ h1.main-content {
         font-size: 24px;
     }
     #header{
-        height: auto;
+        height: 60px;
     }
     .page-title{
         float: none;
