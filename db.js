@@ -184,7 +184,8 @@ const groupMessagesTable = () => {
   const groupMessagesQuery = `CREATE TABLE IF NOT EXISTS
       groupmessages(
         id SERIAL PRIMARY KEY,
-        FOREIGN KEY (memberId) REFRENCES groupmembers (memberId) NOT NULL,
+        FOREIGN KEY (ownerId) REFRENCES groupmembers (memberId) NOT NULL,
+        FOREIGN KEY (groupName) REFRENCES groupmembers (groupName) NOT NULL,
         message TEXT NOT NULL,
         parrentMessageId SERIAL
       )`;
