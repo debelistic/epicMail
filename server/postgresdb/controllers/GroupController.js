@@ -1,6 +1,12 @@
 import db from '../db';
 
 const GroupController = {
+  /**
+   * create user group
+   * @param {object} req 
+   * @param {object} res 
+   * @returns {object} group
+   */
   async createGroup(req, res) {
     if (!req.body.name || !req.body.description || req.user) {
       return res.status(400).send({ message: 'All fields are required' });
@@ -22,6 +28,12 @@ const GroupController = {
     }
   },
 
+  /**
+   * group owner add users join a group
+   * @param {object} req 
+   * @param {object} res
+   * @returns {object} group array 
+   */
   async joinGroup(req, res) {
     if (!req.body.groupName || !req.user) {
       return res.status(400).send({ message: 'enter a group name' });
@@ -42,6 +54,13 @@ const GroupController = {
     }
   },
 
+
+  /**
+   * see group messages
+   * @param {object} req 
+   * @param {object} res 
+   * @returns {object} array of group messages
+   */
   async seeGroupMessages(req, res) {
     if (!req.body.groupName || !req.user) {
       return res.status(403).send({ message: 'you are not a member' });
@@ -59,6 +78,12 @@ const GroupController = {
     }
   },
 
+  /**
+   * returns an array of group members
+   * @param {object} req 
+   * @param {object} res
+   * @returns {object} group members array 
+   */
   async seeGroupMembers(req, res) {
     if (!req.body.groupName || !req.user) {
       return res.status(403).send({ message: 'you are not a member' });
@@ -76,6 +101,12 @@ const GroupController = {
     }
   },
 
+  /**
+   * sends message to a group where sender is member or owner
+   * @param {object} req 
+   * @param {object} res
+   * @returns {object} sent message 
+   */
   async sendGroupMessage(req, res) {
     if (!req.body.message || !req.body.groupName || !req.user) {
       return res.status(400).send({ message: 'enter a text' });
@@ -92,6 +123,19 @@ const GroupController = {
     try {
       const { rows } = await db.query(groupMessageQuery, values);
       return res.status(201).send(rows[0]);
+    } catch (err) {
+      return res.status(400).send(err);
+    }
+  },
+
+  async deleteAGroupMember(req, res) {
+    const deleteAGroupMemberQuery = 'DELETE FROM groupmembers WHERE memberId=$1 AND ownerId = $2';
+    try {
+      const { rows } = await db.query(deleteAGroupMemberQuery, [req.body.memberId, req.user.id]);
+      if (!rows[0]) {
+        return res.status(404).send({ message: 'memberdoes not not exist' });
+      }
+      return res.status(204).send({ message: 'deleted' });
     } catch (err) {
       return res.status(400).send(err);
     }

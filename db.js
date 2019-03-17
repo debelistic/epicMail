@@ -1,6 +1,6 @@
 /* eslint-disable no-console */
-import { Pool } from 'pg';
-import dotenv from 'dotenv';
+const { Pool } = require('pg');
+const dotenv = require('dotenv');
 
 dotenv.config();
 
@@ -142,12 +142,12 @@ const dropGroupsTable = () => {
  * create group members table
  */
 const groupMembersTable = () => {
-  const groupMembersQuery = `CREATE TABLE IF NOT EXIST 
+  const groupMembersQuery = `CREATE TABLE IF NOT EXISTS 
       groupmembers(
-        id UIDD PRIMARY KEY,
+        id UUID PRIMARY KEY,
         FOREIGN KEY (groupId) REFRENCES groups (id) ON DELETE CASCADE,
         FOREIGN KEY (groupName) REFRENCES groups (name) ON DELETE CASCADE,
-        FOREIGN KEY (memberId) REFRENCES users (id) ON DELETE CASCADE,
+        FOREIGN KEY (memberId) REFRENCES users (email) ON DELETE CASCADE,
       )`;
 
   pool.query(groupMembersQuery)
@@ -240,12 +240,12 @@ pool.on('remove', () => {
 });
 
 module.exports = {
+  createAllTables,
   createUsersTable,
   createMessagesTable,
   groupsTable,
   groupMembersTable,
   groupMessagesTable,
-  createAllTables,
   dropUsersTable,
   dropMessagesTable,
   dropGroupsTable,
