@@ -6,7 +6,8 @@
   "scripts": {
     "test": "nyc mocha --require @babel/register test/*.js --exit",
     "start": "nodemon --exec babel-node server/app.js",
-    "coverage": "nyc --reporter-lcov --reporter=text-lcov npm test"
+    "coverage": "nyc --reporter-lcov --reporter=text-lcov npm test",
+    "oop": "babel-node oopmondayoutput.js"
   },
   "repository": {
     "type": "git",

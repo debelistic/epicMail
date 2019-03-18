@@ -9,6 +9,11 @@
     border: none;
 }
 
+main{
+    padding: 0;
+    margin: 0;
+}
+
 .main-banner{
     position: relative;
     color: #FCFCFC;
@@ -1026,13 +1031,25 @@ h1.main-content {
     }
     .chat{
         display: block;
+        position: absolute;
+        bottom: 0;
+        float: unset;
+        width: unset;
+        overflow: scroll;
+        height: calc(100vh - 85px);
     }
     .chat .open{
         display: unset;
     }
+    .chatwrapper {
+        position: relative;
+        height: 100%;
+    }
     .chatarea{
         width: 100%;
-        margin: 5px;
+        margin: 0;
+        position: absolute;
+        bottom: 0;
     }
     .chatarea input{
         color: #FCFCFC;
@@ -1122,6 +1139,8 @@ h1.main-content {
     }
     .main-banner{
         padding: 0;
+        height: calc(100vh - 60px);
+        position: relative;
     }
     .usermenu{
         position: relative;
@@ -1170,6 +1189,7 @@ h1.main-content {
         margin: 0;
         padding: 10px;
         position: relative;
+        z-index: 2;
     }
     #composeicon{
         position: absolute;
