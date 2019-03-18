@@ -8,9 +8,10 @@ const pool = new Pool({
   connectionString: process.env.DATABASE_URL,
 });
 
-pool.on('connect', () => {
-  console.log('connected to db');
-});
+// pool.on('connect', () => {
+//   console.log('connected to db');
+// });
+pool.connect();
 
 /**
  * create users table
@@ -72,7 +73,7 @@ const createMessagesTable = () => {
         FOREIGN KEY (senderId) REFRENCES users (id),
         receiverId VARCHAR(40) NOT NULL
       )`;
-
+  console.log('ran');
   pool.query(messageQuery)
     .then((res) => {
       console.log('message table created', res);
