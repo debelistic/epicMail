@@ -79,15 +79,15 @@ const messageStatustype = () => {
     )`;
 
   pool.query(messageStatustypeQuery)
-  .then((res) => {
-    console.log('enum created', res);
-    console.log(res);
-  })
-  .catch((err) => {
-    console.log(err);
-    pool.end();
-  })
-}
+    .then((res) => {
+      console.log('enum created', res);
+      console.log(res);
+    })
+    .catch((err) => {
+      console.log(err);
+      pool.end();
+    });
+};
 
 /**
  * create messages table
