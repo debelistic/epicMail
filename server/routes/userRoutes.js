@@ -1,6 +1,6 @@
 import express from 'express';
 import UserController from '../controllers/UserController';
-import MailController from '../controllers/MailController';
+import MailController from '../controllers/MessageController';
 
 const router = express.Router();
 
