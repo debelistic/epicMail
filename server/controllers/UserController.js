@@ -1,5 +1,5 @@
 import db from '../db';
-import Helper from '../../jsobjectsdb/models/Helper';
+import Helper from '../middleware/Helper';
 
 const UserController = {
   /**

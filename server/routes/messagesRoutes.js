@@ -4,7 +4,7 @@ import MailController from '../controllers/MessageController';
 const Router = express.Router();
 
 Router.use(express.json());
-
+Router.use(express.urlencoded('x-www-form-urlencoded'));
 
 // Get all received emails for a user
 Router.get('/user/messages', MailController.getInbox);

@@ -4,6 +4,8 @@ import UserController from '../controllers/UserController';
 const Router = express.Router();
 
 Router.use(express.json());
+Router.use(express.urlencoded('x-www-form-urlencoded'));
+
 
 Router.get('/', (req, res) => {
   res.send({
