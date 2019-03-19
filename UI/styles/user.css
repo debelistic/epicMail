@@ -288,12 +288,17 @@ h1.main-content {
     }
     .main-banner{
         position: relative;
+        height: calc(100vh - 60px);
         color: #FCFCFC;
     }
     .chat{
         display: block;
         position: absolute;
-        bottom: 70px;
+        bottom: 0;
+        float: unset;
+        width: unset;
+        overflow: scroll;
+        height: calc(100vh - 85px);
     }
     .chat .open{
         display: unset;
@@ -410,7 +415,7 @@ h1.main-content {
     }
 
     .usermenu ul.open{
-        width: 50%;
+        width: 250px;
         display: block;
         height: calc(100vh - 55px);
         z-index: 3;
@@ -427,6 +432,7 @@ h1.main-content {
     }
 
     div.userheader{
+        display: block;
         color: #FCFCFC;
         height: 35px;
         background: rgba(13, 47, 70, 0.473);
@@ -545,13 +551,18 @@ h1.main-content {
         height: auto;
     }
     .main-banner{
+        padding: 0;
+        height: calc(100vh - 60px);
         position: relative;
-        color: #FCFCFC;
     }
     .chat{
         display: block;
         position: absolute;
-        bottom: 70px;
+        bottom: 0;
+        float: unset;
+        width: unset;
+        overflow: scroll;
+        height: calc(100vh - 85px);
     }
     .chat .open{
         display: unset;
@@ -667,7 +678,7 @@ h1.main-content {
     }
 
     .usermenu ul.open{
-        width: 80%;
+        width: 250px;
         display: block;
         height: calc(100vh - 55px);
     }
@@ -675,10 +686,11 @@ h1.main-content {
     .usermenu ul li{
         list-style: none;
         display: block;
-        margin: 0;
+        margin: 3px 0 3px 0;
         padding: 10px;
         font-size: 25px;
-        border-top: #FCFCFC solid 3px;
+        border: #FCFCFC solid 1px;
+        border-radius: 12px;
     }
 
     div.userheader{
@@ -777,13 +789,18 @@ h1.main-content {
 
 @media screen and (max-width:480px){
     .main-banner{
+        padding: 0;
+        height: calc(100vh - 60px);
         position: relative;
-        color: #FCFCFC;
     }
     .chat{
         display: block;
         position: absolute;
-        bottom: 70px;
+        bottom: 0;
+        float: unset;
+        width: unset;
+        overflow: scroll;
+        height: calc(100vh - 85px);
     }
     .chat .open{
         display: unset;
@@ -895,23 +912,24 @@ h1.main-content {
         background: #003D66;
         margin: 0;
         height: 0;
-        padding: 0;
+        padding: 5px 0 0 5px;
     }
 
     .usermenu ul.open{
-        width: 60%;
+        width: 260px;
         display: block;
         height: calc(100vh - 55px);
+        background: #003D66;
     }
 
     .usermenu ul li{
         list-style: none;
         display: block;
-        margin: 0;
+        margin: 3px 0 3px 0;
         padding: 10px;
         font-size: 25px;
-        border: #FCFCFC solid 3px;
-        border-radius: 16px;
+        border: #FCFCFC solid 1px;
+        border-radius: 12px;
     }
 
     .usermenu ul li a{
@@ -919,6 +937,7 @@ h1.main-content {
         height: inherit;
     }
     div.userheader{
+        display: block;
         color: #FCFCFC;
         height: 35px;
         background: rgba(13, 47, 70, 0.473);
@@ -1147,33 +1166,35 @@ h1.main-content {
         border: none;
         width: unset;
         color: #FCFCFC;
+        z-index: 3;
     }
     .usermenu ul{
-        position: absolute;
-        top: 0;
-        left: 0;
+        position: unset;
+        top: unset;
+        left: unset;
         display: none;
         background: #003D66;
         margin: 0;
         height: 0;
-        padding: 0;
-        z-index: 3;
+        padding: 5px 0 0 5px;
     }
 
     .usermenu ul.open{
-        width: 80%;
+        width: 250px;
         display: block;
         height: calc(100vh - 55px);
+        background: #003D66;
     }
 
     .usermenu ul li{
+        width: 80%;
         list-style: none;
         display: block;
-        margin: 0;
+        margin: 0 0 3px 0;
         padding: 10px;
         font-size: 25px;
-        border: #FCFCFC solid 3px;
-        border-radius: 16px;
+        border: #FCFCFC solid 1px;
+        border-radius: 12px;
     }
 
     .usermenu ul li a{
