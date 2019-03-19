@@ -19,7 +19,7 @@ const MessageController = {
         VALUES($1, $2, $3, $4, $5, $6)
         returning *`;
     const values = [
-      req.user.id,
+      req.body.user,
       req.body.receiverId,
       req.body.subject,
       req.body.message,

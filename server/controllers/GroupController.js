@@ -3,8 +3,8 @@ import db from '../db';
 const GroupController = {
   /**
    * create user group
-   * @param {object} req 
-   * @param {object} res 
+   * @param {object} req
+   * @param {object} res
    * @returns {object} group
    */
   async createGroup(req, res) {
@@ -30,9 +30,9 @@ const GroupController = {
 
   /**
    * group owner add users join a group
-   * @param {object} req 
+   * @param {object} req
    * @param {object} res
-   * @returns {object} group array 
+   * @returns {object} group array
    */
   async joinGroup(req, res) {
     if (!req.body.groupName || !req.user) {
@@ -57,8 +57,8 @@ const GroupController = {
 
   /**
    * see group messages
-   * @param {object} req 
-   * @param {object} res 
+   * @param {object} req
+   * @param {object} res
    * @returns {object} array of group messages
    */
   async seeGroupMessages(req, res) {
@@ -80,9 +80,9 @@ const GroupController = {
 
   /**
    * returns an array of group members
-   * @param {object} req 
+   * @param {object} req
    * @param {object} res
-   * @returns {object} group members array 
+   * @returns {object} group members array
    */
   async seeGroupMembers(req, res) {
     if (!req.body.groupName || !req.user) {
@@ -103,9 +103,9 @@ const GroupController = {
 
   /**
    * sends message to a group where sender is member or owner
-   * @param {object} req 
+   * @param {object} req
    * @param {object} res
-   * @returns {object} sent message 
+   * @returns {object} sent message
    */
   async sendGroupMessage(req, res) {
     if (!req.body.message || !req.body.groupName || !req.user) {
@@ -128,6 +128,13 @@ const GroupController = {
     }
   },
 
+
+  /**
+   * deletes a group member
+   * @param {object} req
+   * @param {object} res
+   * @returns {object} group members array
+   */
   async deleteAGroupMember(req, res) {
     const deleteAGroupMemberQuery = 'DELETE FROM groupmembers WHERE memberId=$1 AND ownerId = $2';
     try {
@@ -140,8 +147,6 @@ const GroupController = {
       return res.status(400).send(err);
     }
   },
-
-  // delete group members
 };
 
 export default GroupController;

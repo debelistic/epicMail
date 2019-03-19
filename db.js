@@ -69,6 +69,27 @@ const dropUsersTable = () => {
 };
 
 /**
+ * create messages status type
+ */
+const messageStatustype = () => {
+  const messageStatustypeQuery = `CREATE TYPE IF NOT EXISTS mssg_status AS ENUM
+    (
+      'read',
+      'unread'
+    )`;
+
+  pool.query(messageStatustypeQuery)
+  .then((res) => {
+    console.log('enum created', res);
+    console.log(res);
+  })
+  .catch((err) => {
+    console.log(err);
+    pool.end();
+  })
+}
+
+/**
  * create messages table
  */
 const createMessagesTable = () => {
@@ -81,7 +102,8 @@ const createMessagesTable = () => {
     subject TEXT NOT NULL,
     message TEXT NOT NULL,
     parentMessageId INT DEFAULT 1,
-    status TEXT NOT NULL    
+    status mssg_status NOT NULL,
+    FOREIGN KEY (senderId) REFERENCES users (email) ON DELETE CASCADE 
   )`;
   console.log('about to table create');
   pool.query(messageQuery)
@@ -198,7 +220,8 @@ const groupMessagesTable = () => {
         ownerId VARCHAR(128) UNIQUE NOT NULL,
         groupName VARCHAR(128) UNIQUE NOT NULL,
         message TEXT NOT NULL,
-        parrentMessageId SERIAL
+        parrentMessageId SERIAL,
+        FOREIGN KEY (groupName) REFERENCES groups (name)
       )`;
   console.log('about to table create');
   pool.query(groupMessagesQuery)
@@ -233,6 +256,7 @@ const dropGroupMessage = () => {
 const createAllTables = () => {
   createUsersTable();
   createMessagesTable();
+  messageStatustype();
   groupsTable();
   groupMembersTable();
   groupMessagesTable();
@@ -254,6 +278,7 @@ pool.on('remove', () => {
 module.exports = {
   createAllTables,
   createUsersTable,
+  messageStatustype,
   createMessagesTable,
   groupsTable,
   groupMembersTable,

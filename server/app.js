@@ -2,7 +2,7 @@ import express from 'express';
 import dotenv from 'dotenv';
 import swaggerUi from 'swagger-ui-express';
 import swaggerDocument from '../swagger.json';
-import userRoutes from './jsobjectsdb/routes/userRoutes';
+import userRoutes from './routes/userRoutes';
 import MessageController from './postgresdb/controllers/MessageController';
 
 const app = express();

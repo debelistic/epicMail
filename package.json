@@ -4,8 +4,8 @@
   "description": "A wep app to share messages over the internet",
   "main": "server/app.js",
   "scripts": {
-    "test": "set NODE_ENV=test mocha --require @babel/register test/*.js --exit && npm run rollback",
-    "start": "set NODE_ENV=production nodemon --exec npm run migrate && babel-node server/app.js",
+    "test": "set NODE_ENV=test && mocha --require @babel/register test/*.js --exit && npm run rollback",
+    "start": "set NODE_ENV=production && npm run migrate && nodemon --exec babel-node server/app.js",
     "coverage": "nyc report --reporter=text-lcov > coverage.lcov && codecov",
     "migrate": "babel-node db createAllTables",
     "rollback": "babel-node db dropAllTables"
