@@ -1,17 +1,25 @@
 /* eslint-disable no-console */
-const { Pool } = require('pg');
-const dotenv = require('dotenv');
+import { Pool } from 'pg';
+import { config } from 'dotenv';
 
-dotenv.config();
+config();
+
+let dbURI;
+
+if (process.env.NODE_ENV === 'test') {
+  dbURI = process.env.TEST_DATABASE_URL;
+} else {
+  dbURI = process.env.DATABASE_URL;
+}
 
 const pool = new Pool({
-  connectionString: process.env.DATABASE_URL,
+  connectionString: dbURI,
 });
 
-// pool.on('connect', () => {
-//   console.log('connected to db');
-// });
-pool.connect();
+pool.on('connect', () => {
+  console.log('connected to db');
+});
+
 
 /**
  * create users table
@@ -21,7 +29,7 @@ const createUsersTable = () => {
   const usersTableQuery = `CREATE TABLE IF NOT EXISTS
       users(
         id SERIAL PRIMARY KEY,
-        email VARCHAR(40) UNIQUE NOT NULL,
+        email VARCHAR(200) UNIQUE NOT NULL,
         firstName VARCHAR(50) NOT NULL,
         lastName VARCHAR(50) NOT NULL,
         password VARCHAR(40) NOT NULL,
@@ -29,10 +37,10 @@ const createUsersTable = () => {
         createdOn TIMESTAMP,
         modifiedOn TIMESTAMP
       )`;
-
+  console.log('about to table create');
   pool.query(usersTableQuery)
     .then((res) => {
-      console.log('table created', res);
+      console.log('users table created', res);
       pool.end();
     })
     .catch((err) => {
@@ -46,9 +54,11 @@ const createUsersTable = () => {
  */
 
 const dropUsersTable = () => {
-  const dropUsersQuery = 'DROP TABLE IF EXISTS users RETURNING *';
+  const dropUsersQuery = 'DROP TABLE IF EXISTS users';
+  console.log('users table about to be droped');
   pool.query(dropUsersQuery)
     .then((res) => {
+      console.log('users table droped', res);
       console.log(res);
       pool.end();
     })
@@ -63,24 +73,24 @@ const dropUsersTable = () => {
  */
 const createMessagesTable = () => {
   const messageQuery = `CREATE TABLE IF NOT EXISTS
-      messages(
-        id SERIAL PRIMARY KEY,
-        createdOn TIMESTAMP,
-        subject TEXT NOT NULL,
-        message TEXT NOT NULL,
-        parentMessageId SERIAL DEFAULT 1,
-        status TEXT NOT NULL,
-        FOREIGN KEY (senderId) REFRENCES users (id),
-        receiverId VARCHAR(40) NOT NULL
-      )`;
-  console.log('ran');
+  messages(
+    id SERIAL PRIMARY KEY,
+    createdOn TIMESTAMP,
+    receiverId VARCHAR(40) NOT NULL,
+    senderId VARCHAR(40) UNIQUE NOT NULL,
+    subject TEXT NOT NULL,
+    message TEXT NOT NULL,
+    parentMessageId INT DEFAULT 1,
+    status TEXT NOT NULL    
+  )`;
+  console.log('about to table create');
   pool.query(messageQuery)
     .then((res) => {
       console.log('message table created', res);
       pool.end();
     })
     .catch((err) => {
-      console.log(err);
+      console.log('table not created', err);
       pool.end();
     });
 };
@@ -89,7 +99,7 @@ const createMessagesTable = () => {
  * drop messages table
  */
 const dropMessagesTable = () => {
-  const dropMessagesQuery = 'DROP TABLE IF EXISTS messages RETURNING *';
+  const dropMessagesQuery = 'DROP TABLE IF EXISTS messages';
   pool.query(dropMessagesQuery)
     .then((res) => {
       console.log(res);
@@ -107,11 +117,11 @@ const groupsTable = () => {
   const groupQuery = `CREATE TABLE IF NOT EXISTS 
       groups(
         id SERIAL PRIMARY KEY,
-        name VARCHAR(128) NOT NULL,
+        name VARCHAR(128) UNIQUE NOT NULL,
         description VARCHAR(500) NOT NULL,
-        FOREIGN KEY (ownerId) REFRENCES users (id)
+        ownerId VARCHAR(128) NOT NULL
       )`;
-
+  console.log('about to table create');
   pool.query(groupQuery)
     .then((res) => {
       console.log('groups table created ', res);
@@ -127,7 +137,7 @@ const groupsTable = () => {
  * drop groups table
  */
 const dropGroupsTable = () => {
-  const dropGroupsQuery = 'DROP TABLE IF EXISTS groups RETURNING *';
+  const dropGroupsQuery = 'DROP TABLE IF EXISTS groups';
   pool.query(dropGroupsQuery)
     .then((res) => {
       console.log(res);
@@ -146,11 +156,11 @@ const groupMembersTable = () => {
   const groupMembersQuery = `CREATE TABLE IF NOT EXISTS 
       groupmembers(
         id UUID PRIMARY KEY,
-        FOREIGN KEY (groupId) REFRENCES groups (id) ON DELETE CASCADE,
-        FOREIGN KEY (groupName) REFRENCES groups (name) ON DELETE CASCADE,
-        FOREIGN KEY (memberId) REFRENCES users (email) ON DELETE CASCADE,
+        groupId VARCHAR(128) UNIQUE NOT NULL,
+        groupName VARCHAR(128) UNIQUE NOT NULL,
+        memberId VARCHAR(128) UNIQUE NOT NULL
       )`;
-
+  console.log('about to table create');
   pool.query(groupMembersQuery)
     .then((res) => {
       console.log('group members table created', res);
@@ -185,11 +195,12 @@ const groupMessagesTable = () => {
   const groupMessagesQuery = `CREATE TABLE IF NOT EXISTS
       groupmessages(
         id SERIAL PRIMARY KEY,
-        FOREIGN KEY (ownerId) REFRENCES groupmembers (memberId) NOT NULL,
-        FOREIGN KEY (groupName) REFRENCES groupmembers (groupName) NOT NULL,
+        ownerId VARCHAR(128) UNIQUE NOT NULL,
+        groupName VARCHAR(128) UNIQUE NOT NULL,
         message TEXT NOT NULL,
         parrentMessageId SERIAL
       )`;
+  console.log('about to table create');
   pool.query(groupMessagesQuery)
     .then((res) => {
       console.log('group messages table created', res);
@@ -206,7 +217,7 @@ const groupMessagesTable = () => {
  * drop group messages tables
  */
 const dropGroupMessage = () => {
-  const dropgroupMessageQuery = 'DROP TABLE IF EXISTS groupmessages RETURNING *';
+  const dropgroupMessageQuery = 'DROP TABLE IF EXISTS groupmessages';
   pool.query(dropgroupMessageQuery)
     .then((res) => {
       console.log(res);

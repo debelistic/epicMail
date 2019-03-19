@@ -8,23 +8,23 @@ const MessageController = {
    * @returns { object } message object
    */
   async create(req, res) {
-    if (!req.body.subject || !req.body.message || !req.body.status || !req.body.receiverId) {
-      return res.status(400).send({ message: 'You have one or more empty fields' });
-    }
-    if (!req.user) {
-      return res.status(400).send({ message: 'User not logged in' });
-    }
+    // if (!req.body.subject || !req.body.message || !req.body.status || !req.body.receiverId) {
+    //   return res.status(400).send({ message: 'You have one or more empty fields' });
+    // }
+    // if (!req.user) {
+    //   return res.status(400).send({ message: 'User not logged in' });
+    // }
     const createMessageQuery = `INSERT INTO
-        messages(subject, message, parentMessageId, status, senderId, receiverId)
+        messages(senderId, receiverId, subject, message, parentMessageId, status)
         VALUES($1, $2, $3, $4, $5, $6)
         returning *`;
     const values = [
+      req.user.id,
+      req.body.receiverId,
       req.body.subject,
       req.body.message,
       req.body.parentMessageId,
       req.body.status,
-      req.user.id,
-      req.body.receiverId,
     ];
 
     try {
