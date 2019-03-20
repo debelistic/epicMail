@@ -11,7 +11,6 @@ const app = express();
 dotenv.config();
 
 app.use(express.json());
-app.use(express.urlencoded(true));
 
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 app.use('/api/v1', userRoutes);

@@ -1,169 +1,51 @@
-import randomId from './randomid';
+/**
+ * create messages status type
+ */
+const messageStatustype = async () => {
+  const messageStatustypeQuery = `CREATE TYPE message_status AS ENUM
+  (
+    'read',
+    'unread',
+    'draft'
+  )`;
+  await pool.query(messageStatustypeQuery, (res) => {
+    console.log(res);
+  });
+};
 
-class MailModel {
-  constructor() {
-    this.inbox = [
-      {
-        id: randomId(),
-        receiverId: randomId(),
-        parentMessageId: randomId(),
-        messageId: randomId(),
-        subject: 'Rain Coder',
-        message: 'Lorem ipsum dolor sit, amet consectetur adipisicing elit. Magni temporibus ex tenetur delectus earum',
-        createdOn: new Date(),
-        readStatus: false,
-        status: 'UnRead',
-      },
-      {
-        id: randomId(),
-        receiverId: randomId(),
-        parentMessageId: randomId(),
-        messageId: randomId(),
-        subject: 'Summer Coder',
-        message: 'Lorem ipsum dolor sit, amet consectetur adipisicing elit. Magni temporibus ex tenetur delectus earum',
-        createdOn: new Date(),
-        readStatus: false,
-        status: 'UnRead',
-      },
-      {
-        id: 13,
-        receiverId: randomId(),
-        parentMessageId: randomId(),
-        messageId: randomId(),
-        subject: 'Rain Coder',
-        message: 'Lorem ipsum dolor sit, amet consectetur adipisicing elit. Magni temporibus ex tenetur delectus earum',
-        createdOn: new Date(),
-        readStatus: true,
-        status: 'Read',
-      },
-      {
-        id: randomId(),
-        receiverId: randomId(),
-        parentMessageId: randomId(),
-        messageId: randomId(),
-        subject: 'Summer Coder',
-        message: 'Lorem ipsum dolor sit, amet consectetur adipisicing elit. Magni temporibus ex tenetur delectus earum',
-        createdOn: new Date(),
-        readStatus: true,
-        status: 'Read',
-      },
-    ];
-    this.sent = [
-      {
-        id: randomId(),
-        receiverId: randomId(),
-        messageId: randomId(),
-        subject: 'Rain Coder',
-        message: 'Lorem ipsum dolor sit, amet consectetur adipisicing elit. Magni temporibus ex tenetur delectus earum',
-        createdOn: new Date(),
-        sentStatus: true,
-        status: 'Sent',
-      },
-      {
-        id: 13,
-        receiverId: randomId(),
-        messageId: randomId(),
-        subject: 'Rain Coder',
-        message: 'Lorem ipsum dolor sit, amet consectetur adipisicing elit. Magni temporibus ex tenetur delectus earum',
-        createdOn: new Date(),
-        sentStatus: true,
-        status: 'Sent',
-      },
-    ];
-    this.drafts = [
-      {
-        id: randomId(),
-        receiverId: randomId(),
-        messageId: randomId(),
-        subject: 'Rain Coder',
-        message: 'Lorem ipsum dolor sit, amet consectetur adipisicing elit. Magni temporibus ex tenetur delectus earum',
-        createdOn: new Date(),
-        sentStatus: false,
-        status: 'Draft',
-      },
-      {
-        id: randomId(),
-        receiverId: randomId(),
-        messageId: randomId(),
-        subject: 'Rain Coder',
-        message: 'Lorem ipsum dolor sit, amet consectetur adipisicing elit. Magni temporibus ex tenetur delectus earum',
-        createdOn: new Date(),
-        sentStatus: false,
-        status: 'Draft',
-      },
-    ];
-    this.allMail = [];
-  }
+const dropmessageStatustype = async () => {
+  const dropmessageStatustypeQuery = 'DROP TYPE IF EXISTS message_status';
+  await pool.query(dropmessageStatustypeQuery, (res) => {
+    console.log(res);
+  });
+};
+/**
+ * create messages table
+ */
+const createMessagesTable = async () => {
+  const messageQuery = `CREATE TABLE IF NOT EXISTS
+  messages(
+    id SERIAL PRIMARY KEY,
+    createdOn TIMESTAMP,
+    receiverEmail VARCHAR(500),
+    senderEmail VARCHAR(500) REFERENCES users (email),
+    subject TEXT NOT NULL DEFAULT 'No Subject',
+    message TEXT NOT NULL DEFAULT 'No Message',
+    parentMessageId INT DEFAULT 1,
+    status message_status NOT NULL DEFAULT 'draft'
+  )`;
+  console.log('about to create message table');
+  await pool.query(messageQuery, (res) => {
+    console.log(res);
+  });
+};
 
-  create(mail) {
-    const newMail = {
-      id: randomId(),
-      createdOn: Date(),
-      subject: mail.subject,
-      message: mail.message,
-      receiverId: mail.receiverId,
-      parentMessageId: mail.parentMessageId,
-      sentStatus: mail.sentStatus,
-      status: mail.status,
-    };
-
-    this.allMail.push(mail);
-
-    if (newMail.sentStatus === true) {
-      this.sent.push(newMail);
-      return {
-        message: 'Mail Sent',
-        newMail,
-      };
-    }
-    this.drafts.push(newMail);
-    return {
-      message: 'Saved to darfts',
-      newMail,
-    };
-  }
-
-  getAllMail() {
-    return this.allMail;
-  }
-
-  getInbox() {
-    return this.inbox;
-  }
-
-  getAInbox(id) {
-    const aInbox = this.inbox.find(ainbox => ainbox.id === id);
-    return aInbox;
-  }
-
-  getUnread() {
-    const aInbox = this.inbox.find(inbox => inbox.readStatus === false);
-    return aInbox;
-  }
-
-  getRead() {
-    const aInbox = this.inbox.find(ainbox => ainbox.readStatus === true);
-    return aInbox;
-  }
-
-  getSent() {
-    return this.sent;
-  }
-
-  getASent(id) {
-    const aSent = this.sent.find(asent => asent.id === id);
-    return aSent;
-  }
-
-  deleteAInbox(id) {
-    const ainbox = this.getAInbox(id);
-    const index = this.inbox.indexOf(ainbox);
-
-    this.inbox.splice(index, 1);
-
-    return {};
-  }
-}
-
-
-export default new MailModel();
+/**
+ * drop messages table
+ */
+const dropMessagesTable = async () => {
+  const dropMessagesQuery = 'DROP TABLE IF EXISTS messages';
+  await pool.query(dropMessagesQuery, (res) => {
+    console.log(res);
+  });
+};

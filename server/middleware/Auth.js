@@ -10,12 +10,12 @@ const Auth = {
     }
     try {
       const decoded = jwt.verify(token, process.env.SECRET);
-      const text = 'SELECT * FROM users WHERE id = $1';
-      const { rows } = await db.query(text, [decoded.userId]);
+      const text = 'SELECT * FROM users WHERE email = $1';
+      const { rows } = await db.query(text, [decoded.userEmail]);
       if (!rows[0]) {
         return res.status(403).send({ message: 'Session closed' });
       }
-      req.user = { id: decoded.userId };
+      req.user = { email: decoded.userEmail };
       next();
     } catch (error) {
       return res.status(400).send({ error });

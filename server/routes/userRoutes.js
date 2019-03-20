@@ -4,7 +4,6 @@ import UserController from '../controllers/UserController';
 const Router = express.Router();
 
 Router.use(express.json());
-Router.use(express.urlencoded(true));
 
 
 Router.get('/', (req, res) => {
@@ -19,5 +18,8 @@ Router.post('/auth/signup', UserController.createUser);
 
 // User Signin
 Router.post('/auth/login', UserController.login);
+
+// Reset password
+Router.post('/auth/resetpassword', UserController.resetPassword);
 
 export default Router;

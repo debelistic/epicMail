@@ -27,7 +27,7 @@ const UserController = {
 
     const createUserQuery = `INSERT INTO
       users(email, firstName, lastName, password, userImage, securityQuestion, createdOn, modifiedOn)
-      VALUES($1, $2, $3, $4, $5, $6, $7, $8)`;
+      VALUES($1, $2, $3, $4, $5, $6, $7, $8) RETURNING *`;
     const values = [
       req.body.email,
       req.body.firstName,
@@ -41,20 +41,20 @@ const UserController = {
 
     try {
       const { rows } = await db.query(createUserQuery, values);
-      const token = Helper.generateToken(rows[0].id);
+      const token = Helper.generateToken(rows[0].email);
 
       return res.status(201).send({
         status: 201,
         data: [
           token,
-          `New user created, your email is ${rows[0].email}`,
+          `New user created, your email is ${rows[0].email}@epicmail`,
         ],
       });
     } catch (error) {
       if (error.routine === '_bt_check_unique') {
         return res.status(400).send({ message: 'User email exists already' });
       }
-      return res.status(400).send({ error });
+      return res.status(400).send(error);
     }
   },
 
@@ -77,7 +77,7 @@ const UserController = {
       if (!Helper.comparePassword(req.body.password, rows[0].password)) {
         return res.status(400).send({ message: 'Invalid password' });
       }
-      const token = Helper.generateToken(rows[0].id);
+      const token = Helper.generateToken(rows[0].email);
       return res.status(200).send({ token });
     } catch (error) {
       return res.status(400).send({ error });
@@ -90,15 +90,16 @@ const UserController = {
    * @param {object} res
    */
   async resetPassword(req, res) {
-    // get user question
-    const getUserSecurityQuestion = 'SELECT FROM users WHERE $1 = id AND $2 = securityQuestion AND $3 =password';
+    if (!req.body.securityQuestion || !req.body.password || !req.body.email) {
+      return res.status(400).send({ message: 'A field or more is empty' });
+    }
+    const getUserSecurityQuestion = 'SELECT FROM users WHERE $1 = email AND $2 = securityQuestion AND $3 =password';
     const values = [
-      req.user.id,
+      req.body.email,
       req.body.securityQuestion,
       req.body.password,
     ];
-    // validate the response
-    // update password
+
     try {
       const rows = await db.query(getUserSecurityQuestion, values);
       if (!rows) {
@@ -108,8 +109,9 @@ const UserController = {
       if (!Helper.comparePassword(req.body.securityQuestion, rows[1])) {
         return res.status(400).send({ message: 'Your answer is incorrect' });
       }
-      const updateUserPassword = 'UPDATE FROM users WHERE $1 = id AND $3 =password';
-
+      const newPassword = Helper.hashPassword(req.body.password);
+      const updateUserPassword = 'UPDATE FROM users SET password=$1 WHERE $1 = id RETURNING *';
+      await db.query(updateUserPassword, [newPassword, req.user.id]);
       return res.status(201).send({ message: 'Your password has been successfully changed' });
     } catch (error) {
       return res.status(400).send({ error });
