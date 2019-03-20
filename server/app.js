@@ -3,6 +3,7 @@ import dotenv from 'dotenv';
 import swaggerUi from 'swagger-ui-express';
 import swaggerDocument from '../swagger.json';
 import userRoutes from './routes/userRoutes';
+import messagesRoutes from './routes/messagesRoutes';
 import MessageController from './controllers/MessageController';
 
 const app = express();
@@ -10,10 +11,11 @@ const app = express();
 dotenv.config();
 
 app.use(express.json());
-app.use(express.urlencoded('x-www-form-urlencoded'));
+app.use(express.urlencoded(true));
 
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 app.use('/api/v1', userRoutes);
+app.use('/api/v1', messagesRoutes);
 
 app.get('/', (req, res) => {
   res.status(200).send('WELCOME TO EPICMAIL SERVICE');

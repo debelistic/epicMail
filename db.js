@@ -25,27 +25,26 @@ pool.on('connect', () => {
  * create users table
  */
 
-const createUsersTable = () => {
+const createUsersTable = async () => {
   const usersTableQuery = `CREATE TABLE IF NOT EXISTS
       users(
         id SERIAL PRIMARY KEY,
-        email VARCHAR(200) UNIQUE NOT NULL,
-        firstName VARCHAR(50) NOT NULL,
-        lastName VARCHAR(50) NOT NULL,
-        password VARCHAR(40) NOT NULL,
+        email VARCHAR(500) UNIQUE NOT NULL,
+        firstName VARCHAR(500) NOT NULL,
+        lastName VARCHAR(500) NOT NULL,
+        password VARCHAR(500) NOT NULL,
         userImage VARCHAR(500),
+        securityQuestion VARCHAR(500) NOT NULL,
         createdOn TIMESTAMP,
         modifiedOn TIMESTAMP
       )`;
-  console.log('about to table create');
-  pool.query(usersTableQuery)
+  console.log('about to create users table');
+  await pool.query(usersTableQuery)
     .then((res) => {
       console.log('users table created', res);
-      pool.end();
     })
     .catch((err) => {
       console.log(err);
-      pool.end();
     });
 };
 
@@ -53,89 +52,95 @@ const createUsersTable = () => {
  * drop users table
  */
 
-const dropUsersTable = () => {
+const dropUsersTable = async () => {
   const dropUsersQuery = 'DROP TABLE IF EXISTS users';
   console.log('users table about to be droped');
-  pool.query(dropUsersQuery)
+  await pool.query(dropUsersQuery)
     .then((res) => {
-      console.log('users table droped', res);
+      console.log('users table droped');
       console.log(res);
-      pool.end();
     })
     .catch((res) => {
       console.log(res);
-      pool.end();
     });
 };
 
 /**
  * create messages status type
  */
-const messageStatustype = () => {
-  const messageStatustypeQuery = `CREATE TYPE IF NOT EXISTS mssg_status AS ENUM
-    (
-      'read',
-      'unread'
-    )`;
+const messageStatustype = async () => {
+  const messageStatustypeQuery = `CREATE TYPE message_status AS ENUM
+  (
+    'read',
+    'unread',
+    'draft'
+  )`;
 
-  pool.query(messageStatustypeQuery)
+  await pool.query(messageStatustypeQuery)
     .then((res) => {
       console.log('enum created', res);
       console.log(res);
     })
     .catch((err) => {
       console.log(err);
-      pool.end();
+    });
+};
+
+const dropmessageStatustype = async () => {
+  const dropmessageStatustypeQuery = 'DROP TYPE IF EXISTS message_status';
+  await pool.query(dropmessageStatustypeQuery)
+    .then((res) => {
+      console.log('enum deleted', res);
+      console.log(res);
+    })
+    .catch((err) => {
+      console.log(err);
     });
 };
 
 /**
  * create messages table
  */
-const createMessagesTable = () => {
+const createMessagesTable = async () => {
   const messageQuery = `CREATE TABLE IF NOT EXISTS
   messages(
     id SERIAL PRIMARY KEY,
     createdOn TIMESTAMP,
-    receiverId VARCHAR(40) NOT NULL,
-    senderId VARCHAR(40) UNIQUE NOT NULL,
-    subject TEXT NOT NULL,
-    message TEXT NOT NULL,
+    receiverEmail VARCHAR(500),
+    senderEmail VARCHAR(500) REFERENCES users (email),
+    subject TEXT NOT NULL DEFAULT 'No Subject',
+    message TEXT NOT NULL DEFAULT 'No Message',
     parentMessageId INT DEFAULT 1,
-    status mssg_status NOT NULL,
-    FOREIGN KEY (senderId) REFERENCES users (email) ON DELETE CASCADE 
+    status message_status NOT NULL DEFAULT 'draft'
   )`;
-  console.log('about to table create');
-  pool.query(messageQuery)
+  console.log('about to create message table');
+  await pool.query(messageQuery)
     .then((res) => {
       console.log('message table created', res);
-      pool.end();
     })
     .catch((err) => {
       console.log('table not created', err);
-      pool.end();
     });
 };
 
 /**
  * drop messages table
  */
-const dropMessagesTable = () => {
+const dropMessagesTable = async () => {
   const dropMessagesQuery = 'DROP TABLE IF EXISTS messages';
-  pool.query(dropMessagesQuery)
+  await pool.query(dropMessagesQuery)
     .then((res) => {
       console.log(res);
     })
     .catch((err) => {
       console.log(err);
-      pool.end();
     });
 };
 
 /**
  * create groups table
  */
-const groupsTable = () => {
+const groupsTable = async () => {
   const groupQuery = `CREATE TABLE IF NOT EXISTS 
       groups(
         id SERIAL PRIMARY KEY,
@@ -144,37 +149,33 @@ const groupsTable = () => {
         ownerId VARCHAR(128) NOT NULL
       )`;
   console.log('about to table create');
-  pool.query(groupQuery)
+  await pool.query(groupQuery)
     .then((res) => {
       console.log('groups table created ', res);
-      pool.end();
     })
     .catch((err) => {
       console.log(err);
-      pool.end();
     });
 };
 
 /**
  * drop groups table
  */
-const dropGroupsTable = () => {
+const dropGroupsTable = async () => {
   const dropGroupsQuery = 'DROP TABLE IF EXISTS groups';
-  pool.query(dropGroupsQuery)
+  await pool.query(dropGroupsQuery)
     .then((res) => {
       console.log(res);
-      pool.end();
     })
     .catch((err) => {
       console.log(err);
-      pool.end();
     });
 };
 
 /**
  * create group members table
  */
-const groupMembersTable = () => {
+const groupMembersTable = async () => {
   const groupMembersQuery = `CREATE TABLE IF NOT EXISTS 
       groupmembers(
         id UUID PRIMARY KEY,
@@ -183,37 +184,33 @@ const groupMembersTable = () => {
         memberId VARCHAR(128) UNIQUE NOT NULL
       )`;
   console.log('about to table create');
-  pool.query(groupMembersQuery)
+  await pool.query(groupMembersQuery)
     .then((res) => {
       console.log('group members table created', res);
-      pool.end();
     })
     .catch((err) => {
       console.log(err);
-      pool.end();
     });
 };
 
 /**
  * drop group members
  */
-const dropGroupMembersTable = () => {
+const dropGroupMembersTable = async () => {
   const dropGroupMembersQuery = 'DROP TABLE IF EXISTS groupmembers';
-  pool.query(dropGroupMembersQuery)
+  await pool.query(dropGroupMembersQuery)
     .then((res) => {
       console.log(res);
-      pool.end();
     })
     .catch((err) => {
       console.log(err);
-      pool.end();
     });
 };
 
 /**
  * create group messages tables
  */
-const groupMessagesTable = () => {
+const groupMessagesTable = async () => {
   const groupMessagesQuery = `CREATE TABLE IF NOT EXISTS
       groupmessages(
         id SERIAL PRIMARY KEY,
@@ -224,14 +221,12 @@ const groupMessagesTable = () => {
         FOREIGN KEY (groupName) REFERENCES groups (name)
       )`;
   console.log('about to table create');
-  pool.query(groupMessagesQuery)
+  await pool.query(groupMessagesQuery)
     .then((res) => {
       console.log('group messages table created', res);
-      pool.end();
     })
     .catch((err) => {
       console.log(err);
-      pool.end();
     });
 };
 
@@ -239,38 +234,38 @@ const groupMessagesTable = () => {
 /**
  * drop group messages tables
  */
-const dropGroupMessage = () => {
+const dropGroupMessage = async () => {
   const dropgroupMessageQuery = 'DROP TABLE IF EXISTS groupmessages';
-  pool.query(dropgroupMessageQuery)
+  await pool.query(dropgroupMessageQuery)
     .then((res) => {
       console.log(res);
-      pool.end();
     })
     .catch((err) => {
       console.log(err);
-      pool.end();
     });
 };
 
 
 const createAllTables = () => {
   createUsersTable();
-  createMessagesTable();
   messageStatustype();
+  createMessagesTable();
   groupsTable();
   groupMembersTable();
   groupMessagesTable();
 };
 
 const dropAllTables = () => {
-  dropUsersTable();
-  dropMessagesTable();
-  dropGroupsTable();
   dropGroupMembersTable();
   dropGroupMessage();
+  dropGroupsTable();
+  dropUsersTable();
+  dropmessageStatustype();
+  dropMessagesTable();
 };
 
 pool.on('remove', () => {
+  pool.end();
   console.log('client removed');
   process.exit(0);
 });
@@ -288,6 +283,7 @@ module.exports = {
   dropGroupsTable,
   dropGroupMembersTable,
   dropGroupMessage,
+  dropmessageStatustype,
   dropAllTables,
 };
 

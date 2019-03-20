@@ -8,19 +8,20 @@ const MessageController = {
    * @returns { object } message object
    */
   async create(req, res) {
-    // if (!req.body.subject || !req.body.message || !req.body.status || !req.body.receiverId) {
-    //   return res.status(400).send({ message: 'You have one or more empty fields' });
-    // }
-    // if (!req.user) {
-    //   return res.status(400).send({ message: 'User not logged in' });
-    // }
+    if (!req.body.subject || !req.body.message || !req.body.status || !req.body.receiverId) {
+      return res.status(400).send({ message: 'You have one or more empty fields' });
+    }
+    if (!req.user) {
+      return res.status(400).send({ message: 'User not logged in' });
+    }
     const createMessageQuery = `INSERT INTO
-        messages(senderId, receiverId, subject, message, parentMessageId, status)
-        VALUES($1, $2, $3, $4, $5, $6)
+        messages(createdOn, receiverId, senderId, subject, message, parentMessageId, status)
+        VALUES($1, $2, $3, $4, $5, $6, $7)
         returning *`;
     const values = [
-      req.body.user,
+      new Date(),
       req.body.receiverId,
+      req.user.id,
       req.body.subject,
       req.body.message,
       req.body.parentMessageId,
@@ -65,7 +66,9 @@ const MessageController = {
       if (!rows[0]) {
         return res.status(404).send({ message: 'we could not find your mail' });
       }
-      return res.status(200).send({ mail: rows[0] });
+      const updateStatusQuery = 'UPDATE messages SET status=$1 WHERE receiverId = $2 ';
+      const { row } = await db.query(updateStatusQuery, ['read', req.user.id]);
+      return res.status(200).send({ mail: row[0] });
     } catch (err) {
       return res.status(400).send(err);
     }

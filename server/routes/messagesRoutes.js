@@ -1,31 +1,35 @@
 import express from 'express';
 import MailController from '../controllers/MessageController';
+import Auth from '../middleware/Auth';
 
 const Router = express.Router();
 
 Router.use(express.json());
-Router.use(express.urlencoded('x-www-form-urlencoded'));
+Router.use(express.urlencoded(true));
 
 // Get all received emails for a user
-Router.get('/user/messages', MailController.getInbox);
+Router.get('/messages', Auth.verifyToken, MailController.getInbox);
 
 // Get unread mails for a user
-Router.get('/user/messages/unread', MailController.getUnreadMail);
+// Router.get('/messages/unread', MailController.getUnreadMail);
 
 // Get all sent emails for a user
-Router.get('/user/messages/sent', MailController.getSentMails);
+Router.get('/messages/sent', Auth.verifyToken, MailController.getSent);
+
+// Get all a sent email for a user
+Router.get('/messages/sent/:id', Auth.verifyToken, MailController.getASent);
 
 // Get a user email
-Router.get('/user/messages/:id', MailController.getAInboxMail);
+Router.get('/messages/:id', Auth.verifyToken, MailController.getAInbox);
 
 // Send mail to individuals
-Router.post('/user/message', MailController.createMail);
+Router.post('/message', Auth.verifyToken, MailController.create);
 
 // Delete from inbox
-Router.delete('/user/message/:id', MailController.deleteInbox);
+Router.delete('/message/:id', Auth.verifyToken, MailController.deleteAInbox);
 
 // Get a sent email for a user
-Router.get('/user/messages/sent/:id', MailController.getASentMail);
+Router.delete('/messages/sent/:id', Auth.verifyToken, MailController.deleteASent);
 
 
 export default Router;
