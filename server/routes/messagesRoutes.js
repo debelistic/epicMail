@@ -10,7 +10,7 @@ Router.use(express.json());
 Router.get('/messages', Auth.verifyToken, MailController.getInbox);
 
 // Get unread mails for a user
-Router.get('/messages/unread', MailController.getUnread);
+Router.get('/messages/unread', Auth.verifyToken, MailController.getUnread);
 
 // Get all sent emails for a user
 Router.get('/messages/sent', Auth.verifyToken, MailController.getSent);
@@ -25,7 +25,7 @@ Router.get('/messages/:id', Auth.verifyToken, MailController.getAInbox);
 Router.post('/messages', Auth.verifyToken, MailController.create);
 
 // Delete from inbox
-Router.delete('/message/:id', Auth.verifyToken, MailController.deleteAInbox);
+Router.delete('/messages/:id', Auth.verifyToken, MailController.deleteAInbox);
 
 // Get a sent email for a user
 Router.delete('/messages/sent/:id', Auth.verifyToken, MailController.deleteASent);

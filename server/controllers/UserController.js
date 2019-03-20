@@ -93,25 +93,27 @@ const UserController = {
     if (!req.body.securityQuestion || !req.body.password || !req.body.email) {
       return res.status(400).send({ message: 'A field or more is empty' });
     }
-    const getUserSecurityQuestion = 'SELECT FROM users WHERE $1 = email AND $2 = securityQuestion AND $3 =password';
+    const getUserSecurityQuestion = 'SELECT * FROM users WHERE $1 = email';
     const values = [
       req.body.email,
-      req.body.securityQuestion,
-      req.body.password,
     ];
 
     try {
-      const rows = await db.query(getUserSecurityQuestion, values);
+      const { rows } = await db.query(getUserSecurityQuestion, values);
       if (!rows) {
         return res.status(400).send({ message: 'User not found' });
       }
-      console.log(rows);
-      if (!Helper.comparePassword(req.body.securityQuestion, rows[1])) {
+
+      const security = rows[0].securityquestion;
+      const answer = req.body.securityQuestion;
+
+      if (!Helper.comparePassword(answer, security)) {
         return res.status(400).send({ message: 'Your answer is incorrect' });
       }
+
       const newPassword = Helper.hashPassword(req.body.password);
-      const updateUserPassword = 'UPDATE FROM users SET password=$1 WHERE $1 = id RETURNING *';
-      await db.query(updateUserPassword, [newPassword, req.user.id]);
+      const updateUserPassword = 'UPDATE users SET password=$1 WHERE $2 = email RETURNING *';
+      await db.query(updateUserPassword, [newPassword, req.body.email]);
       return res.status(201).send({ message: 'Your password has been successfully changed' });
     } catch (error) {
       return res.status(400).send({ error });
