@@ -59,7 +59,6 @@ const GroupController = {
       const verifyAdminQuery = 'SELECT * FROM groups WHERE ownerId = $1 AND Id = $2';
       const Result = await db.query(verifyAdminQuery, [req.user.email, req.body.groupId]);
       const Admin = Result.rows[0].ownerid;
-      console.log(Result);
       if (!Admin) {
         return res.status(403).send({ message: 'Only Admins can add users' });
       }
