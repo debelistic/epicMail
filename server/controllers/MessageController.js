@@ -66,9 +66,9 @@ const MessageController = {
    * @param { object } res
    * @returns { object } inbox mail object
    */
-  async getAInbox(req, res) {
-    const findAInboxMailQuery = 'SELECT * FROM messages WHERE id=$1 AND receiverEmail = $2';
+  async getAInbox(req, res) {    
     try {
+      const findAInboxMailQuery = 'SELECT * FROM messages WHERE id=$1 AND receiverEmail = $2';
       if (!req.user.email) {
         return res.status(403).send({ message: 'Login to your account' });
       }
@@ -86,8 +86,8 @@ const MessageController = {
   },
 
   async getUnread(req, res) {
-    const findAllUnreadQuery = 'SELECT * FROM messages WHERE receiverEmail = $1 AND status = $2';
     try {
+      const findAllUnreadQuery = 'SELECT * FROM messages WHERE receiverEmail = $1 AND status = $2';
       if (!req.user.email) {
         return res.status(403).send({ message: 'Login to your account' });
       }
@@ -105,8 +105,8 @@ const MessageController = {
    * @returns { object } sent array
    */
   async getSent(req, res) {
-    const findSentQuery = 'SELECT * FROM messages WHERE senderEmail = $1';
     try {
+      const findSentQuery = 'SELECT * FROM messages WHERE senderEmail = $1';
       if (!req.user.email) {
         return res.status(403).send({ message: 'Login to your account' });
       }
@@ -124,8 +124,8 @@ const MessageController = {
    * @returns { object } sent mail object
    */
   async getASent(req, res) {
-    const findASentMailQuery = 'SELECT * FROM messages WHERE id = $1 AND senderEmail = $2';
     try {
+      const findASentMailQuery = 'SELECT * FROM messages WHERE id = $1 AND senderEmail = $2';
       const { rows } = await db.query(findASentMailQuery, [req.params.id, req.user.email]);
       if (!rows[0]) {
         return res.status(404).send({ message: 'we could not find your mail' });
@@ -142,9 +142,9 @@ const MessageController = {
    * @param { object } res
    * @returns { object } success or error
    */
-  async deleteAInbox(req, res) {
-    const deleteAInboxMailQuery = 'DELETE FROM messages WHERE id=$1 AND receiverEmail = $2 RETURNING *';
+  async deleteAInbox(req, res) {    
     try {
+      const deleteAInboxMailQuery = 'DELETE FROM messages WHERE id=$1 AND receiverEmail = $2 RETURNING *';
       const { rows } = await db.query(deleteAInboxMailQuery, [req.params.id, req.user.email]);
       if (!rows[0]) {
         return res.status(404).send({ message: 'we could not find your mail' });
@@ -165,8 +165,8 @@ const MessageController = {
    * @returns { object } success or error
    */
   async deleteASent(req, res) {
-    const deleteASentMailQuery = 'DELETE FROM messages WHERE id=$1 AND senderEmail = $2 RETURNING *';
     try {
+      const deleteASentMailQuery = 'DELETE FROM messages WHERE id=$1 AND senderEmail = $2 RETURNING *';
       const { rows } = await db.query(deleteASentMailQuery, [req.params.id, req.user.email]);
       if (!rows[0]) {
         return res.status(404).send({ message: 'we could not find your mail' });

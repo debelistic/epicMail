@@ -122,9 +122,9 @@ const dropGroupsTable = async () => {
 const groupMembersTable = async () => {
   const groupMembersQuery = `CREATE TABLE IF NOT EXISTS 
       groupmembers(
-        id UUID PRIMARY KEY,
-        groupId VARCHAR(128) UNIQUE NOT NULL,
-        groupName VARCHAR(128) UNIQUE NOT NULL,
+        id SERIAL PRIMARY KEY,
+        groupId VARCHAR(128) NOT NULL,
+        groupName VARCHAR(128) NOT NULL,
         memberId VARCHAR(128) UNIQUE NOT NULL
       )`;
   await pool.query(groupMembersQuery);
@@ -148,7 +148,7 @@ const groupMessagesTable = async () => {
         ownerId VARCHAR(128) UNIQUE NOT NULL,
         groupName VARCHAR(128) UNIQUE NOT NULL,
         message TEXT NOT NULL,
-        parrentMessageId SERIAL,
+        parrentMessageId INT,
         FOREIGN KEY (groupName) REFERENCES groups (name)
       )`;
   await pool.query(groupMessagesQuery);
