@@ -1,5 +1,5 @@
+import uuidv4 from 'uuid/v4';
 import db from '../db';
-import randomId from '../middleware/randomid';
 
 const GroupController = {
   /**
@@ -50,7 +50,7 @@ const GroupController = {
     groupmembers(id, groupId, groupName, memberId)
     VALUES($1, $2, $3, $4) RETURNING *`;
     const values = [
-      randomId(),
+      uuidv4(),
       req.body.groupId,
       req.body.groupName,
       req.body.membermail,
@@ -59,13 +59,20 @@ const GroupController = {
       const verifyAdminQuery = 'SELECT * FROM groups WHERE ownerId = $1 AND Id = $2';
       const Result = await db.query(verifyAdminQuery, [req.user.email, req.body.groupId]);
       const Admin = Result.rows[0].ownerid;
-      if (!Admin === req.user.email) {
+      console.log(Result);
+      if (!Admin) {
         return res.status(403).send({ message: 'Only Admins can add users' });
       }
       const { rows } = await db.query(addGroupMembersQuery, values);
-      return res.status(201).send(rows[0]);
+      return res.status(201).send({
+        status: 201,
+        newmember: rows[0].memberId,
+      });
     } catch (err) {
-      return res.status(400).send(err);
+      if (err.routine === '_bt_check_unique') {
+        return res.status(400).send({ message: 'Group Eixts Already' });
+      }
+      return res.status(400).send({ err });
     }
   },
 
@@ -80,10 +87,10 @@ const GroupController = {
     if (!req.body.groupName || !req.user) {
       return res.status(403).send({ message: 'you are not a member' });
     }
-    const findGroupMessagesQuery = 'SELECT * FROM groupmessages WHERE memberId = $1 AND groupName = $2';
+    const findGroupMessagesQuery = 'SELECT * FROM groupmessages WHERE ownerId = $1 AND groupName = $2';
     try {
       // eslint-disable-next-line max-len
-      const { rows, rowCount } = await db.query(findGroupMessagesQuery, [req.user.id, req.body.groupName]);
+      const { rows, rowCount } = await db.query(findGroupMessagesQuery, [req.user.email, req.body.groupName]);
       if (!rows[0]) {
         return res.status(403).send({ message: 'you are not a member' });
       }
@@ -103,10 +110,10 @@ const GroupController = {
     if (!req.body.groupName || !req.user) {
       return res.status(403).send({ message: 'you are not a member' });
     }
-    const seeGroupMembersQuery = 'SELECT * FROM groupmember WHERE memberId = $1 AND groupName = $2';
+    const seeGroupMembersQuery = 'SELECT * FROM groupmembers WHERE memberId = $1 AND groupName = $2';
     try {
       // eslint-disable-next-line max-len
-      const { rows, rowCount } = await db.query(seeGroupMembersQuery, [req.user.id, req.body.groupName]);
+      const { rows, rowCount } = await db.query(seeGroupMembersQuery, [req.user.email, req.body.groupName]);
       if (!rows[0]) {
         return res.status(403).send({ message: 'you are not a member' });
       }
@@ -133,12 +140,15 @@ const GroupController = {
     const values = [
       req.body.message,
       req.body.groupName,
-      req.user.id,
+      req.user.email,
     ];
     try {
       const { rows } = await db.query(groupMessageQuery, values);
       return res.status(201).send(rows[0]);
     } catch (err) {
+      if (err.routine === 'ri_ReportViolation') {
+        return res.status(400).send({ message: 'Not a group' });
+      }
       return res.status(400).send(err);
     }
   },
@@ -151,13 +161,45 @@ const GroupController = {
    * @returns {object} group members array
    */
   async deleteAGroupMember(req, res) {
-    const deleteAGroupMemberQuery = 'DELETE FROM groupmembers WHERE memberId=$1 AND ownerId = $2';
+    if (!req.body.memberId || !req.body.groupName) {
+      return res.status(400).send({ message: 'Some fields are missing' });
+    }
+    const deleteAGroupMemberQuery = 'DELETE FROM groupmembers WHERE memberId=$1 AND groupName = $2';
     try {
-      const { rows } = await db.query(deleteAGroupMemberQuery, [req.body.memberId, req.user.id]);
+      // eslint-disable-next-line max-len
+      const { rows } = await db.query(deleteAGroupMemberQuery, [req.body.memberId, req.body.groupName]);
       if (!rows[0]) {
-        return res.status(404).send({ message: 'memberdoes not not exist' });
+        return res.status(404).send({ message: 'member does not not exist' });
       }
-      return res.status(204).send({ message: 'deleted' });
+      return res.send({ message: `You have removed ${req.body.memberId}` });
+    } catch (err) {
+      return res.status(400).send(err);
+    }
+  },
+  /**
+   * deletes a group message
+   * @param {object} req
+   * @param {object} res
+   * @returns {object} group members array
+   */
+  async deleteAGroupMessage(req, res) {
+    if (!req.body.id || !req.body.groupName || !req.user.email) {
+      return res.status(400).send({ message: 'Some fields are missing' });
+    }
+    const deleteAGroupMessagesQuery = 'DELETE FROM groupmessages WHERE id=$1 AND groupName = $2';
+    try {
+      const verifyAdminQuery = 'SELECT * FROM groups WHERE ownerId = $1 AND Id = $2';
+      const Result = await db.query(verifyAdminQuery, [req.user.email, req.params.groupId]);
+      const Admin = Result.rows[0].ownerid;
+      if (!Admin === req.user.email) {
+        return res.status(403).send({ message: 'Only Admins can delete users' });
+      }
+      // eslint-disable-next-line max-len
+      const { rows } = await db.query(deleteAGroupMessagesQuery, [req.body.memberId, req.body.groupName]);
+      if (!rows[0]) {
+        return res.status(404).send({ message: 'member does not not exist' });
+      }
+      return res.send({ message: `You have removed ${req.body.memberId}` });
     } catch (err) {
       return res.status(400).send(err);
     }
