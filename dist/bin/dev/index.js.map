@@ -1,1 +1,0 @@
-{"version":3,"sources":["../../../server/bin/dev/index.js"],"names":["require"],"mappings":";;AAAAA,OAAO,CAAC,iBAAD,CAAP;;AACAA,OAAO,CAAC,WAAD,CAAP","sourcesContent":["require('@babel/register');\nrequire('../../app');\n"],"file":"index.js"}

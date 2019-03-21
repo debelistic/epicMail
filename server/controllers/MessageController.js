@@ -66,7 +66,7 @@ const MessageController = {
    * @param { object } res
    * @returns { object } inbox mail object
    */
-  async getAInbox(req, res) {    
+  async getAInbox(req, res) {
     try {
       const findAInboxMailQuery = 'SELECT * FROM messages WHERE id=$1 AND receiverEmail = $2';
       if (!req.user.email) {
@@ -142,7 +142,7 @@ const MessageController = {
    * @param { object } res
    * @returns { object } success or error
    */
-  async deleteAInbox(req, res) {    
+  async deleteAInbox(req, res) {
     try {
       const deleteAInboxMailQuery = 'DELETE FROM messages WHERE id=$1 AND receiverEmail = $2 RETURNING *';
       const { rows } = await db.query(deleteAInboxMailQuery, [req.params.id, req.user.email]);
