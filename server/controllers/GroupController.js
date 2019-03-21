@@ -1,4 +1,5 @@
 import db from '../db';
+import randomId from '../middleware/randomid';
 
 const GroupController = {
   /**
@@ -8,17 +9,20 @@ const GroupController = {
    * @returns {object} group
    */
   async createGroup(req, res) {
-    if (!req.body.name || !req.body.description || req.user) {
+    if (!req.body.name || !req.body.description || !req.user) {
       return res.status(400).send({ message: 'All fields are required' });
     }
-    const createGroupQuery = `INSER INTO
+    if (!req.user.email) {
+      return res.status(403).send({ message: 'only registered users can make groups' });
+    }
+    const createGroupQuery = `INSERT INTO
     groups(name, description, ownerId)
     VALUES($1, $2, $3)
     returning *`;
     const values = [
       req.body.name,
       req.body.description,
-      req.user.id,
+      req.user.email,
     ];
     try {
       const { rows } = await db.query(createGroupQuery, values);
@@ -34,20 +38,31 @@ const GroupController = {
    * @param {object} res
    * @returns {object} group array
    */
-  async joinGroup(req, res) {
-    if (!req.body.groupName || !req.user) {
-      return res.status(400).send({ message: 'enter a group name' });
+  async addGroupMembers(req, res) {
+    if (!req.user.email) {
+      return res.status(403).send({ message: 'only registered users can make groups' });
     }
-    const joinGroupQuery = `INSER INTO
-    groupmembers(groupName, memberId)
-    VALUES($1, $2)
-    returning *`;
+    if (!req.body.groupName || !req.body.groupId || !req.body.membermail) {
+      return res.status(400).send({ message: 'enter a group name and new mail' });
+    }
+
+    const addGroupMembersQuery = `INSERT INTO
+    groupmembers(id, groupId, groupName, memberId)
+    VALUES($1, $2, $3, $4) RETURNING *`;
     const values = [
+      randomId(),
+      req.body.groupId,
       req.body.groupName,
-      req.user.id,
+      req.body.membermail,
     ];
     try {
-      const { rows } = await db.query(joinGroupQuery, values);
+      const verifyAdminQuery = 'SELECT * FROM groups WHERE ownerId = $1 AND Id = $2';
+      const Result = await db.query(verifyAdminQuery, [req.user.email, req.body.groupId]);
+      const Admin = Result.rows[0].ownerid;
+      if (!Admin === req.user.email) {
+        return res.status(403).send({ message: 'Only Admins can add users' });
+      }
+      const { rows } = await db.query(addGroupMembersQuery, values);
       return res.status(201).send(rows[0]);
     } catch (err) {
       return res.status(400).send(err);
@@ -111,7 +126,7 @@ const GroupController = {
     if (!req.body.message || !req.body.groupName || !req.user) {
       return res.status(400).send({ message: 'enter a text' });
     }
-    const groupMessageQuery = `INSER INTO
+    const groupMessageQuery = `INSERT INTO
       groupmessages(message, groupName, ownerId)
       VALUES($1, $2, $3)
       returning *`;

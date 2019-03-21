@@ -20,7 +20,6 @@ const Helper = {
    * Generate Token
    */
   generateToken(email) {
-    console.log(email);
     const token = jwt.sign({
       userEmail: email,
     },

@@ -16,7 +16,7 @@ const Auth = {
         return res.status(403).send({ message: 'Session closed' });
       }
       req.user = { email: decoded.userEmail };
-      next();
+      return next();
     } catch (error) {
       return res.status(400).send({ error });
     }

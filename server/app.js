@@ -4,7 +4,7 @@ import swaggerUi from 'swagger-ui-express';
 import swaggerDocument from '../swagger.json';
 import userRoutes from './routes/userRoutes';
 import messagesRoutes from './routes/messagesRoutes';
-import MessageController from './controllers/MessageController';
+import groupsRoutes from './routes/groupsRoutes';
 
 const app = express();
 
@@ -15,13 +15,12 @@ app.use(express.json());
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 app.use('/api/v1', userRoutes);
 app.use('/api/v1', messagesRoutes);
+app.use('/api/v1', groupsRoutes);
+
 
 app.get('/', (req, res) => {
   res.status(200).send('WELCOME TO EPICMAIL SERVICE');
 });
-
-app.get('/messages', MessageController.getInbox);
-app.post('/messages', MessageController.create);
 
 
 const port = process.env.PORT;
