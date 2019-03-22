@@ -20,6 +20,6 @@ Router.post('/auth/signup', UserController.createUser);
 Router.post('/auth/login', UserController.login);
 
 // Reset password
-Router.post('/auth/resetpassword', UserController.resetPassword);
+Router.post('/auth/reset', UserController.resetPassword);
 
 export default Router;

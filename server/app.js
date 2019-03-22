@@ -25,8 +25,6 @@ app.get('/', (req, res) => {
 
 
 const port = process.env.PORT;
-app.listen(port, () => {
-  console.log('Your are on', port);  
-});
+app.listen(port);
 
 export default app;
