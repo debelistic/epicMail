@@ -58,7 +58,7 @@ const UserController = {
    */
   async login(req, res) {
     try {
-      ValidateUserInput.loginField();
+      ValidateUserInput.loginField(req, res);
       const loginQuery = 'SELECT * FROM users WHERE email = $1';
       const { rows } = await db.query(loginQuery, [req.body.email.trim()]);
       if (!rows[0]) {
