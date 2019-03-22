@@ -67,7 +67,7 @@ const ValidateUserInput = {
       });
     }
   },
-  async loginField(req, res, next) {
+  async loginField(req, res) {
     try {
       if (!req.body.email) {
         return res.send({
@@ -85,7 +85,6 @@ const ValidateUserInput = {
           }],
         });
       }
-      return next();
     } catch (error) {
       return res.send({
         status: 400,
