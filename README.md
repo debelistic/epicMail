@@ -15,7 +15,11 @@ This version of EPIC MAIL implement
     - Get Received Emails
     - Get Unread Emails
     - Get Sent Emails
-    - Get Drafts
+    - Create groups
+    - Add members to group
+    - Delete group
+    - Delete a Inbox mail
+    - Delete a sent mail
 ```
 
 ### How to Use
@@ -23,9 +27,9 @@ This version of EPIC MAIL implement
 ---
 
 - Run 'npm install' to install dependenccies
-- Run 'npm start' to run app
+- Run 'npm run devstart' to run app
 - Run 'npm test' to test
-- See API on [heroku](cmailwithds.herokuapp.com)
+- See API on [heroku](epicmailwithds.herokuapp.com)
 - See [Documentation](https://epicmailwithds.herokuapp.com/api-docs/) for routes
 - UI is hosted on :
         - [Landing page gh-pages](https://debelistic.github.io/epicMail/UI/index.html)

@@ -33,8 +33,7 @@ const createUsersTable = async () => {
         firstName VARCHAR(500) NOT NULL,
         lastName VARCHAR(500) NOT NULL,
         password VARCHAR(500) NOT NULL,
-        userImage VARCHAR(500),
-        securityQuestion VARCHAR(500) NOT NULL,
+        securitykey VARCHAR(500) NOT NULL,
         createdOn TIMESTAMP,
         modifiedOn TIMESTAMP
       )`;
@@ -80,8 +79,8 @@ const createMessagesTable = async () => {
     senderEmail VARCHAR(500) REFERENCES users (email),
     subject TEXT NOT NULL DEFAULT 'No Subject',
     message TEXT NOT NULL DEFAULT 'No Message',
-    parentMessageId INT DEFAULT 1,
-    status message_status NOT NULL DEFAULT 'draft'
+    parentMessageId SERIAL,
+    status message_status NOT NULL DEFAULT 'unread'
   )`;
   await pool.query(messageQuery);
 };
@@ -124,6 +123,7 @@ const groupMembersTable = async () => {
       groupmembers(
         id SERIAL PRIMARY KEY,
         groupId VARCHAR(128) NOT NULL,
+        role TEXT NOT NULL DEFAULT 'member',
         groupName VARCHAR(128) NOT NULL,
         memberId VARCHAR(128) UNIQUE NOT NULL
       )`;
@@ -147,7 +147,9 @@ const groupMessagesTable = async () => {
         id SERIAL PRIMARY KEY,
         ownerId VARCHAR(128) UNIQUE NOT NULL,
         groupName VARCHAR(128) UNIQUE NOT NULL,
+        subject TEXT NOT NULL,
         message TEXT NOT NULL,
+        status message_status NOT NULL DEFAULT 'unread',
         parrentMessageId INT,
         FOREIGN KEY (groupName) REFERENCES groups (name)
       )`;

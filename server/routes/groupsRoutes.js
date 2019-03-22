@@ -8,21 +8,21 @@ const Router = express.Router();
 Router.post('/groups', Auth.verifyToken, GroupController.createGroup);
 
 // add members
-Router.post('/addgroupmembers', Auth.verifyToken, GroupController.addGroupMembers);
+Router.post('/groups/:id/users', Auth.verifyToken, GroupController.addGroupMembers);
 
 // delete members
-Router.delete('/deletegroupmembers', Auth.verifyToken, GroupController.deleteAGroupMember);
+Router.delete('/groups/:id/users/:userid', Auth.verifyToken, GroupController.deleteAGroupMember);
+
 // send group messages
-Router.post('/sendgroupmessages', Auth.verifyToken, GroupController.sendGroupMessage);
+Router.post('/groups/:id/messages', Auth.verifyToken, GroupController.sendGroupMessage);
 
-// see group messages
-Router.post('/seegroupmessages', Auth.verifyToken, GroupController.seeGroupMessages);
+// get groups
+Router.get('/groups', Auth.verifyToken, GroupController.getAllGroups);
 
-// see group messages
-Router.post('/seegroupmembers', Auth.verifyToken, GroupController.seeGroupMembers);
+// patch group name
+Router.patch('/groups/:id/:name', Auth.verifyToken, GroupController.editGroupName);
 
-
-// delete group messages from my inbox
-// dlete group messages by admin
+// delete group
+Router.delete('/groups/:id', Auth.verifyToken, GroupController.deleteGroup);
 
 export default Router;

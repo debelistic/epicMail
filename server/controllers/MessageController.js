@@ -1,4 +1,5 @@
 import db from '../db';
+import ValidateMessageInput from '../middleware/MessagesValidator';
 
 const MessageController = {
 
@@ -9,34 +10,36 @@ const MessageController = {
    * @returns { object } message object
    */
   async create(req, res) {
-    if (!req.body.subject || !req.body.message || !req.body.status || !req.body.receiverId) {
-      return res.status(400).send({ message: 'You have one or more empty fields' });
-    }
-    if (req.user.email === req.body.receiverId) {
-      return res.status(400).send({ message: 'You should save as sraft instead' });
-    }
-    if (!req.user) {
-      return res.status(400).send({ message: 'User not logged in' });
-    }
+    ValidateMessageInput.newMessageInput(req, res);
+
     const createMessageQuery = `INSERT INTO
         messages(createdOn, receiverEmail, senderEmail, subject, message, parentMessageId, status)
         VALUES($1, $2, $3, $4, $5, $6, $7)
         RETURNING *`;
     const values = [
       new Date(),
-      req.body.receiverId,
+      req.body.receiverEmail,
       req.user.email,
-      req.body.subject,
+      req.body.subject.trim(),
       req.body.message,
       req.body.parentMessageId,
-      req.body.status,
+      'unread',
     ];
 
     try {
       const { rows } = await db.query(createMessageQuery, values);
-      return res.status(201).send(rows[0]);
+      return res.status(201).send({
+        status: 201,
+        data: [{
+          message: 'Your message has been sent',
+          newsent: rows[0],
+        }],
+      });
     } catch (err) {
-      return res.status(400).send(err);
+      return res.status(400).send({
+        status: 400,
+        err,
+      });
     }
   },
 
