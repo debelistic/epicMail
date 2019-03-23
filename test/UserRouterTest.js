@@ -2,26 +2,26 @@ import chai from 'chai';
 import chaiHttp from 'chai-http';
 import jwt from 'jsonwebtoken';
 import app from '../server/app';
-import UserModel from '../server/jsobjectsdb/models/User';
-
+import db from '../db';
 
 chai.use(chaiHttp);
 
 const token = jwt.sign({
-  userId: 3,
+  userEmail: 'frankjunior@epicmail.com',
 },
 process.env.SECRET, { expiresIn: '7d' });
 
 describe('/Post User', () => {
   it('Create USer Account on Sign up', (done) => {
     const newuser = {
-      firstName: 'victor',
-      lastName: 'tolulope',
-      contactName: 'deviclistic23',
-      password: 'jdnfmHYU67&hjfjf',
-      confirmPassword: 'jdnfmHYU67&hjfjf',
+      username: 'frankjunior',
+      firstName: 'frank',
+      lastName: 'frank juninor junior',
+      password: 'ghJUIlO9@gh',
+      securityKey: 'brave',
+      createdOn: new Date(),
+      modifiedOn: new Date(),
     };
-
     chai.request(app)
       .post('/api/v1/auth/signup')
       .send(newuser)
@@ -30,7 +30,7 @@ describe('/Post User', () => {
         chai.expect(res.status).to.equal(201);
         chai.expect(res.body).to.be.a('object');
         chai.expect(res.body.data).to.be.a('array');
-        chai.expect(res.body.data[1]).to.be.a('string');        
+        chai.expect(res.body.data[1]).to.be.a('string');
         done();
       });
   });
@@ -52,9 +52,8 @@ describe('/Post User', () => {
     const newuser = {
       firstName: 'victor',
       lastName: 'tolulope',
-      contactName: 'deviclistic23',
-      password: 'jdnfmHYU',
-      confirmPassword: 'jdnfmHYU',
+      username: 'deviclistic23',
+      password: 'jdnfmHYU'
     };
 
     chai.request(app)
@@ -67,31 +66,13 @@ describe('/Post User', () => {
       });
   });
 
-  it('Return 400 status code if password does not match', (done) => {
+ 
+  it('Return 400 status code if username is too short', (done) => {
     const newuser = {
       firstName: 'victor',
       lastName: 'tolulope',
-      contactName: 'deviclistic23',
-      password: 'frankmHYU67&hjfjf',
-      confirmPassword: 'jdnfmHYU67&hjfjf',
-    };
-
-    chai.request(app)
-      .post('/api/v1/auth/signup')
-      .send(newuser)
-      .end((err, res) => {
-        if (err) done();
-        chai.expect(res.status).to.equal(400);
-        done();
-      });
-  });
-  it('Return 400 status code if contact name is too short', (done) => {
-    const newuser = {
-      firstName: 'victor',
-      lastName: 'tolulope',
-      contactName: 'devi',
-      password: 'frankmHYU67&hjfjf',
-      confirmPassword: 'jdnfmHYU67&hjfjf',
+      username: 'devi',
+      password: 'frankmHYU67&hjfjf'
     };
 
     chai.request(app)
@@ -110,12 +91,11 @@ describe('/Send Message', () => {
     const newmail = {
       subject: 'victor',
       message: 'jnnvjfnvtmj jvfrmjv',
-      sentStatus: 'Drafts',
-      status: true,
+      reciverId: 'frankjunior@epicmail.com'
     };
 
     chai.request(app)
-      .post('/api/v1//user/message')
+      .post('/api/v1/message')
       .set('x-access-token', token)
       .send(newmail)
       .end((err, res) => {

@@ -4,7 +4,7 @@
   "description": "A wep app to share messages over the internet",
   "main": "server/app.js",
   "scripts": {
-    "test": "set NODE_ENV=test && mocha --require @babel/register test/*.js --exit && npm run rollback",
+    "test": "set NODE_ENV=test && npm run migrate && mocha --require @babel/register test/*.js --exit && npm run rollback",
     "devstart": "set NODE_ENV=production && npm run migrate && nodemon --exec babel-node server/app.js",
     "start": "set NODE_ENV=production && npm run migrate && node server/bin/dev",
     "clean": "rm -rf dist",
