@@ -6,11 +6,15 @@ config();
 
 let dbURI;
 
+console.log('@@@@ before', process.env.NODE_ENV);
+
 if (process.env.NODE_ENV === 'test') {
+  console.log('node env is', process.env.NODE_ENV);
   dbURI = process.env.TEST_DATABASE_URL;
 } else {
   dbURI = process.env.DATABASE_URL;
 }
+
 
 const pool = new Pool({
   connectionString: dbURI,

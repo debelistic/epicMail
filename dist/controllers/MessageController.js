@@ -8,6 +8,10 @@ var _db = require('../db');
 
 var _db2 = _interopRequireDefault(_db);
 
+var _MessagesValidator = require('../middleware/MessagesValidator');
+
+var _MessagesValidator2 = _interopRequireDefault(_MessagesValidator);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, arguments); return new Promise(function (resolve, reject) { function step(key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { return Promise.resolve(value).then(function (value) { step("next", value); }, function (err) { step("throw", err); }); } } return step("next"); }); }; }
@@ -24,58 +28,54 @@ var MessageController = {
     var _this = this;
 
     return _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee() {
-      var createMessageQuery, values, _ref, rows;
+      var messageStatus, createMessageQuery, values, _ref, rows;
 
       return regeneratorRuntime.wrap(function _callee$(_context) {
         while (1) {
           switch (_context.prev = _context.next) {
             case 0:
-              if (!(!req.body.subject || !req.body.message || !req.body.status || !req.body.receiverId)) {
-                _context.next = 2;
-                break;
+              _MessagesValidator2.default.newMessageInput(req, res);
+
+              messageStatus = void 0;
+
+
+              if (!req.body.receiverEmail) {
+                messageStatus = 'drafts';
+              } else {
+                messageStatus = 'unread';
               }
 
-              return _context.abrupt('return', res.status(400).send({ message: 'You have one or more empty fields' }));
-
-            case 2:
-              if (!(req.user.email === req.body.receiverId)) {
-                _context.next = 4;
-                break;
-              }
-
-              return _context.abrupt('return', res.status(400).send({ message: 'You should save as sraft instead' }));
-
-            case 4:
-              if (req.user) {
-                _context.next = 6;
-                break;
-              }
-
-              return _context.abrupt('return', res.status(400).send({ message: 'User not logged in' }));
-
-            case 6:
               createMessageQuery = 'INSERT INTO\n        messages(createdOn, receiverEmail, senderEmail, subject, message, parentMessageId, status)\n        VALUES($1, $2, $3, $4, $5, $6, $7)\n        RETURNING *';
-              values = [new Date(), req.body.receiverId, req.user.email, req.body.subject, req.body.message, req.body.parentMessageId, req.body.status];
-              _context.prev = 8;
-              _context.next = 11;
+              values = [new Date(), req.body.receiverEmail, req.user.email, req.body.subject.trim(), req.body.message, req.body.parentMessageId, messageStatus];
+              _context.prev = 5;
+              _context.next = 8;
               return _db2.default.query(createMessageQuery, values);
 
-            case 11:
+            case 8:
               _ref = _context.sent;
               rows = _ref.rows;
-              return _context.abrupt('return', res.status(201).send(rows[0]));
+              return _context.abrupt('return', res.status(201).send({
+                status: 201,
+                data: [{
+                  message: 'Your message has been sent',
+                  newsent: rows[0]
+                }]
+              }));
+
+            case 13:
+              _context.prev = 13;
+              _context.t0 = _context['catch'](5);
+              return _context.abrupt('return', res.status(400).send({
+                status: 400,
+                err: _context.t0
+              }));
 
             case 16:
-              _context.prev = 16;
-              _context.t0 = _context['catch'](8);
-              return _context.abrupt('return', res.status(400).send(_context.t0));
-
-            case 19:
             case 'end':
               return _context.stop();
           }
         }
-      }, _callee, _this, [[8, 16]]);
+      }, _callee, _this, [[5, 13]]);
     }))();
   },
 

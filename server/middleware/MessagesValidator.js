@@ -1,3 +1,4 @@
+/* eslint-disable consistent-return */
 import db from '../db';
 
 const ValidateMessageInput = {
@@ -10,14 +11,6 @@ const ValidateMessageInput = {
           status: 400,
           data: [{
             message: 'Receiver email does not exist',
-          }],
-        });
-      }
-      if (!req.body.receiverEmail) {
-        return res.send({
-          status: 400,
-          data: [{
-            message: 'Enter receiver email address',
           }],
         });
       }

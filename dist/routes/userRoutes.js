@@ -32,7 +32,7 @@ Router.post('/auth/signup', _UserController2.default.createUser);
 Router.post('/auth/login', _UserController2.default.login);
 
 // Reset password
-Router.post('/auth/resetpassword', _UserController2.default.resetPassword);
+Router.post('/auth/reset', _UserController2.default.resetPassword);
 
 exports.default = Router;
 //# sourceMappingURL=userRoutes.js.map

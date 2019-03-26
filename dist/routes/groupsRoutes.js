@@ -24,21 +24,22 @@ var Router = _express2.default.Router();
 Router.post('/groups', _Auth2.default.verifyToken, _GroupController2.default.createGroup);
 
 // add members
-Router.post('/addgroupmembers', _Auth2.default.verifyToken, _GroupController2.default.addGroupMembers);
+Router.post('/groups/:id/users', _Auth2.default.verifyToken, _GroupController2.default.addGroupMembers);
 
 // delete members
-Router.delete('/deletegroupmembers', _Auth2.default.verifyToken, _GroupController2.default.deleteAGroupMember);
+Router.delete('/groups/:id/users/:userid', _Auth2.default.verifyToken, _GroupController2.default.deleteAGroupMember);
+
 // send group messages
-Router.post('/sendgroupmessages', _Auth2.default.verifyToken, _GroupController2.default.sendGroupMessage);
+Router.post('/groups/:id/messages', _Auth2.default.verifyToken, _GroupController2.default.sendGroupMessage);
 
-// see group messages
-Router.post('/seegroupmessages', _Auth2.default.verifyToken, _GroupController2.default.seeGroupMessages);
+// get groups
+Router.get('/groups', _Auth2.default.verifyToken, _GroupController2.default.getAllGroups);
 
-// see group messages
-Router.post('/seegroupmembers', _Auth2.default.verifyToken, _GroupController2.default.seeGroupMembers);
+// patch group name
+Router.patch('/groups/:id/:name', _Auth2.default.verifyToken, _GroupController2.default.editGroupName);
 
-// delete group messages from my inbox
-// dlete group messages by admin
+// delete group
+Router.delete('/groups/:id', _Auth2.default.verifyToken, _GroupController2.default.deleteGroup);
 
 exports.default = Router;
 //# sourceMappingURL=groupsRoutes.js.map

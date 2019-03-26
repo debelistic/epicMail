@@ -1,6 +1,9 @@
+import '@babel/polyfill';
 import db from '../db';
 import Helper from '../middleware/Helper';
 import ValidateUserInput from '../middleware/UserValidator';
+import Sanitize from '../middleware/Sanitize';
+
 
 const UserController = {
   /**
@@ -9,10 +12,10 @@ const UserController = {
   async createUser(req, res) {
     try {
       ValidateUserInput.signUpField(req, res);
-      const converSecurityKey = req.body.securityKey.toLocaleLowerCase();
-      const hashPassword = Helper.hashPassword(req.body.password);
-      const hashSecurity = Helper.hashPassword(converSecurityKey);
-      const emailAddress = `${req.body.username}@epicmail.com`;
+      const securityKey = Sanitize.trimAndLowerCase(req.body.securityKey);
+      const hashPassword = Helper.hashPassword(Sanitize.trimInput(req.body.password));
+      const hashSecurity = Helper.hashPassword(securityKey);
+      const emailAddress = `${Sanitize.trimAndLowerCase(req.body.username)}@epicmail.com`;
 
       const createUserQuery = `INSERT INTO
         users(email, firstName, lastName, password, securitykey, createdOn, modifiedOn)
@@ -26,6 +29,12 @@ const UserController = {
         new Date(),
         new Date(),
       ];
+      console.log(
+        {
+          email: emailAddress,
+          key: securityKey,
+        },
+      );
       const { rows } = await db.query(createUserQuery, values);
       const token = Helper.generateToken(rows[0].email);
 
@@ -46,9 +55,9 @@ const UserController = {
           }],
         });
       }
-      return res.send({
+      return res.status(400).send({
         status: 400,
-        message: error,
+        error,
       });
     }
   },

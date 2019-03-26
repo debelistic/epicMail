@@ -1,7 +1,17 @@
+/* eslint-disable consistent-return */
+import '@babel/polyfill';
 
 const ValidateUserInput = {
   async signUpField(req, res) {
     try {
+      if (!req.body) {
+        return res.send({
+          status: 400,
+          data: [{
+            message: 'Enter details',
+          }],
+        });
+      }
       if (!req.body.firstName) {
         return res.send({
           status: 400,
