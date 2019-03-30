@@ -1,13 +1,311 @@
+p.main-content{
+    padding: 0;
+    margin: 5px;
+    margin-left: 190px;
+}
+div.container {
+    float: none;
+    width: 80%;
+    padding: 0;
+    height: 1060px;
+}
+.main-banner {
+    height: 1200px;
+}
+
+form#signinform {
+    height: unset;
+    padding: 20px 0 0 0;
+    margin: auto;
+    width: 80%;
+}
+
+@media screen and (max-width: 1440px){
+    div.container {
+        float: none;
+        width: 80%;
+        padding: 0;
+        height: 1060px;
+    }
+    .main-banner {
+        height: 1200px;
+    }
+    p.main-content{
+        margin-left: 180px
+    }
+}
+
 @media screen and (max-width: 1024px){
     div.container {
-        width: 70%;
-        height: calc(100vh + 90px);
+        float: none;
+        width: 80%;
+        padding: 0;
+        border-radius: 16px;
+        padding-top: 20px;
+        height: 1040px;
+    }
+    .main-banner {
+        padding-top: 70px;
+        height: 1150px;
+    }
+    form#signinform{
+        padding-top: 95px;
+        width: 80%;
+        margin-bottom: 40px;
+    }
+    p.main-content{
+        margin-left: 80px
+    }
+    #footer {
+        padding: 20px 0;
+        height: 200px;
+    }
+    .footer-nav{
+        font-size: 25px;
+        padding: 0;
+        margin-bottom: 0;
+        margin-top: 0;
+    }
+    .sm-page{
+        font-size: 25px;
+        padding: 0;
+        margin-bottom: 0;
+        margin-top: 0;
+    }
+    .copyright p {
+        background-color: rgba(13, 47, 70, 0.473);
+        letter-spacing: 2px;
+        border-radius: 5px;
+        margin: 0;
+        padding: 10px;
+        font-size: 18px;
+        font-weight: 600;
     }
 }
 
 @media screen and (max-width: 780px){
-    div.container {
-        width: 70%;
-        height: 95vh;
+    #header{
+        padding-top: 30px;
     }
+    div.container {
+        float: none;
+        width: 80%;
+        margin: 45px;
+        padding: 35px;
+        height: 815px;
+    }
+    .main-banner {
+        padding: 10px 0;
+        height: 950px;
+    }
+    p.main-content{
+        margin-left: 30px;
+        font-size: 20px;
+    }
+    form#signinform{
+        padding: 20px 0;
+        width: 80%;
+    }
+    #footer {
+        width: 100%;
+        padding: 20px 0;
+        height: 150px;
+    }
+}
+
+@media screen and (max-width: 580px){
+    #header{
+        display: block;
+        padding: 0;
+    }
+    .page-title{
+        float: none;
+        padding: 0;
+        margin: auto;
+        width: 50vw;
+    }
+    .page-title h1{
+        margin: 0;
+        letter-spacing: 2px;
+        border-right: none;
+        font-size: 30px;
+        font-weight: bolder;
+        text-align: center
+    }
+    nav.page-nav{
+        text-align: center;
+        float: none;
+        padding: 0 0 0 0;
+        margin: auto;
+        width: 100vw;        
+        color: #FCFCFC;
+        border-top: #FCFCFC solid 5px;
+        border-bottom: #FCFCFC solid 5px;
+    }
+    .page-nav ul{
+        text-align: center;
+        display: inline;
+    }
+    .footer-nav{
+        font-size: 16px;
+    }
+    .sm-page{
+        margin: 0 ;
+        width: 95%;
+    }
+}
+
+@media screen and (max-width: 480px){
+    #header{
+        padding-top: 10px;
+    }
+    #navbutton{
+        margin-right: 14px;
+        margin-top: 14px;
+    }
+    .page-title{
+        width: unset;
+        margin: 0;
+    }
+    .page-title h1{
+        font-size: 1.5rem;
+        margin: 0.3rem;
+        width: unset;
+        text-align: unset;
+        padding: 5px;
+    }
+    nav.page-nav{
+        border: none;
+        float: none;
+        width: unset;
+        border-bottom: #FCFCFC solid 3px;
+    }
+    .page-nav ul{
+        width: 100%;
+        padding: 0;
+        display: none;
+    }
+    .page-nav ul.open{
+        height: auto;
+        display: block;
+    }
+    .page-nav ul li{
+        margin: 10px 0 0 0;
+        padding: 10px;
+        width: 100%;
+        border-top: #FCFCFC solid 3px;
+        line-height: unset;
+	}
+    
+}
+
+@media screen and (max-width: 420px){
+    #header{
+        padding-top: 10px;
+    }
+    div.container {
+        float: none;
+        width: 80%;
+        padding: 0;
+        margin: 0;
+        height: 760px;
+    }
+    .main-banner {
+        padding: 50px 0;
+        height: 780px;
+    }
+    form#signinform{
+        margin: 10px auto;
+        padding: 10px 0 0 0;
+        width: 80%;
+    }
+    p.main-content{
+        padding: 0 0 0 20px;
+        margin: 0;
+        font-size: 16px;
+        width: 80%;
+    }
+    #footer {
+        padding: 0;
+        height: 250px;
+    }
+}
+
+@media screen and (max-width: 380px){
+    div.container {
+        float: none;
+        width: 80%;
+        padding: 0;
+        margin: 0;
+        height: 750px;
+    }
+    .main-banner {
+        padding: 50px 0;
+        height: 780px;
+    }
+    form#signinform{
+        margin: 10px auto;
+        padding: 10px 0 0 0;
+        width: 80%;
+    }
+    p.main-content{
+        padding: 0 0 0 20px;
+        margin: 0;
+        font-size: 14px;
+        width: 80%;
+    }
+    #footer {
+        padding: 0;
+        height: 185px;
+    }
+}
+
+@media screen and (max-width: 360px){
+    .page-title{
+        margin: 0;
+        padding: 0;
+    }
+    div.container {
+        float: none;
+        width: 80%;
+        padding: 0;
+        margin: 0;
+        height: 850px;
+    }
+    .main-banner {
+        padding: 20px 0;
+        height: 880px;
+    }
+    p.main-content{
+        padding: 0 0 0 20px;
+        margin: 0;
+        font-size: 14px;
+        width: 80%;
+    }
+    form#signinform{
+        margin: 10px auto;
+        padding: 10px 0 0 0;
+        width: 80%;
+    }
+    #footer {
+        padding: 0;
+        height: 165px;
+    }
+    .sm-page, .footer-nav{
+        padding: 0;
+        margin: 0;
+    }
+    .sm-page{
+        float: left;
+    }
+    .footer-nav{
+        float: right;
+    }
+    .footer-nav ul{
+        padding: 0.6rem;
+    }
+    footer div.sm-page ul li, footer div.footer-nav ul li{
+        margin: 0;
+    }
+
 }
