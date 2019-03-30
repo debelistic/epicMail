@@ -58,21 +58,21 @@ a{
 
 .container{
     margin: 0;
-    padding: 20px 0 0 10px;
+    padding: 0;
 }
 
 div.container{
     width: 50%;
     float: none;
     color: #FCFCFC;
-    margin: 25px 0 0 25px;
+    margin: 15px;
 }
 
 .transparent{
     background-color: rgba(13, 47, 70, 0.473);
     border-radius: 5px;
     margin: 0 0 0 0;
-    height: calc(100vh - 150px);
+    height: calc(100vh + 190px);
 }
 
 aside.container{
@@ -85,7 +85,7 @@ aside.container{
     margin: 0;
     padding: 10px 0;
     width: 100%;
-    height: calc(100vh - 70px);
+    height: calc(100vh + 250px);
     display: flex;
     align-content: center;
     justify-content: center;
@@ -105,6 +105,17 @@ h1.main-content{
     text-shadow: 4px 4px 8px #003D66;
 }
 
+h2.main-content{
+    margin: 0 0 10px;
+    padding: 10px;
+    font-size: 2rem;
+    font-weight: 800;
+    color: #FCFCFC;
+    text-align: center;
+    letter-spacing: 2px;
+    text-shadow: 4px 4px 8px #003D66;
+}
+
 p.main-content{
     margin: 0 0.2rem 0.7rem 0.2rem;
     padding: 0 0.3rem 0.9rem;
@@ -114,6 +125,12 @@ p.main-content{
     letter-spacing: 2px;
     text-justify: right;
     overflow: hidden;
+}
+
+p.main-content a {
+    background: #003D66;
+    padding: 3px;
+    border-radius: 2px;
 }
 
 #footer{
@@ -222,6 +239,7 @@ p.main-content{
     width: 70%;
 }
 form#signinform{
+    height: 83%;
     padding: 20px 0 0 0;
     margin: auto;
     width: 70%;
@@ -278,13 +296,20 @@ form#signinform{
 	}
 		
 	.main-banner{
-		height: calc(100vh - 40px);
+		height: calc(100vh + 300px);
 	}
 
 	.transparent{
-		height: calc(100vh - 150px);
+		height: calc(100vh + 180px);
     }
     div.container{
+        width: 70%;
+        height: 100vh;
+    }
+    form#signinform {
+        height: unset;
+        padding: 20px 0 0 0;
+        margin: auto;
         width: 70%;
     }
     
@@ -315,7 +340,7 @@ form#signinform{
     }
 }
 
-@media screen and (max-width: 740px){
+@media screen and (max-width: 780px){
     #header{
         display: block;
         padding: 0;
@@ -347,6 +372,9 @@ form#signinform{
         margin: auto;
         width: 50%;
     }
+    .main-banner{
+        height: calc(100vh + 20px)
+    }
     div.container{
         width: 70%;
     }		
@@ -360,6 +388,9 @@ form#signinform{
         text-justify: right;
         overflow: hidden;
     }
+    .transparent{
+        height: calc(100vh - 90px)
+    }
     .footer-nav {
         float: none;
         display: block;
@@ -371,7 +402,8 @@ form#signinform{
         font-size: 0.9rem;
     }
     form#signinform{
-        padding: 30px 20px 20px 20px;
+        height: unset;
+        padding: 7px;
         margin: auto;
     }
     .form-group{
@@ -462,9 +494,6 @@ form#signinform{
         border-top: #FCFCFC solid 3px;
         line-height: unset;
 	}
-	.main-banner{
-		height: calc(100vh - 40px);
-	}
     aside.container{
         float: none;
         width: 90%;
@@ -472,11 +501,14 @@ form#signinform{
         height: 100px;
         overflow: hidden;
     }
+    .main-banner {
+        height: calc(100vh + 100px);
+    }    
     div.container{
         float: none;
         width: 80%;
         margin: 10px auto;
-        height: calc(100vh - 210px);
+        height: calc(100vh + 50px);
     }
     h1.main-content{
         margin: 0;
@@ -509,7 +541,7 @@ form#signinform{
     }
     #footer{
         display: flex;
-		height: calc(100vw - 250px);
+		height: 170px;
 		align-content: center;
 		justify-content: center;
     }
@@ -518,6 +550,7 @@ form#signinform{
         text-align: unset;
         margin: 0;
         padding: 0;
+        height: 120px;
     }
     .sm-page ul{
         display: block;
@@ -551,6 +584,8 @@ form#signinform{
         line-height: unset;
     }
     .footer-nav {
+        width: unset;
+        height: 120px;
         display: block;
         float: right;
         padding: 0.3rem;
@@ -559,7 +594,7 @@ form#signinform{
         color: #FCFCFC;
     }
     .footer-nav ul{
-        text-align: right;
+        text-align: left;
         display: block;
         margin: 0;
         padding: 0.3rem;
@@ -571,7 +606,7 @@ form#signinform{
     }
     form#signinform{
         width: 90%;
-        padding: 0;
+        padding: 15px 7px;
         margin: auto;
     }
     .form-group{
@@ -642,17 +677,22 @@ form#signinform{
         text-justify: right;
         overflow: hidden;
     }
-    .main-banner{
-        height: unset;
+    .main-banner {
+        height: calc(100vh + 250px);
     }
     div.container {
         float: none;
         width: 80%;
-        padding: 10px;
-        height: calc(100vh - 180px);
+        padding: 0;
+        height: calc(100vh + 200px);
+    }
+
+    .container{
+        padding: 0;
     }
     #footer{
-        height: calc(100vh - 500px);
+        padding: 0;
+        height: 170px;
     }
     footer div.sm-page ul li {
         list-style: none;
@@ -692,6 +732,7 @@ form#signinform{
 			justify-content: center;
     }
     .footer-nav {
+        height: 120px;
         float: right;
         padding: 0.3rem;
         text-align: unset;
@@ -710,8 +751,9 @@ form#signinform{
         font-size: 0.9rem;
     }
     form#signinform{
-        width: 90%;
-        padding: 0;
+        height: unset;
+        width: 100%;
+        padding: 5px;
         margin: auto;
     }
     .form-group{
@@ -729,7 +771,6 @@ form#signinform{
         color: #FCFCFC;
         font-size: 1rem;
         border-radius: 0.4rem;
-        width: 100%;
         height: 2rem;
         padding: 0.3rem;
         background: transparent;
