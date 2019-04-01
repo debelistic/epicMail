@@ -12,7 +12,6 @@
     width: 80%;
     overflow: hidden;    
     font-size: 1.3rem;
-    cursor: wait;
     outline: unset;
     color: #FCFCFC
 }
@@ -25,7 +24,7 @@
     width: 50%;
     overflow: hidden;    
     font-size: 1rem;
-    cursor: wait;
+    cursor: pointer;
     color: #FCFCFC;
 }
 div.container ul{
@@ -46,6 +45,7 @@ div.container ul li{
     padding: 0.5rem;
     float: right;
     border-radius: 0.4rem;
+    cursor: pointer;
 }
 
 @media screen and (max-width: 740px){

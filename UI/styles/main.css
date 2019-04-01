@@ -129,7 +129,8 @@ p.main-content{
 
 p.main-content a {
     background: #003D66;
-    padding: 7px;
+    margin: 2px;
+    padding: 2px;
     border-radius: 3px;
 }
 
