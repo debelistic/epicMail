@@ -123,13 +123,14 @@ img.chatimage{
     z-index: 5;
     width: 45%;
     display: block;
-    background: #003D66;
+    background: rgb(176, 216, 228);
 }
 form#mailform{
     height: 0;
     display: none;
     width: 100%;
-    background: #003D66;
+    background: rgb(176, 216, 228);
+    font-family: 'Courier New', Courier, monospace;
 }
 form#mailform.open{
     height: auto;
@@ -138,32 +139,35 @@ form#mailform.open{
 form#mailform input[type='text']{
     margin: 5px;
     padding: 10px;
-    background: rgba(13, 47, 70, 0.473);
+    background: #FCFCFC;
     width: 80%;
-    color: #FCFCFC;
+    color: #003D66;
     font-size: 20px;
+    font-family: 'Courier New', Courier, monospace;
     outline: unset;
 }
 
 form#mailform input[type='button']{
     margin: 5px;
     padding: 10px;
-    background: rgba(13, 47, 70, 0.473);
+    background: #FCFCFC;
     border-radius: 8px;
     width: 40%;
-    color: #FCFCFC;
+    color: #003D66;
     font-size: 20px;
+    font-family: 'Courier New', Courier, monospace;
     outline: unset;
 }
 
 textarea#mailcontent{
     margin: 5px;
     padding: 10px;
-    background: rgba(13, 47, 70, 0.473);
+    background: #FCFCFC;
     width: 80%;
-    color: #FCFCFC;
+    color: #003D66;
     font-size: 20px;
     outline: unset;
+    font-family: 'Courier New', Courier, monospace;
     height: 170px;
     justify-content: left;
     text-align: justify;
@@ -505,9 +509,23 @@ h1.main-content {
         width: 42px;
         padding: 0;
         margin: 5px;
+        cursor: pointer;
+    }
+    i#menu-icon{
+        position: absolute;
+        top: 0;
+        left: 0;
+        font-size: 35px;
+        padding: 0;
+        margin: 5px;
+        margin-right: 7px;
+        cursor: pointer;
     }
     .usermenu{
         display: none;
+        float: none;
+        position: absolute;
+        top: 0;
     }
     .main-chat{
         display: none;
@@ -518,5 +536,25 @@ h1.main-content {
     div.usermail{
         overflow: auto;
         width: 100%;
+    }
+    nav.open {
+        width: 100vw;
+        visibility: unset;
+        display: block;
+        height: auto;
+        z-index: 3;
+    }
+    #imagedrop{
+        width: 150px;
+        background-color: rgba(235, 240, 243, 0.938);
+    }
+    #mailformdiv{
+        position: absolute;
+        width: 100vw;
+        /* height: calc(100vh - 50px); */
+        
+    }
+    form#mailform{
+        padding: 20px;
     }
 }
