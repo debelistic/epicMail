@@ -1,6 +1,5 @@
 import chai from 'chai';
 import chaiHttp from 'chai-http';
-import chaiAsPromised from 'chai-as-promised';
 import jwt from 'jsonwebtoken';
 import app from '../server/app';
 
@@ -9,7 +8,6 @@ process.env.NODE_ENV = 'test';
 const { expect } = chai;
 
 chai.use(chaiHttp);
-chai.use(chaiAsPromised);
 
 const token = jwt.sign({
   userEmail: 'frankjunior@epicmail.com',
@@ -24,16 +22,16 @@ describe('/Post User', () => {
       lastName: 'frank juninor junior',
       password: 'ghJUIlO9@gh',
       securityKey: 'brave',
-      createdOn: new Date(),
-      modifiedOn: new Date(),
     };
     chai.request(app)
       .post('/api/v1/auth/signup')
       .send(newuser)
       .end((err, res) => {
         if (err) done();
-        expect(Promise.resolve(res.status)).to.eventually.equal(201);
-        // chai.expect(res.body).to.eventually.be.a('object');
+        expect(res.status).to.equal(201);
+        expect(res.body).to.have.keys('status', 'data');
+        expect(res.body.status).to.equal(201);
+        expect(res.body.data).to.be.an('array');
         // chai.expect(res.body.data).to.eventually.be.a('array');
         // chai.expect(res.body.data[1]).to.eventually.be.a('string');
         done();
@@ -55,7 +53,7 @@ describe('/Post User', () => {
       .send(newuser)
       .end((err, res) => {
         if (err) done();
-        chai.expect(res.status).to.equal(200);
+        chai.expect(res.status).to.equal(400);
         done();
       });
   });
@@ -92,7 +90,7 @@ describe('/Post User', () => {
       .send(newuser)
       .end((err, res) => {
         if (err) done();
-        chai.expect(res.status).to.equal(200);
+        chai.expect(res.status).to.equal(400);
         done();
       });
   });
@@ -129,7 +127,7 @@ describe('/Signin User', () => {
       .send(reguser)
       .end((err, res) => {
         if (err) done();
-        chai.expect(res.status).to.equal(200);
+        chai.expect(res.status).to.equal(400);
         done();
       });
   });

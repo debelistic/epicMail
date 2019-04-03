@@ -1,11 +1,8 @@
-/* eslint-disable consistent-return */
-import '@babel/polyfill';
-
 const ValidateUserInput = {
-  async signUpField(req, res) {
+  async signUpField(req, res, next) {
     try {
       if (!req.body) {
-        return res.send({
+        return res.status(400).send({
           status: 400,
           data: [{
             message: 'Enter details',
@@ -13,7 +10,7 @@ const ValidateUserInput = {
         });
       }
       if (!req.body.firstName) {
-        return res.send({
+        return res.status(400).send({
           status: 400,
           data: [{
             message: 'Enter your first name',
@@ -21,7 +18,7 @@ const ValidateUserInput = {
         });
       }
       if (!req.body.lastName) {
-        return res.send({
+        return res.status(400).send({
           status: 400,
           data: [{
             message: 'Enter your last name',
@@ -37,7 +34,7 @@ const ValidateUserInput = {
         });
       }
       if (!req.body.username) {
-        return res.send({
+        return res.status(400).send({
           status: 400,
           data: [{
             message: 'Enter your username',
@@ -45,7 +42,7 @@ const ValidateUserInput = {
         });
       }
       if (!/^[a-z\d]{8,}$/i.test(req.body.username)) {
-        return res.send({
+        return res.status(400).send({
           status: 400,
           data: [{
             message: 'username should be at least 8 characters long',
@@ -53,7 +50,7 @@ const ValidateUserInput = {
         });
       }
       if (!req.body.password) {
-        return res.send({
+        return res.status(400).send({
           status: 400,
           data: [{
             message: 'Enter password',
@@ -68,19 +65,15 @@ const ValidateUserInput = {
           }],
         });
       }
+      return next();
     } catch (error) {
-      return res.send({
-        status: 400,
-        data: [
-          error,
-        ],
-      });
+      return next(error);
     }
   },
-  async loginField(req, res) {
+  async loginField(req, res, next) {
     try {
       if (!req.body.email) {
-        return res.send({
+        return res.status(400).send({
           status: 400,
           data: [{
             message: 'Enter your email address',
@@ -88,23 +81,21 @@ const ValidateUserInput = {
         });
       }
       if (!req.body.password) {
-        return res.send({
+        return res.status(400).send({
           status: 400,
           data: [{
             message: 'Enter your password',
           }],
         });
       }
+      return next();
     } catch (error) {
-      return res.send({
-        status: 400,
-        data: [
-          error,
-        ],
-      });
+      return next(error);
     }
   },
-  async resetPasswordField(req, res) {
+
+
+  async resetPasswordField(req, res, next) {
     try {
       if (!req.body.email) {
         return res.send({
@@ -130,13 +121,9 @@ const ValidateUserInput = {
           }],
         });
       }
+      return next();
     } catch (error) {
-      return res.send({
-        status: 400,
-        data: [
-          error,
-        ],
-      });
+      return next(error);
     }
   },
 };
