@@ -2,7 +2,7 @@ before_script:
   - npm install mocha
   - npm install chai
   - npm install nyc codecov coveralls
-  - psql -c 'create database epicmailtest;' -U postgres
+  - psql -c 'create database travis_ci_test;' -U postgres
 language: node_js
 node_js:
   - "stable"
@@ -12,9 +12,5 @@ script:
 services:
   - postgresql
 
-env:
-  global:
-  - CODECLIMATE_REPO_TOKEN=87a765b87dbb6cd1cd812775f246f595e1f75d4a3ef5bb1b3c4f456a1d727e67
-  - SECRET=hbjfrjmbnfvmfnvbbfvnmvj
 
 after_success: npm run coverage
