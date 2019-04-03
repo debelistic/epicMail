@@ -1,7 +1,6 @@
 p.main-content{
     padding: 0;
     margin: 5px;
-    margin-left: 190px;
 }
 
 form#signinform {
@@ -9,6 +8,35 @@ form#signinform {
     padding: 20px 0 0 0;
     margin: auto;
     width: 80%;
+}
+
+.transparent{
+    background-color: rgba(13, 47, 70, 0.473);
+    border-radius: 5px;
+    margin: 0 0 0 0;
+    height: 70%;
+}
+
+div.container{
+    margin: auto;
+}
+
+.main-banner{
+    margin: 0;
+    padding: 10px 0;
+    width: 100%;
+    height: calc(100vh - 237px);
+    display: flex;
+    align-content: center;
+    justify-content: center;
+    background-image: url(../imgs/banner.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+}
+
+#footer{
+    height: 220px;
 }
 
 @media screen and (max-width: 1440px){

@@ -1,7 +1,7 @@
 p.main-content{
     padding: 0;
     margin: 5px;
-    margin-left: 190px;
+    margin-left: 79px;
 }
 
 form#signinform {
@@ -11,10 +11,38 @@ form#signinform {
     width: 80%;
 }
 
+.transparent{
+    background-color: rgba(13, 47, 70, 0.473);
+    border-radius: 5px;
+    margin: 0 0 0 0;
+    height: 70%;
+}
+
+div.container{
+    margin: auto;
+}
+
+#footer{
+    height: 220px;
+}
+
+.main-banner{
+    margin: 0;
+    padding: 10px 0;
+    width: 100%;
+    height: calc(100vh - 237px);
+    display: flex;
+    align-content: center;
+    justify-content: center;
+    background-image: url(../imgs/banner.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+}
+
 @media screen and (max-width: 1440px){
     div.container {
         float: none;
-        width: 80%;
         padding: 0;
         height: 500px;
     }
@@ -22,7 +50,7 @@ form#signinform {
         height: 700px;
     }
     p.main-content{
-        margin-left: 20px
+        margin-left: 79px
     }
 }
 
@@ -36,7 +64,6 @@ form#signinform {
         height: 940px;
     }
     .main-banner {
-        padding-top: 70px;
         height: 1010px;
     }
     form#signinform{
@@ -198,7 +225,7 @@ form#signinform {
         float: none;
         width: 80%;
         padding: 0;
-        margin: 0;
+        margin: auto;
         height: 450px;
     }
     .main-banner {
@@ -211,8 +238,9 @@ form#signinform {
         width: 80%;
     }
     p.main-content{
-        padding: 0 0 0 20px;
+        padding: 0;
         margin: 0;
+        margin-left: 35px;
         font-size: 16px;
         width: 80%;
     }
@@ -227,7 +255,7 @@ form#signinform {
         float: none;
         width: 80%;
         padding: 0;
-        margin: 0;
+        margin: auto;
         height: 450px;
     }
     .main-banner {
@@ -240,8 +268,9 @@ form#signinform {
         width: 80%;
     }
     p.main-content{
-        padding: 0 0 0 20px;
+        padding: 0;
         margin: 0;
+        margin-left: 26px;
         font-size: 14px;
         width: 80%;
     }
@@ -260,7 +289,7 @@ form#signinform {
         float: none;
         width: 80%;
         padding: 0;
-        margin: 0;
+        margin: auto;
         height: 360px;
     }
     .main-banner {
@@ -268,8 +297,9 @@ form#signinform {
         height: 400px;
     }
     p.main-content{
-        padding: 0 0 0 20px;
+        padding: 0;
         margin: 0;
+        margin-left: 26px;
         font-size: 14px;
         width: 80%;
     }
@@ -286,9 +316,12 @@ form#signinform {
         padding: 0;
         margin: 0;
     }
-    footer div.sm-page ul li, footer div.footer-nav ul li{
+    footer div.footer-nav ul li{
         padding: 0;
-        margin: 0;
+        margin: 10px;
+    }
+    footer div.sm-page ul li{
+        padding: 0;
     }
 
 }
