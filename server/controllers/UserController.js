@@ -1,21 +1,17 @@
 import '@babel/polyfill';
 import db from '../db';
 import Helper from '../middleware/Helper';
-import ValidateUserInput from '../middleware/UserValidator';
-import Sanitize from '../middleware/Sanitize';
-
 
 const UserController = {
   /**
      * create user
      */
-  async createUser(req, res) {
+  async createUser(req, res, next) {
     try {
-      ValidateUserInput.signUpField(req, res);
-      const securityKey = Sanitize.trimAndLowerCase(req.body.securityKey);
-      const hashPassword = Helper.hashPassword(Sanitize.trimInput(req.body.password));
+      const securityKey = req.body.securityKey.toLowerCase();
+      const hashPassword = Helper.hashPassword(req.body.password);
       const hashSecurity = Helper.hashPassword(securityKey);
-      const emailAddress = `${Sanitize.trimAndLowerCase(req.body.username)}@epicmail.com`;
+      const emailAddress = `${req.body.username.toLowerCase()}@epicmail.com`;
 
       const createUserQuery = `INSERT INTO
         users(email, firstName, lastName, password, securitykey, createdOn, modifiedOn)
@@ -48,28 +44,20 @@ const UserController = {
       });
     } catch (error) {
       if (error.routine === '_bt_check_unique') {
-        return res.send({
-          status: 400,
-          data: [{
-            message: 'User email exists already',
-          }],
-        });
+        return next('User Already Exists');
       }
-      return res.status(400).send({
-        status: 400,
-        error,
-      });
+      return next(error);
     }
   },
 
   /**
    * user login
    */
-  async login(req, res) {
+  async login(req, res, next) {
     try {
-      ValidateUserInput.loginField(req, res);
       const loginQuery = 'SELECT * FROM users WHERE email = $1';
-      const { rows } = await db.query(loginQuery, [req.body.email.trim()]);
+      const userEmail = await req.body.email;
+      const { rows } = await db.query(loginQuery, [userEmail]);
       if (!rows[0]) {
         return res.status(400).send({
           status: 400,
@@ -90,10 +78,7 @@ const UserController = {
         }],
       });
     } catch (error) {
-      return res.send({
-        status: 400,
-        error,
-      });
+      return next(error);
     }
   },
 
@@ -102,9 +87,8 @@ const UserController = {
    * @param {object} req
    * @param {object} res
    */
-  async resetPassword(req, res) {
+  async resetPassword(req, res, next) {
     try {
-      ValidateUserInput.resetPasswordField(req, res);
       const getUserSecurityQuestion = 'SELECT * FROM users WHERE $1 = email';
       const values = [
         req.body.email,
@@ -130,12 +114,7 @@ const UserController = {
         }],
       });
     } catch (error) {
-      return res.status(400).send({
-        status: 400,
-        data: [{
-          error,
-        }],
-      });
+      return next(error);
     }
   },
 };
