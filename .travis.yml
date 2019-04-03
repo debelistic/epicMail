@@ -2,11 +2,15 @@ before_script:
   - npm install mocha
   - npm install chai
   - npm install nyc codecov coveralls
+  - psql -c 'create database epicmailtest;' -U postgres
 language: node_js
 node_js:
   - "stable"
 script:
   - nyc npm test
+
+services:
+  - postgresql
 
 env:
   global:
