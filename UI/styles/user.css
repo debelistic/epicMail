@@ -4,6 +4,14 @@
     overflow: visible;
     padding-right: 10px;
 }
+
+.bar{
+    widows: 35px;
+    height: 5px;
+    background-color: #FCFCFC;
+    margin: 6px;
+    border-radius: 2px;
+}
 .page-title{
     float: none;
 }
@@ -285,10 +293,6 @@ img.profileimage{
     cursor: pointer;
 }
 
-.user-icons i{
-    font-size: 45px;
-}
-
 nav.user-options{
     visibility: hidden;
     display: none;
@@ -486,6 +490,179 @@ a.main-content {
 h1.main-content {
     text-align: center;
 }
+div#menu-icon{
+    display: none;
+}
+
+@media screen and (max-width: 1044px){
+    #header{
+        padding-top: 10px;
+        text-align: center;
+    }
+    .page-title{
+        float: none;
+    }
+    .removeElment{
+        display: none !Important;
+    }
+    .user-icons{
+        position: unset;
+    }
+    div#menu-icon{
+        position: absolute;
+        left: 10px;
+        top: 0;
+        float: left;
+        width: 40px;
+        margin-top: 7px;
+        border: 1px solid #FCFCFC;
+        border-radius: 10px; 
+        display: block;
+    }
+    .user-icons img.profileimage{
+        position: absolute;
+        right: 10px;
+        top: 0;
+        float: right;
+        width: 40px;
+        margin-top: 7px;
+        border: 1px solid #FCFCFC;
+        border-radius: 10px;
+    }
+    .usermenu{
+        display: none;
+        position: absolute;
+        left: 0;
+        width: 40%;
+        z-index: 6;
+    }
+    div.usermail{
+        width: 45%;
+    }
+    .main-chat{
+        width: 55%;
+    }
+    .chatarea textarea{
+        width: 70%;
+    }
+}
+
+@media screen and (max-width: 780px){
+    #header{
+        padding-top: 10px;
+        text-align: center;
+    }
+    .removeElment{
+        display: none !Important;
+    }
+    .user-icons{
+        position: unset;
+    }
+    div#menu-icon{
+        position: absolute;
+        left: 10px;
+        float: left;
+        width: 40px;
+        border: 1px solid #FCFCFC;
+        border-radius: 10px; 
+    }
+    .user-icons img.profileimage{
+        position: absolute;
+        right: 10px;
+        float: right;
+        width: 40px;
+        border: 1px solid #FCFCFC;
+        border-radius: 10px;
+    }
+    .usermenu{
+        display: none;
+        position: absolute;
+        left: 0;
+        width: 40%;
+        z-index: 6;
+    }
+    div.usermail{
+        width: 45%;
+    }
+    .main-chat{
+        width: 55%;
+    }
+}
+
+@media screen and (max-width: 480px){
+    #navbutton{
+        display: none;
+    }
+    #header{
+        padding-top: 10px;
+    }
+    .page-title{
+        display: flex;
+        padding: 0;
+        margin: 0;
+        float: none;
+        text-align: center;
+    }
+    img.profileimage {
+        position: absolute;
+        top: 0;
+        right: 0;
+        border-radius: 25px;
+        width: 42px;
+        padding: 0;
+        margin: 5px;
+        cursor: pointer;
+    }
+    div#menu-icon{
+        width: 38px;
+        border: 1px solid #FCFCFC;
+        border-radius: 10px;
+        position: absolute;
+        top: 0;
+        left: 0;
+        font-size: 20px;
+        padding: 0;
+        margin: 5px;
+        margin-right: 7px;
+        cursor: pointer;
+    }
+    .usermenu{
+        display: none;
+        float: none;
+        position: absolute;
+        top: 0;
+    }
+    .main-chat{
+        display: none;
+    }
+    .removeElment{
+        display: none !Important;
+    }
+    div.usermail{
+        overflow: auto;
+        width: 100%;
+    }
+    nav.open {
+        width: 100vw;
+        visibility: unset;
+        display: block;
+        height: auto;
+        z-index: 3;
+    }
+    #imagedrop{
+        width: 150px;
+        background-color: rgba(235, 240, 243, 0.938);
+    }
+    #mailformdiv{
+        position: absolute;
+        width: 100vw;
+        /* height: calc(100vh - 50px); */
+        
+    }
+    form#mailform{
+        padding: 20px;
+    }
+}
 
 @media screen and (max-width: 360px){
     #navbutton{
@@ -511,11 +688,14 @@ h1.main-content {
         margin: 5px;
         cursor: pointer;
     }
-    i#menu-icon{
+    div#menu-icon{
+        width: 38px;
+        border: 1px solid #FCFCFC;
+        border-radius: 10px;
         position: absolute;
         top: 0;
         left: 0;
-        font-size: 35px;
+        font-size: 14px;
         padding: 0;
         margin: 5px;
         margin-right: 7px;
