@@ -1,13 +1,14 @@
 p.main-content{
     padding: 0;
     margin: 5px;
-    margin-left: 190px;
+    margin-left: 126px;
 }
 div.container {
     float: none;
     width: 80%;
     padding: 0;
     height: 1060px;
+    margin: auto;
 }
 .main-banner {
     height: 1200px;
