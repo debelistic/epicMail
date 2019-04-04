@@ -25,12 +25,7 @@ const UserController = {
         new Date(),
         new Date(),
       ];
-      console.log(
-        {
-          email: emailAddress,
-          key: securityKey,
-        },
-      );
+
       const { rows } = await db.query(createUserQuery, values);
       const token = Helper.generateToken(rows[0].email);
 
@@ -44,7 +39,9 @@ const UserController = {
       });
     } catch (error) {
       if (error.routine === '_bt_check_unique') {
-        return next('User Already Exists');
+        return res.status(400).send({
+          message: 'User alredy exist',
+        });
       }
       return next(error);
     }
@@ -56,7 +53,7 @@ const UserController = {
   async login(req, res, next) {
     try {
       const loginQuery = 'SELECT * FROM users WHERE email = $1';
-      const userEmail = await req.body.email;
+      const userEmail = await `${req.body.email.toLowerCase()}@epicmail.com`;
       const { rows } = await db.query(loginQuery, [userEmail]);
       if (!rows[0]) {
         return res.status(400).send({

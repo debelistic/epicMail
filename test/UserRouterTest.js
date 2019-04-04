@@ -17,9 +17,9 @@ process.env.SECRET, { expiresIn: '7d' });
 describe('/Post User', () => {
   it('Create USer Account on Sign up', (done) => {
     const newuser = {
-      username: 'frankjunior',
-      firstName: 'frank',
-      lastName: 'frank juninor junior',
+      username: 'franksaint',
+      firstName: 'saint',
+      lastName: 'saint',
       password: 'ghJUIlO9@gh',
       securityKey: 'brave',
     };
@@ -100,7 +100,7 @@ describe('/Post User', () => {
 describe('/Signin User', () => {
   it('Sign in user and generate token', (done) => {
     const reguser = {
-      email: 'frankjunior@epicmail.com',
+      email: 'franksaint@epicmail.com',
       password: 'ghJUIlO9@gh',
     };
 

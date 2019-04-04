@@ -13,6 +13,8 @@ var _swaggerUiExpress = _interopRequireDefault(require("swagger-ui-express"));
 
 var _swagger = _interopRequireDefault(require("../swagger.json"));
 
+var _Sanitize = _interopRequireDefault(require("./middleware/Sanitize"));
+
 var _userRoutes = _interopRequireDefault(require("./routes/userRoutes"));
 
 var _messagesRoutes = _interopRequireDefault(require("./routes/messagesRoutes"));
@@ -29,6 +31,7 @@ app.use(_express.default.json());
 app.use(_express.default.urlencoded({
   extended: false
 }));
+app.use(_Sanitize.default.trimInput);
 app.use('/api-docs', _swaggerUiExpress.default.serve, _swaggerUiExpress.default.setup(_swagger.default));
 app.use('/api/v1', _userRoutes.default);
 app.use('/api/v1', _messagesRoutes.default);
@@ -41,3 +44,4 @@ app.listen(port);
 console.log('Babel is watching');
 var _default = app;
 exports.default = _default;
+//# sourceMappingURL=app.js.map

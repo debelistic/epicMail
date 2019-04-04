@@ -12,8 +12,7 @@ if (process.env.NODE_ENV.trim() === 'test') {
   dbURI = process.env.DATABASE_URL;
 }
 
-console.log('@@@@ dburl', dbURI);
-
+console.log('@@@@ dbURI', dbURI);
 const pool = new Pool({
   connectionString: dbURI,
 });
