@@ -1,3 +1,4 @@
+/* eslint-disable consistent-return */
 import db from '../db';
 
 const ValidateGroupsInput = {
@@ -82,6 +83,7 @@ const ValidateGroupsInput = {
         'admin',
       ];
       const { rows } = await db.query(addGroupAdminQuery, adminvalues);
+      return rows[0];
     } catch (error) {
       return res.send({
         error,

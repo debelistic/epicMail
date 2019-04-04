@@ -1,10 +1,18 @@
 import { Pool } from 'pg';
-import dotenv from 'dotenv';
+import { config } from 'dotenv';
 
-dotenv.config();
+config();
+
+let dbURI;
+
+if (process.env.NODE_ENV.trim() === 'test') {
+  dbURI = process.env.TEST_DATABASE_URL;
+} else {
+  dbURI = process.env.DATABASE_URL;
+}
 
 const pool = new Pool({
-  connectionString: process.env.DATABASE_URL,
+  connectionString: dbURI,
 });
 
 export default {

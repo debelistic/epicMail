@@ -1,18 +1,17 @@
+import '@babel/polyfill';
 import db from '../db';
 import Helper from '../middleware/Helper';
-import ValidateUserInput from '../middleware/UserValidator';
 
 const UserController = {
   /**
      * create user
      */
-  async createUser(req, res) {
+  async createUser(req, res, next) {
     try {
-      ValidateUserInput.signUpField(req, res);
-      const converSecurityKey = req.body.securityKey.toLocaleLowerCase();
+      const securityKey = req.body.securityKey.toLowerCase();
       const hashPassword = Helper.hashPassword(req.body.password);
-      const hashSecurity = Helper.hashPassword(converSecurityKey);
-      const emailAddress = `${req.body.username}@epicmail.com`;
+      const hashSecurity = Helper.hashPassword(securityKey);
+      const emailAddress = `${req.body.username.toLowerCase()}@epicmail.com`;
 
       const createUserQuery = `INSERT INTO
         users(email, firstName, lastName, password, securitykey, createdOn, modifiedOn)
@@ -26,6 +25,7 @@ const UserController = {
         new Date(),
         new Date(),
       ];
+
       const { rows } = await db.query(createUserQuery, values);
       const token = Helper.generateToken(rows[0].email);
 
@@ -34,39 +34,30 @@ const UserController = {
         data: [{
           token,
           message: 'Your account has been created',
-          email: `Your epicmail address is ${emailAddress}`,
+          email_address: `Your epicmail address is ${emailAddress}`,
         }],
       });
     } catch (error) {
       if (error.routine === '_bt_check_unique') {
-        return res.send({
-          status: 400,
-          data: [{
-            message: 'User email exists already',
-          }],
+        return res.status(400).send({
+          message: 'User alredy exist',
         });
       }
-      return res.send({
-        status: 400,
-        message: error,
-      });
+      return next(error);
     }
   },
 
   /**
    * user login
    */
-  async login(req, res) {
+  async login(req, res, next) {
     try {
-      ValidateUserInput.loginField(req, res);
       const loginQuery = 'SELECT * FROM users WHERE email = $1';
-      const { rows } = await db.query(loginQuery, [req.body.email.trim()]);
+      const userEmail = await `${req.body.email.toLowerCase()}@epicmail.com`;
+      const { rows } = await db.query(loginQuery, [userEmail]);
       if (!rows[0]) {
         return res.status(400).send({
-          status: 400,
-          data: [{
-            message: 'User not registered',
-          }],
+          message: 'User not registerd',
         });
       }
       if (!Helper.comparePassword(req.body.password, rows[0].password)) {
@@ -81,10 +72,7 @@ const UserController = {
         }],
       });
     } catch (error) {
-      return res.send({
-        status: 400,
-        error,
-      });
+      return next(error);
     }
   },
 
@@ -93,9 +81,8 @@ const UserController = {
    * @param {object} req
    * @param {object} res
    */
-  async resetPassword(req, res) {
+  async resetPassword(req, res, next) {
     try {
-      ValidateUserInput.resetPasswordField(req, res);
       const getUserSecurityQuestion = 'SELECT * FROM users WHERE $1 = email';
       const values = [
         req.body.email,
@@ -121,12 +108,7 @@ const UserController = {
         }],
       });
     } catch (error) {
-      return res.status(400).send({
-        status: 400,
-        data: [{
-          error,
-        }],
-      });
+      return next(error);
     }
   },
 };

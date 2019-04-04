@@ -12,6 +12,14 @@ const MessageController = {
   async create(req, res) {
     ValidateMessageInput.newMessageInput(req, res);
 
+    let messageStatus;
+
+    if (!req.body.receiverEmail) {
+      messageStatus = 'drafts';
+    } else {
+      messageStatus = 'unread';
+    }
+
     const createMessageQuery = `INSERT INTO
         messages(createdOn, receiverEmail, senderEmail, subject, message, parentMessageId, status)
         VALUES($1, $2, $3, $4, $5, $6, $7)
@@ -23,7 +31,7 @@ const MessageController = {
       req.body.subject.trim(),
       req.body.message,
       req.body.parentMessageId,
-      'unread',
+      messageStatus,
     ];
 
     try {

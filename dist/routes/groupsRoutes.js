@@ -1,44 +1,34 @@
-'use strict';
+"use strict";
 
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
+exports.default = void 0;
 
-var _express = require('express');
+var _express = _interopRequireDefault(require("express"));
 
-var _express2 = _interopRequireDefault(_express);
+var _GroupController = _interopRequireDefault(require("../controllers/GroupController"));
 
-var _GroupController = require('../controllers/GroupController');
-
-var _GroupController2 = _interopRequireDefault(_GroupController);
-
-var _Auth = require('../middleware/Auth');
-
-var _Auth2 = _interopRequireDefault(_Auth);
+var _Auth = _interopRequireDefault(require("../middleware/Auth"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var Router = _express2.default.Router();
+var Router = _express.default.Router(); // create groups
 
-// create groups
-Router.post('/groups', _Auth2.default.verifyToken, _GroupController2.default.createGroup);
 
-// add members
-Router.post('/addgroupmembers', _Auth2.default.verifyToken, _GroupController2.default.addGroupMembers);
+Router.post('/groups', _Auth.default.verifyToken, _GroupController.default.createGroup); // add members
 
-// delete members
-Router.delete('/deletegroupmembers', _Auth2.default.verifyToken, _GroupController2.default.deleteAGroupMember);
-// send group messages
-Router.post('/sendgroupmessages', _Auth2.default.verifyToken, _GroupController2.default.sendGroupMessage);
+Router.post('/groups/:id/users', _Auth.default.verifyToken, _GroupController.default.addGroupMembers); // delete members
 
-// see group messages
-Router.post('/seegroupmessages', _Auth2.default.verifyToken, _GroupController2.default.seeGroupMessages);
+Router.delete('/groups/:id/users/:userid', _Auth.default.verifyToken, _GroupController.default.deleteAGroupMember); // send group messages
 
-// see group messages
-Router.post('/seegroupmembers', _Auth2.default.verifyToken, _GroupController2.default.seeGroupMembers);
+Router.post('/groups/:id/messages', _Auth.default.verifyToken, _GroupController.default.sendGroupMessage); // get groups
 
-// delete group messages from my inbox
-// dlete group messages by admin
+Router.get('/groups', _Auth.default.verifyToken, _GroupController.default.getAllGroups); // patch group name
 
-exports.default = Router;
+Router.patch('/groups/:id/:name', _Auth.default.verifyToken, _GroupController.default.editGroupName); // delete group
+
+Router.delete('/groups/:id', _Auth.default.verifyToken, _GroupController.default.deleteGroup);
+var _default = Router;
+exports.default = _default;
 //# sourceMappingURL=groupsRoutes.js.map

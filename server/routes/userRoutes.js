@@ -1,4 +1,5 @@
 import express from 'express';
+import ValidateUserInput from '../middleware/UserValidator';
 import UserController from '../controllers/UserController';
 
 const Router = express.Router();
@@ -14,12 +15,12 @@ Router.get('/', (req, res) => {
 });
 
 // User Signup for an account
-Router.post('/auth/signup', UserController.createUser);
+Router.post('/auth/signup', ValidateUserInput.signUpField, UserController.createUser);
 
 // User Signin
-Router.post('/auth/login', UserController.login);
+Router.post('/auth/login', ValidateUserInput.loginField, UserController.login);
 
 // Reset password
-Router.post('/auth/reset', UserController.resetPassword);
+Router.post('/auth/reset', ValidateUserInput.resetPasswordField, UserController.resetPassword);
 
 export default Router;

@@ -16,9 +16,9 @@ const GroupController = {
     VALUES($1, $2, $3)
     returning *`;
     const values = [
-      req.body.name,
-      req.body.description,
-      req.user.email,
+      req.body.name.trim().toLowerCase(),
+      req.body.description.trim().toLowerCase(),
+      req.user.email.trim(),
     ];
     try {
       const { rows } = await db.query(createGroupQuery, values);
@@ -56,7 +56,7 @@ const GroupController = {
       req.params.id,
       req.body.name,
       req.body.membermail,
-      req.body.role,
+      'member',
     ];
     try {
       ValidateGroupsInput.verifyMembermail(req, res);

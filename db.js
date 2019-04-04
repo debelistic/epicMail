@@ -6,7 +6,7 @@ config();
 
 let dbURI;
 
-if (process.env.NODE_ENV === 'test') {
+if (process.env.NODE_ENV.trim() === 'test') {
   dbURI = process.env.TEST_DATABASE_URL;
 } else {
   dbURI = process.env.DATABASE_URL;
