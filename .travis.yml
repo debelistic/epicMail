@@ -6,7 +6,7 @@ before_script:
 language: node_js
 node_js:
   - "stable"
-cache: node_modules
+cache: npm
 script:
   - nyc npm test
 
@@ -15,7 +15,6 @@ services:
 
 env:
   global:
-  - CODECLIMATE_REPO_TOKEN=87a765b87dbb6cd1cd812775f246f595e1f75d4a3ef5bb1b3c4f456a1d727e67
   - SECRET=hbjfrjmbnfvmfnvbbfvnmvj
   - TEST_DATABASE_URL=postgres://pvnjhgbw:8bR3vBDbAKq09WwhdZyArY2K0Hb7uofp@isilo.db.elephantsql.com:5432/pvnjhgbw
   - NODE_ENV=test
