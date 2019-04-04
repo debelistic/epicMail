@@ -14,7 +14,7 @@ const token = jwt.sign({
 },
 process.env.SECRET, { expiresIn: '7d' });
 
-describe('/Post User', () => {
+describe('Create User', () => {
   it('Create USer Account on Sign up', (done) => {
     const newuser = {
       username: 'franksaint',
@@ -37,7 +37,28 @@ describe('/Post User', () => {
         done();
       });
   });
+});
 
+describe('Validate Username', () => {
+  it('Return 400 status code if username is too short', (done) => {
+    const newuser = {
+      firstName: 'victor',
+      lastName: 'tolulope',
+      username: 'devi',
+      password: 'frankmHYU67&hjfjf',
+    };
+
+    chai.request(app)
+      .post('/api/v1/auth/signup')
+      .send(newuser)
+      .end((err, res) => {
+        if (err) done();
+        chai.expect(res.status).to.equal(400);
+        done();
+      });
+  });
+});
+describe('Validate Signup Form', () => {
   it('Return 400 status code if there is a missing field', (done) => {
     const newuser = {
       username: 'samsm',
@@ -64,25 +85,6 @@ describe('/Post User', () => {
       lastName: 'tolulope',
       username: 'deviclistic23',
       password: 'jdnfmHYU',
-    };
-
-    chai.request(app)
-      .post('/api/v1/auth/signup')
-      .send(newuser)
-      .end((err, res) => {
-        if (err) done();
-        chai.expect(res.status).to.equal(400);
-        done();
-      });
-  });
-
-
-  it('Return 400 status code if username is too short', (done) => {
-    const newuser = {
-      firstName: 'victor',
-      lastName: 'tolulope',
-      username: 'devi',
-      password: 'frankmHYU67&hjfjf',
     };
 
     chai.request(app)
