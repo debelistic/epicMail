@@ -34,7 +34,7 @@ const UserController = {
         data: [{
           token,
           message: 'Your account has been created',
-          email: `Your epicmail address is ${emailAddress}`,
+          email_address: `Your epicmail address is ${emailAddress}`,
         }],
       });
     } catch (error) {
@@ -57,10 +57,7 @@ const UserController = {
       const { rows } = await db.query(loginQuery, [userEmail]);
       if (!rows[0]) {
         return res.status(400).send({
-          status: 400,
-          data: [{
-            message: 'User not registered',
-          }],
+          message: 'User not registerd',
         });
       }
       if (!Helper.comparePassword(req.body.password, rows[0].password)) {

@@ -32,8 +32,8 @@ describe('/Post User', () => {
         expect(res.body).to.have.keys('status', 'data');
         expect(res.body.status).to.equal(201);
         expect(res.body.data).to.be.an('array');
-        // chai.expect(res.body.data).to.eventually.be.a('array');
-        // chai.expect(res.body.data[1]).to.eventually.be.a('string');
+        expect(res.body.data[0]).to.be.an('object');
+        expect(res.body.data[0]).to.have.keys('token', 'message', 'email_address');
         done();
       });
   });
@@ -100,7 +100,7 @@ describe('/Post User', () => {
 describe('/Signin User', () => {
   it('Sign in user and generate token', (done) => {
     const reguser = {
-      email: 'franksaint@epicmail.com',
+      email: 'franksaint',
       password: 'ghJUIlO9@gh',
     };
 

@@ -1,5 +1,5 @@
 import express from 'express';
-import dotenv from 'dotenv';
+import { config } from 'dotenv';
 import swaggerUi from 'swagger-ui-express';
 import swaggerDocument from '../swagger.json';
 import Sanitize from './middleware/Sanitize';
@@ -9,7 +9,7 @@ import groupsRoutes from './routes/groupsRoutes';
 
 const app = express();
 
-dotenv.config();
+config();
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
