@@ -6,8 +6,7 @@ before_script:
 language: node_js
 node_js:
   - "stable"
-cache:
-  -node_modules
+cache: node_modules
 script:
   - nyc npm test
 
