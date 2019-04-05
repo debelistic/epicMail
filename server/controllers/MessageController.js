@@ -10,7 +10,6 @@ const MessageController = {
    */
   async create(req, res, next) {
     const messageStatus = (!req.body.receiverEmail) ? 'drafts' : 'unread';
-
     const createMessageQuery = `INSERT INTO
         messages(createdOn, receiverEmail, senderEmail, subject, message, parentMessageId, status)
         VALUES($1, $2, $3, $4, $5, $6, $7)

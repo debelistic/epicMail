@@ -9,7 +9,7 @@ const ValidateGroupsInput = {
    */
   async user(req, _res, next) {
     if (!req.user) {
-      return next('Signup to own groups');
+      return next('Signup to create groups');
     }
     return next();
   },
@@ -20,7 +20,7 @@ const ValidateGroupsInput = {
    * @param {object} _res
    * @param {object} next
    */
-  async addGroup(req, _res, next) {
+  async groupForm(req, _res, next) {
     if (!req.body.name || !req.body.description) {
       return next('If you are a registered user enter group name and description or Signup');
     }

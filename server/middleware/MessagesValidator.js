@@ -10,7 +10,7 @@ const ValidateMessageInput = {
       return next(error);
     }
   },
-  async checkSubject(req, res, next) {
+  async checkFeilds(req, res, next) {
     if (!req.body.subject || !req.body.message) {
       return next('Subject and Message should not be empty');
     }
