@@ -1,73 +1,77 @@
+/* eslint-disable consistent-return */
 import db from '../db';
 
 const ValidateGroupsInput = {
-  /**
-   * Validate User
-   * @param {object} req
-   * @param {object} res
-   * @param {object} next
-   */
-  async user(req, res, next) {
-    if (!req.user) {
-      return res.status(400).send({
-        message: 'Signup to create groups',
+  async addGroup(req, res) {
+    try {
+      if (!req.body.name) {
+        return res.send({
+          status: 400,
+          message: 'Enter name',
+        });
+      }
+      if (!req.body.description) {
+        return res.send({
+          status: 400,
+          message: 'Enter description',
+        });
+      }
+      if (!req.user.email) {
+        return res.send({
+          status: 403,
+          message: 'Only members can create groups',
+        });
+      }
+    } catch (error) {
+      if (error.routine === '_bt_check_unique') {
+        return res.send({
+          status: 400,
+          message: 'Group already exist',
+        });
+      }
+      return res.send({
+        status: 400,
+        error,
       });
     }
-    return next();
   },
-
-  /**
-   * Validate create group form
-   * @param {object} req
-   * @param {object} res
-   * @param {object} next
-   */
-  async groupForm(req, res, next) {
-    if (!req.body.name || !req.body.description) {
-      return res.status(400).send({
-        message: 'If you are a registered user enter group name and description or Signup',
-      });
-    }
-    return next();
-  },
-
-  /**
-   * Validate add member form
-   * @param {object} req
-   * @param {object} res
-   * @param {object} next
-   */
-  async addMember(req, res, next) {
-    if (!req.body.name || !req.body.membermail) {
-      return res.status(400).send({
-        message: 'Enter a group name and member mail',
-      });
-    }
-    return next();
-  },
-
-  /**
-   * Verify User Email
-   * @param {object} req
-   * @param {object} res
-   * @param {object} next
-   */
-  async verifyMail(req, res, next) {
+  async verifyMembermail(req, res) {
     try {
       const checkMemberEmailQuery = 'SELECT * FROM users WHERE $1=email';
       const { rows } = await db.query(checkMemberEmailQuery, [req.body.membermail]);
-      return rows[0];
+      if (!rows[0]) {
+        return res.send({
+          status: 400,
+          data: [{
+            message: 'Receiver email does not exist',
+          }],
+        });
+      }
+      if (!req.user.email) {
+        return res.status(403).send({
+          status: 403,
+          message: 'only registered users can make groups',
+        });
+      }
+      if (!req.body.name || !req.body.membermail) {
+        return res.status(400).send({
+          status: 400,
+          message: 'enter a group name and member mail',
+        });
+      }
     } catch (error) {
-      return next(error);
+      if (error.routine === '_bt_check_unique') {
+        return res.status(400).send({
+          status: 400,
+          message: 'Member Eixts Already',
+        });
+      }
+      return res.send({
+        error,
+      });
     }
   },
-
-  /**
-   * Add Creator as Admin on Creating group
-   * @param {object} req
-   * @param {object} res
-   */
-  async addAdmin(req, res, next) {
+  async addAdmin(req, res) {
     try {
       const addGroupAdminQuery = `INSERT INTO
       groupmembers(groupId, groupName, memberId, role)
@@ -81,7 +85,9 @@ const ValidateGroupsInput = {
       const { rows } = await db.query(addGroupAdminQuery, adminvalues);
       return rows[0];
     } catch (error) {
-      return next(error);
+      return res.send({
+        error,
+      });
     }
   },
 };

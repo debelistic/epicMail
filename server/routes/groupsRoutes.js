@@ -1,27 +1,14 @@
 import express from 'express';
 import GroupController from '../controllers/GroupController';
 import Auth from '../middleware/Auth';
-import ValidateGroupsInput from '../middleware/GroupsValidator';
 
 const Router = express.Router();
 
 // create groups
-Router.post(
-  '/groups',
-  ValidateGroupsInput.user,
-  Auth.checkToken,
-  Auth.verifyToken,
-  ValidateGroupsInput.groupForm,
-  ValidateGroupsInput.addAdmin,
-  GroupController.createGroup,
-);
+Router.post('/groups', Auth.verifyToken, GroupController.createGroup);
 
 // add members
-Router.post(
-  '/groups/:id/users',
-  Auth.verifyToken,
-  GroupController.addGroupMembers,
-);
+Router.post('/groups/:id/users', Auth.verifyToken, GroupController.addGroupMembers);
 
 // delete members
 Router.delete('/groups/:id/users/:userid', Auth.verifyToken, GroupController.deleteAGroupMember);

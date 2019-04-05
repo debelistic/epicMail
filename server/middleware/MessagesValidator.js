@@ -1,22 +1,59 @@
+/* eslint-disable consistent-return */
 import db from '../db';
 
 const ValidateMessageInput = {
-  async checkReceiver(req, res, next) {
+  async newMessageInput(req, res) {
     try {
       const checkReceiverEmailQuery = 'SELECT * FROM users WHERE $1=email';
       const { rows } = await db.query(checkReceiverEmailQuery, [req.body.receiverEmail]);
-      return rows[0];
+      if (!rows[0]) {
+        return res.send({
+          status: 400,
+          data: [{
+            message: 'Receiver email does not exist',
+          }],
+        });
+      }
+      if (!req.body.subject) {
+        return res.send({
+          status: 400,
+          data: [{
+            message: 'No subject is declared',
+          }],
+        });
+      }
+      if (!req.body.message) {
+        return res.send({
+          status: 400,
+          data: [{
+            message: 'No message content',
+          }],
+        });
+      }
+      if (!req.user) {
+        return res.send({
+          status: 400,
+          data: [{
+            message: 'Login to your account',
+          }],
+        });
+      }
+      if (req.user.email === req.body.receiverId) {
+        return res.send({
+          status: 400,
+          data: [{
+            message: 'Your message will be moved to drafts',
+          }],
+        });
+      }
     } catch (error) {
-      return next(error);
-    }
-  },
-  async checkFeilds(req, res, next) {
-    if (!req.body.subject || !req.body.message) {
-      return res.status(400).send({
-        message: 'Subject and Message should not be empty',
+      return res.send({
+        status: 400,
+        data: [{
+          error,
+        }],
       });
     }
-    return next();
   },
 };
 

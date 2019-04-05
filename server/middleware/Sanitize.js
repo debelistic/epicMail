@@ -21,6 +21,19 @@ const Sanitize = {
       return next(error);
     }
   },
+  async lowerCaseInput(req, res, next) {
+    try {
+      if (req.body.username) {
+      // eslint-disable-next-line no-restricted-syntax
+        for (const [key, value] of Object.entries(req.body)) {
+          req.body[key] = value.trim();
+        }
+      }
+      return next();
+    } catch (error) {
+      return next(error);
+    }
+  },
 };
 
 
