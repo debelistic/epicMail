@@ -5,14 +5,16 @@ const ValidateMessageInput = {
     try {
       const checkReceiverEmailQuery = 'SELECT * FROM users WHERE $1=email';
       const { rows } = await db.query(checkReceiverEmailQuery, [req.body.receiverEmail]);
-      return next(rows[0]);
+      return rows[0];
     } catch (error) {
       return next(error);
     }
   },
   async checkFeilds(req, res, next) {
     if (!req.body.subject || !req.body.message) {
-      return next('Subject and Message should not be empty');
+      return res.status(400).send({
+        message: 'Subject and Message should not be empty',
+      });
     }
     return next();
   },
