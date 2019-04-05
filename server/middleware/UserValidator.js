@@ -113,6 +113,19 @@ const ValidateUserInput = {
     }
     return next();
   },
+
+  /**
+   * Check is User is logged in
+   * @param {object} req
+   * @param {object} res
+   * @param {object} next
+   */
+  async checkUser(req, res, next) {
+    if (!req.user) {
+      return next('Login to your account');
+    }
+    return next();
+  },
 };
 
 export default ValidateUserInput;
