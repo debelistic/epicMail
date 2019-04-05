@@ -1,5 +1,4 @@
 import db from '../db';
-import ValidateMessageInput from '../middleware/MessagesValidator';
 
 const MessageController = {
 
@@ -9,17 +8,8 @@ const MessageController = {
    * @param { object } res
    * @returns { object } message object
    */
-  async create(req, res) {
-    ValidateMessageInput.newMessageInput(req, res);
-
-    let messageStatus;
-
-    if (!req.body.receiverEmail) {
-      messageStatus = 'drafts';
-    } else {
-      messageStatus = 'unread';
-    }
-
+  async create(req, res, next) {
+    const messageStatus = (!req.body.receiverEmail) ? 'drafts' : 'unread';
     const createMessageQuery = `INSERT INTO
         messages(createdOn, receiverEmail, senderEmail, subject, message, parentMessageId, status)
         VALUES($1, $2, $3, $4, $5, $6, $7)
@@ -43,11 +33,8 @@ const MessageController = {
           newsent: rows[0],
         }],
       });
-    } catch (err) {
-      return res.status(400).send({
-        status: 400,
-        err,
-      });
+    } catch (error) {
+      return next(error);
     }
   },
 
@@ -58,16 +45,13 @@ const MessageController = {
    * @returns { object } inbox array
    */
 
-  async getInbox(req, res) {
+  async getInbox(req, res, next) {
     const findInboxQuery = 'SELECT * FROM messages WHERE receiverEmail = $1';
     try {
-      if (!req.user.email) {
-        return res.status(403).send({ message: 'Login to your account' });
-      }
       const { rows, rowCount } = await db.query(findInboxQuery, [req.user.email]);
       return res.status(200).send({ rows, rowCount });
-    } catch (err) {
-      return res.status(400).send(err);
+    } catch (error) {
+      return next(error);
     }
   },
 
@@ -77,35 +61,25 @@ const MessageController = {
    * @param { object } res
    * @returns { object } inbox mail object
    */
-  async getAInbox(req, res) {
+  async getAInbox(req, res, next) {
     try {
       const findAInboxMailQuery = 'SELECT * FROM messages WHERE id=$1 AND receiverEmail = $2';
-      if (!req.user.email) {
-        return res.status(403).send({ message: 'Login to your account' });
-      }
-
       const { rows } = await db.query(findAInboxMailQuery, [req.params.id, req.user.email]);
-      if (!rows[0]) {
-        return res.status(404).send({ message: 'we could not find your mail' });
-      }
       const updateStatusQuery = 'UPDATE messages SET status=$1 WHERE receiverEmail = $2 RETURNING *';
       await db.query(updateStatusQuery, ['read', req.user.email]);
       return res.status(200).send({ rows });
-    } catch (err) {
-      return res.status(400).send({ err });
+    } catch (error) {
+      return next(error);
     }
   },
 
-  async getUnread(req, res) {
+  async getUnread(req, res, next) {
     try {
       const findAllUnreadQuery = 'SELECT * FROM messages WHERE receiverEmail = $1 AND status = $2';
-      if (!req.user.email) {
-        return res.status(403).send({ message: 'Login to your account' });
-      }
       const { rows, rowCount } = await db.query(findAllUnreadQuery, [req.user.email, 'unread']);
       return res.status(200).send({ rows, rowCount });
-    } catch (err) {
-      return res.status(400).send({ err });
+    } catch (error) {
+      return next(error);
     }
   },
 
@@ -118,9 +92,6 @@ const MessageController = {
   async getSent(req, res) {
     try {
       const findSentQuery = 'SELECT * FROM messages WHERE senderEmail = $1';
-      if (!req.user.email) {
-        return res.status(403).send({ message: 'Login to your account' });
-      }
       const { rows, rowCount } = await db.query(findSentQuery, [req.user.email]);
       return res.status(200).send({ rows, rowCount });
     } catch (err) {
@@ -134,16 +105,13 @@ const MessageController = {
    * @param { object } res
    * @returns { object } sent mail object
    */
-  async getASent(req, res) {
+  async getASent(req, res, next) {
     try {
       const findASentMailQuery = 'SELECT * FROM messages WHERE id = $1 AND senderEmail = $2';
       const { rows } = await db.query(findASentMailQuery, [req.params.id, req.user.email]);
-      if (!rows[0]) {
-        return res.status(404).send({ message: 'we could not find your mail' });
-      }
       return res.status(200).send({ sent: rows[0] });
-    } catch (err) {
-      return res.status(400).send(err);
+    } catch (error) {
+      return next(error);
     }
   },
 
@@ -153,19 +121,17 @@ const MessageController = {
    * @param { object } res
    * @returns { object } success or error
    */
-  async deleteAInbox(req, res) {
+  async deleteAInbox(req, res, next) {
     try {
       const deleteAInboxMailQuery = 'DELETE FROM messages WHERE id=$1 AND receiverEmail = $2 RETURNING *';
       const { rows } = await db.query(deleteAInboxMailQuery, [req.params.id, req.user.email]);
-      if (!rows[0]) {
-        return res.status(404).send({ message: 'we could not find your mail' });
-      }
       return res.send({
         status: 204,
         message: 'deleted',
+        mail: rows[0],
       });
-    } catch (err) {
-      return res.status(400).send(err);
+    } catch (error) {
+      return next(error);
     }
   },
 
@@ -175,19 +141,17 @@ const MessageController = {
    * @param { object } res
    * @returns { object } success or error
    */
-  async deleteASent(req, res) {
+  async deleteASent(req, res, next) {
     try {
       const deleteASentMailQuery = 'DELETE FROM messages WHERE id=$1 AND senderEmail = $2 RETURNING *';
       const { rows } = await db.query(deleteASentMailQuery, [req.params.id, req.user.email]);
-      if (!rows[0]) {
-        return res.status(404).send({ message: 'we could not find your mail' });
-      }
       return res.send({
         status: 204,
         message: 'deleted',
+        mail: rows[0],
       });
-    } catch (err) {
-      return res.status(400).send(err);
+    } catch (error) {
+      return next(error);
     }
   },
 };

@@ -15,12 +15,25 @@ Router.get('/', (req, res) => {
 });
 
 // User Signup for an account
-Router.post('/auth/signup', ValidateUserInput.signUpField, UserController.createUser);
+Router.post(
+  '/auth/signup',
+  ValidateUserInput.bodyCheck,
+  ValidateUserInput.names,
+  ValidateUserInput.username,
+  ValidateUserInput.password,
+  ValidateUserInput.restoreKey,
+  UserController.createUser,
+);
 
 // User Signin
-Router.post('/auth/login', ValidateUserInput.loginField, UserController.login);
+Router.post(
+  '/auth/login',
+  ValidateUserInput.loginField,
+  ValidateUserInput.loginEmail,
+  ValidateUserInput.loginPassword,
+  UserController.login,
+);
 
 // Reset password
-Router.post('/auth/reset', ValidateUserInput.resetPasswordField, UserController.resetPassword);
 
 export default Router;

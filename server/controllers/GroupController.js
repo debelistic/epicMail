@@ -9,8 +9,6 @@ const GroupController = {
    * @returns {object} group
    */
   async createGroup(req, res) {
-    ValidateGroupsInput.addGroup(req, res);
-    ValidateGroupsInput.addAdmin(req, res);
     const createGroupQuery = `INSERT INTO
     groups(name, description, ownerId)
     VALUES($1, $2, $3)
@@ -29,12 +27,6 @@ const GroupController = {
         }],
       });
     } catch (error) {
-      if (error.routine === '_bt_check_unique') {
-        return res.send({
-          status: 400,
-          message: 'Group already exist',
-        });
-      }
       return res.send({
         status: 400,
         error,
@@ -76,12 +68,6 @@ const GroupController = {
         ],
       });
     } catch (err) {
-      if (err.routine === '_bt_check_unique') {
-        return res.status(400).send({
-          status: 400,
-          message: 'Member Eixts Already',
-        });
-      }
       return res.send({
         status: 400,
         data: [
