@@ -10,7 +10,7 @@ const { expect } = chai;
 chai.use(chaiHttp);
 
 const token = jwt.sign({
-  userEmail: 'frankjunior@epicmail.com',
+  userEmail: 'franksaint@epicmail.com',
 },
 process.env.SECRET, { expiresIn: '7d' });
 
@@ -78,7 +78,9 @@ describe('Validate Signup Form', () => {
         done();
       });
   });
+});
 
+describe('Valiadte Password', () => {
   it('Return 400 status code if password is not strong', (done) => {
     const newuser = {
       firstName: 'victor',
@@ -98,9 +100,8 @@ describe('Validate Signup Form', () => {
   });
 });
 
-
-describe('/Signin User', () => {
-  it('Sign in user and generate token', (done) => {
+describe('Login User', () => {
+  it('Sign User with Token', (done) => {
     const reguser = {
       email: 'franksaint',
       password: 'ghJUIlO9@gh',
@@ -120,7 +121,9 @@ describe('/Signin User', () => {
         done();
       });
   });
+});
 
+describe('Validate Login form', () => {
   it('Return 400 status code if there is a missing field', (done) => {
     const reguser = {};
 
