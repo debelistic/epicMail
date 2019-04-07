@@ -11,9 +11,9 @@ Router.use(express.json());
 // Get all received emails for a user
 Router.get(
   '/messages',
-  ValidateUserInput.checkUser,
   Auth.checkToken,
   Auth.verifyToken,
+  ValidateUserInput.checkUser,
   MailController.getInbox,
 );
 
@@ -55,9 +55,9 @@ Router.get(
 // Send mail to individuals
 Router.post(
   '/messages',
-  ValidateUserInput.checkUser,
   Auth.checkToken,
   Auth.verifyToken,
+  ValidateUserInput.checkUser,
   ValidateMessageInput.checkReceiver,
   ValidateMessageInput.checkFeilds,
   MailController.create,

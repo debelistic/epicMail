@@ -1,3 +1,4 @@
+import { uuidv4 } from 'uuid';
 import db from '../db';
 
 const MessageController = {
@@ -9,6 +10,7 @@ const MessageController = {
    * @returns { object } message object
    */
   async create(req, res, next) {
+    console.log('about to send');
     const messageStatus = (!req.body.receiverEmail) ? 'drafts' : 'unread';
     const createMessageQuery = `INSERT INTO
         messages(createdOn, receiverEmail, senderEmail, subject, message, parentMessageId, status)
@@ -17,12 +19,14 @@ const MessageController = {
     const values = [
       new Date(),
       req.body.receiverEmail,
-      req.user.email,
-      req.body.subject.trim(),
+      req.user,
+      req.body.subject.toLowerCase(),
       req.body.message,
-      req.body.parentMessageId,
+      uuidv4(),
       messageStatus,
     ];
+    console.log('user sending mesage');
+    console.log(req.user, 'is sending a message', req.body.receiverEmail);
 
     try {
       const { rows } = await db.query(createMessageQuery, values);
@@ -34,6 +38,7 @@ const MessageController = {
         }],
       });
     } catch (error) {
+      console.log(error);
       return next(error);
     }
   },

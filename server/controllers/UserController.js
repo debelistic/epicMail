@@ -38,7 +38,7 @@ const UserController = {
         data: [{
           token,
           message: 'Your account has been created',
-          email_address: `Your epicmail address is ${emailAddress}`,
+          email_address: `Your epicmail address is ${rows[0].email}`,
         }],
       });
     } catch (error) {
