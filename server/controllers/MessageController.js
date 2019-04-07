@@ -24,8 +24,6 @@ const MessageController = {
       uuidv4(),
       messageStatus,
     ];
-    console.log('user sending mesage');
-    console.log(req.user, 'is sending a message', req.body.receiverEmail);
 
     try {
       const { rows } = await db.query(createMessageQuery, values);
@@ -37,7 +35,6 @@ const MessageController = {
         }],
       });
     } catch (error) {
-      console.log('error @  create message contoller', error);
       if (error.routine === 'ri_ReportViolation') {
         return res.status(400).send({
           message: 'Receiver not registered',
