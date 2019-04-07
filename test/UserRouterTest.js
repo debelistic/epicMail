@@ -103,7 +103,7 @@ describe('Valiadte Password', () => {
 describe('Login User', () => {
   it('Sign User with Token', (done) => {
     const reguser = {
-      email: 'franksaint',
+      email: 'franksaint@epicmail.com',
       password: 'ghJUIlO9@gh',
     };
 
