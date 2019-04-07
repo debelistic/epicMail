@@ -93,7 +93,7 @@ describe('GET All Inbox', () => {
   });
 });
 
-describe('/GET All Unread mails', () => {
+describe('GET All Unread mails', () => {
   it('It should get all unread mails of auth user', (done) => {
     chai.request(app)
       .get('/api/v1/messages/unread')
@@ -129,10 +129,26 @@ describe('GET All Sent mails', () => {
 });
 
 
-describe('Get A Mail', () => {
+describe('Get A Mail From Inbox', () => {
   it('It should return specific mail of a user', (done) => {
     chai.request(app)
       .get('/api/v1/messages/5')
+      .set('x-access-token', token)
+      .end((err, res) => {
+        if (err) done(err);
+        expect(res.status).to.equal(200);
+        expect(res.body).to.be.a('object');
+        expect(res.body).to.have.keys('status', 'message');
+        expect(res.body.message).to.be.a('array');
+        done();
+      });
+  });
+});
+
+describe('Get A Sent Mail', () => {
+  it('It should return a sent mail of a user', (done) => {
+    chai.request(app)
+      .get('/api/v1/messages/sent/2')
       .set('x-access-token', token)
       .end((err, res) => {
         if (err) done(err);

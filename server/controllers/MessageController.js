@@ -140,7 +140,10 @@ const MessageController = {
     try {
       const findASentMailQuery = 'SELECT * FROM messages WHERE id = $1 AND senderEmail = $2';
       const { rows } = await db.query(findASentMailQuery, [req.params.id, req.user.email]);
-      return res.status(200).send({ sent: rows[0] });
+      return res.status(200).send({
+        status: 200,
+        message: rows,
+      });
     } catch (error) {
       return res.status(400).send({
         mesage: error,
