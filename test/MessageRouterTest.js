@@ -35,11 +35,33 @@ describe('Send Message', () => {
   });
 });
 
-describe('Validate Message Input Field', () => {
-  it('Return 400 status code if there is a missing field', (done) => {
+describe('Save as draft', () => {
+  it('Save as draft if receiver is not specified', (done) => {
     const newmail = {
-      subject: 'victor',
-      message: 'jnnvjfnvtmj jvfrmjv',
+      subject: 'chai test',
+      message: 'developin backend skils',
+    };
+
+    chai.request(app)
+      .post('/api/v1/messages')
+      .set('x-access-token', token)
+      .send(newmail)
+      .end((err, res) => {
+        if (err) done();
+        expect(res.status).to.equal(201);
+        expect(res.body).to.be.a('object');
+        expect(res.body.data).to.be.a('array');
+        expect(res.body.data[0]).to.be.a('object');
+        expect(res.body.data[0].newsent).to.be.a('object');
+        done();
+      });
+  });
+});
+
+describe('Return 400 status code if there is a missing field', () => {
+  it('Return 400 status code', (done) => {
+    const newmail = {
+      subject: 'chai test',
     };
 
     chai.request(app)
