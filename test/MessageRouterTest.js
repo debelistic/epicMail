@@ -85,7 +85,9 @@ describe('GET All Inbox', () => {
         if (err) done(err);
         expect(res.status).to.equal(200);
         expect(res.body).to.be.a('object');
-        expect(res.body.data[0]).to.be.a('array');
+        expect(res.body).to.have.keys('status', 'count', 'inbox');
+        expect(res.body.count).to.be.a('string');
+        expect(res.body.inbox).to.be.a('array');
         done();
       });
   });
@@ -100,7 +102,9 @@ describe('/GET All Unread mails', () => {
         if (err) done(err);
         expect(res.status).to.equal(200);
         expect(res.body).to.be.a('object');
-        expect(res.body.data).to.be.a('array');
+        expect(res.body).to.have.keys('status', 'count', 'unread');
+        expect(res.body.count).to.be.a('string');
+        expect(res.body.unread).to.be.a('array');
         done();
       });
   });
@@ -116,7 +120,9 @@ describe('/GET All Sent mails', () => {
         if (err) done(err);
         expect(res.status).to.equal(200);
         expect(res.body).to.be.a('object');
-        expect(res.body.data[0]).to.be.a('array');
+        expect(res.body).to.have.keys('status', 'count', 'sent');
+        expect(res.body.count).to.be.a('string');
+        expect(res.body.sent).to.be.a('array');
         done();
       });
   });
@@ -153,15 +159,15 @@ describe('Get A Mail', () => {
 //   });
 // });
 
-// describe('Delete A Mail', () => {
-//   it('It return 404 status code', (done) => {
-//     chai.request(app)
-//       .delete('/api/v1/messages/13')
-//       .set('x-access-token', token)
-//       .end((err, res) => {
-//         if (err) done(err);
-//         expect(res.status).to.equal(404);
-//         done();
-//       });
-//   });
-// });
+describe('Delete A Mail', () => {
+  it('Delete a mail from inbox', (done) => {
+    chai.request(app)
+      .delete('/api/v1/messages/3')
+      .set('x-access-token', token)
+      .end((err, res) => {
+        if (err) done(err);
+        expect(res.status).to.equal(204);
+        done();
+      });
+  });
+});

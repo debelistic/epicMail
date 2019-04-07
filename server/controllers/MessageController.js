@@ -57,7 +57,11 @@ const MessageController = {
     const findInboxQuery = 'SELECT * FROM messages WHERE receiverEmail = $1';
     try {
       const { rows, rowCount } = await db.query(findInboxQuery, [req.user.email]);
-      return res.status(200).send({ rows, rowCount });
+      return res.status(200).send({
+        status: 200,
+        count: `You have ${rowCount} messages.`,
+        inbox: rows,
+      });
     } catch (error) {
       return res.status(400).send({
         mesage: error,
@@ -77,7 +81,11 @@ const MessageController = {
       const { rows } = await db.query(findAInboxMailQuery, [req.params.id, req.user.email]);
       const updateStatusQuery = 'UPDATE messages SET status=$1 WHERE receiverEmail = $2 RETURNING *';
       await db.query(updateStatusQuery, ['read', req.user.email]);
-      return res.status(200).send({ rows });
+      console.log(rows);
+      return res.status(200).send({
+        status: 200,
+        message: rows,
+      });
     } catch (error) {
       return res.status(400).send({
         mesage: error,
@@ -89,7 +97,11 @@ const MessageController = {
     try {
       const findAllUnreadQuery = 'SELECT * FROM messages WHERE receiverEmail = $1 AND status = $2';
       const { rows, rowCount } = await db.query(findAllUnreadQuery, [req.user.email, 'unread']);
-      return res.status(200).send({ rows, rowCount });
+      return res.status(200).send({
+        status: 200,
+        count: `You have ${rowCount} unread messages.`,
+        unread: rows,
+      });
     } catch (error) {
       return res.status(400).send({
         mesage: error,
@@ -107,7 +119,11 @@ const MessageController = {
     try {
       const findSentQuery = 'SELECT * FROM messages WHERE senderEmail = $1';
       const { rows, rowCount } = await db.query(findSentQuery, [req.user.email]);
-      return res.status(200).send({ rows, rowCount });
+      return res.status(200).send({
+        status: 200,
+        count: `You havesent messages ${rowCount}.`,
+        sent: rows,
+      });
     } catch (error) {
       return res.status(400).send({
         mesage: error,

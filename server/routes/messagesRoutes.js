@@ -6,7 +6,9 @@ import ValidateMessageInput from '../middleware/MessagesValidator';
 
 const Router = express.Router();
 
-// Get all received emails for a user
+/**
+ * Get inbox for a user
+ */
 Router.get(
   '/messages',
   Auth.checkToken,
@@ -15,7 +17,9 @@ Router.get(
   MessageController.getInbox,
 );
 
-// Get unread mails for a user
+/**
+ * Get unread mails for a user
+ */
 Router.get(
   '/messages/unread',
   ValidateUserInput.checkUser,
@@ -24,7 +28,9 @@ Router.get(
   MessageController.getUnread,
 );
 
-// Get all sent emails for a user
+/**
+ * Get all sent emails for a user
+ */
 Router.get(
   '/messages/sent',
   ValidateUserInput.checkUser,
@@ -33,7 +39,9 @@ Router.get(
   MessageController.getSent,
 );
 
-// Get all a sent email for a user
+/**
+ * Get a sent email for a user
+ */
 Router.get(
   '/messages/sent/:id',
   ValidateUserInput.checkUser,
@@ -42,7 +50,9 @@ Router.get(
   MessageController.getASent,
 );
 
-// Get a user email
+/**
+ * Get a user specific inbox mail
+ */
 Router.get(
   '/messages/:id',
   Auth.checkToken,
@@ -50,7 +60,9 @@ Router.get(
   MessageController.getAInbox,
 );
 
-// Send mail to individuals
+/**
+ * Send mail to individuals
+ */
 Router.post(
   '/messages',
   Auth.checkToken,
@@ -61,7 +73,9 @@ Router.post(
   MessageController.create,
 );
 
-// Delete from inbox
+/**
+ * Delete a mail from inbox
+ */
 Router.delete(
   '/messages/:id',
   ValidateUserInput.checkUser,
@@ -70,7 +84,9 @@ Router.delete(
   MessageController.deleteAInbox,
 );
 
-// Get a sent email for a user
+/**
+ * Delete a sent email for a user
+ */
 Router.delete(
   '/messages/sent/:id',
   ValidateUserInput.checkUser,
