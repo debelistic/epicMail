@@ -6,8 +6,6 @@ import ValidateMessageInput from '../middleware/MessagesValidator';
 
 const Router = express.Router();
 
-Router.use(express.json());
-
 // Get all received emails for a user
 Router.get(
   '/messages',

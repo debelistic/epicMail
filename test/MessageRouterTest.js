@@ -125,19 +125,8 @@ describe('/GET All Sent mails', () => {
 
 describe('Get A Mail', () => {
   it('It should return specific mail of a user', (done) => {
-    const newMail = {
-      id: 63,
-      createdOn: Date(),
-      subject: 'test',
-      message: "you're building",
-      receiverId: 56,
-      parentMessageId: 89,
-      sentStatus: true,
-      status: 'sent',
-    };
-
     chai.request(app)
-      .get(`/api/v1/messages/${newMail.id}`)
+      .get('/api/v1/messages/5')
       .set('x-access-token', token)
       .end((err, res) => {
         if (err) done(err);

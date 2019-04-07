@@ -18,6 +18,7 @@ const ValidateUserInput = {
     return next();
   },
 
+
   /**
    * Validate Name fields
    * @param {object} req
@@ -27,7 +28,7 @@ const ValidateUserInput = {
   async names(req, res, next) {
     if (!req.body.firstName || !req.body.lastName) {
       return res.status(400).send({
-        message: 'Enter your first name, last name ',
+        message: 'Enter your first name and last name ',
       });
     }
     return next();
