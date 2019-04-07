@@ -22,9 +22,9 @@ Router.get(
  */
 Router.get(
   '/messages/unread',
-  ValidateUserInput.checkUser,
   Auth.checkToken,
   Auth.verifyToken,
+  ValidateUserInput.checkUser,
   MessageController.getUnread,
 );
 
@@ -33,9 +33,9 @@ Router.get(
  */
 Router.get(
   '/messages/sent',
-  ValidateUserInput.checkUser,
   Auth.checkToken,
   Auth.verifyToken,
+  ValidateUserInput.checkUser,
   MessageController.getSent,
 );
 
@@ -44,9 +44,9 @@ Router.get(
  */
 Router.get(
   '/messages/sent/:id',
-  ValidateUserInput.checkUser,
   Auth.checkToken,
   Auth.verifyToken,
+  ValidateUserInput.checkUser,
   MessageController.getASent,
 );
 
@@ -57,6 +57,7 @@ Router.get(
   '/messages/:id',
   Auth.checkToken,
   Auth.verifyToken,
+  ValidateUserInput.checkUser,
   MessageController.getAInbox,
 );
 
@@ -78,9 +79,9 @@ Router.post(
  */
 Router.delete(
   '/messages/:id',
-  ValidateUserInput.checkUser,
   Auth.checkToken,
   Auth.verifyToken,
+  ValidateUserInput.checkUser,
   MessageController.deleteAInbox,
 );
 
@@ -89,9 +90,9 @@ Router.delete(
  */
 Router.delete(
   '/messages/sent/:id',
-  ValidateUserInput.checkUser,
   Auth.checkToken,
   Auth.verifyToken,
+  ValidateUserInput.checkUser,
   MessageController.deleteASent,
 );
 

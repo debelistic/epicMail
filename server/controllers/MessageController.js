@@ -81,7 +81,6 @@ const MessageController = {
       const { rows } = await db.query(findAInboxMailQuery, [req.params.id, req.user.email]);
       const updateStatusQuery = 'UPDATE messages SET status=$1 WHERE receiverEmail = $2 RETURNING *';
       await db.query(updateStatusQuery, ['read', req.user.email]);
-      console.log(rows);
       return res.status(200).send({
         status: 200,
         message: rows,
@@ -159,7 +158,7 @@ const MessageController = {
     try {
       const deleteAInboxMailQuery = 'DELETE FROM messages WHERE id=$1 AND receiverEmail = $2 RETURNING *';
       const { rows } = await db.query(deleteAInboxMailQuery, [req.params.id, req.user.email]);
-      return res.send({
+      return res.status(204).send({
         status: 204,
         message: 'deleted',
         mail: rows[0],
@@ -181,7 +180,7 @@ const MessageController = {
     try {
       const deleteASentMailQuery = 'DELETE FROM messages WHERE id=$1 AND senderEmail = $2 RETURNING *';
       const { rows } = await db.query(deleteASentMailQuery, [req.params.id, req.user.email]);
-      return res.send({
+      return res.status(204).send({
         status: 204,
         message: 'deleted',
         mail: rows[0],

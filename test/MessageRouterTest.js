@@ -111,7 +111,7 @@ describe('/GET All Unread mails', () => {
 });
 
 
-describe('/GET All Sent mails', () => {
+describe('GET All Sent mails', () => {
   it('It should get all sent mails of auth user', (done) => {
     chai.request(app)
       .get('/api/v1/messages/sent')
@@ -138,7 +138,8 @@ describe('Get A Mail', () => {
         if (err) done(err);
         expect(res.status).to.equal(200);
         expect(res.body).to.be.a('object');
-        expect(res.body.data).to.be.a('array');
+        expect(res.body).to.have.keys('status', 'message');
+        expect(res.body.message).to.be.a('array');
         done();
       });
   });
