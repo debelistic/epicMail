@@ -79,7 +79,7 @@ const createMessagesTable = async () => {
     senderEmail VARCHAR(500) REFERENCES users (email),
     subject TEXT NOT NULL DEFAULT 'No Subject',
     message TEXT NOT NULL DEFAULT 'No Message',
-    parentMessageId INT,
+    parentMessageId UUID,
     status message_status NOT NULL DEFAULT 'unread'
   )`;
   await pool.query(messageQuery);

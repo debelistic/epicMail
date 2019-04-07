@@ -20,11 +20,10 @@ const Auth = {
        */
       const decoded = jwt.verify(token, process.env.SECRET);
       const text = 'SELECT * FROM users WHERE email = $1';
-      const { rows } = await db.query(text, [decoded.userEmail]);
+      await db.query(text, [decoded.userEmail]);
       req.user = { email: decoded.userEmail };
-      console.log(req.user);
+      return next();
     } catch (error) {
-      console.log(error);
       return next(error);
     }
   },

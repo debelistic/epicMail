@@ -25,7 +25,7 @@ describe('Send Message', () => {
       .set('x-access-token', token)
       .send(newmail)
       .end((err, res) => {
-        if (err) done();
+        if (err) done(err);
         expect(res.status).to.equal(201);
         expect(res.body).to.be.a('object');
         expect(res.body.data).to.be.a('array');

@@ -4,8 +4,8 @@ const ValidateMessageInput = {
   async checkReceiver(req, res, next) {
     try {
       const checkReceiverEmailQuery = 'SELECT * FROM users WHERE $1=email';
-      const { rows } = await db.query(checkReceiverEmailQuery, [req.body.receiverEmail]);
-      return rows[0];
+      await db.query(checkReceiverEmailQuery, [req.body.receiverEmail]);
+      return next();
     } catch (error) {
       return next(error);
     }

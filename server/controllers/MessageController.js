@@ -1,4 +1,4 @@
-import { uuidv4 } from 'uuid';
+import uuidv4 from 'uuid/v4';
 import db from '../db';
 
 const MessageController = {
@@ -9,9 +9,8 @@ const MessageController = {
    * @param { object } res
    * @returns { object } message object
    */
-  async create(req, res, next) {
-    console.log('about to send');
-    const messageStatus = (!req.body.receiverEmail) ? 'drafts' : 'unread';
+  async create(req, res) {
+    const messageStatus = (!req.body.receiverEmail) ? 'draft' : 'unread';
     const createMessageQuery = `INSERT INTO
         messages(createdOn, receiverEmail, senderEmail, subject, message, parentMessageId, status)
         VALUES($1, $2, $3, $4, $5, $6, $7)
@@ -19,7 +18,7 @@ const MessageController = {
     const values = [
       new Date(),
       req.body.receiverEmail,
-      req.user,
+      req.user.email,
       req.body.subject.toLowerCase(),
       req.body.message,
       uuidv4(),
@@ -38,8 +37,15 @@ const MessageController = {
         }],
       });
     } catch (error) {
-      console.log(error);
-      return next(error);
+      console.log('error @  create message contoller', error);
+      if (error.routine === 'ri_ReportViolation') {
+        return res.status(400).send({
+          message: 'Receiver not registered',
+        });
+      }
+      return res.status(400).send({
+        mesage: error,
+      });
     }
   },
 
@@ -50,13 +56,15 @@ const MessageController = {
    * @returns { object } inbox array
    */
 
-  async getInbox(req, res, next) {
+  async getInbox(req, res) {
     const findInboxQuery = 'SELECT * FROM messages WHERE receiverEmail = $1';
     try {
       const { rows, rowCount } = await db.query(findInboxQuery, [req.user.email]);
       return res.status(200).send({ rows, rowCount });
     } catch (error) {
-      return next(error);
+      return res.status(400).send({
+        mesage: error,
+      });
     }
   },
 
@@ -66,7 +74,7 @@ const MessageController = {
    * @param { object } res
    * @returns { object } inbox mail object
    */
-  async getAInbox(req, res, next) {
+  async getAInbox(req, res) {
     try {
       const findAInboxMailQuery = 'SELECT * FROM messages WHERE id=$1 AND receiverEmail = $2';
       const { rows } = await db.query(findAInboxMailQuery, [req.params.id, req.user.email]);
@@ -74,17 +82,21 @@ const MessageController = {
       await db.query(updateStatusQuery, ['read', req.user.email]);
       return res.status(200).send({ rows });
     } catch (error) {
-      return next(error);
+      return res.status(400).send({
+        mesage: error,
+      });
     }
   },
 
-  async getUnread(req, res, next) {
+  async getUnread(req, res) {
     try {
       const findAllUnreadQuery = 'SELECT * FROM messages WHERE receiverEmail = $1 AND status = $2';
       const { rows, rowCount } = await db.query(findAllUnreadQuery, [req.user.email, 'unread']);
       return res.status(200).send({ rows, rowCount });
     } catch (error) {
-      return next(error);
+      return res.status(400).send({
+        mesage: error,
+      });
     }
   },
 
@@ -99,8 +111,10 @@ const MessageController = {
       const findSentQuery = 'SELECT * FROM messages WHERE senderEmail = $1';
       const { rows, rowCount } = await db.query(findSentQuery, [req.user.email]);
       return res.status(200).send({ rows, rowCount });
-    } catch (err) {
-      return res.status(400).send(err);
+    } catch (error) {
+      return res.status(400).send({
+        mesage: error,
+      });
     }
   },
 
@@ -110,13 +124,15 @@ const MessageController = {
    * @param { object } res
    * @returns { object } sent mail object
    */
-  async getASent(req, res, next) {
+  async getASent(req, res) {
     try {
       const findASentMailQuery = 'SELECT * FROM messages WHERE id = $1 AND senderEmail = $2';
       const { rows } = await db.query(findASentMailQuery, [req.params.id, req.user.email]);
       return res.status(200).send({ sent: rows[0] });
     } catch (error) {
-      return next(error);
+      return res.status(400).send({
+        mesage: error,
+      });
     }
   },
 
@@ -126,7 +142,7 @@ const MessageController = {
    * @param { object } res
    * @returns { object } success or error
    */
-  async deleteAInbox(req, res, next) {
+  async deleteAInbox(req, res) {
     try {
       const deleteAInboxMailQuery = 'DELETE FROM messages WHERE id=$1 AND receiverEmail = $2 RETURNING *';
       const { rows } = await db.query(deleteAInboxMailQuery, [req.params.id, req.user.email]);
@@ -136,7 +152,9 @@ const MessageController = {
         mail: rows[0],
       });
     } catch (error) {
-      return next(error);
+      return res.status(400).send({
+        mesage: error,
+      });
     }
   },
 
@@ -146,7 +164,7 @@ const MessageController = {
    * @param { object } res
    * @returns { object } success or error
    */
-  async deleteASent(req, res, next) {
+  async deleteASent(req, res) {
     try {
       const deleteASentMailQuery = 'DELETE FROM messages WHERE id=$1 AND senderEmail = $2 RETURNING *';
       const { rows } = await db.query(deleteASentMailQuery, [req.params.id, req.user.email]);
@@ -156,7 +174,9 @@ const MessageController = {
         mail: rows[0],
       });
     } catch (error) {
-      return next(error);
+      return res.status(400).send({
+        mesage: error,
+      });
     }
   },
 };

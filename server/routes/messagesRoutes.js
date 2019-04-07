@@ -1,5 +1,5 @@
 import express from 'express';
-import MailController from '../controllers/MessageController';
+import MessageController from '../controllers/MessageController';
 import Auth from '../middleware/Auth';
 import ValidateUserInput from '../middleware/UserValidator';
 import ValidateMessageInput from '../middleware/MessagesValidator';
@@ -14,7 +14,7 @@ Router.get(
   Auth.checkToken,
   Auth.verifyToken,
   ValidateUserInput.checkUser,
-  MailController.getInbox,
+  MessageController.getInbox,
 );
 
 // Get unread mails for a user
@@ -23,7 +23,7 @@ Router.get(
   ValidateUserInput.checkUser,
   Auth.checkToken,
   Auth.verifyToken,
-  MailController.getUnread,
+  MessageController.getUnread,
 );
 
 // Get all sent emails for a user
@@ -32,7 +32,7 @@ Router.get(
   ValidateUserInput.checkUser,
   Auth.checkToken,
   Auth.verifyToken,
-  MailController.getSent,
+  MessageController.getSent,
 );
 
 // Get all a sent email for a user
@@ -41,7 +41,7 @@ Router.get(
   ValidateUserInput.checkUser,
   Auth.checkToken,
   Auth.verifyToken,
-  MailController.getASent,
+  MessageController.getASent,
 );
 
 // Get a user email
@@ -49,7 +49,7 @@ Router.get(
   '/messages/:id',
   Auth.checkToken,
   Auth.verifyToken,
-  MailController.getAInbox,
+  MessageController.getAInbox,
 );
 
 // Send mail to individuals
@@ -60,7 +60,7 @@ Router.post(
   ValidateUserInput.checkUser,
   ValidateMessageInput.checkReceiver,
   ValidateMessageInput.checkFeilds,
-  MailController.create,
+  MessageController.create,
 );
 
 // Delete from inbox
@@ -69,7 +69,7 @@ Router.delete(
   ValidateUserInput.checkUser,
   Auth.checkToken,
   Auth.verifyToken,
-  MailController.deleteAInbox,
+  MessageController.deleteAInbox,
 );
 
 // Get a sent email for a user
@@ -78,7 +78,7 @@ Router.delete(
   ValidateUserInput.checkUser,
   Auth.checkToken,
   Auth.verifyToken,
-  MailController.deleteASent,
+  MessageController.deleteASent,
 );
 
 
