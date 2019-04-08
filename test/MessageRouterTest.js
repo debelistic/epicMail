@@ -161,25 +161,56 @@ describe('Get A Sent Mail', () => {
   });
 });
 
-// describe('/GET All Drafts', () => {
-//   it('It should get all drafts for auth user', (done) => {
-//     chai.request(app)
-//       .get('/api/v1/messages/drafts')
-//       .set('x-access-token', token)
-//       .end((err, res) => {
-//         if (err) done(err);
-//         expect(res.status).to.equal(200);
-//         expect(res.body).to.be.a('object');
-//         expect(res.body.data).to.be.a('array');
-//         done();
-//       });
-//   });
-// });
+describe('GET All Drafts', () => {
+  it('It should get all drafts for auth user', (done) => {
+    chai.request(app)
+      .get('/api/v1/messages/drafts')
+      .set('x-access-token', token)
+      .end((err, res) => {
+        if (err) done(err);
+        expect(res.status).to.equal(200);
+        expect(res.body).to.be.a('object');
+        expect(res.body).to.have.keys('status', 'count', 'drafts');
+        expect(res.body.count).to.be.a('string');
+        expect(res.body.drafts).to.be.a('array');
+        done();
+      });
+  });
+});
+
+describe('Get A Draft', () => {
+  it('It should return a draft of a user', (done) => {
+    chai.request(app)
+      .get('/api/v1/messages/drafts/10')
+      .set('x-access-token', token)
+      .end((err, res) => {
+        if (err) done(err);
+        expect(res.status).to.equal(200);
+        expect(res.body).to.be.a('object');
+        expect(res.body).to.have.keys('status', 'message');
+        expect(res.body.message).to.be.a('array');
+        done();
+      });
+  });
+});
 
 describe('Delete A Mail', () => {
   it('Delete a mail from inbox', (done) => {
     chai.request(app)
       .delete('/api/v1/messages/3')
+      .set('x-access-token', token)
+      .end((err, res) => {
+        if (err) done(err);
+        expect(res.status).to.equal(204);
+        done();
+      });
+  });
+});
+
+describe('Delete A Sent Mail', () => {
+  it('Delete a mail from sent', (done) => {
+    chai.request(app)
+      .delete('/api/v1/messages/sent/3')
       .set('x-access-token', token)
       .end((err, res) => {
         if (err) done(err);
