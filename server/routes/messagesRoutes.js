@@ -40,6 +40,17 @@ Router.get(
 );
 
 /**
+ * Get all draft for a user
+ */
+Router.get(
+  '/messages/drafts',
+  Auth.checkToken,
+  Auth.verifyToken,
+  ValidateUserInput.checkUser,
+  MessageController.getDrafts,
+);
+
+/**
  * Get a sent email for a user
  */
 Router.get(
@@ -59,6 +70,17 @@ Router.get(
   Auth.verifyToken,
   ValidateUserInput.checkUser,
   MessageController.getAInbox,
+);
+
+/**
+ * Get a sent email for a user
+ */
+Router.get(
+  '/messages/drafts/:id',
+  Auth.checkToken,
+  Auth.verifyToken,
+  ValidateUserInput.checkUser,
+  MessageController.getADraft,
 );
 
 /**

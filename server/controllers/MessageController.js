@@ -120,7 +120,7 @@ const MessageController = {
       const { rows, rowCount } = await db.query(findSentQuery, [req.user.email]);
       return res.status(200).send({
         status: 200,
-        count: `You havesent messages ${rowCount}.`,
+        count: `You have sent messages ${rowCount}.`,
         sent: rows,
       });
     } catch (error) {
@@ -140,6 +140,45 @@ const MessageController = {
     try {
       const findASentMailQuery = 'SELECT * FROM messages WHERE id = $1 AND senderEmail = $2';
       const { rows } = await db.query(findASentMailQuery, [req.params.id, req.user.email]);
+      return res.status(200).send({
+        status: 200,
+        message: rows,
+      });
+    } catch (error) {
+      return res.status(400).send({
+        mesage: error,
+      });
+    }
+  },
+
+  /**
+   * get all draft mails
+   * @param { object } req
+   * @param { object } res
+   * @returns { object } sent array
+   */
+  async getDrafts(req, res) {
+    try {
+      const findSentQuery = 'SELECT * FROM messages WHERE senderEmail = $1 AND status = $2';
+      const { rows, rowCount } = await db.query(findSentQuery, [req.user.email, 'draft']);
+      return res.status(200).send({
+        status: 200,
+        count: `You have ${rowCount} drafts.`,
+        drafts: rows,
+      });
+    } catch (error) {
+      return res.status(400).send({
+        mesage: error,
+      });
+    }
+  },
+
+  async getADraft(req, res) {
+    try {
+      const findAInboxMailQuery = 'SELECT * FROM messages WHERE id=$1 AND senderEmail = $2 AND status = $3';
+      const { rows } = await db.query(findAInboxMailQuery, [req.params.id, req.user.email, 'draft']);
+      const updateStatusQuery = 'UPDATE messages SET status=$1 WHERE receiverEmail = $2 RETURNING *';
+      await db.query(updateStatusQuery, ['read', req.user.email]);
       return res.status(200).send({
         status: 200,
         message: rows,
