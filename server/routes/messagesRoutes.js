@@ -1,84 +1,121 @@
 import express from 'express';
-import MailController from '../controllers/MessageController';
+import MessageController from '../controllers/MessageController';
 import Auth from '../middleware/Auth';
 import ValidateUserInput from '../middleware/UserValidator';
 import ValidateMessageInput from '../middleware/MessagesValidator';
 
 const Router = express.Router();
 
-Router.use(express.json());
-
-// Get all received emails for a user
+/**
+ * Get inbox for a user
+ */
 Router.get(
   '/messages',
-  ValidateUserInput.checkUser,
   Auth.checkToken,
   Auth.verifyToken,
-  MailController.getInbox,
+  ValidateUserInput.checkUser,
+  MessageController.getInbox,
 );
 
-// Get unread mails for a user
+/**
+ * Get unread mails for a user
+ */
 Router.get(
   '/messages/unread',
-  ValidateUserInput.checkUser,
   Auth.checkToken,
   Auth.verifyToken,
-  MailController.getUnread,
+  ValidateUserInput.checkUser,
+  MessageController.getUnread,
 );
 
-// Get all sent emails for a user
+/**
+ * Get all sent emails for a user
+ */
 Router.get(
   '/messages/sent',
-  ValidateUserInput.checkUser,
   Auth.checkToken,
   Auth.verifyToken,
-  MailController.getSent,
+  ValidateUserInput.checkUser,
+  MessageController.getSent,
 );
 
-// Get all a sent email for a user
+/**
+ * Get all draft for a user
+ */
+Router.get(
+  '/messages/drafts',
+  Auth.checkToken,
+  Auth.verifyToken,
+  ValidateUserInput.checkUser,
+  MessageController.getDrafts,
+);
+
+/**
+ * Get a sent email for a user
+ */
 Router.get(
   '/messages/sent/:id',
-  ValidateUserInput.checkUser,
   Auth.checkToken,
   Auth.verifyToken,
-  MailController.getASent,
+  ValidateUserInput.checkUser,
+  MessageController.getASent,
 );
 
-// Get a user email
+/**
+ * Get a user specific inbox mail
+ */
 Router.get(
   '/messages/:id',
   Auth.checkToken,
   Auth.verifyToken,
-  MailController.getAInbox,
+  ValidateUserInput.checkUser,
+  MessageController.getAInbox,
 );
 
-// Send mail to individuals
+/**
+ * Get a sent email for a user
+ */
+Router.get(
+  '/messages/drafts/:id',
+  Auth.checkToken,
+  Auth.verifyToken,
+  ValidateUserInput.checkUser,
+  MessageController.getADraft,
+);
+
+/**
+ * Send mail to individuals
+ */
 Router.post(
   '/messages',
-  ValidateUserInput.checkUser,
   Auth.checkToken,
   Auth.verifyToken,
+  ValidateUserInput.checkUser,
   ValidateMessageInput.checkReceiver,
   ValidateMessageInput.checkFeilds,
-  MailController.create,
+  MessageController.create,
 );
 
-// Delete from inbox
+/**
+ * Delete a mail from inbox
+ */
 Router.delete(
   '/messages/:id',
-  ValidateUserInput.checkUser,
   Auth.checkToken,
   Auth.verifyToken,
-  MailController.deleteAInbox,
+  ValidateUserInput.checkUser,
+  MessageController.deleteAInbox,
 );
 
-// Get a sent email for a user
+/**
+ * Delete a sent email for a user
+ */
 Router.delete(
   '/messages/sent/:id',
-  ValidateUserInput.checkUser,
   Auth.checkToken,
   Auth.verifyToken,
-  MailController.deleteASent,
+  ValidateUserInput.checkUser,
+  MessageController.deleteASent,
 );
 
 

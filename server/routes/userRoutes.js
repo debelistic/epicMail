@@ -4,9 +4,6 @@ import UserController from '../controllers/UserController';
 
 const Router = express.Router();
 
-Router.use(express.json());
-
-
 Router.get('/', (req, res) => {
   res.send({
     status: 200,

@@ -10,7 +10,7 @@ const UserController = {
    * @param {object} next
    * @returns {object} user
    */
-  async createUser(req, res, next) {
+  async createUser(req, res) {
     try {
       const securityKey = req.body.securityKey.toLowerCase();
       const hashPassword = Helper.hashPassword(req.body.password);
@@ -38,11 +38,13 @@ const UserController = {
         data: [{
           token,
           message: 'Your account has been created',
-          email_address: `Your epicmail address is ${emailAddress}`,
+          email_address: `Your epicmail address is ${rows[0].email}`,
         }],
       });
     } catch (error) {
-      return next(error);
+      return res.status(400).send({
+        message: error,
+      });
     }
   },
 
@@ -53,10 +55,10 @@ const UserController = {
    * @param {object} next
    * @returns {object} user
    */
-  async login(req, res, next) {
+  async login(req, res) {
     try {
       const loginQuery = 'SELECT * FROM users WHERE email = $1';
-      const userEmail = await `${req.body.email.toLowerCase()}`;
+      const userEmail = await req.body.email.toLowerCase();
       const { rows } = await db.query(loginQuery, [userEmail]);
       const token = Helper.generateToken(rows[0].email);
       return res.status(200).send({
@@ -67,7 +69,9 @@ const UserController = {
         }],
       });
     } catch (error) {
-      return next(error);
+      return res.status(400).send({
+        messgae: error,
+      });
     }
   },
 

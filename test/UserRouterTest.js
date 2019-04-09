@@ -27,7 +27,7 @@ describe('Create User', () => {
       .post('/api/v1/auth/signup')
       .send(newuser)
       .end((err, res) => {
-        if (err) done();
+        if (err) done(err);
         expect(res.status).to.equal(201);
         expect(res.body).to.have.keys('status', 'data');
         expect(res.body.status).to.equal(201);
@@ -53,7 +53,7 @@ describe('Validate Username', () => {
       .send(newuser)
       .end((err, res) => {
         if (err) done();
-        chai.expect(res.status).to.equal(400);
+        expect(res.status).to.equal(400);
         done();
       });
   });
@@ -74,7 +74,7 @@ describe('Validate Signup Form', () => {
       .send(newuser)
       .end((err, res) => {
         if (err) done();
-        chai.expect(res.status).to.equal(400);
+        expect(res.status).to.equal(400);
         done();
       });
   });
@@ -94,7 +94,7 @@ describe('Valiadte Password', () => {
       .send(newuser)
       .end((err, res) => {
         if (err) done();
-        chai.expect(res.status).to.equal(400);
+        expect(res.status).to.equal(400);
         done();
       });
   });
@@ -103,7 +103,7 @@ describe('Valiadte Password', () => {
 describe('Login User', () => {
   it('Sign User with Token', (done) => {
     const reguser = {
-      email: 'franksaint',
+      email: 'franksaint@epicmail.com',
       password: 'ghJUIlO9@gh',
     };
 
@@ -113,11 +113,11 @@ describe('Login User', () => {
       .send(reguser)
       .end((err, res) => {
         if (err) done(err);
-        chai.expect(res.status).to.equal(200);
-        chai.expect(res.body).to.be.a('object');
-        chai.expect(res.body.data).to.be.a('array');
-        chai.expect(res.body.data[0]).to.be.a('object');
-        chai.expect(res.body.data[0]).to.have.property('token');
+        expect(res.status).to.equal(200);
+        expect(res.body).to.be.a('object');
+        expect(res.body.data).to.be.a('array');
+        expect(res.body.data[0]).to.be.a('object');
+        expect(res.body.data[0]).to.have.property('token');
         done();
       });
   });
@@ -132,7 +132,7 @@ describe('Validate Login form', () => {
       .send(reguser)
       .end((err, res) => {
         if (err) done();
-        chai.expect(res.status).to.equal(400);
+        expect(res.status).to.equal(400);
         done();
       });
   });

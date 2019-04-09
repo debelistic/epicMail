@@ -55,8 +55,8 @@ const ValidateGroupsInput = {
   async verifyMail(req, res, next) {
     try {
       const checkMemberEmailQuery = 'SELECT * FROM users WHERE $1=email';
-      const { rows } = await db.query(checkMemberEmailQuery, [req.body.membermail]);
-      return rows[0];
+      await db.query(checkMemberEmailQuery, [req.body.membermail]);
+      return next();
     } catch (error) {
       return next(error);
     }
@@ -78,8 +78,8 @@ const ValidateGroupsInput = {
         req.user.email,
         'admin',
       ];
-      const { rows } = await db.query(addGroupAdminQuery, adminvalues);
-      return rows[0];
+      await db.query(addGroupAdminQuery, adminvalues);
+      return next();
     } catch (error) {
       return next(error);
     }

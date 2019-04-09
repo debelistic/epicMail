@@ -18,6 +18,7 @@ const ValidateUserInput = {
     return next();
   },
 
+
   /**
    * Validate Name fields
    * @param {object} req
@@ -27,7 +28,7 @@ const ValidateUserInput = {
   async names(req, res, next) {
     if (!req.body.firstName || !req.body.lastName) {
       return res.status(400).send({
-        message: 'Enter your first name, last name ',
+        message: 'Enter your first name and last name ',
       });
     }
     return next();
@@ -103,8 +104,8 @@ const ValidateUserInput = {
     try {
       const loginQuery = 'SELECT * FROM users WHERE email = $1';
       const userEmail = await `${req.body.email.toLowerCase()}@epicmail.com`;
-      const { rows } = await db.query(loginQuery, [userEmail]);
-      return rows[0];
+      await db.query(loginQuery, [userEmail]);
+      return next();
     } catch (error) {
       return next(error);
     }
@@ -117,15 +118,19 @@ const ValidateUserInput = {
    * @param {object} next
    */
   async loginPassword(req, res, next) {
-    const loginQuery = 'SELECT * FROM users WHERE email = $1';
-    const userEmail = await `${req.body.email.toLowerCase()}@epicmail.com`;
-    const { rows } = await db.query(loginQuery, [userEmail]);
-    if (!Helper.comparePassword(req.body.password, rows[0].password)) {
-      return res.status(400).send({
-        message: 'Invalid Passowrd',
-      });
+    try {
+      const loginQuery = 'SELECT * FROM users WHERE email = $1';
+      const userEmail = await req.body.email.toLowerCase();
+      const { rows } = await db.query(loginQuery, [userEmail]);
+      if (!Helper.comparePassword(req.body.password, rows[0].password)) {
+        return res.status(400).send({
+          message: 'Invalid Passowrd',
+        });
+      }
+      return next();
+    } catch (error) {
+      return next(error);
     }
-    return next();
   },
 
   /**
