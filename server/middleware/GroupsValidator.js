@@ -2,21 +2,6 @@ import db from '../db';
 
 const ValidateGroupsInput = {
   /**
-   * Validate User
-   * @param {object} req
-   * @param {object} res
-   * @param {object} next
-   */
-  async user(req, res, next) {
-    if (!req.user) {
-      return res.status(400).send({
-        message: 'Signup to create groups',
-      });
-    }
-    return next();
-  },
-
-  /**
    * Validate create group form
    * @param {object} req
    * @param {object} res
@@ -83,6 +68,37 @@ const ValidateGroupsInput = {
     } catch (error) {
       return next(error);
     }
+  },
+
+  async checkAdmin(req, res, next) {
+    try {
+      const verifyAdminQuery = 'SELECT * FROM groups WHERE ownerId = $1 AND Id = $2';
+      await db.query(verifyAdminQuery, [req.user.email, req.params.id]);
+      return next();
+    } catch (error) {
+      return next(error);
+    }
+  },
+
+  async checkMessageInput(req, res, next) {
+    if (!req.body.message || !req.user) {
+      return res.status(400).send({ message: 'enter a text' });
+    }
+    return next();
+  },
+
+  async checkNewName(req, res, next) {
+    if (!req.body.newName) {
+      return res.send({
+        status: 400,
+        data: [
+          {
+            message: 'enter new name',
+          },
+        ],
+      });
+    }
+    return next();
   },
 };
 
