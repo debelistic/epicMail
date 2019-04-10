@@ -10,15 +10,26 @@ const GroupController = {
   async createGroup(req, res) {
     const createGroupQuery = `INSERT INTO
     groups(name, description, ownerId)
-    VALUES($1, $2, $3)
-    returning *`;
+    VALUES($1, $2, $3) RETURNING *`;
     const values = [
       req.body.name.trim().toLowerCase(),
       req.body.description.trim().toLowerCase(),
       req.user.email.trim(),
     ];
+
+    const addGroupAdminQuery = `INSERT INTO
+      groupmembers(groupId, groupName, memberId, role)
+      VALUES($1, $2, $3, $4) RETURNING *`;
     try {
       const { rows } = await db.query(createGroupQuery, values);
+      const adminvalues = [
+        rows[0].id,
+        req.body.name.trim().toLowerCase(),
+        req.user.email.trim(),
+        'admin',
+      ];
+      console.log(rows);
+      await db.query(addGroupAdminQuery, adminvalues);
       return res.status(201).send({
         status: 201,
         data: [{

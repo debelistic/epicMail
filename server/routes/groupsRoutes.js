@@ -14,7 +14,6 @@ Router.post(
   ValidateUserInput.checkUser,
   ValidateGroupsInput.verifyMail,
   ValidateGroupsInput.groupForm,
-  ValidateGroupsInput.addAdmin,
   GroupController.createGroup,
 );
 
