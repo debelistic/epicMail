@@ -1,6 +1,6 @@
 # epicMail
 
-[![Build Status](https://travis-ci.com/debelistic/epicMail.svg?branch=develop)](https://travis-ci.com/debelistic/epicMail)  [![codecov](https://codecov.io/gh/debelistic/epicMail/branch/develop/graph/badge.svg)](https://codecov.io/gh/debelistic/epicMail) [![Coverage Status](https://coveralls.io/repos/github/debelistic/epicMail/badge.svg?branch=ch-test-postgres-apiendpoints-164826884)](https://coveralls.io/github/debelistic/epicMail?branch=ch-test-postgres-apiendpoints-164826884) [![Maintainability](https://api.codeclimate.com/v1/badges/8ce8c3d1a212240b33aa/maintainability)](https://codeclimate.com/github/debelistic/epicMail/maintainability) [![Test Coverage](https://api.codeclimate.com/v1/badges/8ce8c3d1a212240b33aa/test_coverage)](https://codeclimate.com/github/debelistic/epicMail/test_coverage)
+[![Build Status](https://travis-ci.com/debelistic/epicMail.svg?branch=develop)](https://travis-ci.com/debelistic/epicMail)  [![Coverage Status](https://coveralls.io/repos/github/debelistic/epicMail/badge.svg?branch=develop)](https://coveralls.io/github/debelistic/epicMail?branch=develop) [![Maintainability](https://api.codeclimate.com/v1/badges/8ce8c3d1a212240b33aa/maintainability)](https://codeclimate.com/github/debelistic/epicMail/maintainability) [![Test Coverage](https://api.codeclimate.com/v1/badges/8ce8c3d1a212240b33aa/test_coverage)](https://codeclimate.com/github/debelistic/epicMail/test_coverage)
 
 ## Features
 
