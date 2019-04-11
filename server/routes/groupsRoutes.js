@@ -1,6 +1,7 @@
 import express from 'express';
 import GroupController from '../controllers/GroupController';
 import Auth from '../middleware/Auth';
+import ValidateUserInput from '../middleware/UserValidator';
 import ValidateGroupsInput from '../middleware/GroupsValidator';
 
 const Router = express.Router();
@@ -8,34 +9,78 @@ const Router = express.Router();
 // create groups
 Router.post(
   '/groups',
-  ValidateGroupsInput.user,
   Auth.checkToken,
   Auth.verifyToken,
+  ValidateUserInput.checkUser,
+  ValidateGroupsInput.verifyMail,
   ValidateGroupsInput.groupForm,
-  ValidateGroupsInput.addAdmin,
   GroupController.createGroup,
 );
 
 // add members
 Router.post(
   '/groups/:id/users',
+  Auth.checkToken,
   Auth.verifyToken,
+  ValidateUserInput.checkUser,
+  ValidateGroupsInput.verifyMail,
+  ValidateGroupsInput.checkAdmin,
   GroupController.addGroupMembers,
 );
 
 // delete members
-Router.delete('/groups/:id/users/:userid', Auth.verifyToken, GroupController.deleteAGroupMember);
+Router.delete(
+  '/groups/:id/users/:userid',
+  Auth.checkToken,
+  Auth.verifyToken,
+  ValidateUserInput.checkUser,
+  ValidateGroupsInput.verifyMail,
+  ValidateGroupsInput.checkAdmin,
+  GroupController.deleteAGroupMember,
+);
 
 // send group messages
-Router.post('/groups/:id/messages', Auth.verifyToken, GroupController.sendGroupMessage);
+Router.post(
+  '/groups/:id/messages',
+  Auth.checkToken,
+  Auth.verifyToken,
+  ValidateUserInput.checkUser,
+  ValidateGroupsInput.verifyMail,
+  ValidateGroupsInput.checkMessageInput,
+  GroupController.sendGroupMessage,
+);
 
 // get groups
-Router.get('/groups', Auth.verifyToken, GroupController.getAllGroups);
+Router.get(
+  '/groups',
+  Auth.checkToken,
+  Auth.verifyToken,
+  ValidateUserInput.checkUser,
+  ValidateGroupsInput.verifyMail,
+  GroupController.getAllGroups,
+);
 
 // patch group name
-Router.patch('/groups/:id/:name', Auth.verifyToken, GroupController.editGroupName);
+Router.patch(
+  '/groups/:id/name',
+  Auth.checkToken,
+  Auth.verifyToken,
+  ValidateUserInput.checkUser,
+  ValidateGroupsInput.verifyMail,
+  ValidateGroupsInput.checkAdmin,
+  ValidateGroupsInput.checkNewName,
+  GroupController.editGroupName,
+);
 
 // delete group
-Router.delete('/groups/:id', Auth.verifyToken, GroupController.deleteGroup);
+Router.delete(
+  '/groups/:id',
+  Auth.checkToken,
+  Auth.verifyToken,
+  ValidateUserInput.checkUser,
+  ValidateGroupsInput.verifyMail,
+  ValidateGroupsInput.checkAdmin,
+  GroupController.deleteGroup,
+);
 
 export default Router;
