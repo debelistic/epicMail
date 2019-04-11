@@ -99,7 +99,7 @@ const dropMessagesTable = async () => {
 const groupsTable = async () => {
   const groupQuery = `CREATE TABLE IF NOT EXISTS 
       groups(
-        id SERIAL PRIMARY KEY,
+        id UUID PRIMARY KEY,
         name VARCHAR(128) UNIQUE NOT NULL,
         description VARCHAR(500) NOT NULL,
         ownerId VARCHAR(128) NOT NULL
@@ -122,7 +122,7 @@ const groupMembersTable = async () => {
   const groupMembersQuery = `CREATE TABLE IF NOT EXISTS 
       groupmembers(
         id SERIAL PRIMARY KEY,
-        groupId VARCHAR(128) NOT NULL,
+        groupId UUID NOT NULL,
         role TEXT NOT NULL DEFAULT 'member',
         groupName VARCHAR(128) NOT NULL,
         memberId VARCHAR(128) UNIQUE NOT NULL

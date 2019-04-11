@@ -37,28 +37,28 @@ describe('Create Groups', () => {
   });
 });
 
-// describe('Add Members', () => {
-//   it('Add member to a group', (done) => {
-//     const newMember = {
-//       name: 'franchess',
-//       membermail: 'franchesqa@epicmail.com',
-//     };
+describe('Add Members', () => {
+  it('Add member to a group', (done) => {
+    const newMember = {
+      name: 'franchess',
+      membermail: 'franchesqa@epicmail.com',
+    };
 
-//     chai.request(app)
-//       .post('/api/v1/groups/:id/users')
-//       .set('x-access-token', token)
-//       .send(newMember)
-//       .end((err, res) => {
-//         if (err) done(err);
-//         expect(res.status).to.equal(201);
-//         expect(res.body).to.be.a('object');
-//         expect(res.body.data).to.be.an('array');
-//         expect(res.body.data[0]).to.be.a('object');
-//         expect(res.body.data[0]).to.have.key('member');
-//         done();
-//       });
-//   });
-// });
+    chai.request(app)
+      .post('/api/v1/groups/:id/users')
+      .set('x-access-token', token)
+      .send(newMember)
+      .end((err, res) => {
+        if (err) done(err);
+        expect(res.status).to.equal(201);
+        expect(res.body).to.be.a('object');
+        expect(res.body.data).to.be.an('array');
+        expect(res.body.data[0]).to.be.a('object');
+        expect(res.body.data[0]).to.have.key('member');
+        done();
+      });
+  });
+});
 
 // describe('Delete Memebers', () => {
 //   it('Delete a group member', (done) => {

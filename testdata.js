@@ -45,10 +45,21 @@ const insertUsers = async () => {
     new Date(),
   ];
 
+  const user5values = [
+    'petergolden@epicmail.com',
+    'peter',
+    'golden',
+    'yh89uyightGH',
+    'hashSecurity',
+    new Date(),
+    new Date(),
+  ];
+
   await db.query(insertUser, user1values);
   await db.query(insertUser, user2values);
   await db.query(insertUser, user3values);
   await db.query(insertUser, user4values);
+  await db.query(insertUser, user5values);
 };
 
 const insertMessages = async () => {
@@ -168,9 +179,53 @@ const insertMessages = async () => {
   await db.query(insertMessage, mssg10values);
 };
 
+const insertGroups = async () => {
+  const insertGroup = `INSERT INTO
+    groups(id, name, description, ownerId)
+    VALUES($1, $2, $3, $4) RETURNING *`;
+
+  const group1 = [
+    '5fd08cce-092e-454f-896d-acd78dedb478',
+    'fries maker',
+    'we make fries for a living',
+    'franchesqa@epicmail.com',
+  ];
+  const group2 = [
+    'ade0b372-7e17-4e3e-a3f3-d19e494d8333',
+    'post writer',
+    'fingers that change the world',
+    'ojematthew@epicmail.com',
+  ];
+  const group3 = [
+    'f04bd8ee-e63a-42e1-8264-d195df5316c8',
+    'camp support',
+    'helping campers enjoy camping',
+    'toluniyin@epicmail.com',
+  ];
+  const group4 = [
+    'cb73a9c9-07e2-4efd-8deb-1c71c25c6eed',
+    'data students',
+    'help students analyze and manipulate data',
+    'vincicode@epicmail.com',
+  ];
+  const group5 = [
+    '213be43d-69b5-4fc2-8475-c4ca6cf75124',
+    'vs coder',
+    'get the latest updates on vs code',
+    'petergolden@epicmail.com',
+  ];
+
+  await db.query(insertGroup, group1);
+  await db.query(insertGroup, group2);
+  await db.query(insertGroup, group3);
+  await db.query(insertGroup, group4);
+  await db.query(insertGroup, group5);
+};
+
 const insertData = async () => {
   await insertUsers();
   await insertMessages();
+  await insertGroups();
 };
 
 module.exports = {
