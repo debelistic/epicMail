@@ -47,29 +47,6 @@ const ValidateGroupsInput = {
     }
   },
 
-  /**
-   * Add Creator as Admin on Creating group
-   * @param {object} req
-   * @param {object} res
-   */
-  async addAdmin(req, res, next) {
-    try {
-      const addGroupAdminQuery = `INSERT INTO
-      groupmembers(groupId, groupName, memberId, role)
-      VALUES($1, $2, $3, $4) RETURNING *`;
-      const adminvalues = [
-        req.params.id,
-        req.body.name,
-        req.user.email,
-        'admin',
-      ];
-      await db.query(addGroupAdminQuery, adminvalues);
-      return next();
-    } catch (error) {
-      return next(error);
-    }
-  },
-
   async checkAdmin(req, res, next) {
     try {
       const verifyAdminQuery = 'SELECT * FROM groups WHERE ownerId = $1 AND Id = $2';
