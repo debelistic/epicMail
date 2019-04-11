@@ -89,7 +89,7 @@ const ValidateGroupsInput = {
 
   async checkNewName(req, res, next) {
     if (!req.body.newName) {
-      return res.send({
+      return res.status(400).send({
         status: 400,
         data: [
           {

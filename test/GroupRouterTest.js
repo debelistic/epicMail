@@ -54,7 +54,7 @@ describe('Add Members', () => {
         expect(res.body).to.be.a('object');
         expect(res.body.data).to.be.an('array');
         expect(res.body.data[0]).to.be.a('object');
-        expect(res.body.data[0]).to.have.key('member');
+        expect(res.body.data[0]).to.have.keys('status', 'member');
         done();
       });
   });
@@ -127,16 +127,16 @@ describe('Edit Group Name', () => {
       { expiresIn: '7d' },
     );
     const newGroupName = {
-      newname: 'code Strenght',
+      newName: 'code Strenght',
     };
 
     chai.request(app)
-      .patch('/api/v1/groups/f04bd8ee-e63a-42e1-8264-d195df5316c8/camp support')
+      .patch('/api/v1/groups/f04bd8ee-e63a-42e1-8264-d195df5316c8/name')
       .set('x-access-token', memTtoken)
       .send(newGroupName)
       .end((err, res) => {
         if (err) done(err);
-        expect(res.status).to.equal(204);
+        expect(res.status).to.equal(200);
         expect(res.body).to.be.a('object');
         expect(res.body).to.have.keys('status', 'data');
         expect(res.body.data).to.be.a('array');

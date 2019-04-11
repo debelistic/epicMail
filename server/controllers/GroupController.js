@@ -30,7 +30,6 @@ const GroupController = {
         req.user.email.trim(),
         'admin',
       ];
-      console.log(rows);
       await db.query(addGroupAdminQuery, adminvalues);
       return res.status(201).send({
         status: 201,
@@ -65,7 +64,7 @@ const GroupController = {
     ];
     try {
       const { rows } = await db.query(addGroupMembersQuery, values);
-      return res.send({
+      return res.status(201).send({
         status: 201,
         data: [
           {
@@ -127,11 +126,11 @@ const GroupController = {
    * @returns {object} group members array
    */
   async deleteAGroupMember(req, res) {
-    const deleteAGroupMemberQuery = 'DELETE FROM groupmembers WHERE id=$1 AND groupId = $2 RETURNING *';
+    const deleteAGroupMemberQuery = 'DELETE FROM groupmembers WHERE groupId=$1 AND memberId = $2 RETURNING *';
     try {
-      await db.query(deleteAGroupMemberQuery, [req.prams.id, req.params.userid]);
+      await db.query(deleteAGroupMemberQuery, [req.params.id, req.params.userid]);
 
-      return res.send({
+      return res.status(204).send({
         status: 204,
         data: [{
           message: `You have removed ${req.params.userid}`,
@@ -177,11 +176,11 @@ const GroupController = {
   async editGroupName(req, res) {
     const editGroupNameQuery = 'UPDATE groups SET name=$1 WHERE id= $2 RETURNING *';
     try {
-      const newGroupName = await db.query(editGroupNameQuery, [req.body.newName, req.params.id]);
-      return res.status(204).send({
-        status: 204,
+      const { rows } = await db.query(editGroupNameQuery, [req.body.newName, req.params.id]);
+      return res.status(200).send({
+        status: 200,
         data: [{
-          newname: newGroupName.rows[0],
+          newname: rows[0].name,
         }],
       });
     } catch (error) {
@@ -199,7 +198,7 @@ const GroupController = {
     const deleteGroupQuery = 'DELETE FROM groups WHERE $1=id AND $2=ownerId RETURNING *';
     try {
       const { rows } = await db.query(deleteGroupQuery, [req.params.id, req.user.email]);
-      return res.send({
+      return res.status(204).send({
         status: 204,
         data: [{
           message: `${rows} has been deleted`,

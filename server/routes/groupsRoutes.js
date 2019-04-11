@@ -62,7 +62,7 @@ Router.get(
 
 // patch group name
 Router.patch(
-  '/groups/:id/:name',
+  '/groups/:id/name',
   Auth.checkToken,
   Auth.verifyToken,
   ValidateUserInput.checkUser,

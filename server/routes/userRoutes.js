@@ -4,13 +4,6 @@ import UserController from '../controllers/UserController';
 
 const Router = express.Router();
 
-Router.get('/', (req, res) => {
-  res.send({
-    status: 200,
-    message: 'EPIC MAIL',
-  });
-});
-
 // User Signup for an account
 Router.post(
   '/auth/signup',
