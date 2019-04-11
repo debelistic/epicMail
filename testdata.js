@@ -256,14 +256,14 @@ const insertGroupMembers = async () => {
 
   const writersMember1 = [
     'ade0b372-7e17-4e3e-a3f3-d19e494d8333',
-    'fries maker',
+    'post writer',
     'ojematthew@epicmail.com',
     'member',
   ];
 
   const writersMember2 = [
     'ade0b372-7e17-4e3e-a3f3-d19e494d8333',
-    'fries maker',
+    'post writer',
     'toluniyin@epicmail.com',
     'member',
   ];
