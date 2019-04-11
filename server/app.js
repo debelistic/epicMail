@@ -22,7 +22,9 @@ app.use('/api/v1', groupsRoutes);
 
 
 app.get('/', (req, res) => {
-  res.status(200).send('WELCOME TO EPICMAIL SERVICE');
+  res.status(200).send({
+    message: 'WELCOME TO EPICMAIL SERVICE',
+  });
 });
 
 

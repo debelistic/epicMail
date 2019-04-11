@@ -1,6 +1,5 @@
 import chai from 'chai';
 import chaiHttp from 'chai-http';
-import jwt from 'jsonwebtoken';
 import app from '../server/app';
 
 process.env.NODE_ENV = 'test';
@@ -9,10 +8,20 @@ const { expect } = chai;
 
 chai.use(chaiHttp);
 
-const token = jwt.sign({
-  userEmail: 'franksaint@epicmail.com',
-},
-process.env.SECRET, { expiresIn: '7d' });
+
+describe('GET Index Page', () => {
+  it('It should return index page', (done) => {
+    chai.request(app)
+      .get('/')
+      .end((err, res) => {
+        if (err) done(err);
+        expect(res.status).to.equal(200);
+        expect(res.body).to.be.a('object');
+        expect(res.body.message).to.be.a('string');
+        done();
+      });
+  });
+});
 
 describe('Create User', () => {
   it('Create USer Account on Sign up', (done) => {
@@ -109,7 +118,6 @@ describe('Login User', () => {
 
     chai.request(app)
       .post('/api/v1/auth/login')
-      .set('x-access-token', token)
       .send(reguser)
       .end((err, res) => {
         if (err) done(err);
