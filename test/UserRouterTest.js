@@ -42,7 +42,7 @@ describe('Create User', () => {
         expect(res.body.status).to.equal(201);
         expect(res.body.data).to.be.an('array');
         expect(res.body.data[0]).to.be.an('object');
-        expect(res.body.data[0]).to.have.keys('token', 'message', 'email_address');
+        expect(res.body.data[0]).to.have.keys('token', 'emailAddress');
         done();
       });
   });

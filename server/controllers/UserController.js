@@ -2,6 +2,14 @@ import '@babel/polyfill';
 import db from '../db';
 import Helper from '../middleware/Helper';
 
+/** Queries */
+const createUserQuery = `INSERT INTO
+        users(email, firstName, lastName, password, securitykey, createdOn, modifiedOn)
+        VALUES($1, $2, $3, $4, $5, $6, $7) RETURNING *`;
+
+const loginQuery = 'SELECT * FROM users WHERE email = $1';
+/** End of Queries */
+
 const UserController = {
   /**
    * Create user controller
@@ -17,19 +25,8 @@ const UserController = {
       const hashSecurity = Helper.hashPassword(securityKey);
       const emailAddress = `${req.body.username.toLowerCase()}@epicmail.com`;
 
-      const createUserQuery = `INSERT INTO
-        users(email, firstName, lastName, password, securitykey, createdOn, modifiedOn)
-        VALUES($1, $2, $3, $4, $5, $6, $7) RETURNING *`;
-      const values = [
-        emailAddress,
-        req.body.firstName,
-        req.body.lastName,
-        hashPassword,
-        hashSecurity,
-        new Date(),
-        new Date(),
-      ];
-
+      const values = [emailAddress, req.body.firstName,
+        req.body.lastName, hashPassword, hashSecurity, new Date(), new Date()];
       const { rows } = await db.query(createUserQuery, values);
       const token = Helper.generateToken(rows[0].email);
 
@@ -37,8 +34,7 @@ const UserController = {
         status: 201,
         data: [{
           token,
-          message: 'Your account has been created',
-          email_address: `Your epicmail address is ${rows[0].email}`,
+          emailAddress: `Your epicmail address is ${rows[0].email}`,
         }],
       });
     } catch (error) {
@@ -57,7 +53,6 @@ const UserController = {
    */
   async login(req, res) {
     try {
-      const loginQuery = 'SELECT * FROM users WHERE email = $1';
       const userEmail = await req.body.email.toLowerCase();
       const { rows } = await db.query(loginQuery, [userEmail]);
       const token = Helper.generateToken(rows[0].email);

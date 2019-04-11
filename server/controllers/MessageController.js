@@ -1,6 +1,26 @@
 import uuidv4 from 'uuid/v4';
 import db from '../db';
 
+/** Queries */
+const createMessageQuery = `INSERT INTO
+        messages(createdOn, receiverEmail, senderEmail, subject, message, parentMessageId, status)
+        VALUES($1, $2, $3, $4, $5, $6, $7)
+        RETURNING *`;
+
+const findInboxQuery = 'SELECT * FROM messages WHERE receiverEmail = $1';
+const findAInboxMailQuery = 'SELECT * FROM messages WHERE id=$1 AND receiverEmail = $2';
+const updateStatusQuery = 'UPDATE messages SET status=$1 WHERE receiverEmail = $2 RETURNING *';
+const findAllUnreadQuery = 'SELECT * FROM messages WHERE receiverEmail = $1 AND status = $2';
+const findSentQuery = 'SELECT * FROM messages WHERE senderEmail = $1';
+const findASentMailQuery = 'SELECT * FROM messages WHERE id = $1 AND senderEmail = $2';
+const findDraftQuery = 'SELECT * FROM messages WHERE senderEmail = $1 AND status = $2';
+const findADraftQuery = 'SELECT * FROM messages WHERE id=$1 AND senderEmail = $2 AND status = $3';
+const deleteAInboxMailQuery = 'DELETE FROM messages WHERE id=$1 AND receiverEmail = $2 RETURNING *';
+const deleteASentMailQuery = 'DELETE FROM messages WHERE id=$1 AND senderEmail = $2 RETURNING *';
+
+
+/** End of Queries */
+
 const MessageController = {
 
   /**
@@ -11,10 +31,6 @@ const MessageController = {
    */
   async create(req, res) {
     const messageStatus = (!req.body.receiverEmail) ? 'draft' : 'unread';
-    const createMessageQuery = `INSERT INTO
-        messages(createdOn, receiverEmail, senderEmail, subject, message, parentMessageId, status)
-        VALUES($1, $2, $3, $4, $5, $6, $7)
-        RETURNING *`;
     const values = [
       new Date(),
       req.body.receiverEmail,
@@ -35,11 +51,6 @@ const MessageController = {
         }],
       });
     } catch (error) {
-      if (error.routine === 'ri_ReportViolation') {
-        return res.status(400).send({
-          message: 'Receiver not registered',
-        });
-      }
       return res.status(400).send({
         mesage: error,
       });
@@ -54,7 +65,6 @@ const MessageController = {
    */
 
   async getInbox(req, res) {
-    const findInboxQuery = 'SELECT * FROM messages WHERE receiverEmail = $1';
     try {
       const { rows, rowCount } = await db.query(findInboxQuery, [req.user.email]);
       return res.status(200).send({
@@ -77,9 +87,7 @@ const MessageController = {
    */
   async getAInbox(req, res) {
     try {
-      const findAInboxMailQuery = 'SELECT * FROM messages WHERE id=$1 AND receiverEmail = $2';
       const { rows } = await db.query(findAInboxMailQuery, [req.params.id, req.user.email]);
-      const updateStatusQuery = 'UPDATE messages SET status=$1 WHERE receiverEmail = $2 RETURNING *';
       await db.query(updateStatusQuery, ['read', req.user.email]);
       return res.status(200).send({
         status: 200,
@@ -94,7 +102,6 @@ const MessageController = {
 
   async getUnread(req, res) {
     try {
-      const findAllUnreadQuery = 'SELECT * FROM messages WHERE receiverEmail = $1 AND status = $2';
       const { rows, rowCount } = await db.query(findAllUnreadQuery, [req.user.email, 'unread']);
       return res.status(200).send({
         status: 200,
@@ -116,7 +123,6 @@ const MessageController = {
    */
   async getSent(req, res) {
     try {
-      const findSentQuery = 'SELECT * FROM messages WHERE senderEmail = $1';
       const { rows, rowCount } = await db.query(findSentQuery, [req.user.email]);
       return res.status(200).send({
         status: 200,
@@ -138,7 +144,6 @@ const MessageController = {
    */
   async getASent(req, res) {
     try {
-      const findASentMailQuery = 'SELECT * FROM messages WHERE id = $1 AND senderEmail = $2';
       const { rows } = await db.query(findASentMailQuery, [req.params.id, req.user.email]);
       return res.status(200).send({
         status: 200,
@@ -159,8 +164,7 @@ const MessageController = {
    */
   async getDrafts(req, res) {
     try {
-      const findSentQuery = 'SELECT * FROM messages WHERE senderEmail = $1 AND status = $2';
-      const { rows, rowCount } = await db.query(findSentQuery, [req.user.email, 'draft']);
+      const { rows, rowCount } = await db.query(findDraftQuery, [req.user.email, 'draft']);
       return res.status(200).send({
         status: 200,
         count: `You have ${rowCount} drafts.`,
@@ -175,10 +179,7 @@ const MessageController = {
 
   async getADraft(req, res) {
     try {
-      const findAInboxMailQuery = 'SELECT * FROM messages WHERE id=$1 AND senderEmail = $2 AND status = $3';
-      const { rows } = await db.query(findAInboxMailQuery, [req.params.id, req.user.email, 'draft']);
-      const updateStatusQuery = 'UPDATE messages SET status=$1 WHERE receiverEmail = $2 RETURNING *';
-      await db.query(updateStatusQuery, ['read', req.user.email]);
+      const { rows } = await db.query(findADraftQuery, [req.params.id, req.user.email, 'draft']);
       return res.status(200).send({
         status: 200,
         message: rows,
@@ -198,7 +199,6 @@ const MessageController = {
    */
   async deleteAInbox(req, res) {
     try {
-      const deleteAInboxMailQuery = 'DELETE FROM messages WHERE id=$1 AND receiverEmail = $2 RETURNING *';
       const { rows } = await db.query(deleteAInboxMailQuery, [req.params.id, req.user.email]);
       return res.status(204).send({
         status: 204,
@@ -220,7 +220,6 @@ const MessageController = {
    */
   async deleteASent(req, res) {
     try {
-      const deleteASentMailQuery = 'DELETE FROM messages WHERE id=$1 AND senderEmail = $2 RETURNING *';
       const { rows } = await db.query(deleteASentMailQuery, [req.params.id, req.user.email]);
       return res.status(204).send({
         status: 204,

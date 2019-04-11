@@ -1,6 +1,30 @@
 import uuidv4 from 'uuid/v4';
 import db from '../db';
 
+/** Queries */
+const createGroupQuery = `INSERT INTO
+    groups(id, name, description, ownerId)
+    VALUES($1, $2, $3, $4) RETURNING *`;
+
+const addGroupMembersQuery = `INSERT INTO
+    groupmembers(groupId, groupName, memberId, role)
+    VALUES($1, $2, $3, $4) RETURNING *`;
+
+const addGroupAdminQuery = `INSERT INTO
+    groupmembers(groupId, groupName, memberId, role)
+    VALUES($1, $2, $3, $4) RETURNING *`;
+
+const groupMessageQuery = `INSERT INTO
+    groupmessages(id, groupId, senderEmail, subject, message, status)
+    VALUES($1, $2, $3, $4, $5, $6) RETURNING *`;
+
+const deleteAGroupMemberQuery = 'DELETE FROM groupmembers WHERE groupId=$1 AND memberId = $2 RETURNING *';
+const editGroupNameQuery = 'UPDATE groups SET name=$1 WHERE id= $2 RETURNING *';
+const deleteGroupQuery = 'DELETE FROM groups WHERE $1=id AND $2=ownerId RETURNING *';
+
+/** End of Queries */
+
+
 const GroupController = {
   /**
    * create user group
@@ -9,9 +33,6 @@ const GroupController = {
    * @returns {object} group
    */
   async createGroup(req, res) {
-    const createGroupQuery = `INSERT INTO
-    groups(id, name, description, ownerId)
-    VALUES($1, $2, $3, $4) RETURNING *`;
     const values = [
       uuidv4(),
       req.body.name.trim().toLowerCase(),
@@ -19,9 +40,6 @@ const GroupController = {
       req.user.email.trim(),
     ];
 
-    const addGroupAdminQuery = `INSERT INTO
-      groupmembers(groupId, groupName, memberId, role)
-      VALUES($1, $2, $3, $4) RETURNING *`;
     try {
       const { rows } = await db.query(createGroupQuery, values);
       const adminvalues = [
@@ -53,9 +71,6 @@ const GroupController = {
    * @returns {object} group array
    */
   async addGroupMembers(req, res) {
-    const addGroupMembersQuery = `INSERT INTO
-    groupmembers(groupId, groupName, memberId, role)
-    VALUES($1, $2, $3, $4) RETURNING *`;
     const values = [
       req.params.id,
       req.body.name,
@@ -66,21 +81,17 @@ const GroupController = {
       const { rows } = await db.query(addGroupMembersQuery, values);
       return res.status(201).send({
         status: 201,
-        data: [
-          {
-            status: 201,
-            member: rows[0],
-          },
-        ],
+        data: [{
+          status: 201,
+          member: rows[0],
+        }],
       });
-    } catch (err) {
+    } catch (error) {
       return res.send({
         status: 400,
-        data: [
-          {
-            err,
-          },
-        ],
+        data: [{
+          error,
+        }],
       });
     }
   },
@@ -92,9 +103,6 @@ const GroupController = {
    * @returns {object} sent message
    */
   async sendGroupMessage(req, res) {
-    const groupMessageQuery = `INSERT INTO
-      groupmessages(id, groupId, senderEmail, subject, message, status)
-      VALUES($1, $2, $3, $4, $5, $6) RETURNING *`;
     const values = [
       uuidv4(),
       req.params.id,
@@ -126,7 +134,6 @@ const GroupController = {
    * @returns {object} group members array
    */
   async deleteAGroupMember(req, res) {
-    const deleteAGroupMemberQuery = 'DELETE FROM groupmembers WHERE groupId=$1 AND memberId = $2 RETURNING *';
     try {
       await db.query(deleteAGroupMemberQuery, [req.params.id, req.params.userid]);
 
@@ -174,7 +181,6 @@ const GroupController = {
   },
 
   async editGroupName(req, res) {
-    const editGroupNameQuery = 'UPDATE groups SET name=$1 WHERE id= $2 RETURNING *';
     try {
       const { rows } = await db.query(editGroupNameQuery, [req.body.newName, req.params.id]);
       return res.status(200).send({
@@ -194,8 +200,6 @@ const GroupController = {
   },
 
   async deleteGroup(req, res) {
-    // admin should delete group
-    const deleteGroupQuery = 'DELETE FROM groups WHERE $1=id AND $2=ownerId RETURNING *';
     try {
       const { rows } = await db.query(deleteGroupQuery, [req.params.id, req.user.email]);
       return res.status(204).send({
