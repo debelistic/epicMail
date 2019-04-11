@@ -222,10 +222,123 @@ const insertGroups = async () => {
   await db.query(insertGroup, group5);
 };
 
+const insertGroupMembers = async () => {
+  const addGroupMembersQuery = `INSERT INTO
+    groupmembers(groupId, groupName, memberId, role)
+    VALUES($1, $2, $3, $4) RETURNING *`;
+  const friesadmin = [
+    '5fd08cce-092e-454f-896d-acd78dedb478',
+    'fries maker',
+    'franchesqa@epicmail.com',
+    'admin',
+  ];
+
+  const friesMember1 = [
+    '5fd08cce-092e-454f-896d-acd78dedb478',
+    'fries maker',
+    'ojematthew@epicmail.com',
+    'member',
+  ];
+
+  const friesMember2 = [
+    '5fd08cce-092e-454f-896d-acd78dedb478',
+    'fries maker',
+    'toluniyin@epicmail.com',
+    'member',
+  ];
+
+  const writersAdmin = [
+    'ade0b372-7e17-4e3e-a3f3-d19e494d8333',
+    'post writer',
+    'ojematthew@epicmail.com',
+    'admin',
+  ];
+
+  const writersMember1 = [
+    'ade0b372-7e17-4e3e-a3f3-d19e494d8333',
+    'fries maker',
+    'ojematthew@epicmail.com',
+    'member',
+  ];
+
+  const writersMember2 = [
+    'ade0b372-7e17-4e3e-a3f3-d19e494d8333',
+    'fries maker',
+    'toluniyin@epicmail.com',
+    'member',
+  ];
+
+  await db.query(addGroupMembersQuery, friesadmin);
+  await db.query(addGroupMembersQuery, friesMember1);
+  await db.query(addGroupMembersQuery, friesMember2);
+  await db.query(addGroupMembersQuery, writersAdmin);
+  await db.query(addGroupMembersQuery, writersMember1);
+  await db.query(addGroupMembersQuery, writersMember2);
+};
+
+const insertGroupMessages = async () => {
+  const groupMessageQuery = `INSERT INTO
+      groupmessages(id, groupId, senderEmail, subject, message, status)
+      VALUES($1, $2, $3, $4, $5, $6)
+      returning *`;
+  const message1 = [
+    'dde4e871-d3de-4290-9cb5-2a15a1fbcfa8',
+    '5fd08cce-092e-454f-896d-acd78dedb478',
+    'ojematthew@epicmail.com',
+    'testing group message',
+    'Ensure to Setup Environment variables',
+    'unread',
+  ];
+
+  const message2 = [
+    '15b1bb03-042c-449f-8443-c4ced7dae934',
+    '5fd08cce-092e-454f-896d-acd78dedb478',
+    'ojematthew@epicmail.com',
+    'testing group message',
+    'Ensure to Setup Environment variables',
+    'unread',
+  ];
+
+  const message3 = [
+    '8e97d9e7-905b-4b6c-93aa-cce23790bf8b',
+    '5fd08cce-092e-454f-896d-acd78dedb478',
+    'ojematthew@epicmail.com',
+    'testing group message',
+    'Ensure to Setup Environment variables',
+    'unread',
+  ];
+
+  const message4 = [
+    'ab0b0739-c03e-4606-aff5-376eb2c146c6',
+    'ade0b372-7e17-4e3e-a3f3-d19e494d8333',
+    'ojematthew@epicmail.com',
+    'testing group message',
+    'Ensure to Setup Environment variables',
+    'unread',
+  ];
+
+  const message5 = [
+    'e950ae91-60d8-43e6-98f2-49009dff7683',
+    'ade0b372-7e17-4e3e-a3f3-d19e494d8333',
+    'ojematthew@epicmail.com',
+    'testing group message',
+    'Ensure to Setup Environment variables',
+    'unread',
+  ];
+
+  await db.query(groupMessageQuery, message1);
+  await db.query(groupMessageQuery, message2);
+  await db.query(groupMessageQuery, message3);
+  await db.query(groupMessageQuery, message4);
+  await db.query(groupMessageQuery, message5);
+};
+
 const insertData = async () => {
   await insertUsers();
   await insertMessages();
   await insertGroups();
+  await insertGroupMembers();
+  await insertGroupMessages();
 };
 
 module.exports = {

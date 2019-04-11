@@ -1,3 +1,4 @@
+import uuidv4 from 'uuid/v4';
 import db from '../db';
 
 const GroupController = {
@@ -9,9 +10,10 @@ const GroupController = {
    */
   async createGroup(req, res) {
     const createGroupQuery = `INSERT INTO
-    groups(name, description, ownerId)
-    VALUES($1, $2, $3) RETURNING *`;
+    groups(id, name, description, ownerId)
+    VALUES($1, $2, $3, $4) RETURNING *`;
     const values = [
+      uuidv4(),
       req.body.name.trim().toLowerCase(),
       req.body.description.trim().toLowerCase(),
       req.user.email.trim(),
@@ -92,10 +94,10 @@ const GroupController = {
    */
   async sendGroupMessage(req, res) {
     const groupMessageQuery = `INSERT INTO
-      groupmessages(groupName, ownerId, subject, message, status)
-      VALUES($1, $2, $3, $4, $5)
-      returning *`;
+      groupmessages(id, groupId, senderEmail, subject, message, status)
+      VALUES($1, $2, $3, $4, $5, $6) RETURNING *`;
     const values = [
+      uuidv4(),
       req.params.id,
       req.user.email,
       req.body.subject,
