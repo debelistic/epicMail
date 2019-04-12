@@ -12,7 +12,6 @@ Router.post(
   Auth.checkToken,
   Auth.verifyToken,
   ValidateUserInput.checkUser,
-  ValidateGroupsInput.verifyMail,
   ValidateGroupsInput.groupForm,
   GroupController.createGroup,
 );

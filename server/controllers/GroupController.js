@@ -18,7 +18,7 @@ const groupMessageQuery = `INSERT INTO
     groupmessages(id, groupId, senderEmail, subject, message, status)
     VALUES($1, $2, $3, $4, $5, $6) RETURNING *`;
 
-const getGroupMssgQuery = 'SELECT FROM groupmessages WHERE groupId = $1 AND memberId = S2 RETURNING *';
+const getGroupMssgQuery = 'SELECT FROM groupmessages WHERE groupId = $1';
 const deleteAGroupMemberQuery = 'DELETE FROM groupmembers WHERE groupId=$1 AND memberId = $2 RETURNING *';
 const editGroupNameQuery = 'UPDATE groups SET name=$1 WHERE id= $2 RETURNING *';
 const deleteGroupQuery = 'DELETE FROM groups WHERE $1=id AND $2=ownerId RETURNING *';
@@ -134,7 +134,7 @@ const GroupController = {
    */
   async getGroupMessages(req, res) {
     try {
-      const { rows, rowCount } = await db.query(getGroupMssgQuery, [req.params.id, req.user.email]);
+      const { rows, rowCount } = await db.query(getGroupMssgQuery, [req.params.id]);
       console.log(rowCount, 'messges \n', rows);
       return res.status(200).send({
         status: 200,
@@ -143,6 +143,7 @@ const GroupController = {
         }],
       });
     } catch (error) {
+      console.log('Your error:', error);
       return res.status(400).send({
         error,
       });
