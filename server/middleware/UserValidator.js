@@ -103,11 +103,24 @@ const ValidateUserInput = {
   async loginEmail(req, res, next) {
     try {
       const loginQuery = 'SELECT * FROM users WHERE email = $1';
-      const userEmail = await `${req.body.email.toLowerCase()}@epicmail.com`;
-      await db.query(loginQuery, [userEmail]);
+      const userEmail = await `${req.body.email.toLowerCase()}`;
+      const { rows } = await db.query(loginQuery, [userEmail]);
+      if (rows[0] === undefined) {
+        return res.status(403).send({
+          mesage: 'You are not a registered',
+        });
+      }
+      if (rows[0].email !== userEmail) {
+        return res.status(403).send({
+          mesage: 'You are not a member of this group',
+        });
+      }
       return next();
     } catch (error) {
-      return next(error);
+      return res.status(403).send({
+        message: 'Invaild email',
+        error,
+      });
     }
   },
 
@@ -129,7 +142,9 @@ const ValidateUserInput = {
       }
       return next();
     } catch (error) {
-      return next(error);
+      return res.status(400).send({
+        error,
+      });
     }
   },
 

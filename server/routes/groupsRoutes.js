@@ -12,29 +12,26 @@ Router.post(
   Auth.checkToken,
   Auth.verifyToken,
   ValidateUserInput.checkUser,
-  ValidateGroupsInput.verifyMail,
   ValidateGroupsInput.groupForm,
   GroupController.createGroup,
 );
 
-// add members
+// admin add members
 Router.post(
   '/groups/:id/users',
   Auth.checkToken,
   Auth.verifyToken,
   ValidateUserInput.checkUser,
-  ValidateGroupsInput.verifyMail,
   ValidateGroupsInput.checkAdmin,
   GroupController.addGroupMembers,
 );
 
-// delete members
+// admin delete members
 Router.delete(
   '/groups/:id/users/:userid',
   Auth.checkToken,
   Auth.verifyToken,
   ValidateUserInput.checkUser,
-  ValidateGroupsInput.verifyMail,
   ValidateGroupsInput.checkAdmin,
   GroupController.deleteAGroupMember,
 );
@@ -50,35 +47,41 @@ Router.post(
   GroupController.sendGroupMessage,
 );
 
+// get group messages
+Router.get(
+  '/groups/:id/messages',
+  Auth.checkToken,
+  Auth.verifyToken,
+  ValidateUserInput.checkUser,
+  ValidateGroupsInput.verifyMail,
+  GroupController.getGroupMessages,
+);
+
 // get groups
 Router.get(
   '/groups',
   Auth.checkToken,
   Auth.verifyToken,
   ValidateUserInput.checkUser,
-  ValidateGroupsInput.verifyMail,
   GroupController.getAllGroups,
 );
 
-// patch group name
+// admin patch group name
 Router.patch(
   '/groups/:id/name',
   Auth.checkToken,
   Auth.verifyToken,
   ValidateUserInput.checkUser,
-  ValidateGroupsInput.verifyMail,
   ValidateGroupsInput.checkAdmin,
   ValidateGroupsInput.checkNewName,
   GroupController.editGroupName,
 );
 
-// delete group
+// admin delete group
 Router.delete(
   '/groups/:id',
   Auth.checkToken,
   Auth.verifyToken,
-  ValidateUserInput.checkUser,
-  ValidateGroupsInput.verifyMail,
   ValidateGroupsInput.checkAdmin,
   GroupController.deleteGroup,
 );

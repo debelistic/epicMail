@@ -39,21 +39,46 @@ const ValidateGroupsInput = {
    */
   async verifyMail(req, res, next) {
     try {
-      const checkMemberEmailQuery = 'SELECT * FROM users WHERE $1=email';
-      await db.query(checkMemberEmailQuery, [req.body.membermail]);
+      const checkMemberEmailQuery = 'SELECT * FROM groupmembers WHERE $1=groupId AND $2=memberId';
+      const { rows } = await db.query(checkMemberEmailQuery, [req.params.id, req.user.email]);
+      if (rows[0] === undefined) {
+        return res.status(403).send({
+          mesage: 'You are not a member',
+        });
+      }
+      if (rows[0].memberid !== req.user.email) {
+        return res.status(403).send({
+          mesage: 'You are not a member of this group',
+        });
+      }
       return next();
     } catch (error) {
-      return next(error);
+      return res.status(400).send({
+        error,
+      });
     }
   },
 
   async checkAdmin(req, res, next) {
     try {
-      const verifyAdminQuery = 'SELECT * FROM groups WHERE ownerId = $1 AND Id = $2';
-      await db.query(verifyAdminQuery, [req.user.email, req.params.id]);
+      const verifyAdminQuery = 'SELECT * FROM groupmembers WHERE memberId = $1 AND groupId = $2 AND role = $3';
+      const { rows } = await db.query(verifyAdminQuery, [req.user.email, req.params.id, 'admin']);
+      if (rows[0] === undefined) {
+        return res.status(403).send({
+          message: 'Admins Only.',
+        });
+      }
+      if (rows[0].memberid !== req.user.email) {
+        return res.status(403).send({
+          message: 'Admins Only.',
+        });
+      }
+
       return next();
     } catch (error) {
-      return next(error);
+      return res.status(400).send({
+        error,
+      });
     }
   },
 

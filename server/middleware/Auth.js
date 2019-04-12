@@ -24,7 +24,10 @@ const Auth = {
       req.user = { email: decoded.userEmail };
       return next();
     } catch (error) {
-      return next(error);
+      return res.status(403).send({
+        message: 'Forbidden',
+        error,
+      });
     }
   },
 };

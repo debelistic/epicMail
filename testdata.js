@@ -230,6 +230,13 @@ const writersMember2 = [
   'toluniyin@epicmail.com',
   'member',
 ];
+
+const campAdmin = [
+  'f04bd8ee-e63a-42e1-8264-d195df5316c8',
+  'camp support',
+  'toluniyin@epicmail.com',
+  'admin',
+];
 /** End dummy groups members */
 
 /** Start dummy groups messgaes */
@@ -335,6 +342,7 @@ const insertGroupMembers = async () => {
   await db.query(addGroupMembersQuery, writersAdmin);
   await db.query(addGroupMembersQuery, writersMember1);
   await db.query(addGroupMembersQuery, writersMember2);
+  await db.query(addGroupMembersQuery, campAdmin);
 };
 
 const insertGroupMessages = async () => {
