@@ -16,18 +16,17 @@ Router.post(
   GroupController.createGroup,
 );
 
-// add members
+// admin add members
 Router.post(
   '/groups/:id/users',
   Auth.checkToken,
   Auth.verifyToken,
   ValidateUserInput.checkUser,
-  ValidateGroupsInput.verifyMail,
   ValidateGroupsInput.checkAdmin,
   GroupController.addGroupMembers,
 );
 
-// delete members
+// admin delete members
 Router.delete(
   '/groups/:id/users/:userid',
   Auth.checkToken,
@@ -67,7 +66,7 @@ Router.get(
   GroupController.getAllGroups,
 );
 
-// patch group name
+// admin patch group name
 Router.patch(
   '/groups/:id/name',
   Auth.checkToken,
@@ -78,7 +77,7 @@ Router.patch(
   GroupController.editGroupName,
 );
 
-// delete group
+// admin delete group
 Router.delete(
   '/groups/:id',
   Auth.checkToken,
