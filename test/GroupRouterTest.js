@@ -37,16 +37,22 @@ describe('Create Groups', () => {
   });
 });
 
-describe('Add Members', () => {
-  it('Add member to a group', (done) => {
+describe('Add Member', () => {
+  it('Add a member to group', (done) => {
     const newMember = {
       name: 'franchess',
-      membermail: 'franchesqa@epicmail.com',
+      membermail: 'vincicode@epicmail.com',
     };
+
+    const adminToken = jwt.sign(
+      { userEmail: 'franchesqa@epicmail.com' },
+      process.env.SECRET,
+      { expiresIn: '7d' },
+    );
 
     chai.request(app)
       .post('/api/v1/groups/5fd08cce-092e-454f-896d-acd78dedb478/users')
-      .set('x-access-token', token)
+      .set('x-access-token', adminToken)
       .send(newMember)
       .end((err, res) => {
         if (err) done(err);
@@ -86,9 +92,14 @@ describe('Get Group Messages', () => {
 
 describe('Delete Memebers', () => {
   it('Delete a group member', (done) => {
+    const adminToken = jwt.sign(
+      { userEmail: 'franchesqa@epicmail.com' },
+      process.env.SECRET,
+      { expiresIn: '7d' },
+    );
     chai.request(app)
       .delete('/api/v1/groups/5fd08cce-092e-454f-896d-acd78dedb478/users/ojematthew@epicmail.com')
-      .set('x-access-token', token)
+      .set('x-access-token', adminToken)
       .end((err, res) => {
         if (err) done(err);
         expect(res.status).to.equal(204);

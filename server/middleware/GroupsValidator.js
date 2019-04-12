@@ -38,38 +38,48 @@ const ValidateGroupsInput = {
    * @param {object} next
    */
   async verifyMail(req, res, next) {
-    const checkMemberEmailQuery = 'SELECT * FROM groupmembers WHERE $1=groupId AND $2=memberId';
-    const { rows } = await db.query(checkMemberEmailQuery, [req.params.id, req.user.email]);
-    console.log('member mail: ', rows[0]);
-    if (rows[0] === undefined) {
-      return res.status(403).send({
-        mesage: 'You are not a member',
+    try {
+      const checkMemberEmailQuery = 'SELECT * FROM groupmembers WHERE $1=groupId AND $2=memberId';
+      const { rows } = await db.query(checkMemberEmailQuery, [req.params.id, req.user.email]);
+      if (rows[0] === undefined) {
+        return res.status(403).send({
+          mesage: 'You are not a member',
+        });
+      }
+      if (rows[0].memberid !== req.user.email) {
+        return res.status(403).send({
+          mesage: 'You are not a member of this group',
+        });
+      }
+      return next();
+    } catch (error) {
+      return res.status(400).send({
+        error,
       });
     }
-    if (rows[0].memberid !== req.user.email) {
-      return res.status(403).send({
-        mesage: 'You are not a member of this group',
-      });
-    }
-    return next();
   },
 
   async checkAdmin(req, res, next) {
-    const verifyAdminQuery = 'SELECT * FROM groupmembers WHERE memberId = $1 AND groupId = $2 AND role = $3';
-    const { rows } = await db.query(verifyAdminQuery, [req.user.email, req.params.id, 'admin']);
-    if (rows[0] === undefined) {
-      return res.status(403).send({
-        message: 'Admins Only.',
-      });
-    }
-    console.log('admin here>>', rows.ownerid);
-    if (rows[0].ownerid !== req.user.email) {
-      return res.status(403).send({
-        message: 'Admins Only.',
-      });
-    }
+    try {
+      const verifyAdminQuery = 'SELECT * FROM groupmembers WHERE memberId = $1 AND groupId = $2 AND role = $3';
+      const { rows } = await db.query(verifyAdminQuery, [req.user.email, req.params.id, 'admin']);
+      if (rows[0] === undefined) {
+        return res.status(403).send({
+          message: 'Admins Only.',
+        });
+      }
+      if (rows[0].memberid !== req.user.email) {
+        return res.status(403).send({
+          message: 'Admins Only.',
+        });
+      }
 
-    return next();
+      return next();
+    } catch (error) {
+      return res.status(400).send({
+        error,
+      });
+    }
   },
 
   async checkMessageInput(req, res, next) {

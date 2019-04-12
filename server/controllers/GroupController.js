@@ -134,8 +134,7 @@ const GroupController = {
    */
   async getGroupMessages(req, res) {
     try {
-      const { rows, rowCount } = await db.query(getGroupMssgQuery, [req.params.id]);
-      console.log(rowCount, 'messges \n', rows[0]);
+      const { rows } = await db.query(getGroupMssgQuery, [req.params.id]);
       return res.status(200).send({
         status: 200,
         data: [{
@@ -143,7 +142,6 @@ const GroupController = {
         }],
       });
     } catch (error) {
-      console.log('Your error:', error);
       return res.status(400).send({
         error,
       });
