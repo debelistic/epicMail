@@ -33,7 +33,6 @@ Router.delete(
   Auth.checkToken,
   Auth.verifyToken,
   ValidateUserInput.checkUser,
-  ValidateGroupsInput.verifyMail,
   ValidateGroupsInput.checkAdmin,
   GroupController.deleteAGroupMember,
 );
@@ -65,7 +64,6 @@ Router.get(
   Auth.checkToken,
   Auth.verifyToken,
   ValidateUserInput.checkUser,
-  ValidateGroupsInput.verifyMail,
   GroupController.getAllGroups,
 );
 
@@ -75,7 +73,6 @@ Router.patch(
   Auth.checkToken,
   Auth.verifyToken,
   ValidateUserInput.checkUser,
-  ValidateGroupsInput.verifyMail,
   ValidateGroupsInput.checkAdmin,
   ValidateGroupsInput.checkNewName,
   GroupController.editGroupName,
@@ -86,8 +83,6 @@ Router.delete(
   '/groups/:id',
   Auth.checkToken,
   Auth.verifyToken,
-  ValidateUserInput.checkUser,
-  ValidateGroupsInput.verifyMail,
   ValidateGroupsInput.checkAdmin,
   GroupController.deleteGroup,
 );

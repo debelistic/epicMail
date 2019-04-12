@@ -38,37 +38,38 @@ const ValidateGroupsInput = {
    * @param {object} next
    */
   async verifyMail(req, res, next) {
-    try {
-      const checkMemberEmailQuery = 'SELECT * FROM groupmembers WHERE $1=groupId AND $2=memberId';
-      await db.query(checkMemberEmailQuery, [req.params.id, req.user.email]);
-      return next();
-    } catch (error) {
-      console.log('Your error: ', error);
+    const checkMemberEmailQuery = 'SELECT * FROM groupmembers WHERE $1=groupId AND $2=memberId';
+    const { rows } = await db.query(checkMemberEmailQuery, [req.params.id, req.user.email]);
+    console.log('member mail: ', rows[0]);
+    if (rows[0] === undefined) {
       return res.status(403).send({
-        message: 'You are probably not registered',
-        error,
+        mesage: 'You are not a member',
       });
     }
+    if (rows[0].memberid !== req.user.email) {
+      return res.status(403).send({
+        mesage: 'You are not a member of this group',
+      });
+    }
+    return next();
   },
 
   async checkAdmin(req, res, next) {
-    try {
-      const verifyAdminQuery = 'SELECT * FROM groups WHERE ownerId = $1 AND Id = $2';
-      const { rows } = await db.query(verifyAdminQuery, [req.user.email, req.params.id]);
-      console.log('admin her>>', rows);
-      if (rows[0].ownerid !== req.user.email) {
-        return res.status(403).send({
-          message: 'Admins Only.',
-        });
-      }
-
-      return next();
-    } catch (error) {
+    const verifyAdminQuery = 'SELECT * FROM groupmembers WHERE memberId = $1 AND groupId = $2 AND role = $3';
+    const { rows } = await db.query(verifyAdminQuery, [req.user.email, req.params.id, 'admin']);
+    if (rows[0] === undefined) {
       return res.status(403).send({
-        message: 'Only Admins',
-        error,
+        message: 'Admins Only.',
       });
     }
+    console.log('admin here>>', rows.ownerid);
+    if (rows[0].ownerid !== req.user.email) {
+      return res.status(403).send({
+        message: 'Admins Only.',
+      });
+    }
+
+    return next();
   },
 
   async checkMessageInput(req, res, next) {
