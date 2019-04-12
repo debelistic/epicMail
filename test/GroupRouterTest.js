@@ -60,6 +60,30 @@ describe('Add Members', () => {
   });
 });
 
+describe('Get Group Messages', () => {
+  it('Returns an array of messages for a group', (done) => {
+    const memTtoken = jwt.sign(
+      { userEmail: 'toluniyin@epicmail.com' },
+      process.env.SECRET,
+      { expiresIn: '7d' },
+    );
+
+    chai.request(app)
+      .get('/api/v1/groups/ade0b372-7e17-4e3e-a3f3-d19e494d8333/messages')
+      .set('x-access-token', memTtoken)
+      .end((err, res) => {
+        if (err) done(err);
+        expect(res.status).to.equal(200);
+        expect(res.body).to.be.a('object');
+        expect(res.body).to.have.keys('status', 'data');
+        expect(res.body.data).to.be.a('array');
+        expect(res.body.data[0]).to.be.a('object');
+        expect(res.body.data[0].messages).to.be.a('array');
+        done();
+      });
+  });
+});
+
 describe('Delete Memebers', () => {
   it('Delete a group member', (done) => {
     chai.request(app)
