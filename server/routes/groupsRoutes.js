@@ -50,6 +50,16 @@ Router.post(
   GroupController.sendGroupMessage,
 );
 
+// get group messages
+Router.get(
+  '/groups/:id/messages',
+  Auth.checkToken,
+  Auth.verifyToken,
+  ValidateUserInput.checkUser,
+  ValidateGroupsInput.verifyMail,
+  GroupController.getGroupMessages,
+);
+
 // get groups
 Router.get(
   '/groups',

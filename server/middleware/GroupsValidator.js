@@ -39,11 +39,14 @@ const ValidateGroupsInput = {
    */
   async verifyMail(req, res, next) {
     try {
-      const checkMemberEmailQuery = 'SELECT * FROM users WHERE $1=email';
-      await db.query(checkMemberEmailQuery, [req.body.membermail]);
+      const checkMemberEmailQuery = 'SELECT * FROM users WHERE $1=groupId AND $2=memberId';
+      await db.query(checkMemberEmailQuery, [req.params.id, req.user.email]);
       return next();
     } catch (error) {
-      return next(error);
+      return res.status(403).send({
+        message: 'You are probably not registered',
+        error,
+      });
     }
   },
 
@@ -53,7 +56,10 @@ const ValidateGroupsInput = {
       await db.query(verifyAdminQuery, [req.user.email, req.params.id]);
       return next();
     } catch (error) {
-      return next(error);
+      return res.send(403).send({
+        message: 'Only Admins',
+        error,
+      });
     }
   },
 

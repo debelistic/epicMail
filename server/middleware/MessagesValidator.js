@@ -2,13 +2,12 @@ import db from '../db';
 
 const ValidateMessageInput = {
   async checkReceiver(req, res, next) {
-    try {
+    if (req.body.receiverEmail) {
       const checkReceiverEmailQuery = 'SELECT * FROM users WHERE $1=email';
       await db.query(checkReceiverEmailQuery, [req.body.receiverEmail]);
       return next();
-    } catch (error) {
-      return next(error);
     }
+    return next();
   },
   async checkFeilds(req, res, next) {
     if (!req.body.subject || !req.body.message) {

@@ -107,7 +107,10 @@ const ValidateUserInput = {
       await db.query(loginQuery, [userEmail]);
       return next();
     } catch (error) {
-      return next(error);
+      return res.status(403).send({
+        message: 'Invaild email',
+        error,
+      });
     }
   },
 
@@ -118,19 +121,15 @@ const ValidateUserInput = {
    * @param {object} next
    */
   async loginPassword(req, res, next) {
-    try {
-      const loginQuery = 'SELECT * FROM users WHERE email = $1';
-      const userEmail = await req.body.email.toLowerCase();
-      const { rows } = await db.query(loginQuery, [userEmail]);
-      if (!Helper.comparePassword(req.body.password, rows[0].password)) {
-        return res.status(400).send({
-          message: 'Invalid Passowrd',
-        });
-      }
-      return next();
-    } catch (error) {
-      return next(error);
+    const loginQuery = 'SELECT * FROM users WHERE email = $1';
+    const userEmail = await req.body.email.toLowerCase();
+    const { rows } = await db.query(loginQuery, [userEmail]);
+    if (!Helper.comparePassword(req.body.password, rows[0].password)) {
+      return res.status(400).send({
+        message: 'Invalid Passowrd',
+      });
     }
+    return next();
   },
 
   /**
