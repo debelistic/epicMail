@@ -1,26 +1,29 @@
 /* global document */
 const mailform = document.querySelector('form#mailform');
-const userimage = document.querySelector('#profiledropdown');
 const usernav = document.querySelector('nav.user-options');
-const largecompose = document.querySelector('#large-compose');
-const menuicon = document.querySelector('#menu-icon');
 const usermenu = document.querySelector('.usermenu');
 
-
-largecompose.addEventListener('click', () => {
-  usermenu.classList.remove('open');
-  mailform.classList.toggle('open');
+document.addEventListener('click', (event) => {
+  if (event.target.id === 'large-compose') {
+    mailform.classList.toggle('open');
+  } else {
+    mailform.classList.remove('open');
+    
+  }
 });
 
-userimage.addEventListener('click', () => {
-  usernav.classList.toggle('open');
+document.addEventListener('click', (event) => {
+  if (event.target.id === 'profiledropdown') {
+    usernav.classList.toggle('open');
+  } else {
+    usernav.classList.remove('open');
+  }
 });
 
-menuicon.addEventListener('click', () => {
-  mailform.classList.remove('open');
-  usermenu.classList.toggle('open');
-});
-
-document.addEventListener('click', () => {
-  document.removeEventListener('click', userimage);
+document.addEventListener('click', (event) => {
+  if (event.target.id === 'menu-icon') {
+    usermenu.classList.toggle('open');
+  } else {
+    usermenu.classList.remove('open');
+  }
 });
