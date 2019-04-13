@@ -6,9 +6,8 @@ const usermenu = document.querySelector('.usermenu');
 document.addEventListener('click', (event) => {
   if (event.target.id === 'large-compose') {
     mailform.classList.toggle('open');
-  } else {
+  } else{
     mailform.classList.remove('open');
-    
   }
 });
 
