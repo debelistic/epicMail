@@ -1,16 +1,26 @@
 /* global document */
-const mailicon = document.querySelector('i#mailicon');
-const mailmenu = document.querySelector('nav.usermenu ul');
-const composeicon = document.querySelector('i#composeicon');
 const mailform = document.querySelector('form#mailform');
+const userimage = document.querySelector('#profiledropdown');
+const usernav = document.querySelector('nav.user-options');
+const largecompose = document.querySelector('#large-compose');
+const menuicon = document.querySelector('#menu-icon');
+const usermenu = document.querySelector('.usermenu');
 
 
-mailicon.addEventListener('click', () => {
-  mailform.classList.remove('open');
-  mailmenu.classList.toggle('open');
+largecompose.addEventListener('click', () => {
+  usermenu.classList.remove('open');
+  mailform.classList.toggle('open');
 });
 
-composeicon.addEventListener('click', () => {
-  mailmenu.classList.remove('open');
-  mailform.classList.toggle('open');
+userimage.addEventListener('click', () => {
+  usernav.classList.toggle('open');
+});
+
+menuicon.addEventListener('click', () => {
+  mailform.classList.remove('open');
+  usermenu.classList.toggle('open');
+});
+
+document.addEventListener('click', () => {
+  document.removeEventListener('click', userimage);
 });

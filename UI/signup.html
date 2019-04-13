@@ -3,9 +3,19 @@
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>EPIC MAIL</title>
+    <title>EPIC MAIL | SignUp</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" type="text/css" media="screen" href="./styles/main.css"> 
+    <!-- favicons -->
+    <meta name="msapplication-TileColor" content="#da532c">
+    <meta name="theme-color" content="#ffffff">
+    <link rel="apple-touch-icon" sizes="180x180" href="./imgs/favicons/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="./imgs/favicons/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="./imgs/favicons/favicon-16x16.png">
+    <link rel="manifest" href="./imgs/favicons/site.webmanifest">
+    <link rel="mask-icon" href="./imgs/favicons/safari-pinned-tab.svg" color="#5bbad5">
+    <!-- end of favicons -->
+
+    <link rel="stylesheet" type="text/css" media="screen" href="./styles/main.css">
     <link rel="stylesheet" type="text/css" media="screen" href="./styles/signup.css"> 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">  
 </head>
@@ -21,7 +31,7 @@
             <ul>
                 <li class="navli"><a href="index.html">Sign in</a></li>
                 <li class="navli"><a href="signup.html">Sign Up</a></li>
-                <li class="navli"><a href="#">Help</a></li>
+                <li class="navli"><a href="https://epicmailwithds.herokuapp.com/api-docs">Doc</a></li>
             </ul>
         </nav>
     </header>
@@ -29,30 +39,38 @@
     <main>
         <section class="main-banner">            
             <div class="container transparent">
-                <p class="main-content">Signup</p>
+                    <h2 class="main-content">SignUp</h2>
                 <form action="#" method="get" id="signinform">
                     <div id="message"></div>
                     <div class="form-group">
                         <label for="name">Name</label>
-                        <input type="text" name="username" id="name" placeholder="First name" required>
+                        <input type="text" name="name" id="name" required>
                     </div>
                     <div class="form-group">
-                            <label for="email">Email</label>
-                            <input type="email" name="username" id="email" placeholder="example@mail.com" required>
+                        <label for="username">Username</label>
+                        <input type="text" name="username" id="email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="username">Recovery Email</label>
+                        <input type="email" name="username" id="recoveryemail" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="username">Phone Number</label>
+                        <input type="tel" name="phonenumber" id="phoneNumber">
+                    </div>
+                    <div class="form-group">
+                        <label for="userimage">Profile Picture</label>
+                        <input type="file" name="userimage" id="userimage" required>
                     </div>
                     <div class="form-group">
                         <label for="password">Password</label>
-                        <input type="text" name="password" id="password"     placeholder="Enter Password" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="confirmpassword">Confirm Password</label>
-                        <input type="text" name="password" id="confirmpassword"     placeholder="Confirm Password" required>
+                        <input type="text" name="password" id="password" placeholder="Password" required>
                     </div>
                     <div class="form-group">
                         <button type="button">Signup</button>
                     </div>                    
                 </form>
-                <p class="main-content">Don't have an account, <a href="#">Signin</a></p>
+                <p class="main-content">Have an account, <a href="index.html">SignIn</a></p>
             </div>
         </section>
     </main>
@@ -60,16 +78,16 @@
     <footer id="footer">
         <div class="sm-page">
                 <ul>
-                    <li><a href="#"> Facebook <i class="fa fa-facebook-square"></i></a></li>
-                    <li><a href="#"> Twitter <i class="fa fa-twitter"></i></a></li>
-                    <li><a href="#"> Pinterest <i class="fa fa-pinterest"></i></a></li>
+                    <li><a href="https://www.pivotaltracker.com/n/projects/2314742" target="blank"><i class="fa fa-sun-o" aria-hidden="true"></i> Stories</a></li>
+                    <li><a href="https://github.com/debelistic/epicMail" target="blank"><i class="fa fa-github" aria-hidden="true"></i> GitHub</a></li>
+                    <li><a href="https://epicmailwithds.herokuapp.com/api-docs" target="blank"><i class="fa fa-tasks" aria-hidden="true"></i></i> Swagger</a></li>
                 </ul>
         </div>
         <div class="footer-nav">
             <ul id="navigation">
-                <li class="footerli"><a href="#">Find Us</a></li>
-                <li class="footerli"><a href="#">Support</a></li>
-                <li class="footerli"><a href="#">About</a></li>
+                <li class="footerli"><a href="https://www.pivotaltracker.com/n/projects/2314742" target="blank">Find Us</a></li>
+                <li class="footerli"><a href="https://github.com/debelistic/epicMail" target="blank">Support</a></li>
+                <li class="footerli"><a href="https://epicmailwithds.herokuapp.com/api-docs" target="blank">About</a></li>
             </ul>
         </div>
         <div class="copyright">
