@@ -5,30 +5,58 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>EPIC MAIL</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- favicons -->
+    <meta name="msapplication-TileColor" content="#da532c">
+    <meta name="theme-color" content="#ffffff">
+    <link rel="apple-touch-icon" sizes="180x180" href="./imgs/favicons/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="./imgs/favicons/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="./imgs/favicons/favicon-16x16.png">
+    <link rel="manifest" href="./imgs/favicons/site.webmanifest">
+    <link rel="mask-icon" href="./imgs/favicons/safari-pinned-tab.svg" color="#5bbad5">
+    <!-- end of favicons -->
+
+    <!-- stylesheets -->
     <link rel="stylesheet" type="text/css" media="screen" href="./styles/main.css">
     <link rel="stylesheet" type="text/css" media="screen" href="./styles/user.css">  
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">  
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+    <!-- end of stylesheets -->
 </head>
 <body>
     <header id="header">
         <div class="page-title">
-            <h1><a href="index.html"><i class="fa fa-envelope-o"></i> EPIC MAIL</a></h1>
-        </div> 
+            <h1><a href="index.html">EPIC MAIL</a></h1>
+        </div>
+        <i id="navbutton" class="fa fa-bars icon"></i>
+        <div class="user-icons">
+            <div id="menu-icon">
+                <div class="bar"></div>
+                <div class="bar"></div>
+                <div class="bar"></div>
+            </div>
+            <img class="profileimage" id="profiledropdown" src="./imgs/profile-placeholder.jpg" alt="profile picture">
+        </div>
+        <nav class="user-options" id="imagedrop">
+            <ul>
+                <li class="navli">Vincent</li>
+                <li class="navli"><a href="signup.html">Settings</a></li>
+                <li class="navli"><a href="signup.html">Logout</a></li>
+            </ul>
+        </nav>        
     </header>
 
     <main>
         <section class="main-banner">
-            
-            <div class="userheader">
-                <i id="mailicon" class="fa fa-bars icon"></i>
-                <i class="fa fa-pencil-square-o" id="composeicon"></i>
-            </div>
             <nav class="usermenu">
                 <ul>
+                    <li id="large-compose">Compose</li>
                     <li><a href="userallmail.html">Inbox</a></a></li>
                     <li><a href="usersent.html">Sent</a></li>
                     <li><a href="userdrafts.html">Drafts</a></li>
-                    <li><a href="user.html">Settings</a></li>
+                    <li><a href="groups.html">Groups</a></li>
+                    <li><a href="resetpass.html">Settings</a></li>
+                    <li>EPIC MAIL &copy 2019</li>
                 </ul>
             </nav>
             <div id="mailformdiv">
@@ -82,8 +110,62 @@
                             <span class="senderid">Wedekind:</span>
                             <span class="mailsubject">Sit, amet conse...</span>
                         </a>                        
-                    </li>           
-                </ul>            
+                    </li>
+                    <li class="maillist">
+                            <a href="usermessage.html">
+                                <span class="senderid">Frank:</span>
+                                <span class="mailsubject">Lorem ipsum...</span>
+                            </a>
+                        </li> 
+                    <li class="maillist">
+                        <a href="usermessage.html">
+                            <span class="senderid">Gerrad:</span>
+                            <span class="mailsubject">Sit, amet conse...</span>
+                        </a>                        
+                    </li>   
+                    <li class="maillist">
+                        <a href="usermessage.html">
+                            <span class="senderid">Victor:</span>
+                            <span class="mailsubject">Sit, amet conse...</span>
+                        </a>
+                    </li>
+                    <li class="maillist">
+                        <a href="usermessage.html">
+                            <span class="senderid">Tobe:</span>
+                            <span class="mailsubject">Sit, amet conse...</span>
+                        </a>
+                    </li>          
+                </ul>           
+            </div>
+            <div class="main-chat">
+                <div class="chatheader">
+                    <img class="profileimage" src="./imgs/profile-placeholder.jpg" alt="profile picture">
+                    <span class="contactname">Fred Simens</span>
+                </div>
+                <div class="chats">
+                    <div class="chatwrapper">
+                        <div class="sent">
+                            <p class="chatp">
+                                Lorem ipsum dolor, iis
+                                sit amet consectetur 
+                                adipisicing elit. Atque unde, 
+                                laborum nam optio tempora offic
+                            </p>
+                        </div>
+                        <div class="receive">
+                            <p class="chatp">
+                                Lorem ipsum dolor, iis
+                                sit amet consectetur 
+                                adipisicing elit. Atque unde, 
+                                laborum nam optio tempora offic
+                            </p>
+                        </div>        
+                    </div>
+                </div>
+                <div class="chatarea">
+                    <textarea name="" id="" cols="30" rows="10"></textarea>
+                    <i class="fa fa-paper-plane"></i>
+                </div>
             </div>
         </section>
     </main>

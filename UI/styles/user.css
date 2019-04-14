@@ -1,5 +1,16 @@
 #header{
-    height: auto;
+    height: 50px;
+    position: relative;
+    overflow: visible;
+    padding-right: 10px;
+}
+
+.bar{
+    widows: 35px;
+    height: 5px;
+    background-color: #FCFCFC;
+    margin: 6px;
+    border-radius: 2px;
 }
 .page-title{
     float: none;
@@ -7,46 +18,76 @@
 
 .page-title h1 {
     border: none;
+    font-size: 25px;
+    padding: 0;
+    margin: 0;
+}
+
+main{
+    padding: 0;
+    margin: 0;
 }
 
 .main-banner{
     position: relative;
     color: #FCFCFC;
     display: block;
+    font-size: 20px;
 }
 .chat{
-    display: block;
-    float: right;
     width: 80%;
-    height: 70%;
-    bottom: 70px;
+    height: 100%;
 }
 .chat .open{
     display: unset;
 }
 .chatarea{
+    background-color: rgb(194, 196, 233);
+    clear: both;
     width: 100%;
-    margin: 0;
+    height: 65px;
+    padding: 0;
+    position: absolute;
+    bottom: 0;
 }
-.chatarea input{
-    color: #FCFCFC;
-    height: 30px;
-    width: 80%;
+.chatwrapper{
+    background-color: rgba(235, 240, 243, 0.938);
+    position: relative;
+    margin-top: 60px;
+    height: calc(100vh - 166px);
+    overflow: auto;
+}
+.chatarea textarea{
+    color: #003D66;
+    height: 40px;
+    width: 83%;
     padding: 5px;
     border-radius: 4px;
-    background: rgba(13, 47, 70, 0.473);
+    background: #FCFCFC;
     outline: unset;
+    font-size: 16px;
+    margin-top: 10px;
+    margin-left: 10px;
 }
 .chatarea i {
-    color: #003D66;
+    border-radius: 16px;
+    padding: 8px;
+    cursor: pointer;
+    background-color: rgba(6, 28, 51, 0.925);
+    color: rgb(194, 196, 233);
+    font-weight: 900;
+    font-size: 30px;
+    float: right;
+    margin-top: 11px;
+    margin-right: 5px;
 }
 div.sent{
     width: 70%;
     float: right;
     border-radius: 4px;
-    background: rgba(13, 47, 80, 0.473);
+    background: rgba(13, 47, 70, 0.473);
     padding: 5px;
-    margin: 2px;
+    margin: 5px;
     border: 1px solid #FCFCFC;
 
 }
@@ -56,8 +97,27 @@ div.receive{
     background: rgba(13, 47, 80, 0.473);
     border-radius: 4px;
     padding: 5px;
-    margin: 2px;
+    margin: 5px;
     border: 1px solid #FCFCFC;
+}
+div.sent::after{
+    content: "";
+    clear: both;
+    display: table;
+}
+p.chatp{
+    display: block;
+    padding: 0;
+    margin: 0;
+}
+img.chatimage{
+    border-radius: 25px;
+    width: 45px;
+    padding: 0;
+    margin: 0;
+    margin-right: 5px;
+    height: inherit;
+    float: left;
 }
 .page-title{
     text-align: center;
@@ -65,17 +125,20 @@ div.receive{
     display: flex;
 }
 #mailformdiv{
-    position: relative;
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    z-index: 5;
+    width: 45%;
     display: block;
-    background: #003D66;
+    background: rgb(176, 216, 228);
 }
 form#mailform{
-    position: absolute;
-    top: 0;
-    right: 0;
     height: 0;
     display: none;
-    background: #003D66;
+    width: 100%;
+    background: rgb(176, 216, 228);
+    font-family: 'Courier New', Courier, monospace;
 }
 form#mailform.open{
     height: auto;
@@ -84,32 +147,35 @@ form#mailform.open{
 form#mailform input[type='text']{
     margin: 5px;
     padding: 10px;
-    background: rgba(13, 47, 70, 0.473);
+    background: #FCFCFC;
     width: 80%;
-    color: #FCFCFC;
+    color: #003D66;
     font-size: 20px;
+    font-family: 'Courier New', Courier, monospace;
     outline: unset;
 }
 
 form#mailform input[type='button']{
     margin: 5px;
     padding: 10px;
-    background: rgba(13, 47, 70, 0.473);
+    background: #FCFCFC;
     border-radius: 8px;
     width: 40%;
-    color: #FCFCFC;
+    color: #003D66;
     font-size: 20px;
+    font-family: 'Courier New', Courier, monospace;
     outline: unset;
 }
 
 textarea#mailcontent{
     margin: 5px;
     padding: 10px;
-    background: rgba(13, 47, 70, 0.473);
+    background: #FCFCFC;
     width: 80%;
-    color: #FCFCFC;
+    color: #003D66;
     font-size: 20px;
     outline: unset;
+    font-family: 'Courier New', Courier, monospace;
     height: 170px;
     justify-content: left;
     text-align: justify;
@@ -119,30 +185,57 @@ textarea#mailcontent{
 }
 .usermenu{
     float: left;
-    border: none;
     width: 20%;
     color: #FCFCFC;
+    background-color: rgb(194, 196, 233);
 }
-.usermenu ul{    
+.usermenu ul{
+    position: relative;  
     display: block;
-    background: #003D66;
+    background-color: inherit;
     width: 100%;
     margin: 0;
-    height: 0;
     padding: 0;
-    height: calc(100vh - 55px);
+    height: calc(100vh - 50px);
+}
+
+.usermenu ul li:last-of-type{
+    position: absolute;
+    bottom: 0;
+    font-size: 18px;
+    font-weight: bolder;
+    border: none;
 }
 
 .usermenu ul li{
+    background: inherit;
+    cursor: pointer;
     list-style: none;
     display: block;
     margin: 0;
     padding: 10px;
-    font-size: 25px;
-    border-top: #FCFCFC solid 3px;
+    font-size: 22px;
+    font-weight: bolder;
+    color: #003D66;
+}
+
+.usermenu ul li a{
+    color: inherit;
+}
+
+.usermenu ul li:hover{
+    color: #FCFCFC;
+    border: 3px solid rgb(176, 216, 228);
+    border-radius: 10px;
+    background-color: rgba(21, 101, 180, 0.473);
+}
+
+.usermenu ul li a:hover{
+    color: inherit;
 }
 
 div.userheader{
+    display: none;
     color: #FCFCFC;
     height: 35px;
     background: rgba(13, 47, 70, 0.473);
@@ -171,31 +264,163 @@ div.usermail{
     display: flex;
     justify-content: center;
     align-content: center;
-    float: right;
-    width: 80%;
+    float: left;
+    width: 35%;
+    height: 100%;
+    background-color: rgba(235, 240, 243, 0.938);;
+    overflow: auto;
 }
-.usermail ul{
+::-webkit-scrollbar{
+    width: 5px;
+}
+
+::-webkit-scrollbar-track{
+    background-color: rgb(176, 216, 228);
+}
+::-webkit-scrollbar-thumb{
+    background-color: #003D66;
+}
+img.profileimage{
+    border-radius: 25px;
+    width: 45px;
+    padding: 0;
+    margin: 0;
+}
+.user-icons{
+    float: right;
     margin: 0;
     padding: 0;
-    width: 100%;        
+    cursor: pointer;
 }
-.maillist{
-    background-color: rgba(13, 47, 70, 0.473);
+
+nav.user-options{
+    visibility: hidden;
+    display: none;
+    background-color: rgb(194, 196, 233);
+    width: 150px;
+    padding: 5px;
+    border: 2px solid #003D66;
+    border-radius: 3px;
+    position: absolute;
+    right: 0;
+    top: 58px;
+    z-index: 4;
+}
+
+nav.user-options ul{
+    height: auto;
+    width: 100%;
+    padding: 0;
+    margin: 0;
     list-style: none;
-    border-bottom: solid 1px #FCFCFC;
-    border-top: solid 1px #FCFCFC;      
+}
+
+nav.user-options ul li{
+    display: block;
+    font-size: 22px;
+    color: #003D66;
+    font-weight: 800;
+    width: 100%;
+    height: 30px;
+    padding: 0;
+    margin: 0;
+}
+nav.user-options ul li a{
+    color: inherit; 
+}
+
+nav.user-options ul li:hover{
+    color: rgb(176, 216, 228);
+    background-color: rgba(21, 101, 180, 0.473);
+}
+
+nav.user-options ul li a:hover{
+    color: inherit;
+}
+
+nav.open{
+    visibility: unset;
+    display: block;
+    height: auto;
+}
+.usermail ul{
+    width: 100%; 
+    position: relative;
+    display: block;
+    background-color: rgba(235, 240, 243, 0.938);
+    margin: 0;
+    padding: 0;
+    height: calc(100vh - 50px);     
+}
+
+.maillist{
+    background-color: rgba(235, 240, 243, 0.938);
+    list-style: none;
+    border-bottom: 0.1px solid #003D66;
+    color: #003D66; 
+    font-size: 20px;
+    font-weight: bolder; 
     padding: 10px;
     height: 45px;
     margin: 0;
 }
 
-.senderid{
-    font-size: 20px;
-}
-.mailsubject{
-    font-size: 24px;
+.maillist a{
+    color: inherit;
 }
 
+.maillist:hover{
+    border: 3px solid rgb(176, 216, 228);
+    border-radius: 10px;
+    color: rgb(17, 52, 128);
+    background-color: rgba(21, 101, 180, 0.473);
+}
+
+.maillist a:hover{
+    color: inherit;
+}
+
+.senderid{
+    font-size: 20px;
+    display: block;
+}
+.mailsubject{
+    font-size: 16px;
+    font-weight: 300;
+}
+
+.main-chat{
+    border-bottom: 2px solid #003D66;
+    height: calc(100vh - 50px);
+    position: relative;
+    padding: 0;
+    margin: 0;
+    width:45%;
+    float: right;
+}
+
+.chatheader{
+    position: absolute;
+    top: 0;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    color: rgba(15, 8, 8, 0.993);
+    background-color: rgb(194, 196, 233);
+    z-index: 3;
+}
+
+.chatheader img.profileimage{
+    margin: 5px;
+}
+
+.contactname{
+    color: #003D66;
+    font-size: 22px;
+    font-weight: 700;
+    float: right;
+    margin: 7px;
+}
 
 .page-title {
     float: left;
@@ -210,7 +435,9 @@ div.usermail{
 }
 
 .main-banner{
-    height: 100vh;
+    height: calc(100vh - 50px);
+    background-image: unset;
+    background-color: #FCFCFC;
 }
 
 aside.container{
@@ -263,996 +490,251 @@ a.main-content {
 h1.main-content {
     text-align: center;
 }
-@media screen and (max-width:1024px){
+div#menu-icon{
+    display: none;
+}
+
+@media screen and (max-width: 1044px){
     #header{
-        height: auto;
+        padding-top: 10px;
+        text-align: center;
     }
     .page-title{
         float: none;
     }
-    .main-banner{
-        position: relative;
-        color: #FCFCFC;
+    .removeElment{
+        display: none !Important;
     }
-    .chat{
-        display: block;
+    .user-icons{
+        position: unset;
+    }
+    div#menu-icon{
         position: absolute;
-        bottom: 70px;
-    }
-    .chat .open{
-        display: unset;
-    }
-    .chatarea{
-        width: 100%;
-        margin: 5px;
-    }
-    .chatarea input{
-        color: #FCFCFC;
-        height: 30px;
-        width: 80%;
-        padding: 5px;
-        border-radius: 4px;
-        background: rgba(13, 47, 70, 0.473);
-        outline: unset;
-    }
-    .chatarea i {
-        color: #003D66;
-    }
-    div.sent{
-        width: 70%;
-        float: right;
-        border-radius: 4px;
-        background: rgba(13, 47, 80, 0.473);
-        padding: 5px;
-        margin: 2px;
-        border: 1px solid #FCFCFC;
-
-    }
-    div.receive{
-        width: 70%;
-        float: left;
-        background: rgba(13, 47, 80, 0.473);
-        border-radius: 4px;
-        padding: 5px;
-        margin: 2px;
-        border: 1px solid #FCFCFC;
-    }
-    .page-title{
-        text-align: center;
-        justify-content: center;
-        display: flex;
-    }
-    #mailformdiv{
-        position: relative;
-        display: block;
-        background: #003D66;
-    }
-    form#mailform{
-        position: absolute;
+        left: 10px;
         top: 0;
-        right: 0;
-        height: 0;
-        display: none;
-        background: #003D66;
-    }
-    form#mailform.open{
-        height: auto;
+        float: left;
+        width: 40px;
+        margin-top: 7px;
+        border: 1px solid #FCFCFC;
+        border-radius: 10px; 
         display: block;
-        z-index: 3;
     }
-    form#mailform input[type='text']{
-        margin: 5px;
-        padding: 10px;
-        background: rgba(13, 47, 70, 0.473);
-        width: 80%;
-        color: #FCFCFC;
-        font-size: 20px;
-        outline: unset;
-    }
-
-    form#mailform input[type='button']{
-        margin: 5px;
-        padding: 10px;
-        background: rgba(13, 47, 70, 0.473);
-        border-radius: 8px;
-        width: 40%;
-        color: #FCFCFC;
-        font-size: 20px;
-        outline: unset;
-    }
-
-    textarea#mailcontent{
-        margin: 5px;
-        padding: 10px;
-        background: rgba(13, 47, 70, 0.473);
-        width: 80%;
-        color: #FCFCFC;
-        font-size: 20px;
-        outline: unset;
-        height: 170px;
-        justify-content: left;
-        text-align: justify;
-    }
-    .main-banner{
-        padding: 0;
+    .user-icons img.profileimage{
+        position: absolute;
+        right: 10px;
+        top: 0;
+        float: right;
+        width: 40px;
+        margin-top: 7px;
+        border: 1px solid #FCFCFC;
+        border-radius: 10px;
     }
     .usermenu{
-        position: relative;
-        border: none;
-        width: unset;
-        color: #FCFCFC;
-    }
-    .usermenu ul{
-        position: absolute;
-        top: 0;
-        left: 0;
         display: none;
-        background: #003D66;
-        margin: 0;
-        height: 0;
-        padding: 0;
-    }
-
-    .usermenu ul.open{
-        width: 50%;
-        display: block;
-        height: calc(100vh - 55px);
-        z-index: 3;
-    }
-
-    .usermenu ul li{
-        list-style: none;
-        display: block;
-        margin: 0;
-        padding: 10px;
-        font-size: 25px;
-        border: #FCFCFC solid 3px;
-        border-radius: 16px;
-    }
-
-    div.userheader{
-        color: #FCFCFC;
-        height: 35px;
-        background: rgba(13, 47, 70, 0.473);
-        margin: 0;
-        padding: 10px;
-        position: relative;
-    }
-    #composeicon{
         position: absolute;
-        right: 15px;
-        top: 5px;
-        font-size: 30px;
-    }
-    #mailicon{
-        position: absolute;
-        left: 15px;
-        top: 5px;
-        font-size: 30px;
-    }
-    .userheader p{
-        margin: 0;
-        padding: 0;
+        left: 0;
+        width: 40%;
+        z-index: 6;
     }
     div.usermail{
-        color: #FCFCFC;
-        display: flex;
-        justify-content: center;
-        align-content: center;
-        width: 100vw;
+        width: 45%;
     }
-    .usermail ul{
-        margin: 0;
-        padding: 0;
-        width: 100%;        
+    .main-chat{
+        width: 55%;
     }
-    .maillist{
-        background-color: rgba(13, 47, 70, 0.473);
-        list-style: none;
-        border-bottom: solid 1px #FCFCFC;
-        border-top: solid 1px #FCFCFC;      
-        padding: 10px;
-        height: 45px;
-        margin: 0;
-    }
-
-    .senderid{
-        font-size: 20px;
-    }
-    .mailsubject{
-        font-size: 24px;
-    }
-    .page-nav{
-        float: right;
-        padding: 0;
-        margin: 0;
-        color: #FCFCFC;
-    }
-    .page-nav ul{
-        padding: 0;
-    }
-    aside.container{
-        height: calc(100vh - 350px);
-    }    
-    div.container {
-        float: left;
-        width: 60%;
-        margin: 25px 0 0 25px;
-        height: 80%;
-    }
-    .transparent{
-        height: unset;
-    }
-    div.container ul{
-        margin: auto;
-        width: 50%;
-        padding: 0;
-    }
-    div.container ul li{
-        list-style: none;
-        height: 1.3rem;
-        border-radius: 0.4rem;
-        box-shadow: 2px 2px 4px 2px thistle;
-        background: #003D66;
-        padding: 0.6rem;
-        margin: 0.8rem auto;
-        width: 14rem;
-        overflow: hidden;
-        text-align: center;
-        font-size: 1.3rem;
-        cursor: pointer;
-
-    }
-    p.main-content {
-        font-size: 1.3rem;
-        margin: 0.5rem;
-        padding: 0.3rem;
-        text-align: center;
-    }
-    a.main-content {
-        font-size: 1.4rem;
-        text-align: center;
-    }
-    h1.main-content {
-        text-align: center;
+    .chatarea textarea{
+        width: 70%;
     }
 }
 
-@media screen and (max-width:740px){
+@media screen and (max-width: 780px){
     #header{
-        height: auto;
-    }
-    .page-title{
-        float: none;
-    }
-    #header {
-        height: auto;
-    }
-    .main-banner{
-        position: relative;
-        color: #FCFCFC;
-    }
-    .chat{
-        display: block;
-        position: absolute;
-        bottom: 70px;
-    }
-    .chat .open{
-        display: unset;
-    }
-    .chatarea{
-        width: 100%;
-        margin: 0;
-    }
-    .chatarea input{
-        color: #FCFCFC;
-        height: 30px;
-        width: 80%;
-        padding: 5px;
-        border-radius: 4px;
-        background: rgba(13, 47, 70, 0.473);
-        outline: unset;
-    }
-    .chatarea i {
-        color: #003D66;
-    }
-    div.sent{
-        width: 70%;
-        float: right;
-        border-radius: 4px;
-        background: rgba(13, 47, 80, 0.473);
-        padding: 5px;
-        margin: 2px;
-        border: 1px solid #FCFCFC;
-
-    }
-    div.receive{
-        width: 70%;
-        float: left;
-        background: rgba(13, 47, 80, 0.473);
-        border-radius: 4px;
-        padding: 5px;
-        margin: 2px;
-        border: 1px solid #FCFCFC;
-    }
-    .page-title{
+        padding-top: 10px;
         text-align: center;
-        justify-content: center;
-        display: flex;
     }
-    #mailformdiv{
-        position: relative;
-        display: block;
-        background: #003D66;
+    .removeElment{
+        display: none !Important;
     }
-    form#mailform{
+    .user-icons{
+        position: unset;
+    }
+    div#menu-icon{
         position: absolute;
-        top: 0;
-        right: 0;
-        height: 0;
-        display: none;
-        background: #003D66;
+        left: 10px;
+        float: left;
+        width: 40px;
+        border: 1px solid #FCFCFC;
+        border-radius: 10px; 
     }
-    form#mailform.open{
-        height: auto;
-        display: block;
-    }
-    form#mailform input[type='text']{
-        margin: 5px;
-        padding: 10px;
-        background: rgba(13, 47, 70, 0.473);
-        width: 80%;
-        color: #FCFCFC;
-        font-size: 20px;
-        outline: unset;
-    }
-
-    form#mailform input[type='button']{
-        margin: 5px;
-        padding: 10px;
-        background: rgba(13, 47, 70, 0.473);
-        border-radius: 8px;
-        width: 40%;
-        color: #FCFCFC;
-        font-size: 20px;
-        outline: unset;
-    }
-
-    textarea#mailcontent{
-        margin: 5px;
-        padding: 10px;
-        background: rgba(13, 47, 70, 0.473);
-        width: 80%;
-        color: #FCFCFC;
-        font-size: 20px;
-        outline: unset;
-        height: 170px;
-        justify-content: left;
-        text-align: justify;
-    }
-    .main-banner{
-        padding: 0;
+    .user-icons img.profileimage{
+        position: absolute;
+        right: 10px;
+        float: right;
+        width: 40px;
+        border: 1px solid #FCFCFC;
+        border-radius: 10px;
     }
     .usermenu{
-        position: relative;
-        border: none;
-        width: unset;
-        color: #FCFCFC;
-    }
-    .usermenu ul{
-        position: absolute;
-        top: 0;
-        left: 0;
         display: none;
-        background: #003D66;
-        margin: 0;
-        height: 0;
-        padding: 0;
-    }
-
-    .usermenu ul.open{
-        width: 80%;
-        display: block;
-        height: calc(100vh - 55px);
-    }
-
-    .usermenu ul li{
-        list-style: none;
-        display: block;
-        margin: 0;
-        padding: 10px;
-        font-size: 25px;
-        border-top: #FCFCFC solid 3px;
-    }
-
-    div.userheader{
-        color: #FCFCFC;
-        height: 35px;
-        background: rgba(13, 47, 70, 0.473);
-        margin: 0;
-        padding: 10px;
-        position: relative;
-    }
-    #composeicon{
         position: absolute;
-        right: 15px;
-        top: 5px;
-        font-size: 30px;
-    }
-    #mailicon{
-        position: absolute;
-        left: 15px;
-        top: 5px;
-        font-size: 30px;
-    }
-    .userheader p{
-        margin: 0;
-        padding: 0;
+        left: 0;
+        width: 40%;
+        z-index: 6;
     }
     div.usermail{
-        color: #FCFCFC;
-        display: flex;
-        justify-content: center;
-        align-content: center;
-        width: 100vw;
+        width: 45%;
     }
-    .usermail ul{
-        margin: 0;
-        padding: 0;
-        width: 100%;        
-    }
-    .maillist{
-        background-color: rgba(13, 47, 70, 0.473);
-        list-style: none;
-        border-bottom: solid 1px #FCFCFC;
-        border-top: solid 1px #FCFCFC;      
-        padding: 10px;
-        height: 45px;
-        margin: 0;
-    }
-
-    .senderid{
-        font-size: 20px;
-    }
-    .mailsubject{
-        font-size: 24px;
-    }
-    
-    aside.container{
-        height: unset;
-    }
-    div.container {
-        float: left;
-        width: 60%;
-        margin: 25px 0 0 25px;
-        height: 80%;
-    }
-    div.container ul li{
-        list-style: none;
-        height: 1.3rem;
-        border-radius: 0.4rem;
-        background: #003D66;
-        box-shadow: 2px 2px 4px 2px thistle;
-        padding: 0.6rem;
-        margin: 0.8rem auto;
-        width: 14rem;
-        overflow: hidden;
-        text-align: center;
-        font-size: 1.3rem;
-        cursor: pointer;
-
-    }
-    p.main-content {
-        font-size: 0.9rem;
-        text-align: center;
-    }
-    a.main-content {
-        font-size: 1.2rem;
-        text-align: center;
-        margin: 0.5rem auto;
-        padding: 0.4rem;
-        width: 50%;
-        font-weight: 600;
-    }
-    h1.main-content {
-        text-align: center;
+    .main-chat{
+        width: 55%;
     }
 }
 
-@media screen and (max-width:480px){
-    .main-banner{
-        position: relative;
-        color: #FCFCFC;
-    }
-    .chat{
-        display: block;
-        position: absolute;
-        bottom: 70px;
-    }
-    .chat .open{
-        display: unset;
-    }
-    .chatarea{
-        width: 100%;
-        margin: 5px;
-    }
-    .chatarea input{
-        color: #FCFCFC;
-        height: 30px;
-        width: 80%;
-        padding: 5px;
-        border-radius: 4px;
-        background: rgba(13, 47, 70, 0.473);
-        outline: unset;
-    }
-    .chatarea i {
-        color: #003D66;
-    }
-    div.sent{
-        width: 70%;
-        float: right;
-        border-radius: 4px;
-        background: rgba(13, 47, 80, 0.473);
-        padding: 5px;
-        margin: 2px;
-        border: 1px solid #FCFCFC;
-
-    }
-    div.receive{
-        width: 70%;
-        float: left;
-        background: rgba(13, 47, 80, 0.473);
-        border-radius: 4px;
-        padding: 5px;
-        margin: 2px;
-        border: 1px solid #FCFCFC;
-    }
-    .page-title{
-        text-align: center;
-        justify-content: center;
-        display: flex;
-    }
-    #mailformdiv{
-        position: relative;
-        display: block;
-        background: #003D66;
-    }
-    form#mailform{
-        position: absolute;
-        top: 0;
-        right: 0;
-        height: 0;
+@media screen and (max-width: 480px){
+    #navbutton{
         display: none;
-        background: #003D66;
-    }
-    form#mailform.open{
-        height: auto;
-        display: block;
-    }
-    form#mailform input[type='text']{
-        margin: 5px;
-        padding: 10px;
-        background: rgba(13, 47, 70, 0.473);
-        width: 80%;
-        color: #FCFCFC;
-        font-size: 20px;
-        outline: unset;
-    }
-
-    form#mailform input[type='button']{
-        margin: 5px;
-        padding: 10px;
-        background: rgba(13, 47, 70, 0.473);
-        border-radius: 8px;
-        width: 40%;
-        color: #FCFCFC;
-        font-size: 20px;
-        outline: unset;
-    }
-
-    textarea#mailcontent{
-        margin: 5px;
-        padding: 10px;
-        background: rgba(13, 47, 70, 0.473);
-        width: 80%;
-        color: #FCFCFC;
-        font-size: 20px;
-        outline: unset;
-        height: 170px;
-        justify-content: left;
-        text-align: justify;
-    }
-    .main-banner{
-        padding: 0;
-    }
-    .usermenu{
-        position: relative;
-        border: none;
-        width: unset;
-        color: #FCFCFC;
-    }
-    .usermenu ul{
-        position: absolute;
-        top: 0;
-        left: 0;
-        display: none;
-        background: #003D66;
-        margin: 0;
-        height: 0;
-        padding: 0;
-    }
-
-    .usermenu ul.open{
-        width: 60%;
-        display: block;
-        height: calc(100vh - 55px);
-    }
-
-    .usermenu ul li{
-        list-style: none;
-        display: block;
-        margin: 0;
-        padding: 10px;
-        font-size: 25px;
-        border: #FCFCFC solid 3px;
-        border-radius: 16px;
-    }
-
-    .usermenu ul li a{
-        width: 100%;
-        height: inherit;
-    }
-    div.userheader{
-        color: #FCFCFC;
-        height: 35px;
-        background: rgba(13, 47, 70, 0.473);
-        margin: 0;
-        padding: 10px;
-        position: relative;
-    }
-    #composeicon{
-        position: absolute;
-        right: 15px;
-        top: 5px;
-        font-size: 30px;
-    }
-    #mailicon{
-        position: absolute;
-        left: 15px;
-        top: 5px;
-        font-size: 30px;
-    }
-    .userheader p{
-        margin: 0;
-        padding: 0;
-    }
-    div.usermail{
-        color: #FCFCFC;
-        display: flex;
-        justify-content: center;
-        align-content: center;
-        width: 100vw;
-    }
-    .usermail ul{
-        margin: 0;
-        padding: 0;
-        width: 100%;        
-    }
-    .maillist{
-        background-color: rgba(13, 47, 70, 0.473);
-        list-style: none;
-        border-bottom: solid 1px #FCFCFC;
-        border-top: solid 1px #FCFCFC;      
-        padding: 10px;
-        height: 45px;
-        margin: 0;
-    }
-
-    .senderid{
-        font-size: 20px;
-    }
-    .mailsubject{
-        font-size: 24px;
     }
     #header{
-        height: auto;
+        padding-top: 10px;
     }
     .page-title{
-        float: none;
-    }
-    .page-title h1{
-        font-size: 1.5rem;
-        margin: 0.3rem;
-        width: unset;
-        text-align: unset;
-        padding: 5px;
-    }
-    aside.container{
-        height: unset;
-    }
-    div.container {
-        float: none;
-        width: 80%;
-        margin: 10px auto;
-        height: 80%;
-    }
-    div.container ul li{
-        list-style: none;
-        height: 1.3rem;
-        border-radius: 0.4rem;
-        background: #003D66;
-        box-shadow: 2px 2px 4px 2px thistle;
-        padding: 0.6rem;
-        margin: 0.8rem auto;
-        width: 80%;
-        overflow: hidden;
-        text-align: center;
-        font-size: 1.3rem;
-        cursor: pointer;
-
-    }
-    p.main-content {
-        font-size: 0.9rem;
-        text-align: center;
-    }
-    a.main-content {
-        font-size: 1.2rem;
-        text-align: center;
-        margin: 0.5rem auto;
-        padding: 0.4rem;
-        width: 50%;
-        font-weight: 600;
-    }
-    h1.main-content {
-        text-align: center;
-    }
-}
-
-@media screen and (max-width:380px){
-    .main-banner{
-        position: relative;
-        color: #FCFCFC;
-    }
-    .chat{
-        display: block;
-        position: absolute;
-        bottom: 70px;
-    }
-    .chat .open{
-        display: unset;
-    }
-    .chatarea{
-        width: 100%;
-        margin: 5px;
-    }
-    .chatarea input{
-        color: #FCFCFC;
-        height: 30px;
-        width: 80%;
-        padding: 5px;
-        border-radius: 4px;
-        background: rgba(13, 47, 70, 0.473);
-        outline: unset;
-    }
-    .chatarea i {
-        color: #003D66;
-    }
-    div.sent{
-        width: 70%;
-        float: right;
-        border-radius: 4px;
-        background: rgba(13, 47, 80, 0.473);
-        padding: 5px;
-        margin: 2px;
-        border: 1px solid #FCFCFC;
-
-    }
-    div.receive{
-        width: 70%;
-        float: left;
-        background: rgba(13, 47, 80, 0.473);
-        border-radius: 4px;
-        padding: 5px;
-        margin: 2px;
-        border: 1px solid #FCFCFC;
-    }
-    .page-title{
-        text-align: center;
-        justify-content: center;
         display: flex;
+        padding: 0;
+        margin: 0;
+        float: none;
+        text-align: center;
     }
-    #mailformdiv{
-        position: relative;
-        display: block;
-        background: #003D66;
-    }
-    form#mailform{
+    img.profileimage {
         position: absolute;
         top: 0;
         right: 0;
-        height: 0;
-        display: none;
-        background: #003D66;
-    }
-    form#mailform.open{
-        height: auto;
-        display: block;
-    }
-    form#mailform input[type='text']{
-        margin: 5px;
-        padding: 10px;
-        background: rgba(13, 47, 70, 0.473);
-        width: 80%;
-        color: #FCFCFC;
-        font-size: 20px;
-        outline: unset;
-    }
-
-    form#mailform input[type='button']{
-        margin: 5px;
-        padding: 10px;
-        background: rgba(13, 47, 70, 0.473);
-        border-radius: 8px;
-        width: 40%;
-        color: #FCFCFC;
-        font-size: 20px;
-        outline: unset;
-    }
-
-    textarea#mailcontent{
-        margin: 5px;
-        padding: 10px;
-        background: rgba(13, 47, 70, 0.473);
-        width: 80%;
-        color: #FCFCFC;
-        font-size: 20px;
-        outline: unset;
-        height: 170px;
-        justify-content: left;
-        text-align: justify;
-    }
-    .main-banner{
+        border-radius: 25px;
+        width: 42px;
         padding: 0;
+        margin: 5px;
+        cursor: pointer;
     }
-    .usermenu{
-        position: relative;
-        border: none;
-        width: unset;
-        color: #FCFCFC;
-    }
-    .usermenu ul{
+    div#menu-icon{
+        width: 38px;
+        border: 1px solid #FCFCFC;
+        border-radius: 10px;
         position: absolute;
         top: 0;
         left: 0;
-        display: none;
-        background: #003D66;
-        margin: 0;
-        height: 0;
+        font-size: 20px;
         padding: 0;
+        margin: 5px;
+        margin-right: 7px;
+        cursor: pointer;
+    }
+    .usermenu{
+        display: none;
+        float: none;
+        position: absolute;
+        top: 0;
+    }
+    .main-chat{
+        display: none;
+    }
+    .removeElment{
+        display: none !Important;
+    }
+    div.usermail{
+        overflow: auto;
+        width: 100%;
+    }
+    nav.open {
+        width: 100vw;
+        visibility: unset;
+        display: block;
+        height: auto;
         z-index: 3;
     }
-
-    .usermenu ul.open{
-        width: 80%;
-        display: block;
-        height: calc(100vh - 55px);
+    #imagedrop{
+        width: 150px;
+        background-color: rgba(235, 240, 243, 0.938);
     }
-
-    .usermenu ul li{
-        list-style: none;
-        display: block;
-        margin: 0;
-        padding: 10px;
-        font-size: 25px;
-        border: #FCFCFC solid 3px;
-        border-radius: 16px;
-    }
-
-    .usermenu ul li a{
-        width: 100%;
-        height: inherit;
-    }
-
-    div.userheader{
-        color: #FCFCFC;
-        height: 35px;
-        background: rgba(13, 47, 70, 0.473);
-        margin: 0;
-        padding: 10px;
-        position: relative;
-    }
-    #composeicon{
+    #mailformdiv{
         position: absolute;
-        right: 15px;
-        top: 5px;
-        font-size: 30px;
-    }
-    #mailicon{
-        position: absolute;
-        left: 15px;
-        top: 5px;
-        font-size: 30px;
-    }
-    .userheader p{
-        margin: 0;
-        padding: 0;
-    }
-    div.usermail{
-        color: #FCFCFC;
-        display: flex;
-        justify-content: center;
-        align-content: center;
         width: 100vw;
+        /* height: calc(100vh - 50px); */
+        
     }
-    .usermail ul{
-        margin: 0;
-        padding: 0;
-        width: 100%;        
+    form#mailform{
+        padding: 20px;
     }
-    .maillist{
-        background-color: rgba(13, 47, 70, 0.473);
-        list-style: none;
-        border-bottom: solid 1px #FCFCFC;
-        border-top: solid 1px #FCFCFC;      
-        padding: 10px;
-        height: 45px;
-        margin: 0;
-    }
+}
 
-    .senderid{
-        font-size: 20px;
-    }
-    .mailsubject{
-        font-size: 24px;
+@media screen and (max-width: 360px){
+    #navbutton{
+        display: none;
     }
     #header{
-        height: auto;
+        padding-top: 10px;
     }
     .page-title{
+        display: flex;
+        padding: 0;
+        margin: 0;
         float: none;
-    }
-    aside.container{
-        height: unset;
-    }    
-    div.container {
-        float: none;
-        width: 80%;
-        margin: 10px auto;
-        height: 80%;
-    }
-    div.container ul {
-        margin: 0.5rem;
-        width: 90%;
-        padding: 0.5rem;
-    }
-    div.container ul li{
-        list-style: none;
-        height: 1.3rem;
-        border-radius: 0.4rem;
-        box-shadow: 2px 2px 4px 2px thistle;
-        background: #003D66;
-        padding: 0.6rem;
-        margin: 0.6rem auto;
-        width: 80%;
-        overflow: hidden;
         text-align: center;
-        font-size: 1.3rem;
+    }
+    img.profileimage {
+        position: absolute;
+        top: 0;
+        right: 0;
+        border-radius: 25px;
+        width: 42px;
+        padding: 0;
+        margin: 5px;
         cursor: pointer;
-
     }
-    p.main-content {
-        font-size: 0.9rem;
-        text-align: center;
+    div#menu-icon{
+        width: 38px;
+        border: 1px solid #FCFCFC;
+        border-radius: 10px;
+        position: absolute;
+        top: 0;
+        left: 0;
+        font-size: 14px;
+        padding: 0;
+        margin: 5px;
+        margin-right: 7px;
+        cursor: pointer;
     }
-    a.main-content {
-        font-size: 1rem;
-        text-align: center;
-        margin: 0.5rem auto;
-        padding: 0.4rem;
-        width: 50%;
-        font-weight: 600;
+    .usermenu{
+        display: none;
+        float: none;
+        position: absolute;
+        top: 0;
     }
-    h1.main-content {
-        text-align: center;
+    .main-chat{
+        display: none;
+    }
+    .removeElment{
+        display: none !Important;
+    }
+    div.usermail{
+        overflow: auto;
+        width: 100%;
+    }
+    nav.open {
+        width: 100vw;
+        visibility: unset;
+        display: block;
+        height: auto;
+        z-index: 3;
+    }
+    #imagedrop{
+        width: 150px;
+        background-color: rgba(235, 240, 243, 0.938);
+    }
+    #mailformdiv{
+        position: absolute;
+        width: 100vw;
+        /* height: calc(100vh - 50px); */
+        
+    }
+    form#mailform{
+        padding: 20px;
     }
 }

@@ -1,16 +1,28 @@
 /* global document */
-const mailicon = document.querySelector('i#mailicon');
-const mailmenu = document.querySelector('nav.usermenu ul');
-const composeicon = document.querySelector('i#composeicon');
 const mailform = document.querySelector('form#mailform');
+const usernav = document.querySelector('nav.user-options');
+const usermenu = document.querySelector('.usermenu');
 
-
-mailicon.addEventListener('click', () => {
-  mailform.classList.remove('open');
-  mailmenu.classList.toggle('open');
+document.addEventListener('click', (event) => {
+  if (event.target.id === 'large-compose') {
+    mailform.classList.toggle('open');
+  } else{
+    mailform.classList.remove('open');
+  }
 });
 
-composeicon.addEventListener('click', () => {
-  mailmenu.classList.remove('open');
-  mailform.classList.toggle('open');
+document.addEventListener('click', (event) => {
+  if (event.target.id === 'profiledropdown') {
+    usernav.classList.toggle('open');
+  } else {
+    usernav.classList.remove('open');
+  }
+});
+
+document.addEventListener('click', (event) => {
+  if (event.target.id === 'menu-icon') {
+    usermenu.classList.toggle('open');
+  } else {
+    usermenu.classList.remove('open');
+  }
 });
