@@ -2,10 +2,11 @@ import '@babel/polyfill';
 import db from '../db';
 import Helper from '../middleware/Helper';
 
+
 /** Queries */
 const createUserQuery = `INSERT INTO
-        users(email, firstName, lastName, password, securitykey, createdOn, modifiedOn)
-        VALUES($1, $2, $3, $4, $5, $6, $7) RETURNING *`;
+        users(email, firstName, lastName, userImage, password, securitykey, createdOn, modifiedOn)
+        VALUES($1, $2, $3, $4, $5, $6, $7, $8) RETURNING *`;
 
 const loginQuery = 'SELECT * FROM users WHERE email = $1';
 /** End of Queries */
@@ -25,8 +26,10 @@ const UserController = {
       const hashSecurity = Helper.hashPassword(securityKey);
       const emailAddress = `${req.body.username.toLowerCase()}@epicmail.com`;
 
+      console.log('uploaded file', req.file);
+
       const values = [emailAddress, req.body.firstName,
-        req.body.lastName, hashPassword, hashSecurity, new Date(), new Date()];
+        req.body.lastName, req.file.path, hashPassword, hashSecurity, new Date(), new Date()];
       const { rows } = await db.query(createUserQuery, values);
       const token = Helper.generateToken(rows[0].email);
 
@@ -61,6 +64,7 @@ const UserController = {
         data: [{
           token,
           message: `Loggedin as ${rows[0].email}`,
+          image: rows[0].userimage,
         }],
       });
     } catch (error) {
