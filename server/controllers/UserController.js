@@ -26,7 +26,6 @@ const UserController = {
       const hashSecurity = Helper.hashPassword(securityKey);
       const emailAddress = `${req.body.username.toLowerCase()}@epicmail.com`;
 
-      console.log('uploaded file', req.file);
 
       const values = [emailAddress, req.body.firstName,
         req.body.lastName, req.file.path, hashPassword, hashSecurity, new Date(), new Date()];
@@ -38,6 +37,7 @@ const UserController = {
         data: [{
           token,
           emailAddress: `Your epicmail address is ${rows[0].email}`,
+          image: rows[0].userimage,
         }],
       });
     } catch (error) {

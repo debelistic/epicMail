@@ -5,7 +5,7 @@ const Auth = {
   async checkToken(req, res, next) {
     const token = req.headers['x-access-token'];
     if (!token) {
-      return res.status(403).send({ message: 'No Token Provided' });
+      return res.status(401).send({ message: 'No Token Provided' });
     }
     return next();
   },

@@ -42,12 +42,12 @@ const ValidateGroupsInput = {
       const checkMemberEmailQuery = 'SELECT * FROM groupmembers WHERE $1=groupId AND $2=memberId';
       const { rows } = await db.query(checkMemberEmailQuery, [req.params.id, req.user.email]);
       if (rows[0] === undefined) {
-        return res.status(403).send({
+        return res.status(401).send({
           mesage: 'You are not a member',
         });
       }
       if (rows[0].memberid !== req.user.email) {
-        return res.status(403).send({
+        return res.status(401).send({
           mesage: 'You are not a member of this group',
         });
       }
