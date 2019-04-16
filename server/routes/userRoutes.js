@@ -1,5 +1,7 @@
 import express from 'express';
 import multer from 'multer';
+import cloudinary from 'cloudinary';
+import cloudinaryStorage from 'multer-storage-cloudinary';
 import ValidateUserInput from '../middleware/UserValidator';
 import UserController from '../controllers/UserController';
 
