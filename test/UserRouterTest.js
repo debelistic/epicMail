@@ -50,6 +50,28 @@ describe('Create User', () => {
   });
 });
 
+describe('Test Image Type', () => {
+  it('Return Error if image is not png, jpg or jpeg', (done) => {
+    const newuser = {
+      username: 'franksaint',
+      firstName: 'saint',
+      lastName: 'saint',
+      password: 'ghJUIlO9@gh',
+      securityKey: 'brave',
+    };
+    chai.request(app)
+      .post('/api/v1/auth/signup')
+      .set('Content-Type', 'multipart/form-data')
+      .field(newuser)
+      .attach('userImage', './uploads/awww.gif')
+      .end((err, res) => {
+        if (err) done(err);
+        expect(res.status).to.equal(500);
+        done();
+      });
+  });
+});
+
 describe('Validate Username', () => {
   it('Return 400 status code if username is too short', (done) => {
     const newuser = {
