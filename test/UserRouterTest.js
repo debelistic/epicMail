@@ -34,7 +34,9 @@ describe('Create User', () => {
     };
     chai.request(app)
       .post('/api/v1/auth/signup')
-      .send(newuser)
+      .set('Content-Type', 'multipart/form-data')
+      .field(newuser)
+      .attach('userImage', './uploads/test.png')
       .end((err, res) => {
         if (err) done(err);
         expect(res.status).to.equal(201);
@@ -42,7 +44,29 @@ describe('Create User', () => {
         expect(res.body.status).to.equal(201);
         expect(res.body.data).to.be.an('array');
         expect(res.body.data[0]).to.be.an('object');
-        expect(res.body.data[0]).to.have.keys('token', 'emailAddress');
+        expect(res.body.data[0]).to.have.keys('token', 'emailAddress', 'image');
+        done();
+      });
+  });
+});
+
+describe('Test Image Type', () => {
+  it('Return Error if image is not png, jpg or jpeg', (done) => {
+    const newuser = {
+      username: 'franksaint',
+      firstName: 'saint',
+      lastName: 'saint',
+      password: 'ghJUIlO9@gh',
+      securityKey: 'brave',
+    };
+    chai.request(app)
+      .post('/api/v1/auth/signup')
+      .set('Content-Type', 'multipart/form-data')
+      .field(newuser)
+      .attach('userImage', './uploads/awww.gif')
+      .end((err, res) => {
+        if (err) done(err);
+        expect(res.status).to.equal(500);
         done();
       });
   });
@@ -125,7 +149,7 @@ describe('Login User', () => {
         expect(res.body).to.be.a('object');
         expect(res.body.data).to.be.a('array');
         expect(res.body.data[0]).to.be.a('object');
-        expect(res.body.data[0]).to.have.property('token');
+        expect(res.body.data[0]).to.have.keys('token', 'message', 'image');
         done();
       });
   });
@@ -140,7 +164,7 @@ describe('Validate Login form', () => {
       .send(reguser)
       .end((err, res) => {
         if (err) done();
-        expect(res.status).to.equal(400);
+        expect(res.status).to.equal(401);
         done();
       });
   });

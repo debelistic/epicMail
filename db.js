@@ -32,6 +32,7 @@ const createUsersTable = async () => {
         email VARCHAR(500) UNIQUE NOT NULL,
         firstName VARCHAR(500) NOT NULL,
         lastName VARCHAR(500) NOT NULL,
+        userImage TEXT,
         password VARCHAR(500) NOT NULL,
         securitykey VARCHAR(500) NOT NULL,
         createdOn TIMESTAMP,

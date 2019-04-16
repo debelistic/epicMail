@@ -87,7 +87,7 @@ const ValidateUserInput = {
    */
   async loginField(req, res, next) {
     if (!req.body.email || !req.body.password) {
-      return res.status(400).send({
+      return res.status(401).send({
         message: 'Enter email and password',
       });
     }
@@ -111,13 +111,13 @@ const ValidateUserInput = {
         });
       }
       if (rows[0].email !== userEmail) {
-        return res.status(403).send({
+        return res.status(401).send({
           mesage: 'You are not a member of this group',
         });
       }
       return next();
     } catch (error) {
-      return res.status(403).send({
+      return res.status(400).send({
         message: 'Invaild email',
         error,
       });
@@ -136,7 +136,7 @@ const ValidateUserInput = {
       const userEmail = await req.body.email.toLowerCase();
       const { rows } = await db.query(loginQuery, [userEmail]);
       if (!Helper.comparePassword(req.body.password, rows[0].password)) {
-        return res.status(400).send({
+        return res.status(401).send({
           message: 'Invalid Passowrd',
         });
       }

@@ -9,7 +9,7 @@ cache:
   directories:
     - node_modules
 script:
-  - nyc npm test
+  - npm test
 services:
   - postgresql
 env:
