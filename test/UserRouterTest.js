@@ -29,17 +29,16 @@ describe('Create User', () => {
       username: 'franksaint',
       firstName: 'saint',
       lastName: 'saint',
-      userImage: 'random//url.5690',
       password: 'ghJUIlO9@gh',
       securityKey: 'brave',
     };
     chai.request(app)
       .post('/api/v1/auth/signup')
-      .send(newuser)
+      .set('Content-Type', 'multipart/form-data')
+      .field(newuser)
+      .attach('userImage', './uploads/test.png')
       .end((err, res) => {
         if (err) done(err);
-        console.log('response', res);
-        console.log('response>>>', res.body);
         expect(res.status).to.equal(201);
         expect(res.body).to.have.keys('status', 'data');
         expect(res.body.status).to.equal(201);
@@ -124,8 +123,6 @@ describe('Login User', () => {
       .send(reguser)
       .end((err, res) => {
         if (err) done(err);
-        console.log('response', res);
-        console.log('response>>>', res.body);
         expect(res.status).to.equal(200);
         expect(res.body).to.be.a('object');
         expect(res.body.data).to.be.a('array');
