@@ -1,6 +1,10 @@
 import '@babel/polyfill';
+import { dataUri } from '../middleware/multer';
+import { uploader, cloudinaryConfig } from '../config/cloudinaryConfig';
 import db from '../db';
 import Helper from '../middleware/Helper';
+
+cloudinaryConfig();
 
 
 /** Queries */
@@ -26,9 +30,11 @@ const UserController = {
       const hashSecurity = Helper.hashPassword(securityKey);
       const emailAddress = `${req.body.username.toLowerCase()}@epicmail.com`;
 
+      const file = await dataUri(req).content;
+      const image = await uploader.upload(file);
 
       const values = [emailAddress, req.body.firstName,
-        req.body.lastName, req.file.path, hashPassword, hashSecurity, new Date(), new Date()];
+        req.body.lastName, image.url, hashPassword, hashSecurity, new Date(), new Date()];
       const { rows } = await db.query(createUserQuery, values);
       const token = Helper.generateToken(rows[0].email);
 
