@@ -1,5 +1,5 @@
 import express from 'express';
-import multerUploads from '../middleware/multer';
+import { multerUploads } from '../middleware/multer';
 import ValidateUserInput from '../middleware/UserValidator';
 import UserController from '../controllers/UserController';
 
