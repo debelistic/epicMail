@@ -26,6 +26,7 @@ const UserController = {
       const hashSecurity = Helper.hashPassword(securityKey);
       const emailAddress = `${req.body.username.toLowerCase()}@epicmail.com`;
 
+      console.log(req.file);
 
       const values = [emailAddress, req.body.firstName,
         req.body.lastName, req.file.path, hashPassword, hashSecurity, new Date(), new Date()];
