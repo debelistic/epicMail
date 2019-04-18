@@ -85,6 +85,24 @@ const UserController = {
    * @param {object} req
    * @param {object} res
    */
+  async resetpass(req, res) {
+    try {
+      // get recovery email
+      const { recoveryEmail } = req.body;
+
+      // send reset password link to email
+      return res.status(201).send({
+        status: 201,
+        data: [{
+          message: 'Your password has been changed.',
+        }],
+      });
+    } catch (error) {
+      return res.status(400).send({
+        message: error,
+      });
+    }
+  },
 };
 
 export default UserController;
