@@ -1,11 +1,12 @@
 import '@babel/polyfill';
+import nodemailer from 'nodemailer';
 import { dataUri } from '../middleware/multer';
 import { uploader, cloudinaryConfig } from '../config/cloudinaryConfig';
+import nodemailerConfig from '../config/nodemailerConfig';
 import db from '../db';
 import Helper from '../middleware/Helper';
 
 cloudinaryConfig();
-
 
 /** Queries */
 const createUserQuery = `INSERT INTO

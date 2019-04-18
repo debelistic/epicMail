@@ -71,9 +71,9 @@ const ValidateUserInput = {
    * @param {object} next
    */
   async restoreKey(req, res, next) {
-    if (!req.body.securityKey) {
+    if (!req.body.recoveryEmail) {
       return res.status(400).send({
-        message: 'Enter security password to reset your password',
+        message: 'Enter a email addresss to reset your password, should you need to.',
       });
     }
     return next();
