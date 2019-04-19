@@ -32,7 +32,7 @@ describe('Create User', function () {
       firstName: 'saint',
       lastName: 'saint',
       password: 'ghJUIlO9@gh',
-      securityKey: 'brave',
+      recoveryEmail: 'victormailservices@gmail.com',
     };
     chai.request(app)
       .post('/api/v1/auth/signup')
@@ -78,7 +78,7 @@ describe('Validate Signup Form', () => {
       username: 'samsm',
       lastName: 'sam',
       password: 'ghJUIlO9@gh',
-      securityKey: 'brave',
+      recoveryEmail: 'brave',
       createdOn: new Date(),
       modifiedOn: new Date(),
     };

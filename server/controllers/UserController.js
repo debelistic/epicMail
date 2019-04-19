@@ -1,8 +1,8 @@
 import '@babel/polyfill';
-import nodemailer from 'nodemailer';
+import jwt from 'jsonwebtoken';
 import { dataUri } from '../middleware/multer';
 import { uploader, cloudinaryConfig } from '../config/cloudinaryConfig';
-import nodemailerConfig from '../config/nodemailerConfig';
+import { Transporter, MailOptions } from '../config/nodemailerConfig';
 import db from '../db';
 import Helper from '../middleware/Helper';
 
@@ -90,15 +90,23 @@ const UserController = {
     try {
       // get recovery email
       const { recoveryEmail } = req.body;
+      const { host } = req.headers;
+      const token = jwt.sign({
+        recoveryEmail,
+      },
+      process.env.SECRET, { expiresIn: '7d' });
 
-      // send reset password link to email
-      return res.status(201).send({
-        status: 201,
+      const message = await MailOptions(recoveryEmail, 'Victor', host, token);
+      await Transporter.sendMail(message);
+
+      return res.status(200).send({
+        status: 200,
         data: [{
-          message: 'Your password has been changed.',
+          message: 'Your password reset link has been sent to your mail',
         }],
       });
     } catch (error) {
+      console.log(error);
       return res.status(400).send({
         message: error,
       });

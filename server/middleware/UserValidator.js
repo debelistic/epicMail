@@ -65,7 +65,7 @@ const ValidateUserInput = {
   },
 
   /**
-   * Check for security key
+   * Check for recovery email address
    * @param {object} req
    * @param {object} res
    * @param {object} next

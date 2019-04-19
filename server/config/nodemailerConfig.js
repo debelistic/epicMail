@@ -1,23 +1,42 @@
 import nodemailer from 'nodemailer';
 import { config } from 'dotenv';
-import xoauth2 from 'xoauth2';
 
 config();
-
-const xoauth2gen = xoauth2.createXOAuth2Generator({
-  type: 'OAuth2',
-  user: 'victorawotidebe@gmail.com',
-  clientId: process.env.OAUTH_CLIENT_ID,
-  clientSecret: process.env.OAUTH_CLIENT_SECRET,
-  refreshToken: process.env.OAUTH_REFRESH_TOKEN,
-});
 
 const Transporter = nodemailer.createTransport({
   service: 'gmail',
   host: 'smtp.gmail.com',
   secure: 'true',
   port: '465',
-  auth: xoauth2gen,
+  auth: {
+    type: 'OAuth2',
+    user: 'victorawotidebe@gmail.com',
+    clientId: process.env.OAUTH_CLIENT_ID,
+    clientSecret: process.env.OAUTH_CLIENT_SECRET,
+    refreshToken: process.env.OAUTH_REFRESH_TOKEN,
+  },
 });
 
-export default Transporter;
+/**
+ * Email sent to user to reset password
+ * @param {userEmailAddress} String:user email address
+ * @param {username}  String:user first name
+ * @param {host} String:request host address
+ * @param {token} SecureToken:token
+ * @returns{email}Email:reset password mail
+ */
+const MailOptions = async (useraddress, username, host, token) => ({
+  from: 'Victor <victorawotidebe@gmail.com>',
+  to: useraddress,
+  subject: 'Epicmail Password Reset',
+  text: `Hi ${username},
+          You requested to change your password, if you did not
+          ignor this message. This link expires in 20 minutes
+          Your password link is 
+          https://${host}/resetpass/${token}`,
+});
+
+export {
+  Transporter,
+  MailOptions,
+};

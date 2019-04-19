@@ -27,6 +27,13 @@ Router.post(
   UserController.login,
 );
 
-// Reset password
+// Forget password
+Router.post(
+  '/auth/forgetpass',
+  UserController.resetpass,
+);
+
+// Reset Password
+
 
 export default Router;
