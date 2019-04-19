@@ -150,3 +150,7 @@ describe('Validate Login form', () => {
       });
   });
 });
+
+
+// send user link to reset password via email
+// user update password

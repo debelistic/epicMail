@@ -12,7 +12,7 @@ cloudinaryConfig();
 
 /** Queries */
 const createUserQuery = `INSERT INTO
-        users(email, firstName, lastName, userImage, password, securitykey, createdOn, modifiedOn)
+        users(email, firstName, lastName, userImage, password, recoveryEmail, createdOn, modifiedOn)
         VALUES($1, $2, $3, $4, $5, $6, $7, $8) RETURNING *`;
 
 const loginQuery = 'SELECT * FROM users WHERE email = $1';
@@ -29,16 +29,15 @@ const UserController = {
    */
   async createUser(req, res) {
     try {
-      const securityKey = req.body.securityKey.toLowerCase();
+      const recoveryEmail = req.body.recoveryEmail.toLowerCase();
       const hashPassword = Helper.hashPassword(req.body.password);
-      const hashSecurity = Helper.hashPassword(securityKey);
       const emailAddress = `${req.body.username.toLowerCase()}@epicmail.com`;
 
       const file = await dataUri(req).content;
       const image = await uploader.upload(file);
 
       const values = [emailAddress, req.body.firstName,
-        req.body.lastName, image.url, hashPassword, hashSecurity, new Date(), new Date()];
+        req.body.lastName, image.url, hashPassword, recoveryEmail, new Date(), new Date()];
       const { rows } = await db.query(createUserQuery, values);
       const token = Helper.generateToken(rows[0].email);
 

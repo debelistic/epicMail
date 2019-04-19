@@ -70,7 +70,7 @@ const ValidateUserInput = {
    * @param {object} res
    * @param {object} next
    */
-  async restoreKey(req, res, next) {
+  async resetMail(req, res, next) {
     if (!req.body.recoveryEmail) {
       return res.status(400).send({
         message: 'Enter a email addresss to reset your password, should you need to.',
