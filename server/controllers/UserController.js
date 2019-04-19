@@ -91,7 +91,7 @@ const UserController = {
   async forgetpass(req, res) {
     try {
       // get recovery email
-      const { recoveryEmail, email } = req.body;
+      const { recoveryEmail } = req.body;
       const { host } = req.headers;
       const { baseUrl } = req;
       const uri = host + baseUrl;
@@ -100,7 +100,7 @@ const UserController = {
       },
       process.env.SECRET, { expiresIn: '7d' });
 
-      const message = await MailOptions(recoveryEmail, 'Victor', uri, email, token);
+      const message = await MailOptions(recoveryEmail, 'Victor', uri, token);
       await Transporter.sendMail(message);
       return res.status(200).send({
         status: 200,
@@ -109,7 +109,8 @@ const UserController = {
         }],
       });
     } catch (error) {
-      return res.status(400).send({
+      console.log(error);
+      return res.status(500).send({
         message: error,
       });
     }
@@ -118,9 +119,10 @@ const UserController = {
   async resetpass(req, res) {
     try {
       // decode the token generated
-      const { email, token } = req.params;
+      const { email, newPassword } = req.body;
+      const { token } = req.params;
       const { recoveryEmail } = await jwt.verify(token, process.env.SECRET);
-      const hashNewPassword = Helper.hashPassword(req.body.newPassword);
+      const hashNewPassword = Helper.hashPassword(newPassword.toLowerCase());
 
       // update the password
       const { rows } = await db.query(retreiveQuery, [hashNewPassword, recoveryEmail, email]);

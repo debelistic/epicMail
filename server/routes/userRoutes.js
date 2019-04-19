@@ -35,7 +35,7 @@ Router.post(
 
 // Reset Password
 Router.post(
-  '/auth/resetpass/:email/:token',
+  '/auth/resetpass/:token',
   UserController.resetpass,
 );
 
