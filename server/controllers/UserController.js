@@ -109,7 +109,6 @@ const UserController = {
         }],
       });
     } catch (error) {
-      console.log(error);
       return res.status(500).send({
         message: error,
       });
