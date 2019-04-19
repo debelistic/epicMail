@@ -30,10 +30,13 @@ Router.post(
 // Forget password
 Router.post(
   '/auth/forgetpass',
-  UserController.resetpass,
+  UserController.forgetpass,
 );
 
 // Reset Password
-
+Router.post(
+  '/auth/resetpass/:email/:token',
+  UserController.resetpass,
+);
 
 export default Router;

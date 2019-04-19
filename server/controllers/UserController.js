@@ -1,11 +1,13 @@
 import '@babel/polyfill';
 import jwt from 'jsonwebtoken';
+import { config } from 'dotenv';
 import { dataUri } from '../middleware/multer';
 import { uploader, cloudinaryConfig } from '../config/cloudinaryConfig';
 import { Transporter, MailOptions } from '../config/nodemailerConfig';
 import db from '../db';
 import Helper from '../middleware/Helper';
 
+config();
 cloudinaryConfig();
 
 /** Queries */
@@ -14,6 +16,7 @@ const createUserQuery = `INSERT INTO
         VALUES($1, $2, $3, $4, $5, $6, $7, $8) RETURNING *`;
 
 const loginQuery = 'SELECT * FROM users WHERE email = $1';
+const retreiveQuery = 'UPDATE users SET password=$1 WHERE recoveryEmail= $2 AND email=$3 RETURNING *';
 /** End of Queries */
 
 const UserController = {
@@ -86,19 +89,20 @@ const UserController = {
    * @param {object} req
    * @param {object} res
    */
-  async resetpass(req, res) {
+  async forgetpass(req, res) {
     try {
       // get recovery email
-      const { recoveryEmail } = req.body;
+      const { recoveryEmail, email } = req.body;
       const { host } = req.headers;
+      const { baseUrl } = req;
+      const uri = host + baseUrl;
       const token = jwt.sign({
         recoveryEmail,
       },
       process.env.SECRET, { expiresIn: '7d' });
 
-      const message = await MailOptions(recoveryEmail, 'Victor', host, token);
+      const message = await MailOptions(recoveryEmail, 'Victor', uri, email, token);
       await Transporter.sendMail(message);
-
       return res.status(200).send({
         status: 200,
         data: [{
@@ -106,8 +110,30 @@ const UserController = {
         }],
       });
     } catch (error) {
-      console.log(error);
       return res.status(400).send({
+        message: error,
+      });
+    }
+  },
+
+  async resetpass(req, res) {
+    try {
+      // decode the token generated
+      const { email, token } = req.params;
+      const { recoveryEmail } = await jwt.verify(token, process.env.SECRET);
+      const hashNewPassword = Helper.hashPassword(req.body.newPassword);
+
+      // update the password
+      const { rows } = await db.query(retreiveQuery, [hashNewPassword, recoveryEmail, email]);
+      return res.status(201).send({
+        status: 201,
+        data: [{
+          // should redirect to homepage
+          message: `${rows[0].firstname} You have successfully changed your password`,
+        }],
+      });
+    } catch (error) {
+      return res.status(500).send({
         message: error,
       });
     }
