@@ -84,7 +84,7 @@ const UserController = {
   },
 
   /**
-   * users can reset password using their security question
+   * user enter recovery email to get password reset link
    * @param {object} req
    * @param {object} res
    */
@@ -114,6 +114,11 @@ const UserController = {
     }
   },
 
+  /**
+   * users can reset password the link received
+   * @param {object} req
+   * @param {object} res
+   */
   async resetpass(req, res) {
     try {
       const { password } = req.body;

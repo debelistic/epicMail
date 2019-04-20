@@ -59,7 +59,7 @@ const GroupController = {
       });
     } catch (error) {
       return res.send({
-        status: 400,
+        status: 500,
         error,
       });
     }
@@ -89,7 +89,7 @@ const GroupController = {
       });
     } catch (error) {
       return res.send({
-        status: 400,
+        status: 500,
         data: [{
           error,
         }],
@@ -121,7 +121,7 @@ const GroupController = {
         }],
       });
     } catch (err) {
-      return res.status(400).send({
+      return res.status(500).send({
         message: err,
       });
     }
@@ -142,7 +142,7 @@ const GroupController = {
         }],
       });
     } catch (error) {
-      return res.status(400).send({
+      return res.status(500).send({
         error,
       });
     }
@@ -165,8 +165,8 @@ const GroupController = {
         }],
       });
     } catch (err) {
-      return res.status(400).send({
-        status: 400,
+      return res.status(500).send({
+        status: 500,
         err,
       });
     }
@@ -192,8 +192,8 @@ const GroupController = {
         ],
       });
     } catch (error) {
-      return res.send({
-        status: 400,
+      return res.status(500).send({
+        status: 500,
         data: [
           error,
         ],
@@ -201,6 +201,12 @@ const GroupController = {
     }
   },
 
+  /**
+   * edit group name
+   * @param { object } req
+   * @param { object } res
+   * @returns { object } success or error
+   */
   async editGroupName(req, res) {
     try {
       const { rows } = await db.query(editGroupNameQuery, [req.body.newName, req.params.id]);
@@ -211,8 +217,8 @@ const GroupController = {
         }],
       });
     } catch (error) {
-      return res.send({
-        status: 400,
+      return res.status(500).send({
+        status: 500,
         data: [
           error,
         ],
@@ -220,6 +226,13 @@ const GroupController = {
     }
   },
 
+
+  /**
+   * delete a group
+   * @param { object } req
+   * @param { object } res
+   * @returns { object } success or error
+   */
   async deleteGroup(req, res) {
     try {
       const { rows } = await db.query(deleteGroupQuery, [req.params.id, req.user.email]);
@@ -230,8 +243,8 @@ const GroupController = {
         }],
       });
     } catch (error) {
-      return res.send({
-        status: 400,
+      return res.status(500).send({
+        status: 500,
         data: [
           error,
         ],
