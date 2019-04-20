@@ -1,6 +1,7 @@
 import express from 'express';
 import { multerUploads } from '../middleware/multer';
 import ValidateUserInput from '../middleware/UserValidator';
+import CheckToken from '../middleware/TokenHelper';
 import UserController from '../controllers/UserController';
 
 const Router = express.Router();
@@ -37,6 +38,7 @@ Router.post(
 // Reset Password
 Router.post(
   '/auth/resetpass/:token',
+  CheckToken.checkIfExpired,
   ValidateUserInput.loginField,
   ValidateUserInput.password,
   UserController.resetpass,

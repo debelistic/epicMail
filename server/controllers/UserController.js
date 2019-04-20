@@ -90,14 +90,14 @@ const UserController = {
    */
   async forgetpass(req, res) {
     try {
+      const { baseUrl } = req;
       const { recoveryEmail } = req.body;
       const { host } = req.headers;
-      const { baseUrl } = req;
       const uri = host + baseUrl;
       const token = jwt.sign({
         recoveryEmail,
       },
-      process.env.SECRET, { expiresIn: 1200000 });
+      process.env.SECRET, { expiresIn: '20m' });
 
       const message = await MailOptions(recoveryEmail, uri, token);
       await Transporter.sendMail(message);

@@ -7,7 +7,7 @@ const user1values = [
   'franchess',
   'sandra',
   'yh89uyightGH',
-  'hashSecurity',
+  'frahashSecuritythe@ymail.com',
   new Date(),
   new Date(),
 ];
@@ -17,7 +17,7 @@ const user2values = [
   'ifeoluwa',
   'matthew',
   'yh89uyightGH',
-  'hashSecurity',
+  'fghashSecurityy@us.uk',
   new Date(),
   new Date(),
 ];
@@ -27,7 +27,7 @@ const user3values = [
   'toluwalope',
   'iyinoluwa',
   'yh89uyightGH',
-  'hashSecurity',
+  'wehashSecurity45@fiv.com',
   new Date(),
   new Date(),
 ];
@@ -47,7 +47,7 @@ const user5values = [
   'peter',
   'golden',
   'yh89uyightGH',
-  'hashSecurity',
+  'hashSecurity34tyk@we.com',
   new Date(),
   new Date(),
 ];
