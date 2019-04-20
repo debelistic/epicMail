@@ -25,12 +25,11 @@ const Transporter = nodemailer.createTransport({
  * @param {token} SecureToken:token
  * @returns{email}Email:reset password mail
  */
-const MailOptions = async (useraddress, username, host, token) => ({
+const MailOptions = async (useraddress, host, token) => ({
   from: 'EpicMail <victorawotidebe@gmail.com>',
   to: useraddress,
   subject: 'Epicmail Password Reset',
-  text: `Hi ${username},
-          You requested to change your password, if you did not
+  text: `Hi, You requested to change your password, if you did not
           ignore this message. This link expires in 20 minutes
           Your password link is 
           http://${host}/auth/resetpass/${token}`,

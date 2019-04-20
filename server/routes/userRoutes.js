@@ -30,12 +30,15 @@ Router.post(
 // Forget password
 Router.post(
   '/auth/forgetpass',
+  ValidateUserInput.resetMail,
   UserController.forgetpass,
 );
 
 // Reset Password
 Router.post(
   '/auth/resetpass/:token',
+  ValidateUserInput.loginField,
+  ValidateUserInput.password,
   UserController.resetpass,
 );
 
