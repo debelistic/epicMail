@@ -33,7 +33,7 @@ describe('Create User', function () {
       firstName: 'saint',
       lastName: 'saint',
       password: 'ghJUIlO9@gh',
-      recoveryEmail: 'victormailservices@gmail.com',
+      recoveryEmail: 'checkmeout@gmail.com',
     };
     chai.request(app)
       .post('/api/v1/auth/signup')
