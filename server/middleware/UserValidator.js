@@ -71,9 +71,9 @@ const ValidateUserInput = {
    * @param {object} next
    */
   async resetMail(req, res, next) {
-    if (!req.body.recoveryEmail) {
+    if (!req.body.recoveryEmail || !/[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/.test(req.body.recoveryEmail)) {
       return res.status(400).send({
-        message: 'Enter a recovery email addresss.',
+        message: 'Enter a valid email addresss for recovery.',
       });
     }
     return next();
