@@ -131,21 +131,15 @@ const ValidateUserInput = {
    * @param {object} next
    */
   async loginPassword(req, res, next) {
-    try {
-      const loginQuery = 'SELECT * FROM users WHERE email = $1';
-      const userEmail = await req.body.email.toLowerCase();
-      const { rows } = await db.query(loginQuery, [userEmail]);
-      if (!Helper.comparePassword(req.body.password, rows[0].password)) {
-        return res.status(401).send({
-          message: 'Invalid Passowrd',
-        });
-      }
-      return next();
-    } catch (error) {
-      return res.status(400).send({
-        error,
+    const loginQuery = 'SELECT * FROM users WHERE email = $1';
+    const userEmail = await req.body.email.toLowerCase();
+    const { rows } = await db.query(loginQuery, [userEmail]);
+    if (!Helper.comparePassword(req.body.password, rows[0].password)) {
+      return res.status(401).send({
+        message: 'Invalid Passowrd',
       });
     }
+    return next();
   },
 
   /**
@@ -158,6 +152,18 @@ const ValidateUserInput = {
     if (!req.user) {
       return res.status(400).send({
         message: 'Login to your account',
+      });
+    }
+    return next();
+  },
+
+  async checkRecoveryEmail(req, res, next) {
+    const checkQuery = 'SELECT * FROM users WHERE recoveryemail = $1';
+    const { rows } = await db.query(checkQuery, [req.body.recoveryEmail]);
+    const message = 'The recovery email you entered is associated to an account';
+    if (rows[0]) {
+      return res.status(400).send({
+        message,
       });
     }
     return next();
