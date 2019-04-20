@@ -116,18 +116,15 @@ const UserController = {
 
   async resetpass(req, res) {
     try {
-      // decode the token generated
       const { email, password } = req.body;
       const { token } = req.params;
       const { recoveryEmail } = await jwt.verify(token, process.env.SECRET);
       const hashNewPassword = Helper.hashPassword(password.toLowerCase());
 
-      // update the password
       const { rows } = await db.query(retreiveQuery, [hashNewPassword, recoveryEmail, email]);
       return res.status(201).send({
         status: 201,
         data: [{
-          // should redirect to homepage
           message: `${rows[0].firstname} You have successfully changed your password`,
         }],
       });

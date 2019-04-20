@@ -16,6 +16,7 @@ Router.post(
   ValidateUserInput.username,
   ValidateUserInput.password,
   ValidateUserInput.resetMail,
+  ValidateUserInput.checkRecoveryEmail,
   UserController.createUser,
 );
 
