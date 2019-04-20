@@ -1,1 +1,1 @@
-npm run migrate && npm run production
+web: npm run migrate && npm run production

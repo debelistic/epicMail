@@ -40,7 +40,6 @@ Router.post(
 Router.post(
   '/auth/resetpass/:token',
   CheckToken.checkIfExpired,
-  ValidateUserInput.loginField,
   ValidateUserInput.password,
   UserController.resetpass,
 );

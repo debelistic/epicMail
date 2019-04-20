@@ -180,7 +180,6 @@ describe('User gets a link to reset password via email', function () {
 describe('User resets password using sent link', () => {
   it('Resets user password', (done) => {
     const newpassword = {
-      email: 'vincicode@epicmail.com',
       password: 'ghikloHJ@67',
     };
     const token = jwt.sign({

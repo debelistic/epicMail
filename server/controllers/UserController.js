@@ -16,7 +16,7 @@ const createUserQuery = `INSERT INTO
         VALUES($1, $2, $3, $4, $5, $6, $7, $8) RETURNING *`;
 
 const loginQuery = 'SELECT * FROM users WHERE email = $1';
-const retreiveQuery = 'UPDATE users SET password=$1 WHERE recoveryEmail= $2 AND email=$3 RETURNING *';
+const retreiveQuery = 'UPDATE users SET password=$1 WHERE recoveryEmail= $2 RETURNING *';
 /** End of Queries */
 
 const UserController = {
@@ -116,12 +116,12 @@ const UserController = {
 
   async resetpass(req, res) {
     try {
-      const { email, password } = req.body;
+      const { password } = req.body;
       const { token } = req.params;
       const { recoveryEmail } = await jwt.verify(token, process.env.SECRET);
       const hashNewPassword = Helper.hashPassword(password.toLowerCase());
 
-      const { rows } = await db.query(retreiveQuery, [hashNewPassword, recoveryEmail, email]);
+      const { rows } = await db.query(retreiveQuery, [hashNewPassword, recoveryEmail]);
       return res.status(201).send({
         status: 201,
         data: [{
