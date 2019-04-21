@@ -24,9 +24,17 @@ app.use('/api/v1', messagesRoutes);
 app.use('/api/v1', groupsRoutes);
 
 
-app.get('/', (req, res) => {
-  res.status(200).send({
-    message: 'WELCOME TO EPICMAIL SERVICE',
+app.use((req, res, next) => {
+  const error = new Error('Your request could not be found');
+  error.status = 404;
+  next(error);
+});
+
+// eslint-disable-next-line no-unused-vars
+app.use((error, req, res, next) => {
+  const { message } = error;
+  res.status(error.status || 500).send({
+    message,
   });
 });
 

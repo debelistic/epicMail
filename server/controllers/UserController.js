@@ -115,7 +115,7 @@ const UserController = {
   },
 
   /**
-   * users can reset password the link received
+   * users reset password with  the link received
    * @param {object} req
    * @param {object} res
    */
