@@ -1,6 +1,8 @@
 import express from 'express';
 import { config } from 'dotenv';
 import morgan from 'morgan';
+import compression from 'compression';
+import helmet from 'helmet';
 import swaggerUi from 'swagger-ui-express';
 import swaggerDocument from '../swagger.json';
 import Sanitize from './middleware/Sanitize';
@@ -12,6 +14,8 @@ const app = express();
 
 config();
 
+app.use(helmet());
+app.use(compression());
 app.use(morgan('tiny'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
@@ -23,6 +27,12 @@ app.use('/api/v1', userRoutes);
 app.use('/api/v1', messagesRoutes);
 app.use('/api/v1', groupsRoutes);
 
+
+app.get('/', (req, res) => {
+  res.status(200).send({
+    message: 'WELCOME TO EPICMAIL SERVICE',
+  });
+});
 
 app.use((req, res, next) => {
   const error = new Error('Your request could not be found');
