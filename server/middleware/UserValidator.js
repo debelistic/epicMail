@@ -79,6 +79,12 @@ const ValidateUserInput = {
     return next();
   },
 
+  /**
+   * Check image
+   * @param {object} req
+   * @param {object} res
+   * @param {object} next
+   */
   async checkImg(req, res, next) {
     if (!req.file) {
       return res.status(400).send({
@@ -166,10 +172,35 @@ const ValidateUserInput = {
     return next();
   },
 
+  /**
+   * Check recovery email address
+   * @param {object} req
+   * @param {object} res
+   * @param {object} next
+   */
   async checkRecoveryEmail(req, res, next) {
     const checkQuery = 'SELECT * FROM users WHERE recoveryemail = $1';
     const { rows } = await db.query(checkQuery, [req.body.recoveryEmail]);
     const message = 'The recovery email you entered is associated to an account';
+    if (rows[0]) {
+      return res.status(400).send({
+        message,
+      });
+    }
+    return next();
+  },
+
+  /**
+   * Check username
+   * @param {object} req
+   * @param {object} res
+   * @param {object} next
+   */
+  async checkUserName(req, res, next) {
+    const checkQuery = 'SELECT * FROM users WHERE email = $1';
+    const userName = `${req.body.username}@epicmail.com`;
+    const { rows } = await db.query(checkQuery, [userName]);
+    const message = 'username already exist';
     if (rows[0]) {
       return res.status(400).send({
         message,
