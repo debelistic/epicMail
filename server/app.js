@@ -12,7 +12,7 @@ const app = express();
 
 config();
 
-app.use(morgan('dev'));
+app.use(morgan('tiny'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(Sanitize.trimInput);
