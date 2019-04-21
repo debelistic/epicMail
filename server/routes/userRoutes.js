@@ -1,6 +1,7 @@
 import express from 'express';
 import { multerUploads } from '../middleware/multer';
 import ValidateUserInput from '../middleware/UserValidator';
+import CheckToken from '../middleware/TokenHelper';
 import UserController from '../controllers/UserController';
 
 const Router = express.Router();
@@ -14,7 +15,8 @@ Router.post(
   ValidateUserInput.names,
   ValidateUserInput.username,
   ValidateUserInput.password,
-  ValidateUserInput.restoreKey,
+  ValidateUserInput.resetMail,
+  ValidateUserInput.checkRecoveryEmail,
   UserController.createUser,
 );
 
@@ -27,6 +29,19 @@ Router.post(
   UserController.login,
 );
 
-// Reset password
+// Forget password
+Router.post(
+  '/auth/forgetpass',
+  ValidateUserInput.resetMail,
+  UserController.forgetpass,
+);
+
+// Reset Password
+Router.post(
+  '/auth/resetpass/:token',
+  CheckToken.checkIfExpired,
+  ValidateUserInput.password,
+  UserController.resetpass,
+);
 
 export default Router;

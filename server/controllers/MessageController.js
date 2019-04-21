@@ -51,7 +51,7 @@ const MessageController = {
         }],
       });
     } catch (error) {
-      return res.status(400).send({
+      return res.status(500).send({
         mesage: error,
       });
     }
@@ -73,7 +73,7 @@ const MessageController = {
         inbox: rows,
       });
     } catch (error) {
-      return res.status(400).send({
+      return res.status(500).send({
         mesage: error,
       });
     }
@@ -94,7 +94,7 @@ const MessageController = {
         message: rows,
       });
     } catch (error) {
-      return res.status(400).send({
+      return res.status(500).send({
         mesage: error,
       });
     }
@@ -109,7 +109,7 @@ const MessageController = {
         unread: rows,
       });
     } catch (error) {
-      return res.status(400).send({
+      return res.status(500).send({
         mesage: error,
       });
     }
@@ -130,7 +130,7 @@ const MessageController = {
         sent: rows,
       });
     } catch (error) {
-      return res.status(400).send({
+      return res.status(500).send({
         mesage: error,
       });
     }
@@ -150,7 +150,7 @@ const MessageController = {
         message: rows,
       });
     } catch (error) {
-      return res.status(400).send({
+      return res.status(500).send({
         mesage: error,
       });
     }
@@ -171,12 +171,18 @@ const MessageController = {
         drafts: rows,
       });
     } catch (error) {
-      return res.status(400).send({
+      return res.status(500).send({
         mesage: error,
       });
     }
   },
 
+  /**
+   * get a draft
+   * @param { object } req
+   * @param { object } res
+   * @returns { object } success or error
+   */
   async getADraft(req, res) {
     try {
       const { rows } = await db.query(findADraftQuery, [req.params.id, req.user.email, 'draft']);
@@ -185,7 +191,7 @@ const MessageController = {
         message: rows,
       });
     } catch (error) {
-      return res.status(400).send({
+      return res.status(500).send({
         mesage: error,
       });
     }
@@ -206,7 +212,7 @@ const MessageController = {
         mail: rows[0],
       });
     } catch (error) {
-      return res.status(400).send({
+      return res.status(500).send({
         mesage: error,
       });
     }
@@ -227,7 +233,7 @@ const MessageController = {
         mail: rows[0],
       });
     } catch (error) {
-      return res.status(400).send({
+      return res.status(500).send({
         mesage: error,
       });
     }

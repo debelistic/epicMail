@@ -7,7 +7,7 @@ const user1values = [
   'franchess',
   'sandra',
   'yh89uyightGH',
-  'hashSecurity',
+  'frahashSecuritythe@ymail.com',
   new Date(),
   new Date(),
 ];
@@ -17,7 +17,7 @@ const user2values = [
   'ifeoluwa',
   'matthew',
   'yh89uyightGH',
-  'hashSecurity',
+  'fghashSecurityy@us.uk',
   new Date(),
   new Date(),
 ];
@@ -27,7 +27,7 @@ const user3values = [
   'toluwalope',
   'iyinoluwa',
   'yh89uyightGH',
-  'hashSecurity',
+  'wehashSecurity45@fiv.com',
   new Date(),
   new Date(),
 ];
@@ -37,7 +37,7 @@ const user4values = [
   'vinci',
   'lorenzo',
   'yh89uyightGH',
-  'hashSecurity',
+  'victormailservices@gmail.com',
   new Date(),
   new Date(),
 ];
@@ -47,7 +47,7 @@ const user5values = [
   'peter',
   'golden',
   'yh89uyightGH',
-  'hashSecurity',
+  'hashSecurity34tyk@we.com',
   new Date(),
   new Date(),
 ];
@@ -289,7 +289,7 @@ const message5 = [
 
 const insertUsers = async () => {
   const insertUser = `INSERT INTO
-  users(email, firstName, lastName, password, securitykey, createdOn, modifiedOn)
+  users(email, firstName, lastName, password, recoveryEmail, createdOn, modifiedOn)
   VALUES($1, $2, $3, $4, $5, $6, $7) RETURNING *`;
 
   await db.query(insertUser, user1values);

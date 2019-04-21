@@ -1,12 +1,13 @@
 import chai from 'chai';
 import chaiHttp from 'chai-http';
+import jwt from 'jsonwebtoken';
 import app from '../server/app';
-
-process.env.NODE_ENV = 'test';
 
 const { expect } = chai;
 
 chai.use(chaiHttp);
+
+const recoveryemail = 'victormailservices@gmail.com';
 
 
 describe('GET Index Page', () => {
@@ -32,7 +33,7 @@ describe('Create User', function () {
       firstName: 'saint',
       lastName: 'saint',
       password: 'ghJUIlO9@gh',
-      securityKey: 'brave',
+      recoveryEmail: 'checkmeout@gmail.com',
     };
     chai.request(app)
       .post('/api/v1/auth/signup')
@@ -78,7 +79,7 @@ describe('Validate Signup Form', () => {
       username: 'samsm',
       lastName: 'sam',
       password: 'ghJUIlO9@gh',
-      securityKey: 'brave',
+      recoveryEmail: 'brave',
       createdOn: new Date(),
       modifiedOn: new Date(),
     };
@@ -146,6 +147,55 @@ describe('Validate Login form', () => {
       .end((err, res) => {
         if (err) done();
         expect(res.status).to.equal(401);
+        done();
+      });
+  });
+});
+
+
+// send user link to reset password via email
+// eslint-disable-next-line func-names
+describe('User gets a link to reset password via email', function () {
+  this.timeout(8000);
+  const recoveryEmail = {
+    recoveryEmail: recoveryemail,
+  };
+  it('Send user a link to reset password', (done) => {
+    chai.request(app)
+      .post('/api/v1/auth/forgetpass')
+      .send(recoveryEmail)
+      .end((err, res) => {
+        if (err) done(err);
+        expect(res.status).to.equal(200);
+        expect(res.body.data).to.be.a('array');
+        expect(res.body.data[0]).to.be.a('object');
+        expect(res.body.data[0]).to.have.key('message');
+        done();
+      });
+  });
+});
+
+
+// user update password
+describe('User resets password using sent link', () => {
+  it('Resets user password', (done) => {
+    const newpassword = {
+      password: 'ghikloHJ@67',
+    };
+    const token = jwt.sign({
+      recoveryEmail: 'victormailservices@gmail.com',
+    },
+    process.env.SECRET, { expiresIn: '7d' });
+
+    chai.request(app)
+      .post(`/api/v1/auth/resetpass/${token}`)
+      .send(newpassword)
+      .end((err, res) => {
+        if (err) done(err);
+        expect(res.status).to.equal(201);
+        expect(res.body.data).to.be.a('array');
+        expect(res.body.data[0]).to.be.a('object');
+        expect(res.body.data[0]).to.have.key('message');
         done();
       });
   });
