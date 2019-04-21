@@ -50,6 +50,7 @@ const UserController = {
         }],
       });
     } catch (error) {
+      console.log('error here>>', error);
       return res.status(500).send({
         message: error,
       });

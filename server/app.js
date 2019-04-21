@@ -1,5 +1,6 @@
 import express from 'express';
 import { config } from 'dotenv';
+import morgan from 'morgan';
 import swaggerUi from 'swagger-ui-express';
 import swaggerDocument from '../swagger.json';
 import Sanitize from './middleware/Sanitize';
@@ -11,10 +12,12 @@ const app = express();
 
 config();
 
+app.use(morgan('combined'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(Sanitize.trimInput);
 
+// Routes
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 app.use('/api/v1', userRoutes);
 app.use('/api/v1', messagesRoutes);

@@ -79,6 +79,15 @@ const ValidateUserInput = {
     return next();
   },
 
+  async checkImg(req, res, next) {
+    if (!req.file) {
+      return res.status(400).send({
+        message: 'Add a profile image',
+      });
+    }
+    return next();
+  },
+
   /**
    * Validate Login Field
    * @param {object} req
