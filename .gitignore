@@ -3,6 +3,5 @@ node_modules
 .vscode
 .nyc_output/
 coverage
-dummydata
 lcov.info
 alc_dev.html

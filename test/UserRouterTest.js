@@ -24,6 +24,20 @@ describe('GET Index Page', () => {
   });
 });
 
+describe('Check Error', () => {
+  it('Check Error Validation Middleware', (done) => {
+    chai.request(app)
+      .get('/unavaliable/route')
+      .end((err, res) => {
+        if (err) done(err);
+        expect(res.status).to.equal(404);
+        expect(res.body).to.be.a('object');
+        expect(res.body.message).to.be.a('string');
+        done();
+      });
+  });
+});
+
 // eslint-disable-next-line func-names
 describe('Create User', function () {
   this.timeout(8000);

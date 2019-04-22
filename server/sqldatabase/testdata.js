@@ -1,5 +1,7 @@
 import uuidv4 from 'uuid/v4';
-import db from './server/db';
+import db from '../db';
+
+require('@babel/polyfill');
 
 /** Start dummy users */
 const user1values = [

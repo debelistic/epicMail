@@ -15,5 +15,4 @@ const multerUploads = multer({ storage }).single('userImage');
 
 const dataUri = req => dUri.format(path.extname(req.file.originalname).toString(), req.file.buffer);
 
-
 export { multerUploads, dataUri };
