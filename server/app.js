@@ -21,6 +21,23 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(Sanitize.trimInput);
 
+// CORS Headers Access
+app.use((req, res, next) => {
+  res.header('Access-Controll-Allow-Origin', '*');
+  res.header(
+    'Access-Controll-Allow-Headers',
+    'Origin, X-Requested-With, Content-Type, Accept, Authorization',
+  );
+  if (req.method === 'OPTIONS') {
+    res.header(
+      'Access-Controll-Allow-Methods',
+      'POST, PUT, PATCH, DELETE, GET',
+    );
+    return res.status(200).send({});
+  }
+  return next();
+});
+
 // Routes
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 app.use('/api/v1', userRoutes);
